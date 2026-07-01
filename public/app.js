@@ -26,6 +26,17 @@ const LINE_ORDER = ['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'CHF', 'CAD', 'NZD', 'XAU
 let chartToday = null;
 let chartPrev = null;
 
+// The 28 tradeable fiat crosses (base+quote), for the trade-ideas panel.
+const PAIRS = [
+  'EURUSD', 'GBPUSD', 'USDJPY', 'USDCHF', 'AUDUSD', 'USDCAD', 'NZDUSD',
+  'EURGBP', 'EURJPY', 'EURCHF', 'EURAUD', 'EURCAD', 'EURNZD',
+  'GBPJPY', 'GBPCHF', 'GBPAUD', 'GBPCAD', 'GBPNZD',
+  'AUDJPY', 'AUDCHF', 'AUDCAD', 'AUDNZD',
+  'CADJPY', 'CHFJPY', 'NZDJPY', 'NZDCHF', 'NZDCAD', 'CADCHF',
+];
+let ideasTf = 'daily';
+let lastMatrix = null;
+
 // score (0-10) -> colour, interpolated red → grey → green
 function scoreColor(s) {
   const t = Math.max(0, Math.min(10, s)) / 10;      // 0..1
@@ -104,6 +115,62 @@ function hcell(text, cls) {
   return d;
 }
 
+// ── trade ideas ─────────────────────────────────────────────────────────
+// For each pair, the strength gap between its two currencies. Buy the strong
+// one / sell the weak one; a wider gap = a clearer imbalance. Pure client-side
+// derivation from the grid scores — no worker involvement.
+function renderIdeas(matrix) {
+  const list = document.getElementById('ideas-list');
+  if (!list) return;
+  const tf = matrix.timeframes[ideasTf] ? ideasTf : matrix.timeframe_order[0];
+  const scores = matrix.timeframes[tf].scores;
+
+  const ideas = PAIRS.map((p) => {
+    const base = p.slice(0, 3), quote = p.slice(3);
+    const b = scores[base], q = scores[quote];
+    if (!b || !q) return null;
+    const gap = b.score - q.score;                 // 0–10 scale, consistent with grid
+    const buy = gap >= 0;
+    return {
+      pair: p, buy,
+      strongC: buy ? base : quote, weakC: buy ? quote : base,
+      strongS: buy ? b.score : q.score, weakS: buy ? q.score : b.score,
+      gap: Math.abs(gap),
+    };
+  }).filter(Boolean).sort((a, b) => b.gap - a.gap).slice(0, 6);
+
+  list.innerHTML = ideas.map((i) => {
+    const dir = i.buy ? 'buy' : 'sell';
+    const pct = Math.min(100, (i.gap / 10) * 100);
+    return `
+      <div class="idea ${dir}">
+        <div class="idea-top">
+          <span class="idea-pair">${i.pair}</span>
+          <span class="idea-dir ${dir}">${i.buy ? 'Buy' : 'Sell'}</span>
+        </div>
+        <div class="idea-detail">
+          <span class="s-strong">${i.strongC} ${i.strongS.toFixed(1)}</span>
+          &nbsp;vs&nbsp;
+          <span class="s-weak">${i.weakC} ${i.weakS.toFixed(1)}</span>
+        </div>
+        <div class="idea-gap"><span style="width:${pct}%"></span></div>
+        <div class="idea-gaptext">strength gap ${i.gap.toFixed(1)} / 10</div>
+      </div>`;
+  }).join('') || '<p class="loading">No data.</p>';
+}
+
+function initIdeasToggle() {
+  const bar = document.getElementById('ideas-tf');
+  if (!bar) return;
+  bar.addEventListener('click', (ev) => {
+    const btn = ev.target.closest('button[data-tf]');
+    if (!btn) return;
+    ideasTf = btn.dataset.tf;
+    bar.querySelectorAll('button').forEach((b) => b.classList.toggle('active', b === btn));
+    if (lastMatrix) renderIdeas(lastMatrix);
+  });
+}
+
 // ── intraday line charts ────────────────────────────────────────────────
 const CHART_OPTS = {
   responsive: true,
@@ -177,7 +244,9 @@ async function load() {
     const r = await fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const matrix = await r.json();
+    lastMatrix = matrix;
     render(matrix);
+    renderIdeas(matrix);
     renderCharts(matrix.timeframes.intraday);
   } catch (e) {
     document.getElementById('grid').innerHTML =
@@ -216,4 +285,5 @@ function initRefresh() {
 load();
 initCapture();
 initRefresh();
+initIdeasToggle();
 setInterval(load, REFRESH_MS);

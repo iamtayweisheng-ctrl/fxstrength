@@ -138,6 +138,44 @@ h2 { font-size: 18px; margin: 0 0 8px; }
 .refresh.spinning { animation: spin .7s linear infinite; pointer-events: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ── trade ideas ─────────────────────────────────────── */
+.ideas { margin: 26px 0; }
+.ideas-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.tf-toggle { display: inline-flex; background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.tf-toggle button {
+  background: transparent; border: 0; color: var(--muted);
+  padding: 6px 12px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+}
+.tf-toggle button:hover { color: var(--ink); }
+.tf-toggle button.active { background: var(--accent); color: #1a1200; }
+.ideas-list {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.idea {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left-width: 3px;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.idea.buy { border-left-color: var(--strong); }
+.idea.sell { border-left-color: var(--weak); }
+.idea-top { display: flex; align-items: center; justify-content: space-between; }
+.idea-pair { font-weight: 800; font-size: 15px; letter-spacing: .3px; }
+.idea-dir { font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: .5px; }
+.idea-dir.buy { background: rgba(34,197,94,.16); color: var(--strong); }
+.idea-dir.sell { background: rgba(239,68,68,.16); color: var(--weak); }
+.idea-detail { margin-top: 7px; font-size: 12.5px; color: var(--muted); }
+.idea-detail .s-strong { color: var(--strong); font-weight: 700; }
+.idea-detail .s-weak { color: var(--weak); font-weight: 700; }
+.idea-gap { margin-top: 9px; height: 5px; border-radius: 999px; background: var(--panel-2); overflow: hidden; }
+.idea-gap span { display: block; height: 100%; background: var(--accent); }
+.idea-gaptext { font-size: 11px; color: var(--muted); margin-top: 5px; font-variant-numeric: tabular-nums; }
+@media (max-width: 620px) { .ideas-list { grid-template-columns: 1fr; } }
+
 /* ── charts ──────────────────────────────────────────── */
 .charts { margin: 26px 0; }
 .charts-head h2 { margin-bottom: 4px; }
