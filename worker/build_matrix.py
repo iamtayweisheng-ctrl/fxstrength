@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-StrengthGrid — matrix builder.
+FXStrength — matrix builder.
 
 Fetches FX (and gold/silver) closes from Yahoo, computes each currency's
 relative strength across three timeframes, and writes a single static

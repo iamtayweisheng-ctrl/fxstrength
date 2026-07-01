@@ -1,4 +1,4 @@
-// StrengthGrid front-end. Loads the static matrix.json (built by the worker and
+// FXStrength front-end. Loads the static matrix.json (built by the worker and
 // served from the CDN) and renders the multi-timeframe strength grid. No server,
 // no framework — just fetch + render, re-polled while the tab is open.
 

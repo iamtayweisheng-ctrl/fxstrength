@@ -1,4 +1,6 @@
-# StrengthGrid
+# FXStrength
+
+> **fxstrength.org** — working repo folder is still `strengthgrid/` (cosmetic; rename later if desired).
 
 A free, fast, **multi-timeframe currency strength meter** — the 8 major
 currencies plus **gold (XAU)** and **silver (XAG)**, scored across daily,
