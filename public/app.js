@@ -3,6 +3,15 @@
 // no framework — just fetch + render, re-polled while the tab is open.
 
 const REFRESH_MS = 60_000;
+
+// Where the live strength data comes from. In production the JSON lives on a
+// separate `data` branch (refreshed by GitHub Actions) and is served from
+// GitHub's CDN, so the site itself never rebuilds when data updates. Locally we
+// just read the committed copy.
+const IS_LOCAL = ['localhost', '127.0.0.1', ''].includes(location.hostname);
+const DATA_URL = IS_LOCAL
+  ? 'data/matrix.json'
+  : 'https://raw.githubusercontent.com/iamtayweisheng-ctrl/fxstrength/data/matrix.json';
 const CCY_NAME = {
   USD: 'US Dollar', EUR: 'Euro', JPY: 'Yen', GBP: 'Pound', AUD: 'Aussie',
   CHF: 'Franc', CAD: 'Loonie', NZD: 'Kiwi', XAU: 'Gold', XAG: 'Silver',
@@ -89,7 +98,7 @@ function hcell(text, cls) {
 
 async function load() {
   try {
-    const r = await fetch('data/matrix.json?t=' + Date.now(), { cache: 'no-store' });
+    const r = await fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
     if (!r.ok) throw new Error('HTTP ' + r.status);
     render(await r.json());
   } catch (e) {
