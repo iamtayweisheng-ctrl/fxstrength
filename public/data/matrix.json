@@ -1,0 +1,225 @@
+{
+  "generated_at": "2026-07-01T04:28:53+00:00",
+  "market_open": true,
+  "currencies": [
+    "USD",
+    "EUR",
+    "JPY",
+    "GBP",
+    "AUD",
+    "CHF",
+    "CAD",
+    "NZD",
+    "XAU",
+    "XAG"
+  ],
+  "timeframe_order": [
+    "intraday",
+    "daily",
+    "weekly"
+  ],
+  "timeframes": {
+    "intraday": {
+      "label": "Intraday \u00b7 last ~48h (hourly)",
+      "window": 48,
+      "asof": "2026-07-01T04:29",
+      "scores": {
+        "USD": {
+          "pct": 0.098,
+          "score": 5.88,
+          "arrow": "flat",
+          "rank": 3
+        },
+        "EUR": {
+          "pct": 0.097,
+          "score": 5.87,
+          "arrow": "flat",
+          "rank": 4
+        },
+        "JPY": {
+          "pct": -0.556,
+          "score": 0.0,
+          "arrow": "flat",
+          "rank": 9
+        },
+        "GBP": {
+          "pct": 0.2,
+          "score": 6.8,
+          "arrow": "flat",
+          "rank": 2
+        },
+        "AUD": {
+          "pct": -0.116,
+          "score": 3.96,
+          "arrow": "flat",
+          "rank": 7
+        },
+        "CHF": {
+          "pct": -0.045,
+          "score": 4.6,
+          "arrow": "flat",
+          "rank": 5
+        },
+        "CAD": {
+          "pct": -0.087,
+          "score": 4.22,
+          "arrow": "flat",
+          "rank": 6
+        },
+        "NZD": {
+          "pct": 0.409,
+          "score": 8.68,
+          "arrow": "flat",
+          "rank": 1
+        },
+        "XAU": {
+          "pct": -1.449,
+          "score": 0.0,
+          "arrow": "flat",
+          "rank": 10
+        },
+        "XAG": {
+          "pct": -0.343,
+          "score": 1.92,
+          "arrow": "flat",
+          "rank": 8
+        }
+      }
+    },
+    "daily": {
+      "label": "Daily \u00b7 last 30 days",
+      "window": 30,
+      "asof": "2026-07-01",
+      "scores": {
+        "USD": {
+          "pct": 2.541,
+          "score": 10.0,
+          "arrow": "flat",
+          "rank": 1
+        },
+        "EUR": {
+          "pct": 0.464,
+          "score": 5.91,
+          "arrow": "up",
+          "rank": 3
+        },
+        "JPY": {
+          "pct": 0.267,
+          "score": 5.53,
+          "arrow": "down",
+          "rank": 4
+        },
+        "GBP": {
+          "pct": 1.023,
+          "score": 7.01,
+          "arrow": "up",
+          "rank": 2
+        },
+        "AUD": {
+          "pct": -1.442,
+          "score": 2.16,
+          "arrow": "down",
+          "rank": 7
+        },
+        "CHF": {
+          "pct": -0.541,
+          "score": 3.93,
+          "arrow": "up",
+          "rank": 6
+        },
+        "CAD": {
+          "pct": -0.492,
+          "score": 4.03,
+          "arrow": "down",
+          "rank": 5
+        },
+        "NZD": {
+          "pct": -1.819,
+          "score": 1.42,
+          "arrow": "up",
+          "rank": 8
+        },
+        "XAU": {
+          "pct": -8.093,
+          "score": 0.0,
+          "arrow": "down",
+          "rank": 9
+        },
+        "XAG": {
+          "pct": -19.974,
+          "score": 0.0,
+          "arrow": "down",
+          "rank": 10
+        }
+      }
+    },
+    "weekly": {
+      "label": "Weekly \u00b7 last 26 weeks",
+      "window": 26,
+      "asof": "2026-07-01",
+      "scores": {
+        "USD": {
+          "pct": 2.463,
+          "score": 10.0,
+          "arrow": "up",
+          "rank": 1
+        },
+        "EUR": {
+          "pct": -0.669,
+          "score": 3.64,
+          "arrow": "up",
+          "rank": 7
+        },
+        "JPY": {
+          "pct": -0.06,
+          "score": 4.88,
+          "arrow": "down",
+          "rank": 3
+        },
+        "GBP": {
+          "pct": 0.601,
+          "score": 6.22,
+          "arrow": "up",
+          "rank": 2
+        },
+        "AUD": {
+          "pct": -0.422,
+          "score": 4.14,
+          "arrow": "down",
+          "rank": 4
+        },
+        "CHF": {
+          "pct": -0.469,
+          "score": 4.05,
+          "arrow": "flat",
+          "rank": 5
+        },
+        "CAD": {
+          "pct": -0.615,
+          "score": 3.75,
+          "arrow": "down",
+          "rank": 6
+        },
+        "NZD": {
+          "pct": -0.829,
+          "score": 3.32,
+          "arrow": "up",
+          "rank": 8
+        },
+        "XAU": {
+          "pct": -14.08,
+          "score": 0.0,
+          "arrow": "down",
+          "rank": 9
+        },
+        "XAG": {
+          "pct": -21.801,
+          "score": 0.0,
+          "arrow": "down",
+          "rank": 10
+        }
+      }
+    }
+  },
+  "source": "Yahoo Finance"
+}

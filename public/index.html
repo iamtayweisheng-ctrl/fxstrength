@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>StrengthGrid — Live Currency Strength Meter (Multi-Timeframe + Gold)</title>
+  <meta name="description" content="Free live currency strength meter across daily, weekly and intraday timeframes for the 8 major currencies plus gold and silver. See which currencies are strong or weak at a glance and find high-conviction alignment." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="/" />
+  <!-- Open Graph so shared links look right in Discord / X -->
+  <meta property="og:title" content="StrengthGrid — Live Multi-Timeframe Currency Strength Meter" />
+  <meta property="og:description" content="Which currencies are strong right now — across daily, weekly and intraday, plus gold & silver. Free." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">▚▚</span> StrengthGrid
+    </div>
+    <div class="topbar-right">
+      <span class="market" id="market-status">—</span>
+      <span class="updated" id="updated">loading…</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Static, crawlable intro copy (SEO). Real numbers hydrate below. -->
+    <section class="intro">
+      <h1>Live Currency Strength Meter</h1>
+      <p>
+        StrengthGrid shows the <strong>relative strength of the 8 major currencies</strong>
+        — USD, EUR, JPY, GBP, AUD, CHF, CAD, NZD — plus <strong>gold (XAU)</strong> and
+        <strong>silver (XAG)</strong>, across three timeframes at once. Each score is the
+        currency's average move against the other seven, so you can see which currencies
+        are strong, which are weak, and where the daily, weekly and intraday reads line up.
+      </p>
+    </section>
+
+    <section class="grid-wrap">
+      <div class="grid-head">
+        <h2>Strength grid</h2>
+        <p class="hint">
+          Each cell scores <strong>0 (weakest) → 10 (strongest)</strong>. When a row is
+          green across every column, that currency is aligned strong on all timeframes —
+          the read that matters most.
+        </p>
+      </div>
+      <div id="grid" class="grid" aria-live="polite">
+        <p class="loading">Loading strength data…</p>
+      </div>
+      <p class="legend">
+        <span class="chip strong">strong</span>
+        <span class="chip neutral">neutral</span>
+        <span class="chip weak">weak</span>
+        &nbsp;·&nbsp; ▲ rising &nbsp; ▼ falling &nbsp; — flat
+      </p>
+    </section>
+
+    <!-- Funnel: email capture (the bridge to FXFlow). Needs a form backend wired. -->
+    <section class="capture" id="capture">
+      <h2>Get the setups, not just the scores</h2>
+      <p>
+        Strength tells you <em>who's</em> strong. It doesn't tell you <em>where</em> to act.
+        Join the list and we'll notify you when automated confluence alerts
+        (strength + structure + discount zones) go live.
+      </p>
+      <form id="capture-form" class="capture-form" novalidate>
+        <input type="email" id="capture-email" placeholder="you@email.com"
+               autocomplete="email" required />
+        <button type="submit">Notify me</button>
+      </form>
+      <p class="capture-note" id="capture-note">No spam. One email when alerts launch.</p>
+    </section>
+
+    <section class="about">
+      <h2>How the currency strength meter works</h2>
+      <p>
+        For each currency we take its percentage move against each of the other seven
+        majors, across all 28 currency pairs, measured from the start of the selected
+        window, and average them. A positive score means the currency has gained ground
+        on the pack; a negative score means it has lost ground. Gold and silver are scored
+        the same way against the basket of eight fiat currencies.
+      </p>
+      <h2>How to use it</h2>
+      <p>
+        Look for currencies that are strong on the higher timeframes (weekly, daily) and
+        pair them against currencies that are weak. When the intraday read agrees with the
+        higher-timeframe trend, that alignment is where the highest-conviction moves tend
+        to form. StrengthGrid is an information tool — what you do with it is your decision.
+      </p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="disclaimer">
+      StrengthGrid provides market information for educational purposes only and is
+      <strong>not financial advice</strong>. Trading foreign exchange and CFDs carries a
+      high risk of loss. Data via Yahoo Finance, may be delayed. Any third-party links may
+      be affiliate links.
+    </p>
+    <p class="src">Data: <span id="src">Yahoo Finance</span></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
