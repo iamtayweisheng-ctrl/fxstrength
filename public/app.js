@@ -17,6 +17,14 @@ const CCY_NAME = {
   CHF: 'Franc', CAD: 'Loonie', NZD: 'Kiwi', XAU: 'Gold', XAG: 'Silver',
 };
 const ARROWS = { up: '▲', down: '▼', flat: '—' };
+const LINE_COLORS = {
+  USD: '#f59e0b', EUR: '#ef4444', JPY: '#22d3ee', GBP: '#22c55e',
+  AUD: '#3b82f6', CHF: '#a78bfa', CAD: '#ec4899', NZD: '#14b8a6',
+  XAU: '#fde047', XAG: '#cbd5e1',
+};
+const LINE_ORDER = ['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'CHF', 'CAD', 'NZD', 'XAU', 'XAG'];
+let chartToday = null;
+let chartPrev = null;
 
 // score (0-10) -> colour, interpolated red → grey → green
 function scoreColor(s) {
@@ -96,11 +104,81 @@ function hcell(text, cls) {
   return d;
 }
 
+// ── intraday line charts ────────────────────────────────────────────────
+const CHART_OPTS = {
+  responsive: true,
+  maintainAspectRatio: false,
+  animation: false,
+  interaction: { mode: 'index', intersect: false },
+  plugins: {
+    legend: { labels: { color: '#8a97b1', boxWidth: 10, boxHeight: 10, font: { size: 11 } } },
+    tooltip: {
+      callbacks: {
+        label: (c) => `${c.dataset.label}: ${c.parsed.y >= 0 ? '+' : ''}${c.parsed.y.toFixed(2)}%`,
+      },
+    },
+  },
+  scales: {
+    x: { ticks: { color: '#5b6884', maxTicksLimit: 8, font: { size: 10 } }, grid: { color: 'rgba(30,39,64,.5)' } },
+    y: { ticks: { color: '#5b6884', font: { size: 10 }, callback: (v) => v + '%' }, grid: { color: 'rgba(30,39,64,.5)' } },
+  },
+};
+
+function datasets(lines) {
+  return LINE_ORDER.filter((c) => lines[c]).map((c) => {
+    const metal = c === 'XAU' || c === 'XAG';
+    return {
+      label: c,
+      data: lines[c],
+      borderColor: LINE_COLORS[c] || '#888',
+      backgroundColor: LINE_COLORS[c] || '#888',
+      borderWidth: 2,
+      borderDash: metal ? [5, 4] : [],
+      pointRadius: 0,
+      pointHoverRadius: 3,
+      tension: 0.25,
+      hidden: metal,            // metals off by default to keep it readable
+    };
+  });
+}
+
+function makeChart(id, inst, day) {
+  const el = document.getElementById(id);
+  if (!el) return inst;
+  if (!day) {                    // no data (e.g. no previous day yet)
+    if (inst) { inst.destroy(); }
+    el.parentElement.style.opacity = 0.35;
+    return null;
+  }
+  el.parentElement.style.opacity = 1;
+  const ds = datasets(day.lines);
+  if (inst) {                    // update in place, preserving legend toggles
+    inst.data.labels = day.times;
+    const byLabel = Object.fromEntries(ds.map((d) => [d.label, d.data]));
+    inst.data.datasets.forEach((d) => { d.data = byLabel[d.label] || []; });
+    inst.update('none');
+    return inst;
+  }
+  return new Chart(el, { type: 'line', data: { labels: day.times, datasets: ds }, options: CHART_OPTS });
+}
+
+function renderCharts(intra) {
+  if (!intra || typeof Chart === 'undefined') return;
+  chartToday = makeChart('chart-today', chartToday, intra.today);
+  chartPrev = makeChart('chart-prev', chartPrev, intra.prev);
+  const td = document.getElementById('chart-today-date');
+  const pd = document.getElementById('chart-prev-date');
+  if (td && intra.today) td.textContent = intra.today.date + ' UTC';
+  if (pd && intra.prev) pd.textContent = intra.prev.date + ' UTC';
+}
+
 async function load() {
   try {
     const r = await fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
     if (!r.ok) throw new Error('HTTP ' + r.status);
-    render(await r.json());
+    const matrix = await r.json();
+    render(matrix);
+    renderCharts(matrix.timeframes.intraday);
   } catch (e) {
     document.getElementById('grid').innerHTML =
       `<p class="loading">Couldn't load strength data (${e.message}). Retrying…</p>`;
@@ -125,6 +203,17 @@ function initCapture() {
   });
 }
 
+function initRefresh() {
+  const btn = document.getElementById('refresh');
+  if (!btn) return;
+  btn.addEventListener('click', async () => {
+    btn.classList.add('spinning');
+    await load();
+    setTimeout(() => btn.classList.remove('spinning'), 400);
+  });
+}
+
 load();
 initCapture();
+initRefresh();
 setInterval(load, REFRESH_MS);

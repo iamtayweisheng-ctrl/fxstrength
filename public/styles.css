@@ -123,6 +123,41 @@ h2 { font-size: 18px; margin: 0 0 8px; }
 .chip.weak { background: rgba(239,68,68,.15); color: var(--weak); }
 .loading { color: var(--muted); }
 
+/* ── refresh button ──────────────────────────────────── */
+.refresh {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.refresh:hover { border-color: var(--accent); color: var(--accent); }
+.refresh.spinning { animation: spin .7s linear infinite; pointer-events: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── charts ──────────────────────────────────────────── */
+.charts { margin: 26px 0; }
+.charts-head h2 { margin-bottom: 4px; }
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+.chart-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+.chart-title { font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+.chart-date { color: var(--muted); font-weight: 500; font-size: 12px; margin-left: 4px; }
+.chart-box { position: relative; height: 240px; }
+@media (max-width: 700px) { .chart-grid { grid-template-columns: 1fr; } }
+
 /* ── capture ─────────────────────────────────────────── */
 .capture {
   margin: 30px 0;
