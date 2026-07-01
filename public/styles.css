@@ -152,6 +152,41 @@ h2 { font-size: 18px; margin: 0 0 8px; }
 .refresh.spinning { animation: spin .7s linear infinite; pointer-events: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ── risk sentiment ──────────────────────────────────── */
+.risk {
+  margin: 26px 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.risk-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.risk-label { font-weight: 800; font-size: 13px; padding: 3px 11px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.risk-label.on { color: var(--strong); border-color: #1e5233; }
+.risk-label.off { color: var(--weak); border-color: #5a2330; }
+.risk-gauge { margin: 18px 0 6px; }
+.risk-track {
+  position: relative;
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ef4444, #64748b 50%, #22c55e);
+}
+.risk-needle {
+  position: absolute; top: -4px; left: 50%;
+  width: 4px; height: 20px;
+  border-radius: 2px;
+  background: var(--ink);
+  box-shadow: 0 0 0 2px var(--panel);
+  transform: translateX(-50%);
+  transition: left .5s ease;
+}
+.risk-ends { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 9px; }
+.risk-context { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+.rchip { background: var(--panel-2); border: 1px solid var(--line); border-left-width: 3px; border-radius: 8px; padding: 8px 12px; font-size: 13px; font-weight: 700; }
+.rchip.on { border-left-color: var(--strong); }
+.rchip.off { border-left-color: var(--weak); }
+.rchip span { color: var(--muted); font-size: 12px; font-weight: 500; margin-left: 5px; }
+
 /* ── trade ideas ─────────────────────────────────────── */
 .ideas { margin: 26px 0; }
 .ideas-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }

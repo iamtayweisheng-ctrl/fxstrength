@@ -39,6 +39,10 @@ const PAIRS = [
 let ideasTf = 'daily';
 let lastMatrix = null;
 
+// Risk-on (commodity) vs safe-haven currencies, for the risk gauge.
+const RISK_ON = ['AUD', 'NZD', 'CAD'];
+const HAVENS = ['USD', 'JPY', 'CHF'];
+
 // score (0-10) -> colour, interpolated red → grey → green
 function scoreColor(s) {
   const t = Math.max(0, Math.min(10, s)) / 10;      // 0..1
@@ -115,6 +119,41 @@ function hcell(text, cls) {
   d.className = cls;
   d.textContent = text;
   return d;
+}
+
+// ── risk sentiment ──────────────────────────────────────────────────────
+// FX-derived gauge (commodity currencies vs havens) plus VIX / S&P context.
+function renderRisk(matrix) {
+  const sec = document.querySelector('.risk');
+  if (!sec) return;
+  const tf = matrix.timeframes.daily ? 'daily' : matrix.timeframe_order[0];
+  const sc = matrix.timeframes[tf].scores;
+  const avg = (arr) => {
+    const vals = arr.map((c) => (sc[c] ? sc[c].score : 5));
+    return vals.reduce((a, b) => a + b, 0) / vals.length;
+  };
+  const gauge = avg(RISK_ON) - avg(HAVENS);        // roughly -10 … +10
+  const pos = Math.max(2, Math.min(98, ((gauge + 10) / 20) * 100));
+  document.getElementById('risk-needle').style.left = pos + '%';
+
+  const lbl = document.getElementById('risk-label');
+  const state = gauge > 1.5 ? 'on' : gauge < -1.5 ? 'off' : 'mid';
+  lbl.textContent = `${state === 'on' ? 'Risk ON' : state === 'off' ? 'Risk OFF' : 'Mixed'} · FX ${gauge >= 0 ? '+' : ''}${gauge.toFixed(1)}`;
+  lbl.className = 'risk-label ' + state;
+
+  const m = matrix.market || {};
+  const chips = [];
+  if (m.vix) {
+    const lv = m.vix.level;
+    const band = lv >= 30 ? 'high' : lv >= 20 ? 'elevated' : lv >= 15 ? 'normal' : 'calm';
+    chips.push(`<div class="rchip ${lv >= 20 ? 'off' : 'on'}">VIX ${lv} <span>${band} · ${m.vix.chg >= 0 ? '+' : ''}${m.vix.chg}</span></div>`);
+  }
+  if (m.sp500) {
+    const up = m.sp500.pct >= 0;
+    chips.push(`<div class="rchip ${up ? 'on' : 'off'}">S&amp;P 500 <span>${up ? '+' : ''}${m.sp500.pct}% · ${m.sp500.level}</span></div>`);
+  }
+  document.getElementById('risk-context').innerHTML =
+    chips.join('') || '<span class="hint">Market context unavailable.</span>';
 }
 
 // ── trade ideas ─────────────────────────────────────────────────────────
@@ -257,6 +296,7 @@ async function load() {
     const matrix = await r.json();
     lastMatrix = matrix;
     render(matrix);
+    renderRisk(matrix);
     renderIdeas(matrix);
     renderCharts(matrix.timeframes.intraday);
   } catch (e) {

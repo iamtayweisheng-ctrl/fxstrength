@@ -265,6 +265,33 @@ def to_scores(series):
     return out
 
 
+def fetch_context():
+    """Cross-asset risk barometers from Yahoo (free, no key): VIX and S&P 500.
+
+    Each = latest daily level + change vs the prior close. Used alongside the
+    FX-derived risk gauge to show whether the broader market agrees.
+    """
+    ctx = {}
+    # (key, Yahoo symbol URL-encoded: ^ -> %5E)
+    for key, sym in [("vix", "%5EVIX"), ("sp500", "%5EGSPC")]:
+        s = fetch_series(sym, "5d", "1d")
+        if not s:
+            continue
+        items = sorted(s.items())                 # by date ascending
+        closes = [v for _, v in items]
+        if len(closes) < 2:
+            continue
+        latest, prev = closes[-1], closes[-2]
+        ctx[key] = {
+            "level": round(latest, 2),
+            "chg": round(latest - prev, 2),
+            "pct": round((latest / prev - 1) * 100, 2),
+            "asof": items[-1][0],
+        }
+        time.sleep(0.15)
+    return ctx
+
+
 def market_open(now):
     """FX cash market: ~Sun 21:00 UTC → Fri 21:00 UTC."""
     wd, hr = now.weekday(), now.hour            # Mon=0 … Sun=6
@@ -298,12 +325,16 @@ def main():
         timeframes[mode] = {"label": r["label"], "window": r["win"],
                             "asof": r["asof"], "scores": to_scores(r["series"])}
 
+    print("- market context ...")
+    market = fetch_context()
+
     matrix = {
         "generated_at": now.isoformat(timespec="seconds"),
         "market_open": market_open(now),
         "currencies": CCYS + list(COMMODITIES),
         "timeframe_order": [t for t in TIMEFRAME_ORDER if t in timeframes],
         "timeframes": timeframes,
+        "market": market,
         "source": "Yahoo Finance",
     }
 
