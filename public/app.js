@@ -23,16 +23,18 @@ const LINE_COLORS = {
   XAU: '#fde047', XAG: '#cbd5e1',
 };
 const LINE_ORDER = ['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'CHF', 'CAD', 'NZD', 'XAU', 'XAG'];
-let chartToday = null;
-let chartPrev = null;
+let chartMain = null;
+let chartDay = 'today';
 
-// The 28 tradeable fiat crosses (base+quote), for the trade-ideas panel.
+// Tradeable instruments for the trade-ideas panel: the 28 fiat crosses plus
+// gold & silver vs USD. slice(0,3)/slice(3) splits base/quote (works for XAU/XAG too).
 const PAIRS = [
   'EURUSD', 'GBPUSD', 'USDJPY', 'USDCHF', 'AUDUSD', 'USDCAD', 'NZDUSD',
   'EURGBP', 'EURJPY', 'EURCHF', 'EURAUD', 'EURCAD', 'EURNZD',
   'GBPJPY', 'GBPCHF', 'GBPAUD', 'GBPCAD', 'GBPNZD',
   'AUDJPY', 'AUDCHF', 'AUDCAD', 'AUDNZD',
   'CADJPY', 'CHFJPY', 'NZDJPY', 'NZDCHF', 'NZDCAD', 'CADCHF',
+  'XAUUSD', 'XAGUSD',            // gold & silver vs USD
 ];
 let ideasTf = 'daily';
 let lastMatrix = null;
@@ -137,7 +139,7 @@ function renderIdeas(matrix) {
       strongS: buy ? b.score : q.score, weakS: buy ? q.score : b.score,
       gap: Math.abs(gap),
     };
-  }).filter(Boolean).sort((a, b) => b.gap - a.gap).slice(0, 6);
+  }).filter(Boolean).sort((a, b) => b.gap - a.gap).slice(0, 8);
 
   list.innerHTML = ideas.map((i) => {
     const dir = i.buy ? 'buy' : 'sell';
@@ -171,25 +173,33 @@ function initIdeasToggle() {
   });
 }
 
-// ── intraday line charts ────────────────────────────────────────────────
-const CHART_OPTS = {
-  responsive: true,
-  maintainAspectRatio: false,
-  animation: false,
-  interaction: { mode: 'index', intersect: false },
-  plugins: {
-    legend: { labels: { color: '#8a97b1', boxWidth: 10, boxHeight: 10, font: { size: 11 } } },
-    tooltip: {
-      callbacks: {
-        label: (c) => `${c.dataset.label}: ${c.parsed.y >= 0 ? '+' : ''}${c.parsed.y.toFixed(2)}%`,
+// ── intraday line chart (single, full-width, Today / Previous-day toggle) ──
+let intraData = null;      // stashed intraday block for toggle + theme rebuilds
+
+function chartOpts() {
+  const cs = getComputedStyle(document.body);
+  const tick = cs.getPropertyValue('--chart-tick').trim() || '#5b6884';
+  const grid = cs.getPropertyValue('--chart-grid').trim() || 'rgba(30,39,64,.5)';
+  const legend = cs.getPropertyValue('--muted').trim() || '#8a97b1';
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: legend, boxWidth: 10, boxHeight: 10, font: { size: 11 } } },
+      tooltip: {
+        callbacks: {
+          label: (c) => `${c.dataset.label}: ${c.parsed.y >= 0 ? '+' : ''}${c.parsed.y.toFixed(2)}%`,
+        },
       },
     },
-  },
-  scales: {
-    x: { ticks: { color: '#5b6884', maxTicksLimit: 8, font: { size: 10 } }, grid: { color: 'rgba(30,39,64,.5)' } },
-    y: { ticks: { color: '#5b6884', font: { size: 10 }, callback: (v) => v + '%' }, grid: { color: 'rgba(30,39,64,.5)' } },
-  },
-};
+    scales: {
+      x: { ticks: { color: tick, maxTicksLimit: 12, font: { size: 10 } }, grid: { color: grid } },
+      y: { ticks: { color: tick, font: { size: 10 }, callback: (v) => v + '%' }, grid: { color: grid } },
+    },
+  };
+}
 
 function datasets(lines) {
   return LINE_ORDER.filter((c) => lines[c]).map((c) => {
@@ -209,34 +219,35 @@ function datasets(lines) {
   });
 }
 
-function makeChart(id, inst, day) {
-  const el = document.getElementById(id);
-  if (!el) return inst;
-  if (!day) {                    // no data (e.g. no previous day yet)
-    if (inst) { inst.destroy(); }
-    el.parentElement.style.opacity = 0.35;
-    return null;
+function drawChart() {
+  if (!intraData || typeof Chart === 'undefined') return;
+  const day = intraData[chartDay];
+  const label = document.getElementById('chart-day-label');
+  const dateEl = document.getElementById('chart-date');
+  if (label) label.textContent = chartDay === 'today' ? 'Today' : 'Previous day';
+  const el = document.getElementById('chart-main');
+  if (!el) return;
+  if (!day) {                              // e.g. no previous day yet
+    if (chartMain) { chartMain.destroy(); chartMain = null; }
+    if (dateEl) dateEl.textContent = '(no data)';
+    return;
   }
-  el.parentElement.style.opacity = 1;
+  if (dateEl) dateEl.textContent = day.date + ' UTC';
   const ds = datasets(day.lines);
-  if (inst) {                    // update in place, preserving legend toggles
-    inst.data.labels = day.times;
+  if (chartMain) {                         // update in place, keep legend toggles
+    chartMain.data.labels = day.times;
     const byLabel = Object.fromEntries(ds.map((d) => [d.label, d.data]));
-    inst.data.datasets.forEach((d) => { d.data = byLabel[d.label] || []; });
-    inst.update('none');
-    return inst;
+    chartMain.data.datasets.forEach((d) => { d.data = byLabel[d.label] || []; });
+    chartMain.update('none');
+  } else {
+    chartMain = new Chart(el, { type: 'line', data: { labels: day.times, datasets: ds }, options: chartOpts() });
   }
-  return new Chart(el, { type: 'line', data: { labels: day.times, datasets: ds }, options: CHART_OPTS });
 }
 
 function renderCharts(intra) {
-  if (!intra || typeof Chart === 'undefined') return;
-  chartToday = makeChart('chart-today', chartToday, intra.today);
-  chartPrev = makeChart('chart-prev', chartPrev, intra.prev);
-  const td = document.getElementById('chart-today-date');
-  const pd = document.getElementById('chart-prev-date');
-  if (td && intra.today) td.textContent = intra.today.date + ' UTC';
-  if (pd && intra.prev) pd.textContent = intra.prev.date + ' UTC';
+  if (!intra) return;
+  intraData = intra;
+  drawChart();
 }
 
 async function load() {
@@ -282,8 +293,44 @@ function initRefresh() {
   });
 }
 
+function initChartToggle() {
+  const bar = document.getElementById('chart-toggle');
+  if (!bar) return;
+  bar.addEventListener('click', (ev) => {
+    const btn = ev.target.closest('button[data-day]');
+    if (!btn) return;
+    chartDay = btn.dataset.day;
+    bar.querySelectorAll('button').forEach((b) => b.classList.toggle('active', b === btn));
+    drawChart();
+  });
+}
+
+// ── light / dark theme (persisted) ──────────────────────────────────────
+function applyTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  try { localStorage.setItem('fxs_theme', t); } catch (e) { /* private mode */ }
+  const btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = t === 'light' ? '☀' : '☾';
+}
+
+function initTheme() {
+  let saved = 'dark';
+  try { saved = localStorage.getItem('fxs_theme') || 'dark'; } catch (e) { /* ignore */ }
+  applyTheme(saved);
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+    if (chartMain) { chartMain.destroy(); chartMain = null; }  // rebuild with themed axis colours
+    drawChart();
+  });
+}
+
+initTheme();
 load();
 initCapture();
 initRefresh();
 initIdeasToggle();
+initChartToggle();
 setInterval(load, REFRESH_MS);

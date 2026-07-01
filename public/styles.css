@@ -10,16 +10,30 @@
   --weak: #ef4444;
   --neutral: #64748b;
   --radius: 12px;
+  --chart-tick: #5b6884;
+  --chart-grid: rgba(30, 39, 64, 0.6);
+  --body-glow: radial-gradient(1200px 600px at 80% -10%, #16203a 0%, transparent 60%);
   font-synthesis: none;
+}
+
+/* Light theme */
+[data-theme="light"] {
+  --bg: #f6f8fc;
+  --panel: #ffffff;
+  --panel-2: #eef2f8;
+  --line: #dde5f0;
+  --ink: #0f172a;
+  --muted: #5a6b86;
+  --chart-tick: #7c8aa5;
+  --chart-grid: rgba(148, 163, 184, 0.28);
+  --body-glow: radial-gradient(1200px 600px at 80% -10%, #e6eefc 0%, transparent 60%);
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background:
-    radial-gradient(1200px 600px at 80% -10%, #16203a 0%, transparent 60%),
-    var(--bg);
+  background: var(--body-glow), var(--bg);
   color: var(--ink);
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.55;
@@ -194,7 +208,18 @@ h2 { font-size: 18px; margin: 0 0 8px; }
 .chart-title { font-weight: 700; font-size: 14px; margin-bottom: 8px; }
 .chart-date { color: var(--muted); font-weight: 500; font-size: 12px; margin-left: 4px; }
 .chart-box { position: relative; height: 240px; }
-@media (max-width: 700px) { .chart-grid { grid-template-columns: 1fr; } }
+.chart-box.big { height: 380px; }
+@media (max-width: 700px) { .chart-grid { grid-template-columns: 1fr; } .chart-box.big { height: 300px; } }
+
+/* Light-theme surface overrides (vars handle most; these have baked colours) */
+[data-theme="light"] .topbar { background: rgba(246, 248, 252, 0.85); }
+[data-theme="light"] .capture {
+  background: linear-gradient(180deg, #eaf1ff, #ffffff);
+  border-color: #cbdcfb;
+}
+[data-theme="light"] .capture p { color: #33415a; }
+[data-theme="light"] .intro p,
+[data-theme="light"] .about p { color: #33415a; }
 
 /* ── capture ─────────────────────────────────────────── */
 .capture {

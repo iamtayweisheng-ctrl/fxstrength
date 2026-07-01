@@ -22,6 +22,7 @@
     <div class="topbar-right">
       <span class="market" id="market-status">—</span>
       <span class="updated" id="updated">loading…</span>
+      <button class="refresh" id="theme-toggle" title="Light / dark" aria-label="Toggle light or dark theme">☾</button>
       <button class="refresh" id="refresh" title="Refresh now" aria-label="Refresh now">⟳</button>
     </div>
   </header>
@@ -79,22 +80,20 @@
     <section class="charts">
       <div class="charts-head">
         <h2>Strength trend</h2>
-        <p class="hint">
-          Each line is a currency's strength <strong>since the session open (00:00 UTC)</strong>.
-          When two lines cross, strength has shifted between those currencies — often the
-          start of a move in that pair. Click a currency in the legend to hide it.
-          Today's chart updates every 15 minutes.
-        </p>
+        <div class="tf-toggle" id="chart-toggle">
+          <button data-day="today" class="active">Today</button>
+          <button data-day="prev">Previous day</button>
+        </div>
       </div>
-      <div class="chart-grid">
-        <div class="chart-card">
-          <div class="chart-title">Today <span class="chart-date" id="chart-today-date"></span></div>
-          <div class="chart-box"><canvas id="chart-today"></canvas></div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-title">Previous day <span class="chart-date" id="chart-prev-date"></span></div>
-          <div class="chart-box"><canvas id="chart-prev"></canvas></div>
-        </div>
+      <p class="hint">
+        Each line is a currency's strength <strong>since the session open (00:00 UTC)</strong>.
+        When two lines cross, strength has shifted between those currencies — often the
+        start of a move in that pair. Click a currency in the legend to hide it.
+        Today's chart updates every 15 minutes.
+      </p>
+      <div class="chart-card">
+        <div class="chart-title"><span id="chart-day-label">Today</span> <span class="chart-date" id="chart-date"></span></div>
+        <div class="chart-box big"><canvas id="chart-main"></canvas></div>
       </div>
     </section>
 
