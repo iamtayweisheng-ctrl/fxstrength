@@ -60,6 +60,26 @@
       </p>
     </section>
 
+    <section class="charts">
+      <div class="charts-head">
+        <h2>Strength trend</h2>
+        <div class="tf-toggle" id="chart-toggle">
+          <button data-day="today" class="active">Today</button>
+          <button data-day="prev">Previous day</button>
+        </div>
+      </div>
+      <p class="hint">
+        Each line is a currency's strength <strong>since the session open (00:00 UTC)</strong>.
+        When two lines cross, strength has shifted between those currencies — often the
+        start of a move in that pair. Click a currency in the legend to hide it.
+        Today's chart updates through the trading day.
+      </p>
+      <div class="chart-card">
+        <div class="chart-title"><span id="chart-day-label">Today</span> <span class="chart-date" id="chart-date"></span></div>
+        <div class="chart-box big"><canvas id="chart-main"></canvas></div>
+      </div>
+    </section>
+
     <section class="risk">
       <div class="risk-head">
         <h2>Risk sentiment</h2>
@@ -92,26 +112,6 @@
         This is information, not a signal to act — <strong>not financial advice</strong>.
       </p>
       <div id="ideas-list" class="ideas-list"><p class="loading">Loading…</p></div>
-    </section>
-
-    <section class="charts">
-      <div class="charts-head">
-        <h2>Strength trend</h2>
-        <div class="tf-toggle" id="chart-toggle">
-          <button data-day="today" class="active">Today</button>
-          <button data-day="prev">Previous day</button>
-        </div>
-      </div>
-      <p class="hint">
-        Each line is a currency's strength <strong>since the session open (00:00 UTC)</strong>.
-        When two lines cross, strength has shifted between those currencies — often the
-        start of a move in that pair. Click a currency in the legend to hide it.
-        Today's chart updates every 15 minutes.
-      </p>
-      <div class="chart-card">
-        <div class="chart-title"><span id="chart-day-label">Today</span> <span class="chart-date" id="chart-date"></span></div>
-        <div class="chart-box big"><canvas id="chart-main"></canvas></div>
-      </div>
     </section>
 
     <!-- Funnel: email capture (the bridge to FXFlow). Needs a form backend wired. -->

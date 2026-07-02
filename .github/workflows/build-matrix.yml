@@ -28,8 +28,8 @@ jobs:
 
       - name: Publish to the data branch
         run: |
-          git config user.name  "fxstrength-bot"
-          git config user.email "bot@users.noreply.github.com"
+          git config --global user.name  "fxstrength-bot"
+          git config --global user.email "bot@users.noreply.github.com"
           tmp="$(mktemp -d)"
           cp public/data/matrix.json "$tmp/matrix.json"
           cd "$tmp"
