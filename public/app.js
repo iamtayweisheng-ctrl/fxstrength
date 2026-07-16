@@ -305,19 +305,38 @@ async function load() {
   }
 }
 
-// email capture — front-end stub. Wire to a form backend (Formspree / Beehiiv /
-// ConvertKit) before launch; for now it just acknowledges locally.
+// Plausible custom-event helper (safe if the script is blocked/not loaded).
+function track(event, props) {
+  try { if (window.plausible) window.plausible(event, props ? { props } : undefined); } catch (e) { /* ignore */ }
+}
+
+// Email capture → ESP. Set SUBSCRIBE_ENDPOINT to the ESP's subscribe URL once the
+// list is created (MailerLite/Beehiiv/Kit). Until then the form still validates,
+// fires the Plausible "Signup" goal (so we measure intent + source immediately),
+// and acknowledges — the real POST turns on the moment the endpoint is filled.
+const SUBSCRIBE_ENDPOINT = '';   // e.g. MailerLite: https://assets.mailerlite.com/jsonp/<ACCT>/forms/<FORM>/subscribe
+
 function initCapture() {
   const form = document.getElementById('capture-form');
   const note = document.getElementById('capture-note');
-  form.addEventListener('submit', (ev) => {
+  form.addEventListener('submit', async (ev) => {
     ev.preventDefault();
     const email = document.getElementById('capture-email').value.trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
       note.textContent = 'Please enter a valid email.';
       return;
     }
-    // TODO: POST to the list provider here.
+    if (SUBSCRIBE_ENDPOINT) {
+      note.textContent = 'Adding you…';
+      try {
+        await fetch(SUBSCRIBE_ENDPOINT, {
+          method: 'POST', mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, fields: { email } }),
+        });
+      } catch (e) { /* opaque response in no-cors; treat as sent */ }
+    }
+    track('Signup');
     note.textContent = "You're on the list — we'll be in touch when alerts launch.";
     form.reset();
   });
