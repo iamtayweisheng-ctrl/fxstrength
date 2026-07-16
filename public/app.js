@@ -314,7 +314,10 @@ function track(event, props) {
 // list is created (MailerLite/Beehiiv/Kit). Until then the form still validates,
 // fires the Plausible "Signup" goal (so we measure intent + source immediately),
 // and acknowledges — the real POST turns on the moment the endpoint is filled.
-const SUBSCRIBE_ENDPOINT = '';   // e.g. MailerLite: https://assets.mailerlite.com/jsonp/<ACCT>/forms/<FORM>/subscribe
+// Brevo subscription form endpoint (from the form's embed). The site's own styled
+// form posts here directly; the response is opaque (no-cors), so we verify the
+// contact lands via Brevo Contacts. 'email_address_check' is Brevo's honeypot (stays empty).
+const SUBSCRIBE_ENDPOINT = 'https://95e1cb32.sibforms.com/serve/MUIFAIKhyQh6CGkKVNSeY3PosPVQD4EVB-LtNRAK6boe5Ftk9MfOVfqm8jCWu3t7Vr6jgB3f5szihJ4r_0drvErPkuxB-uBanxXUJqsebdxRjpqi-AM3eH-VtDQaKSWbsWQ54ntlFxGz9vd3mItlg_naooEP1Dfz1PSdgaDhyVoGYkxqmzzpUVlVhE02yNKtBiplU09v5l7Lnq6J8w==';
 
 function initCapture() {
   const form = document.getElementById('capture-form');
@@ -326,14 +329,14 @@ function initCapture() {
       note.textContent = 'Please enter a valid email.';
       return;
     }
+    note.textContent = 'Adding you…';
     if (SUBSCRIBE_ENDPOINT) {
-      note.textContent = 'Adding you…';
       try {
-        await fetch(SUBSCRIBE_ENDPOINT, {
-          method: 'POST', mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, fields: { email } }),
-        });
+        const fd = new FormData();
+        fd.append('EMAIL', email);
+        fd.append('email_address_check', '');   // Brevo honeypot — must stay empty
+        fd.append('locale', 'en');
+        await fetch(SUBSCRIBE_ENDPOINT, { method: 'POST', mode: 'no-cors', body: fd });
       } catch (e) { /* opaque response in no-cors; treat as sent */ }
     }
     track('Signup');
