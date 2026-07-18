@@ -77,9 +77,18 @@ function render(matrix) {
   grid.innerHTML = '';
   grid.style.gridTemplateColumns = `72px repeat(${tfs.length}, 1fr)`;
 
-  // header row
+  // header row (with a "how to read" tooltip per timeframe)
+  const TF_HELP = {
+    intraday: 'Intraday — strength since 00:00 UTC today. 0 = weakest → 10 = strongest; ▲ rising / ▼ falling / — flat over recent bars.',
+    daily: 'Daily — strength over the last ~30 days. 0 = weakest → 10 = strongest.',
+    weekly: 'Weekly — strength over the last ~26 weeks. 0 = weakest → 10 = strongest.',
+  };
   grid.appendChild(hcell('', 'ghead rowlabel'));
-  tfs.forEach((m) => grid.appendChild(hcell(m, 'ghead')));
+  tfs.forEach((m) => {
+    const h = hcell(m, 'ghead');
+    if (TF_HELP[m]) { h.title = TF_HELP[m]; h.style.cursor = 'help'; }
+    grid.appendChild(h);
+  });
 
   // currency rows, ordered by the daily rank (fall back to first tf)
   const rankTf = matrix.timeframes.daily || matrix.timeframes[tfs[0]];
@@ -263,15 +272,20 @@ function drawChart() {
   const day = intraData[chartDay];
   const label = document.getElementById('chart-day-label');
   const dateEl = document.getElementById('chart-date');
-  if (label) label.textContent = chartDay === 'today' ? 'Today' : 'Previous day';
   const el = document.getElementById('chart-main');
   if (!el) return;
   if (!day) {                              // e.g. no previous day yet
+    if (label) label.textContent = chartDay === 'today' ? 'Today' : 'Previous day';
     if (chartMain) { chartMain.destroy(); chartMain = null; }
     if (dateEl) dateEl.textContent = '(no data)';
     return;
   }
-  if (dateEl) dateEl.textContent = day.date + ' UTC';
+  // Be honest about "Today": if the latest session isn't the current UTC date
+  // (weekend / market closed), it's the last completed session, not a live day.
+  const nowUTCDate = new Date().toISOString().slice(0, 10);
+  const isLiveToday = chartDay === 'today' && day.date === nowUTCDate;
+  if (label) label.textContent = chartDay === 'today' ? (isLiveToday ? 'Today (live)' : 'Latest session') : 'Previous day';
+  if (dateEl) dateEl.textContent = day.date + ' UTC' + (chartDay === 'today' && !isLiveToday ? ' · market closed' : '');
   const ds = datasets(day.lines);
   if (chartMain) {                         // update in place, keep legend toggles
     chartMain.data.labels = day.times;

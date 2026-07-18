@@ -47,20 +47,22 @@
       <div class="grid-head">
         <h2>Strength grid</h2>
         <p class="hint">
-          Each cell scores <strong>0 (weakest) → 10 (strongest)</strong>. When a row is
-          green across every column, that currency is aligned strong on all timeframes —
-          the read that matters most.
+          <strong>How to read:</strong> each cell is a currency's strength on that timeframe —
+          <strong>0 = weakest, 10 = strongest</strong>, shaded green (strong) → red (weak).
+          The arrow is the short-term direction: <strong>▲ rising · ▼ falling · — flat</strong>.
+          A row that's green across all three columns is aligned strong — the highest-conviction read.
         </p>
       </div>
       <div id="grid" class="grid" aria-live="polite">
         <p class="loading">Loading strength data…</p>
       </div>
       <p class="legend">
-        <span class="chip strong">strong</span>
-        <span class="chip neutral">neutral</span>
-        <span class="chip weak">weak</span>
+        <span class="chip strong">strong · 10</span>
+        <span class="chip neutral">neutral · 5</span>
+        <span class="chip weak">weak · 0</span>
         &nbsp;·&nbsp; ▲ rising &nbsp; ▼ falling &nbsp; — flat
       </p>
+      <p class="hint" style="margin-top:6px;">🕒 Updates through the trading day — FX markets are closed on weekends.</p>
     </section>
 
     <section class="charts">

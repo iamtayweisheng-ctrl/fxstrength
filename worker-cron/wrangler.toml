@@ -1,0 +1,7 @@
+name = "fxstrength-refresh"
+main = "src/index.js"
+compatibility_date = "2026-07-18"
+
+# Reliable refresh cadence (GitHub's own scheduler is unreliable; this replaces it).
+[triggers]
+crons = ["*/15 * * * *"]
