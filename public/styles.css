@@ -149,7 +149,12 @@ h2 { font-size: 18px; margin: 0 0 8px; }
   display: inline-flex; align-items: center; justify-content: center;
 }
 .refresh:hover { border-color: var(--accent); color: var(--accent); }
-.refresh.spinning { animation: spin .7s linear infinite; pointer-events: none; }
+/* wider text variant for the honest "Reload latest" button */
+.refresh.reload { width: auto; padding: 0 10px; gap: 6px; font-size: 12px; font-weight: 600; }
+.refresh.spinning { pointer-events: none; }
+.refresh.spinning .ricon { animation: spin .7s linear infinite; display: inline-block; }
+/* data age goes amber when the snapshot is lagging during market hours */
+.updated.stale { color: var(--accent); }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ── risk sentiment ──────────────────────────────────── */

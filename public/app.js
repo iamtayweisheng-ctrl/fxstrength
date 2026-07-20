@@ -114,9 +114,17 @@ function render(matrix) {
   });
 
   // status line
+  // Show how old the published snapshot is — honest about lag rather than
+  // implying it's live. Goes amber only when it's lagging during market hours
+  // (data is legitimately old at weekends, when FX is closed).
   const gen = new Date(matrix.generated_at);
-  document.getElementById('updated').textContent =
-    'updated ' + gen.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const ageMin = Math.max(0, Math.round((Date.now() - gen.getTime()) / 60000));
+  const ageTxt = ageMin < 60 ? `${ageMin}m ago` : `${Math.floor(ageMin / 60)}h ${ageMin % 60}m ago`;
+  const updEl = document.getElementById('updated');
+  updEl.textContent =
+    `updated ${gen.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} · ${ageTxt}`;
+  updEl.title = 'When the published data snapshot was last rebuilt.';
+  updEl.classList.toggle('stale', ageMin > 45 && !!matrix.market_open);
   const mkt = document.getElementById('market-status');
   mkt.textContent = matrix.market_open ? 'Market open' : 'Market closed';
   mkt.className = 'market ' + (matrix.market_open ? 'open' : 'closed');
