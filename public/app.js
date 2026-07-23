@@ -14,27 +14,30 @@ const DATA_URL = IS_LOCAL
   : 'https://raw.githubusercontent.com/iamtayweisheng-ctrl/fxstrength/data/matrix.json';
 const CCY_NAME = {
   USD: 'US Dollar', EUR: 'Euro', JPY: 'Yen', GBP: 'Pound', AUD: 'Aussie',
-  CHF: 'Franc', CAD: 'Loonie', NZD: 'Kiwi', XAU: 'Gold', XAG: 'Silver',
+  CHF: 'Franc', CAD: 'Loonie', NZD: 'Kiwi', XAU: 'Gold', XAG: 'Silver', BTC: 'Bitcoin',
 };
 const ARROWS = { up: '▲', down: '▼', flat: '—' };
 const LINE_COLORS = {
   USD: '#f59e0b', EUR: '#ef4444', JPY: '#22d3ee', GBP: '#22c55e',
   AUD: '#3b82f6', CHF: '#a78bfa', CAD: '#ec4899', NZD: '#14b8a6',
-  XAU: '#fde047', XAG: '#cbd5e1',
+  XAU: '#fde047', XAG: '#cbd5e1', BTC: '#f7931a',
 };
-const LINE_ORDER = ['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'CHF', 'CAD', 'NZD', 'XAU', 'XAG'];
+const LINE_ORDER = ['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'CHF', 'CAD', 'NZD', 'XAU', 'XAG', 'BTC'];
+// Volatile (non-fiat) assets: scored on their own volatility, and hidden by
+// default on the % chart (their swings dwarf the fiats and would flatten them).
+const VOLATILE = ['XAU', 'XAG', 'BTC'];
 let chartMain = null;
 let chartDay = 'today';
 
 // Tradeable instruments for the trade-ideas panel: the 28 fiat crosses plus
-// gold & silver vs USD. slice(0,3)/slice(3) splits base/quote (works for XAU/XAG too).
+// gold, silver & bitcoin vs USD. slice(0,3)/slice(3) splits base/quote.
 const PAIRS = [
   'EURUSD', 'GBPUSD', 'USDJPY', 'USDCHF', 'AUDUSD', 'USDCAD', 'NZDUSD',
   'EURGBP', 'EURJPY', 'EURCHF', 'EURAUD', 'EURCAD', 'EURNZD',
   'GBPJPY', 'GBPCHF', 'GBPAUD', 'GBPCAD', 'GBPNZD',
   'AUDJPY', 'AUDCHF', 'AUDCAD', 'AUDNZD',
   'CADJPY', 'CHFJPY', 'NZDJPY', 'NZDCHF', 'NZDCAD', 'CADCHF',
-  'XAUUSD', 'XAGUSD',            // gold & silver vs USD
+  'XAUUSD', 'XAGUSD', 'BTCUSD',  // gold, silver & bitcoin vs USD
 ];
 let ideasTf = 'daily';
 let lastMatrix = null;
@@ -99,10 +102,10 @@ function render(matrix) {
   ccys.forEach((ccy) => {
     const scores = tfs.map((m) => matrix.timeframes[m].scores[ccy]);
     const label = hcell('', 'ghead rowlabel');
-    const isMetal = ccy === 'XAU' || ccy === 'XAG';
+    const isVol = VOLATILE.includes(ccy);
     label.innerHTML =
-      `<span class="ccy${isMetal ? ' metal' : ''}">${ccy}</span>`;
-    label.title = (CCY_NAME[ccy] || ccy) + (isMetal
+      `<span class="ccy${isVol ? ' metal' : ''}">${ccy}</span>`;
+    label.title = (CCY_NAME[ccy] || ccy) + (isVol
       ? ' — scored against its OWN normal volatility (0 = weak, 10 = strong for this asset), so it is not directly comparable to the currencies.'
       : '');
 
@@ -265,18 +268,18 @@ function chartOpts() {
 
 function datasets(lines) {
   return LINE_ORDER.filter((c) => lines[c]).map((c) => {
-    const metal = c === 'XAU' || c === 'XAG';
+    const vol = VOLATILE.includes(c);
     return {
       label: c,
       data: lines[c],
       borderColor: LINE_COLORS[c] || '#888',
       backgroundColor: LINE_COLORS[c] || '#888',
       borderWidth: 2,
-      borderDash: metal ? [5, 4] : [],
+      borderDash: vol ? [5, 4] : [],
       pointRadius: 0,
       pointHoverRadius: 3,
       tension: 0.25,
-      hidden: metal,            // metals off by default to keep it readable
+      hidden: vol,              // metals/BTC off by default (their swings dwarf the fiats)
     };
   });
 }

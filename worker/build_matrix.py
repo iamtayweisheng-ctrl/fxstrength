@@ -33,9 +33,10 @@ MINORS = ["EURGBP", "EURJPY", "EURCHF", "EURAUD", "EURCAD", "EURNZD",
           "AUDJPY", "AUDCHF", "AUDCAD", "AUDNZD",
           "CADJPY", "CHFJPY", "NZDJPY", "NZDCHF", "NZDCAD", "CADCHF"]
 ALL_PAIRS = MAJORS + MINORS          # 28 crosses
-# code -> Yahoo symbol. Gold/silver via the front-month futures (spot XAUUSD=X
-# 404s on Yahoo); we only use their % change, so contract rolls are immaterial.
-COMMODITIES = {"XAU": "GC=F", "XAG": "SI=F"}
+# code -> Yahoo symbol. Volatile (non-fiat) assets, scored on their OWN
+# volatility (see to_scores). Gold/silver via front-month futures (spot XAUUSD=X
+# 404s on Yahoo); BTC trades 24/7 so it also fills the weekend FX dead-zone.
+COMMODITIES = {"XAU": "GC=F", "XAG": "SI=F", "BTC": "BTC-USD"}
 
 # Each fiat's price expressed in USD, and whether the raw USD pair is inverted.
 # usdVal(F) = +ret(F+USD) if F is the base of its USD pair, else -ret(USD+F).

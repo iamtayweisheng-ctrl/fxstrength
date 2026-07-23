@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FXStrength — Live Currency Strength Meter (Multi-Timeframe + Gold)</title>
-  <meta name="description" content="Free live currency strength meter across daily, weekly and intraday timeframes for the 8 major currencies plus gold and silver. See which currencies are strong or weak at a glance and find high-conviction alignment." />
+  <title>FXStrength — Live Currency Strength Meter (+ Gold, Silver & Bitcoin)</title>
+  <meta name="description" content="Free live currency strength meter across daily, weekly and intraday timeframes for the 8 major currencies plus gold, silver and Bitcoin (BTC). See which currencies are strong or weak at a glance and find high-conviction alignment." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fxstrength.org/" />
   <!-- Open Graph so shared links look right in Discord / X -->
   <meta property="og:title" content="FXStrength — Live Multi-Timeframe Currency Strength Meter" />
-  <meta property="og:description" content="Which currencies are strong right now — across daily, weekly and intraday, plus gold & silver. Free." />
+  <meta property="og:description" content="Which currencies are strong right now — across daily, weekly and intraday, plus gold, silver & Bitcoin. Free." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://fxstrength.org/" />
   <link rel="stylesheet" href="styles.css" />
@@ -39,10 +39,12 @@
       <h1>Live Currency Strength Meter</h1>
       <p>
         FXStrength shows the <strong>relative strength of the 8 major currencies</strong>
-        — USD, EUR, JPY, GBP, AUD, CHF, CAD, NZD — plus <strong>gold (XAU)</strong> and
-        <strong>silver (XAG)</strong>, across three timeframes at once. Each score is the
-        currency's average move against the other seven, so you can see which currencies
-        are strong, which are weak, and where the daily, weekly and intraday reads line up.
+        — USD, EUR, JPY, GBP, AUD, CHF, CAD, NZD — plus <strong>gold (XAU)</strong>,
+        <strong>silver (XAG)</strong> and <strong>Bitcoin (BTC)</strong>, across three
+        timeframes at once. Each score is the currency's average move against the other
+        seven, so you can see which currencies are strong, which are weak, and where the
+        daily, weekly and intraday reads line up. Bitcoin trades 24/7, so there's always
+        something live — even at the weekend when FX is closed.
       </p>
     </section>
 
@@ -54,9 +56,9 @@
           <strong>0 = weakest, 10 = strongest</strong>, shaded green (strong) → red (weak).
           The arrow is the short-term direction: <strong>▲ rising · ▼ falling · — flat</strong>.
           A row that's green across all three columns is aligned strong — the highest-conviction read.
-          <br><span style="color:var(--muted)">Gold (XAU) and silver (XAG) are scored against their
-          <strong>own normal volatility</strong> — 0–10 = weak→strong <em>for that asset</em> — so their
-          scores aren't directly comparable to the currencies.</span>
+          <br><span style="color:var(--muted)">Gold (XAU), silver (XAG) and Bitcoin (BTC) are scored
+          against their <strong>own normal volatility</strong> — 0–10 = weak→strong <em>for that asset</em>
+          — so their scores aren't directly comparable to the currencies.</span>
         </p>
       </div>
       <div id="grid" class="grid" aria-live="polite">
@@ -103,7 +105,7 @@
       </div>
       <div class="risk-context" id="risk-context"></div>
       <p class="hint">
-        Risk-<strong>on</strong> favours the commodity currencies (AUD/NZD/CAD) and stocks;
+        Risk-<strong>on</strong> favours the commodity currencies (AUD/NZD/CAD), stocks and Bitcoin;
         risk-<strong>off</strong> favours safe havens (USD/JPY/CHF) and gold. The gauge reads
         the currencies; VIX and the S&amp;P show whether the broader market agrees. Context, not a signal.
       </p>
@@ -148,8 +150,10 @@
         For each currency we take its percentage move against each of the other seven
         majors, across all 28 currency pairs, measured from the start of the selected
         window, and average them. A positive score means the currency has gained ground
-        on the pack; a negative score means it has lost ground. Gold and silver are scored
-        the same way against the basket of eight fiat currencies.
+        on the pack; a negative score means it has lost ground. Gold, silver and Bitcoin are
+        measured the same way against the basket of eight fiat currencies, but their 0–10 score
+        is scaled to each asset's own volatility — so a gold or Bitcoin reading is "strong for
+        that asset," not directly comparable to the currencies.
       </p>
       <h2>How to use it</h2>
       <p>
