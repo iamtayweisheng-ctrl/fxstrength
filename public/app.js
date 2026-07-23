@@ -102,7 +102,9 @@ function render(matrix) {
     const isMetal = ccy === 'XAU' || ccy === 'XAG';
     label.innerHTML =
       `<span class="ccy${isMetal ? ' metal' : ''}">${ccy}</span>`;
-    label.title = CCY_NAME[ccy] || ccy;
+    label.title = (CCY_NAME[ccy] || ccy) + (isMetal
+      ? ' — scored against its OWN normal volatility (0 = weak, 10 = strong for this asset), so it is not directly comparable to the currencies.'
+      : '');
 
     // highlight rows aligned strong / weak across every timeframe
     const vals = scores.filter(Boolean).map((s) => s.score);
@@ -252,7 +254,11 @@ function chartOpts() {
     },
     scales: {
       x: { ticks: { color: tick, maxTicksLimit: 12, font: { size: 10 } }, grid: { color: grid } },
-      y: { ticks: { color: tick, font: { size: 10 }, callback: (v) => v + '%' }, grid: { color: grid } },
+      y: {
+        title: { display: true, text: '% move vs the other currencies (since 00:00 UTC)', color: tick, font: { size: 10 } },
+        ticks: { color: tick, font: { size: 10 }, callback: (v) => v.toFixed(2) + '%' },
+        grid: { color: grid },
+      },
     },
   };
 }

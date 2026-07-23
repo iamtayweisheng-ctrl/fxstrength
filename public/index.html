@@ -54,6 +54,9 @@
           <strong>0 = weakest, 10 = strongest</strong>, shaded green (strong) → red (weak).
           The arrow is the short-term direction: <strong>▲ rising · ▼ falling · — flat</strong>.
           A row that's green across all three columns is aligned strong — the highest-conviction read.
+          <br><span style="color:var(--muted)">Gold (XAU) and silver (XAG) are scored against their
+          <strong>own normal volatility</strong> — 0–10 = weak→strong <em>for that asset</em> — so their
+          scores aren't directly comparable to the currencies.</span>
         </p>
       </div>
       <div id="grid" class="grid" aria-live="polite">
@@ -77,10 +80,11 @@
         </div>
       </div>
       <p class="hint">
-        Each line is a currency's strength <strong>since the session open (00:00 UTC)</strong>.
-        When two lines cross, strength has shifted between those currencies — often the
-        start of a move in that pair. Click a currency in the legend to hide it.
-        Today's chart updates through the trading day.
+        Each line is a currency's strength — its <strong>average % move against the other
+        seven</strong> — <strong>since the session open (00:00 UTC)</strong>. So the vertical
+        axis is a % move: above 0 = gaining on the pack, below 0 = losing ground. When two
+        lines cross, strength has shifted between those currencies, often the start of a move
+        in that pair. Click a currency in the legend to hide it. Updates through the trading day.
       </p>
       <div class="chart-card">
         <div class="chart-title"><span id="chart-day-label">Today</span> <span class="chart-date" id="chart-date"></span></div>

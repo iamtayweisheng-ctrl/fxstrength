@@ -19,6 +19,7 @@ No third-party packages — standard library only, so it runs anywhere
 """
 
 import json
+import statistics
 import time
 import urllib.request
 from datetime import datetime, timezone
@@ -241,20 +242,38 @@ def arrow(col):
 
 
 def to_scores(series):
-    """Latest strength per currency + a symmetric 0–10 display score.
+    """Latest strength per currency + a 0–10 display score.
 
-    The scale is driven by the eight fiats (the core grid), so the most-
-    extended fiat pegs at 0/10 and the rest spread out meaningfully. Gold and
-    silver ride the same axis and simply clamp at the extremes when they run
-    far beyond the currency range.
+    The eight FIATS share one scale — the largest current fiat move — so the
+    strongest/weakest fiat peg at 10/0 and the rest spread out, keeping
+    fiat-to-fiat scores directly comparable (the core grid's value).
+
+    VOLATILE assets (gold, silver, later BTC) can't use the fiat scale: gold
+    routinely moves several % when the biggest fiat move is <1%, so on the fiat
+    yardstick it clamps to 0/10 every single day. Each volatile asset instead
+    gets its OWN scale — a multiple of its own recent strength dispersion — so
+    its score reads "how strong is this asset vs its OWN normal" (0–10). A
+    strong gold day lands ~9, a quiet day mid-range; only extremes peg.
+    Trade-off (noted in the UI): a metal's score is relative to its own normal,
+    NOT directly comparable in raw % to the fiats.
     """
     latest = {c: col[-1] for c, col in series.items() if col}
-    scale = max(1e-9, max(abs(latest[c]) for c in CCYS if c in latest))
+    fiat_scale = max(1e-9, max(abs(latest[c]) for c in CCYS if c in latest))
+    volatile = set(COMMODITIES)                 # XAU, XAG (and later BTC)
     out = {}
     for c, col in series.items():
         if not col:
             continue
         pct = col[-1]
+        if c in volatile:
+            # Dispersion of the asset's own strength path. This ratio is scale-
+            # invariant (a steady full-window trend ≈ 3.46·std regardless of
+            # magnitude), so ×4 maps a strong trend to ~9 and reserves 10 for
+            # genuine extremes — metals stop pegging on ordinary days.
+            sd = statistics.pstdev(col) if len(col) > 1 else abs(pct)
+            scale = max(1e-9, 4 * sd)
+        else:
+            scale = fiat_scale
         score = max(0.0, min(10.0, 5 + 5 * pct / scale))
         out[c] = {"pct": round(pct, 3),
                   "score": round(score, 2),
