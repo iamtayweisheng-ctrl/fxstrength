@@ -26,6 +26,9 @@ const LINE_ORDER = ['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'CHF', 'CAD', 'NZD', 'XAU
 // Volatile (non-fiat) assets: scored on their own volatility, and hidden by
 // default on the % chart (their swings dwarf the fiats and would flatten them).
 const VOLATILE = ['XAU', 'XAG', 'BTC'];
+// Fixed grid row order (stable — no reshuffle on refresh). Grouped: safe havens,
+// European majors, commodity dollars, then the non-fiat assets.
+const GRID_ORDER = ['USD', 'JPY', 'CHF', 'GBP', 'EUR', 'AUD', 'NZD', 'CAD', 'XAU', 'XAG', 'BTC'];
 let chartMain = null;
 let chartDay = 'today';
 
@@ -57,9 +60,9 @@ function scoreColor(s) {
   return `rgb(${100 - k * 66}, ${116 + k * 81}, ${139 - k * 45})`;
 }
 
-function cell(score) {
+function cell(score, sep) {
   const c = document.createElement('div');
-  c.className = 'gcell';
+  c.className = 'gcell' + (sep ? ' grp-sep' : '');
   if (!score) { c.innerHTML = '<div class="bar"><span class="score">·</span></div>'; return c; }
   const col = scoreColor(score.score);
   const pct = (score.score / 10) * 100;
@@ -93,16 +96,19 @@ function render(matrix) {
     grid.appendChild(h);
   });
 
-  // currency rows, ordered by the daily rank (fall back to first tf)
-  const rankTf = matrix.timeframes.daily || matrix.timeframes[tfs[0]];
-  const ccys = [...matrix.currencies].sort(
-    (a, b) => (rankTf.scores[a]?.rank || 99) - (rankTf.scores[b]?.rank || 99)
-  );
+  // currency rows in a FIXED order (stable — no reshuffle when data refreshes);
+  // anything not in GRID_ORDER (future assets) falls in at the end.
+  const present = new Set(matrix.currencies);
+  const ccys = GRID_ORDER.filter((c) => present.has(c))
+    .concat(matrix.currencies.filter((c) => !GRID_ORDER.includes(c)));
 
+  let sepDone = false;
   ccys.forEach((ccy) => {
     const scores = tfs.map((m) => matrix.timeframes[m].scores[ccy]);
-    const label = hcell('', 'ghead rowlabel');
     const isVol = VOLATILE.includes(ccy);
+    const sep = isVol && !sepDone;      // divider above the first non-fiat asset
+    if (isVol) sepDone = true;
+    const label = hcell('', 'ghead rowlabel' + (sep ? ' grp-sep' : ''));
     label.innerHTML =
       `<span class="ccy${isVol ? ' metal' : ''}">${ccy}</span>`;
     label.title = (CCY_NAME[ccy] || ccy) + (isVol
@@ -115,7 +121,7 @@ function render(matrix) {
     if (vals.length === tfs.length && vals.every((v) => v <= 3.5)) label.classList.add('aligned-weak');
 
     grid.appendChild(label);
-    scores.forEach((s) => grid.appendChild(cell(s)));
+    scores.forEach((s) => grid.appendChild(cell(s, sep)));
   });
 
   // status line

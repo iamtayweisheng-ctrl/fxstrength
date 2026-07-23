@@ -84,6 +84,8 @@ h2 { font-size: 18px; margin: 0 0 8px; }
   gap: 8px;
 }
 .gcell { min-width: 0; }
+/* subtle divider above the non-fiat assets (gold/silver/BTC) block */
+.grp-sep { border-top: 1px solid var(--line); padding-top: 8px; margin-top: 2px; }
 .ghead {
   font-size: 11.5px;
   text-transform: uppercase;
