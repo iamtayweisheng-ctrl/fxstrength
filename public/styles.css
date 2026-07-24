@@ -82,6 +82,7 @@ h2 { font-size: 18px; margin: 0 0 8px; }
   display: grid;
   grid-template-columns: 68px repeat(3, 1fr);
   gap: 8px;
+  min-height: 480px;      /* reserve space so the grid doesn't shift layout on hydrate (CLS) */
 }
 .gcell { min-width: 0; }
 /* subtle divider above the non-fiat assets (gold/silver/BTC) block */
@@ -261,7 +262,8 @@ h2 { font-size: 18px; margin: 0 0 8px; }
 }
 [data-theme="light"] .capture p { color: #33415a; }
 [data-theme="light"] .intro p,
-[data-theme="light"] .about p { color: #33415a; }
+[data-theme="light"] .about p,
+[data-theme="light"] .faq-item p { color: #33415a; }
 
 /* ── capture ─────────────────────────────────────────── */
 .capture {
@@ -301,6 +303,12 @@ h2 { font-size: 18px; margin: 0 0 8px; }
 /* ── about / footer ──────────────────────────────────── */
 .about { margin-top: 30px; }
 .about h2 { margin-top: 20px; }
+
+/* ── FAQ ─────────────────────────────────────────────── */
+.faq { margin-top: 30px; }
+.faq-item { border-top: 1px solid var(--line); padding: 14px 0; }
+.faq-item h3 { font-size: 15px; margin: 0 0 6px; }
+.faq-item p { color: #c7d0e2; margin: 0; max-width: 78ch; }
 .foot { border-top: 1px solid var(--line); padding: 22px 20px; max-width: 920px; margin: 0 auto; }
 .disclaimer { color: var(--muted); font-size: 12px; max-width: 80ch; }
 .src { color: #4a5878; font-size: 11px; }

@@ -3,19 +3,87 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FXStrength — Live Currency Strength Meter (+ Gold, Silver & Bitcoin)</title>
-  <meta name="description" content="Free live currency strength meter across daily, weekly and intraday timeframes for the 8 major currencies plus gold, silver and Bitcoin (BTC). See which currencies are strong or weak at a glance and find high-conviction alignment." />
+  <title>Free Live Currency Strength Meter — Multi-Timeframe (Gold, Silver, Bitcoin)</title>
+  <meta name="description" content="Free live currency strength meter across intraday, daily and weekly timeframes for the 8 major currencies plus gold, silver and Bitcoin. See which currencies are strong or weak at a glance, on one grid." />
   <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0b0f17" />
   <link rel="canonical" href="https://fxstrength.org/" />
   <!-- Open Graph so shared links look right in Discord / X -->
-  <meta property="og:title" content="FXStrength — Live Multi-Timeframe Currency Strength Meter" />
-  <meta property="og:description" content="Which currencies are strong right now — across daily, weekly and intraday, plus gold, silver & Bitcoin. Free." />
+  <meta property="og:site_name" content="FXStrength" />
+  <meta property="og:title" content="Free Live Currency Strength Meter — FX, Gold, Silver & Bitcoin" />
+  <meta property="og:description" content="Which currencies are strong right now — across intraday, daily and weekly, plus gold, silver & Bitcoin. Free, live, no signup." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://fxstrength.org/" />
+  <meta property="og:image" content="https://fxstrength.org/og.svg" />
+  <meta property="og:image:alt" content="FXStrength — live currency strength meter" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Live Currency Strength Meter — FX, Gold, Silver & Bitcoin" />
+  <meta name="twitter:description" content="See which currencies are strong right now — intraday, daily & weekly, plus gold, silver & Bitcoin. Free." />
+  <meta name="twitter:image" content="https://fxstrength.org/og.svg" />
   <link rel="stylesheet" href="styles.css" />
   <!-- Plausible analytics (privacy-friendly; tagged-events build enables custom goals) -->
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
   <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
+
+  <!-- Structured data: describes the tool + FAQ for Google rich results and AI-engine citation -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "FXStrength — Currency Strength Meter",
+    "url": "https://fxstrength.org/",
+    "description": "Free live currency strength meter across intraday, daily and weekly timeframes for the 8 major currencies plus gold, silver and Bitcoin.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any (web browser)",
+    "browserRequirements": "Requires JavaScript.",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": [
+      "Live relative strength for USD, EUR, JPY, GBP, AUD, CHF, CAD and NZD",
+      "Gold (XAU), silver (XAG) and Bitcoin (BTC)",
+      "Intraday, daily and weekly timeframes on one grid",
+      "Strength-trend charts and trade-idea highlights"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is currency strength?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Currency strength measures how a currency is performing against a basket of other currencies, rather than in a single pair. It isolates the individual currency, so instead of only asking 'is EUR/USD up?' you can see whether the move is EUR strength, USD weakness, or both." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I read the strength grid?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Each row is a currency (or gold, silver, Bitcoin) and each column is a timeframe: intraday, daily and weekly. The score runs 0 to 10, where 0 is the weakest and 10 the strongest, shaded red to green, with an arrow for short-term direction. A row that is green across all three timeframes is aligned strong." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is currency strength calculated?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For each currency, FXStrength averages its percentage move against each of the other seven majors across all 28 currency pairs, measured from the start of the selected window. Gold, silver and Bitcoin are measured the same way against the fiat basket, but their 0 to 10 score is normalized to each asset's own volatility." }
+      },
+      {
+        "@type": "Question",
+        "name": "How often does FXStrength update?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The data refreshes through the trading day, roughly every 15 minutes. FX markets are closed at weekends, while Bitcoin trades 24/7, so there is always something live." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the 0 to 10 scores and the arrows mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "0 is the weakest and 10 the strongest; green means strong and red means weak. The arrow shows the short-term direction over recent bars: up means rising, down means falling, and a dash means flat." }
+      },
+      {
+        "@type": "Question",
+        "name": "How are gold, silver and Bitcoin scored?",
+        "acceptedAnswer": { "@type": "Answer", "text": "They are scored against their own normal volatility, where 0 to 10 means weak to strong for that asset. A metal or crypto routinely moves several percent when the biggest fiat move is under one percent, so their score means 'strong for that asset' and is not directly comparable to the currencies." }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <header class="topbar">
@@ -145,23 +213,91 @@
     </section>
 
     <section class="about">
-      <h2>How the currency strength meter works</h2>
+      <h2>What is a currency strength meter?</h2>
       <p>
-        For each currency we take its percentage move against each of the other seven
-        majors, across all 28 currency pairs, measured from the start of the selected
-        window, and average them. A positive score means the currency has gained ground
-        on the pack; a negative score means it has lost ground. Gold, silver and Bitcoin are
-        measured the same way against the basket of eight fiat currencies, but their 0–10 score
-        is scaled to each asset's own volatility — so a gold or Bitcoin reading is "strong for
-        that asset," not directly comparable to the currencies.
+        A currency strength meter shows how each currency is performing against a
+        <strong>basket</strong> of the others, instead of in a single pair. That isolates the
+        individual currency — so rather than only asking "is EUR/USD up?", you can see whether a
+        move is EUR strength, USD weakness, or both. FXStrength tracks the 8 major currencies —
+        USD, EUR, JPY, GBP, AUD, CHF, CAD, NZD — plus gold, silver and Bitcoin, live, across
+        three timeframes at once.
       </p>
+
+      <h2>How to read the meter</h2>
+      <p>
+        Each row is a currency (or gold, silver, Bitcoin); each column is a timeframe —
+        intraday, daily and weekly. Scores run <strong>0 (weakest) to 10 (strongest)</strong>,
+        shaded red → green, with an arrow for the short-term direction (▲ rising, ▼ falling,
+        — flat). A row that's green across all three columns is aligned strong — the
+        highest-conviction read.
+      </p>
+
+      <h2>How it's calculated</h2>
+      <p>
+        For each currency we take its percentage move against each of the other seven majors,
+        across all 28 pairs, measured from the start of the window, and average them. A positive
+        score means it has gained ground on the pack; a negative score means it has lost ground.
+        Gold, silver and Bitcoin are measured the same way against the fiat basket, but their
+        0–10 score is scaled to each asset's own volatility — so a gold or Bitcoin reading is
+        "strong for that asset," not directly comparable to the currencies.
+      </p>
+
       <h2>How to use it</h2>
       <p>
-        Look for currencies that are strong on the higher timeframes (weekly, daily) and
-        pair them against currencies that are weak. When the intraday read agrees with the
-        higher-timeframe trend, that alignment is where the highest-conviction moves tend
-        to form. FXStrength is an information tool — what you do with it is your decision.
+        Look for currencies that are strong on the higher timeframes (weekly, daily) and pair
+        them against currencies that are weak. When the intraday read agrees with the
+        higher-timeframe trend, that alignment is where the highest-conviction moves tend to
+        form. FXStrength is an information tool — what you do with it is your decision.
       </p>
+
+      <h2>How often it updates</h2>
+      <p>
+        The data refreshes through the trading day (roughly every 15 minutes). FX markets are
+        closed at weekends; Bitcoin trades 24/7, so there's always something live.
+      </p>
+    </section>
+
+    <section class="faq">
+      <h2>Frequently asked questions</h2>
+      <div class="faq-item">
+        <h3>What is currency strength?</h3>
+        <p>Currency strength measures how a currency is performing against a basket of other
+        currencies, rather than in a single pair. It isolates the individual currency, so instead
+        of only asking "is EUR/USD up?" you can see whether the move is EUR strength, USD
+        weakness, or both.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I read the strength grid?</h3>
+        <p>Each row is a currency (or gold, silver, Bitcoin) and each column is a timeframe:
+        intraday, daily and weekly. The score runs 0 to 10, where 0 is the weakest and 10 the
+        strongest, shaded red to green, with an arrow for short-term direction. A row that is
+        green across all three timeframes is aligned strong.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How is currency strength calculated?</h3>
+        <p>For each currency, FXStrength averages its percentage move against each of the other
+        seven majors across all 28 currency pairs, measured from the start of the selected
+        window. Gold, silver and Bitcoin are measured the same way against the fiat basket, but
+        their 0 to 10 score is normalized to each asset's own volatility.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How often does FXStrength update?</h3>
+        <p>The data refreshes through the trading day, roughly every 15 minutes. FX markets are
+        closed at weekends, while Bitcoin trades 24/7, so there is always something live.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What do the 0 to 10 scores and the arrows mean?</h3>
+        <p>0 is the weakest and 10 the strongest; green means strong and red means weak. The
+        arrow shows the short-term direction over recent bars: up means rising, down means
+        falling, and a dash means flat.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How are gold, silver and Bitcoin scored?</h3>
+        <p>They are scored against their own normal volatility, where 0 to 10 means weak to
+        strong for that asset. A metal or crypto routinely moves several percent when the biggest
+        fiat move is under one percent, so their score means "strong for that asset" and is not
+        directly comparable to the currencies.</p>
+      </div>
     </section>
   </main>
 

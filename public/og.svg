@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="FXStrength — live currency strength meter">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1524"/>
+      <stop offset="1" stop-color="#0b0f17"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="none" stroke="#1e2740" stroke-width="2"/>
+  <!-- brand -->
+  <text x="80" y="150" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="34" fill="#f59e0b" font-weight="700" letter-spacing="2">▚▚ FXSTRENGTH</text>
+  <text x="80" y="270" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="76" fill="#e7ecf5" font-weight="800">Live Currency</text>
+  <text x="80" y="360" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="76" fill="#e7ecf5" font-weight="800">Strength Meter</text>
+  <text x="80" y="440" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="30" fill="#8a97b1" font-weight="500">FX · Gold · Silver · Bitcoin — intraday, daily &amp; weekly. Free.</text>
+  <!-- decorative strength bars -->
+  <g transform="translate(80,500)">
+    <rect x="0"   y="40" width="70" height="60"  rx="6" fill="#22c55e"/>
+    <rect x="90"  y="20" width="70" height="80"  rx="6" fill="#22c55e" opacity="0.8"/>
+    <rect x="180" y="55" width="70" height="45"  rx="6" fill="#64748b"/>
+    <rect x="270" y="10" width="70" height="90"  rx="6" fill="#22c55e"/>
+    <rect x="360" y="70" width="70" height="30"  rx="6" fill="#ef4444"/>
+    <rect x="450" y="35" width="70" height="65"  rx="6" fill="#64748b" opacity="0.7"/>
+    <rect x="540" y="60" width="70" height="40"  rx="6" fill="#ef4444" opacity="0.8"/>
+    <rect x="630" y="25" width="70" height="75"  rx="6" fill="#f7931a"/>
+  </g>
+  <text x="1120" y="590" text-anchor="end" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="26" fill="#5b6884">fxstrength.org</text>
+</svg>
