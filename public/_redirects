@@ -1,0 +1,4 @@
+# Serve the Google verification token at its exact .html URL with a 200 (no
+# redirect). Cloudflare Pages strips .html (clean URLs) and 308-redirects the
+# .html path, which can fail Google's file check; this rewrite keeps it direct.
+/google47a457569d03d522.html  /google47a457569d03d522  200
