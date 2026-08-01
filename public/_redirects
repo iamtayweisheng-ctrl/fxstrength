@@ -2,3 +2,6 @@
 # redirect). Cloudflare Pages strips .html (clean URLs) and 308-redirects the
 # .html path, which can fail Google's file check; this rewrite keeps it direct.
 /google47a457569d03d522.html  /google47a457569d03d522  200
+
+# Lesson slug renamed (why-aud-fell-softer-inflation → why-aud-fell-after-cpi)
+/behind-the-move/why-aud-fell-softer-inflation  /behind-the-move/why-aud-fell-after-cpi  301
