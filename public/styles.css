@@ -60,6 +60,9 @@ body {
 .market.open { color: var(--strong); border-color: #1e5233; }
 .market.closed { color: var(--muted); }
 .updated { color: var(--muted); }
+.topbar-right .nav-link { color: var(--muted); text-decoration: none; font-weight: 600; }
+.topbar-right .nav-link:hover { color: var(--accent); }
+@media (max-width: 560px) { .topbar-right .nav-link { display: none; } }
 
 /* ── layout ──────────────────────────────────────────── */
 main { max-width: 920px; margin: 0 auto; padding: 24px 20px 60px; }
