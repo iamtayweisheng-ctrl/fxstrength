@@ -456,8 +456,10 @@ def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for m in lessons:
         others = [o for o in lessons if o["slug"] != m["slug"]]
-        out = OUT_DIR / m["slug"] / "index.html"
-        out.parent.mkdir(parents=True, exist_ok=True)
+        # Flat `<slug>.html` — Cloudflare Pages serves it at the clean URL
+        # `/behind-the-move/<slug>` directly (200, no trailing-slash redirect),
+        # so it matches the canonical tag and the email link exactly.
+        out = OUT_DIR / f"{m['slug']}.html"
         out.write_text(render_lesson(m, m["_body"], others), encoding="utf-8")
         print(f"  wrote {out.relative_to(ROOT)}")
 
