@@ -304,6 +304,31 @@ CTA_SCRIPT = """  <script>
   })();
   </script>"""
 
+LIGHTBOX_SCRIPT = """  <script>
+  (function(){
+    var imgs=document.querySelectorAll('.lesson-figure img');
+    if(!imgs.length)return;
+    var box=null;
+    function close(){ if(box){ box.remove(); box=null; document.body.style.overflow=''; } }
+    function open(src,alt){
+      box=document.createElement('div'); box.className='lightbox';
+      var im=document.createElement('img'); im.src=src; im.alt=alt||'';
+      box.appendChild(im); document.body.appendChild(box);
+      document.body.style.overflow='hidden';
+      box.addEventListener('click',close);
+    }
+    imgs.forEach(function(im){
+      im.setAttribute('tabindex','0'); im.setAttribute('role','button');
+      im.setAttribute('aria-label','Enlarge image');
+      im.addEventListener('click',function(){ open(im.currentSrc||im.src,im.alt); });
+      im.addEventListener('keydown',function(e){
+        if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(im.currentSrc||im.src,im.alt); }
+      });
+    });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+  })();
+  </script>"""
+
 DISCLAIMER = """      <p class="disclaimer">
         FXStrength provides market information for educational purposes only and is
         <strong>not financial advice</strong>. Nothing here is a recommendation to buy
@@ -378,6 +403,7 @@ def render_lesson(meta, body, others):
     <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
   </footer>
 {CTA_SCRIPT}
+{LIGHTBOX_SCRIPT}
 </body>
 </html>
 """
