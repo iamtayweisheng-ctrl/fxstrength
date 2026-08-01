@@ -1,113 +1,93 @@
 ---
 title: Why Did AUD Fall After Softer-Than-Expected Inflation?
-dek: A softer Australian inflation print sent the Aussie lower, the Fed held steady, and the yen stirred — but one theme ties the whole week together: markets trade changes in expectations.
+dek: A softer Australian inflation print sent the Aussie lower — but price held key support, and the real story is a repricing of expectations, not a change of course at the RBA.
 slug: why-aud-fell-after-cpi
 date: 2026-08-01
 issue_no: 1
 lesson_no: 1
-description: Why AUD fell after a softer-than-expected CPI, why the Fed's hold changed little, and the one question that explains the week — did the news actually change expectations? Issue #001 of Behind the Move.
-summary: Softer Australian CPI trimmed expectations of another RBA hike and weakened AUD, while a steady Fed reinforced a patient outlook. Neither central bank actually changed course — both moves were about expectations shifting, not policy.
+description: Why AUD fell after a softer-than-expected CPI — the market repriced the odds of another RBA hike, even though the RBA itself hasn't changed course. What the price chart confirms, and the one question that explains the move. Issue #001 of Behind the Move.
+summary: Softer Australian CPI trimmed expectations of another RBA hike and weakened AUD. But inflation is still above target, the RBA hasn't pivoted, and price held key support rather than breaking down — a repricing of expectations, not a new trend.
 newsletter_issue: Behind the Move · Issue #001 · Week 31, 2026 · Theme — When Expectations Change
 confidence: Medium
 ---
 
-This week the story ran from Sydney to Washington to Tokyo — a softer Australian inflation print, a steady Fed, and a stirring yen. On the surface, unrelated. Underneath, one theme connects all of them: **markets move when expectations change**, not simply when news arrives. Here's what happened — and the single question that explains the whole week.
+This week the Australian dollar fell after an inflation report came in **softer than the market expected**. The easy read — "lower inflation, weaker currency" — is the one most people reach for, and it quietly teaches the wrong lesson.
 
-## The Week in 60 Seconds
-
-- **Australian CPI** surprised to the downside. Markets reduced expectations for another RBA rate hike, and AUD weakened.
-- **The Fed** left rates unchanged. Its communication reinforced the view that policymakers were in no hurry to change policy. USD was mixed after the meeting.
-- **JPY strengthened** amid speculation ahead of the BOJ decision and possible official activity.
-- **Gold** held steady as traders weighed the Fed's cautious tone against shifting rate expectations elsewhere.
-
-Although these events seem unrelated, they all revolve around one theme: **changing expectations.**
+By the end of this you'll understand what *actually* moved the Aussie: not the number itself, but what the number did to **expectations** — and you'll see, on the chart, exactly where the market is testing that story.
 
 ## What Happened
 
-**What happened:** Australian inflation came in lower than economists expected. Not dramatically lower — just enough to make traders question whether the Reserve Bank of Australia (RBA) would raise rates again.
+Australian inflation came in **lower than economists expected**. Not dramatically lower — just enough to make traders question whether the Reserve Bank of Australia (RBA) would raise rates again.
 
-**What the market did:** Investors quickly reduced their bets on another rate hike. That repricing weakened the Australian dollar — it lost ground across much of the G10, not just in one pair.
+Investors quickly reduced their bets on another rate hike, and that repricing weakened the Australian dollar. It lost ground across much of the G10 — a broad currency move, not just one pair.
 
 ## Why Expectations Changed
 
-**What didn't change:** The RBA itself. The central bank hasn't said it is done hiking, and inflation is still above the RBA's target. One report rarely changes a central bank's entire stance.
+Before the report, traders were pricing in a meaningful chance that the RBA might hike again. Higher expected rates tend to support a currency; a softer inflation print nudges that calculation the other way. If price pressures are cooling faster than thought, the RBA has *less* reason to hike — so the market trims the odds, and the Aussie becomes a little less attractive at the margin.
 
-**Compared to what?** Markets had been pricing in a meaningful chance of another hike. After the CPI data, that chance dropped sharply. The *data* didn't change much — but the *probability* did.
+The key move: **the currency reacted to a change in expectations about the RBA — not to anything the RBA actually did.** The bank didn't meet, didn't speak, didn't shift. And what *didn't* change matters just as much — inflation is still above the RBA's target, and one report rarely changes a central bank's entire stance. The *data* barely moved; the *probability* the market attached to it did.
 
-**What this means:** AUD didn't fall because inflation was "bad." It fell because the market's *expectation* of future RBA action changed. The move was a repricing of what traders *thought* would happen — not a reaction to what *actually* happened to policy.
+## What Price Is Saying
 
-**Confidence: Medium.** The CPI surprise was real, but the RBA has not confirmed any shift. Employment data and the next inflation print will tell us more. **What would change our view:** two consecutive soft inflation prints, or a clear signal from the RBA that it is pausing.
+:::figure src="/img/aud-cpi-price-chart.png" alt="Australian Dollar Index daily chart. After the 29 July CPI release the index dipped toward the key support zone near 69.3, held, and recovered toward 70.3 — staying above major support near 68.4 and below the May swing high near 72.5, with major resistance near 71.3."
+caption="Figure 1 — Australian Dollar Index (daily). Softer CPI triggered the initial reaction lower, but price held the key support zone rather than breaking toward major support. Macro explains why price moved; the levels show where the market is making decisions."
+:::
+
+### What Did Price Do?
+
+Right after the 29 July release, the index sold off — the initial CPI reaction — sliding toward the **key support zone near 69.3**. But it didn't keep falling. Price tested that zone, held, and has since recovered back toward **70.3**, still well above **major support near 68.4** and some way below the **May swing high near 72.5**. Earlier in the move, rallies had been rejected at **major resistance near 71.3**.
+
+### Does Price Agree With the Macro Story?
+
+Broadly, yes — and in a telling way. If the market had truly concluded the RBA was changing course, you'd expect the selling to push *through* the key support zone and head for major support. Instead, price found buyers at support and bounced. That's the footprint of a **repricing of expectations** — a contained reaction — rather than the start of a structural downtrend. Price is evidence, not proof: it confirms expectations shifted, but the hold above support says the market isn't yet convinced the RBA itself has pivoted.
+
+### Which Levels Matter?
+
+Think of these as where the market is *making decisions*, not as places to trade. The **key support zone near 69.3** is the line the CPI reaction tested and held — a decisive break below it would tell us conviction is building that the RBA story has genuinely changed. Below that, **major support near 68.4** is the bigger structural floor. On the upside, **major resistance near 71.3** and the **May swing high near 72.5** cap the recovery. Watching how price behaves at these levels is how you tell a temporary repricing from a real trend — the macro explains *why* price moved; the levels show *where* the market is testing that story.
+
+## FXStrength Perspective
+
+Every move is worth splitting into two questions: *what changed* — and *what didn't?*
+
+**What changed:** the market's expectation for another near-term RBA hike, and with it short-term demand for AUD.
+
+**What didn't change:** inflation is lower but **still above the RBA's 2–3% target band**; the RBA hasn't signalled a pivot; the labour market is still relatively resilient; and on the chart, price held key support rather than breaking down.
+
+That balance is what makes this look **tactical, not structural** — a repricing of expectations inside an unchanged macro picture, rather than the start of a new regime. It's also worth remembering the Aussie isn't driven by domestic data alone; China, commodity demand, risk sentiment and the US dollar all pull on it.
+
+**Confidence: Medium** — the CPI surprise was real, but it's a single print and the RBA hasn't confirmed anything. **What would change this view:** two consecutive soft inflation prints, or a clear signal from the RBA that it is pausing — and on the chart, a decisive break of the key support zone would say the same thing.
+
+:::figure src="/img/aud-strength-meter.png" alt="FXStrength currency strength meter showing AUD across intraday, daily and weekly timeframes after the CPI print."
+caption="The FXStrength meter after the print — is AUD weakness broad across the majors, or confined to one pair? And do the daily and weekly reads agree?"
+:::
+
+:::cta:::
+
+## Lesson #001
 
 :::insight
 **Lesson #001 — Markets trade changes in expectations, not just economic data.**
 
-Price is evidence, not proof. The AUD move confirms that expectations shifted — but it doesn't confirm the RBA has actually changed. That's the difference between a tactical repricing and a structural trend.
+A "good" or "bad" number only matters relative to what the market already expected.
 :::
 
-The beginner mistake is reading a headline like "inflation lower" and assuming the currency will always weaken. It depends on what the market *already expected*. The better question to ask: *did this news change anyone's expectations?* If not, the price move may be smaller than the headline suggests. If yes, the move can be large — even from a "small" story.
-
-## The Fed Didn't Blink
-
-**Fact:** The Federal Reserve left interest rates unchanged, as markets expected.
-
-**Market interpretation:** Markets largely read the meeting as reinforcing a patient policy outlook, and left with little reason to expect an imminent policy change.
-
-**What didn't change:** Interest rates themselves. The Fed has not signalled imminent cuts or hikes; the overall stance remains one of patience.
-
-**Compared to what?** Some traders hoped recent data might push the Fed closer to easing. Instead, the meeting reinforced the view that policymakers were prepared to wait.
-
-**Our assessment:** For now, markets continue pricing a patient Fed until incoming data materially changes that outlook. This is a holding pattern, not a pivot. **Confidence: Medium** — upcoming employment, inflation and Fed communication will determine whether this interpretation holds. **What would change our view:** a strong data surprise in either direction that gets the market pricing a shift.
-
-## What Price Is Saying
-
-**Is price behaving consistently with this week's macro story?** Overall, yes — but with different expressions. AUD reflected a change in expectations immediately after the CPI release, while USD price action was more restrained as traders digested a subtle shift in interpretation rather than an actual policy change.
-
-**What did price tell us?** The relatively contained AUD decline suggests the market isn't yet convinced the RBA has pivoted. The muted USD reaction to the Fed suggests traders heard the communication but aren't repositioning aggressively until they see it confirmed.
-
-**What should traders watch next?** Australian employment data and the next inflation print. If both soften, the repricing could deepen; if employment holds firm, the current AUD weakness may prove temporary. For the Fed, watch whether the "patient" interpretation shows up across upcoming speeches — one meeting is caution; sustained language across multiple officials is a signal.
-
-**Why it matters:** Price is evidence, not proof. The AUD move confirms expectations shifted — but not that the RBA has actually changed. The USD's restraint confirms the market's interpretation of Fed patience hasn't yet changed positioning. Both moves point to the same lesson: markets react when expectations change, not when information merely arrives.
-
-:::cta:::
-
-## On Our Radar
-
-**BOJ meeting — Friday.** The Bank of Japan meets this week. Recent yen strength has fuelled speculation about possible official intervention, alongside growing focus on policy normalization. We don't yet know whether this becomes next week's dominant story — the BOJ has surprised markets before, and disappointed them just as often. **The question isn't whether the BOJ surprises the market. It's whether the surprise changes expectations.**
-
-**US employment data — next Friday.** The next jobs report will be a key test of whether the market's "patient Fed" interpretation holds. One strong or weak print won't settle the debate — but a trend might.
-
-## Question of the Week
-
-Which is most accurate?
-
-- **A.** Lower inflation means the RBA will cut rates.
-- **B.** Lower inflation reduced expectations for another hike, but more evidence is still needed before the RBA changes direction.
-- **C.** Lower inflation always weakens AUD.
-
-**Answer: B.** Lower inflation shifted *expectations*, but the RBA hasn't changed direction — and one print rarely settles the question.
-
-## The Lesson
-
-Before reacting to next week's biggest headline, ask one question: **did the news change expectations — or just confirm what everyone already believed?** That single habit — separating a genuine change in expectations from noise that merely confirms the consensus — is what turns headlines into understanding.
+The beginner mistake is reading a headline like "inflation lower" and assuming the currency must weaken. It depends on what was *already priced in* — a soft print can even lift a currency if the market had braced for something worse. The better question to ask: *did this news change anyone's expectations?* If not, the move is smaller than the headline suggests. If yes, even a "small" story can move price a long way.
 
 ## Key Takeaways
 
 - AUD fell because expectations for another RBA hike were trimmed — **not** because the RBA changed course.
-- The Fed held steady and signalled patience; markets read it as a holding pattern, not a pivot.
 - Markets trade **surprises versus what was priced in**, not raw good-or-bad data.
-- Price is evidence, not proof — the moves confirm expectations shifted, not that policy has.
-- Next catalysts: the **BOJ** decision, **Australian employment**, and **US jobs**.
-
-:::figure src="" alt="FXStrength currency strength meter showing AUD softening on the daily timeframe after the CPI print" caption="The FXStrength meter after the print — AUD easing on the daily read while the weekly picture holds. (Screenshot to follow.)"
-:::
+- Inflation is lower but **still above target**; one print is tactical, not structural.
+- Price **held the key support zone and recovered** — a contained repricing, not a new downtrend.
+- What to watch: **Australian employment** and the next inflation print — and, on the chart, the key support zone near 69.3.
 
 :::cards
 ### What You Learned
-Markets move when **expectations** change, not when news simply arrives. A number only matters relative to what was already priced in.
+Markets move on **changes in expectations**, not on headlines. A number only matters relative to what was already priced in.
 
 ### What Price Is Saying
-Both the contained AUD sell-off and the muted USD reaction look like **repricing**, not new trends — the market is waiting for confirmation.
+Price held key support and bounced rather than breaking down — the footprint of a **repricing**, not a new trend.
 
 ### How FXStrength Helps
-The strength meter shows whether a move is **broad** (a real currency story) or just one noisy pair — and whether the daily and weekly reads agree.
+The strength meter shows whether AUD weakness is **broad** (a real currency story) or just one noisy pair — and whether the daily and weekly reads agree.
 :::
