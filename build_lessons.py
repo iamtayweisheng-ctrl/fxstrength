@@ -200,7 +200,12 @@ def head_html(meta):
     url = f"{SITE}/{SECTION}/{slug}"
     title = meta["title"]
     desc = meta.get("description", meta.get("dek", ""))
-    og_img = f"{SITE}/og.svg"
+    # Social share card — a real PNG (X and most scrapers don't render SVG og:images).
+    # Defaults to the branded "Behind the Move" cover; a lesson may override with a
+    # `cover: /img/whatever.png` (or full URL) in frontmatter.
+    cover = meta.get("cover", "").strip()
+    og_img = (cover if cover.startswith("http") else f"{SITE}{cover}") if cover else f"{SITE}/og-behind-the-move.png"
+    og_alt = f"Behind the Move — {title}"
     pub = meta.get("date", str(date.today()))
     ld_article = {
         '"@context"': '"https://schema.org"',
@@ -248,10 +253,15 @@ def head_html(meta):
   <meta property="og:type" content="article" />
   <meta property="og:url" content="{url}" />
   <meta property="og:image" content="{og_img}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content="{e(og_alt)}" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{e(title)}" />
   <meta name="twitter:description" content="{e(desc)}" />
   <meta name="twitter:image" content="{og_img}" />
+  <meta name="twitter:image:alt" content="{e(og_alt)}" />
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="/lessons.css" />
   <script>/* apply saved theme before paint (no flash) */
@@ -433,7 +443,11 @@ def render_index(lessons):
   <meta property="og:description" content="{html.escape(desc, quote=True)}" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="{SITE}/{SECTION}/" />
-  <meta property="og:image" content="{SITE}/og.svg" />
+  <meta property="og:image" content="{SITE}/og-behind-the-move.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="{SITE}/og-behind-the-move.png" />
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="/lessons.css" />
   <script>try{{document.documentElement.setAttribute('data-theme',localStorage.getItem('fxs_theme')||'dark');}}catch(e){{}}</script>
