@@ -60,27 +60,47 @@ body {
 .market.open { color: var(--strong); border-color: #1e5233; }
 .market.closed { color: var(--muted); }
 .updated { color: var(--muted); }
-/* "Behind the Move" CTA pill — amber so it reads as a link, not the green
-   Market-open status. Gentle attention pulse; respects reduced-motion. */
+/* "Behind the Move" nav link — amber underlined text (no pill, no arrow) so it
+   reads as a link, clearly distinct from the green Market-open status pill. The
+   underline gently pulses to draw the eye; respects reduced-motion. */
 .topbar-right .nav-link {
-  display: inline-flex; align-items: center; gap: 5px;
-  color: var(--accent); text-decoration: none; font-weight: 700; font-size: 12px;
-  padding: 4px 11px; border-radius: 999px;
-  background: rgba(245, 158, 11, .10);
-  border: 1px solid rgba(245, 158, 11, .45);
-  animation: btm-pulse 2.6s ease-in-out infinite;
+  color: var(--accent); text-decoration: none; font-weight: 700; font-size: 12.5px;
+  border-bottom: 2px solid rgba(245, 158, 11, .5); padding-bottom: 1px;
+  animation: btm-underline 2.6s ease-in-out infinite;
 }
-.topbar-right .nav-link::after { content: "→"; transition: transform .18s ease; }
-.topbar-right .nav-link:hover {
-  background: rgba(245, 158, 11, .20); border-color: var(--accent); animation: none;
+.topbar-right .nav-link:hover { color: #fbbf24; border-bottom-color: var(--accent); animation: none; }
+@keyframes btm-underline {
+  0%, 100% { border-bottom-color: rgba(245, 158, 11, .35); }
+  50% { border-bottom-color: rgba(245, 158, 11, .95); }
 }
-.topbar-right .nav-link:hover::after { transform: translateX(3px); }
-@keyframes btm-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
-  50% { box-shadow: 0 0 0 4px rgba(245, 158, 11, .12); }
+@media (prefers-reduced-motion: reduce) {
+  .topbar-right .nav-link { animation: none; border-bottom-color: rgba(245, 158, 11, .7); }
 }
-@media (prefers-reduced-motion: reduce) { .topbar-right .nav-link { animation: none; } }
 @media (max-width: 560px) { .topbar-right .nav-link { display: none; } }
+
+/* "Behind the Move" explainer + button below the subscription box */
+.btm-promo {
+  margin: 18px 0 0; padding: 16px 18px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+}
+.btm-promo h3 { margin: 0 0 4px; font-size: 15px; }
+.btm-promo p { margin: 0; color: var(--muted); font-size: 13.5px; max-width: 64ch; }
+.btm-btn {
+  white-space: nowrap; text-decoration: none; font-weight: 700; font-size: 13px;
+  color: var(--accent); background: rgba(245, 158, 11, .10);
+  border: 1px solid var(--accent); border-radius: 8px; padding: 9px 16px;
+}
+.btm-btn:hover { background: var(--accent); color: #1a1200; }
+
+/* footer link */
+.foot-links { margin: 0 0 12px; font-size: 13px; color: var(--muted); }
+.foot-links a {
+  color: var(--accent); text-decoration: none; font-weight: 600;
+  border-bottom: 1px solid rgba(245, 158, 11, .5);
+}
+.foot-links a:hover { border-bottom-color: var(--accent); }
 
 /* ── layout ──────────────────────────────────────────── */
 main { max-width: 920px; margin: 0 auto; padding: 24px 20px 60px; }
