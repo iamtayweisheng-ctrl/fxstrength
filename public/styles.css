@@ -85,7 +85,8 @@ body {
   background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent);
   border-radius: var(--radius);
 }
-.btm-promo h3 { margin: 0 0 4px; font-size: 15px; }
+.btm-promo h3 { margin: 0 0 6px; font-size: 15px; }
+.btm-promo .btm-lead { margin: 0 0 6px; color: var(--ink); font-size: 14.5px; font-weight: 600; max-width: 64ch; }
 .btm-promo p { margin: 0; color: var(--muted); font-size: 13.5px; max-width: 64ch; }
 .btm-btn {
   white-space: nowrap; text-decoration: none; font-weight: 700; font-size: 13px;

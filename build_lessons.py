@@ -284,14 +284,14 @@ def head_html(meta):
 
 CTA_HTML = """    <aside class="lesson-cta" id="lesson-cta">
       <h2>New here?</h2>
-      <p>Get <strong>Behind the Move</strong> — the weekly report that explains
+      <p>Get <strong>Behind the Move</strong> — the free breakdown of
          <em>why</em> the market moved, before you trade it.</p>
       <form id="cta-form" class="capture-form" novalidate>
         <input type="email" id="cta-email" placeholder="you@email.com"
                autocomplete="email" required aria-label="Your email" />
         <button type="submit">Get the free report</button>
       </form>
-      <p class="capture-note" id="cta-note">One email a week. No spam. Unsubscribe anytime.</p>
+      <p class="capture-note" id="cta-note">No spam. Unsubscribe anytime.</p>
     </aside>"""
 
 # Brevo endpoint — same list as the homepage capture form (see public/app.js).
@@ -371,8 +371,8 @@ def topbar_html():
 def related_html(current, others):
     if not others:
         return (f'<section class="related"><h2>More lessons</h2>'
-                f'<p class="hint">This is where the library begins. New <em>Behind the Move</em> '
-                f'lessons land here every week — or '
+                f'<p class="hint">This is where the library begins. More <em>Behind the Move</em> '
+                f'articles land here as they publish — or '
                 f'<a href="/">explore the live strength meter</a> in the meantime.</p></section>')
     cards = ""
     for o in others[:4]:
@@ -417,7 +417,7 @@ def render_lesson(meta, body, others):
 {related_html(meta, others)}
   </main>
   <footer class="foot">
-    <p class="foot-news">📬 <strong>Behind the Move</strong> lands every week —
+    <p class="foot-news">📬 More <strong>Behind the Move</strong> —
        <a href="/{SECTION}/">read the archive</a> or subscribe above.</p>
 {DISCLAIMER}
     <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
@@ -438,8 +438,8 @@ def render_index(lessons):
                   f'<span class="lib-dek">{html.escape(m.get("dek",""))}</span></a>')
     if not items:
         items = '<p class="hint">The first lesson is on its way.</p>'
-    desc = ("Behind the Move — weekly deep-dives that explain why currencies moved. "
-            "Learn to read the market, not just the headlines.")
+    desc = ("Behind the Move — deep-dives that explain why currencies moved, "
+            "not just what happened. Learn to read the market, not just the headlines.")
     sv, lv = asset_v("styles.css"), asset_v("lessons.css")
     return f"""<!DOCTYPE html>
 <html lang="en">
