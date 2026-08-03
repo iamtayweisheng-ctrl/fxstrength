@@ -60,8 +60,26 @@ body {
 .market.open { color: var(--strong); border-color: #1e5233; }
 .market.closed { color: var(--muted); }
 .updated { color: var(--muted); }
-.topbar-right .nav-link { color: var(--muted); text-decoration: none; font-weight: 600; }
-.topbar-right .nav-link:hover { color: var(--accent); }
+/* "Behind the Move" CTA pill — amber so it reads as a link, not the green
+   Market-open status. Gentle attention pulse; respects reduced-motion. */
+.topbar-right .nav-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  color: var(--accent); text-decoration: none; font-weight: 700; font-size: 12px;
+  padding: 4px 11px; border-radius: 999px;
+  background: rgba(245, 158, 11, .10);
+  border: 1px solid rgba(245, 158, 11, .45);
+  animation: btm-pulse 2.6s ease-in-out infinite;
+}
+.topbar-right .nav-link::after { content: "→"; transition: transform .18s ease; }
+.topbar-right .nav-link:hover {
+  background: rgba(245, 158, 11, .20); border-color: var(--accent); animation: none;
+}
+.topbar-right .nav-link:hover::after { transform: translateX(3px); }
+@keyframes btm-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+  50% { box-shadow: 0 0 0 4px rgba(245, 158, 11, .12); }
+}
+@media (prefers-reduced-motion: reduce) { .topbar-right .nav-link { animation: none; } }
 @media (max-width: 560px) { .topbar-right .nav-link { display: none; } }
 
 /* ── layout ──────────────────────────────────────────── */
