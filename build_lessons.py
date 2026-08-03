@@ -17,6 +17,7 @@ PER-LESSON (swap each issue, in the .md):
     figures → key takeaways → end-summary cards). See lessons/README.md.
 """
 
+import hashlib
 import html
 import re
 import sys
@@ -57,6 +58,14 @@ def parse_frontmatter(text):
 
 def slugify(s):
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+
+
+def asset_v(name):
+    """Short content hash for cache-busting a public asset (?v=<hash>)."""
+    try:
+        return hashlib.md5((ROOT / "public" / name).read_bytes()).hexdigest()[:8]
+    except OSError:
+        return "1"
 
 
 def inline(text):
@@ -240,6 +249,7 @@ def head_html(meta):
         ],
     }
     e = lambda s: html.escape(s, quote=True)
+    sv, lv = asset_v("styles.css"), asset_v("lessons.css")
     return f"""  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{e(title)} — FXStrength</title>
@@ -262,8 +272,8 @@ def head_html(meta):
   <meta name="twitter:description" content="{e(desc)}" />
   <meta name="twitter:image" content="{og_img}" />
   <meta name="twitter:image:alt" content="{e(og_alt)}" />
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="stylesheet" href="/lessons.css" />
+  <link rel="stylesheet" href="/styles.css?v={sv}" />
+  <link rel="stylesheet" href="/lessons.css?v={lv}" />
   <script>/* apply saved theme before paint (no flash) */
   try{{document.documentElement.setAttribute('data-theme',localStorage.getItem('fxs_theme')||'dark');}}catch(e){{}}</script>
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
@@ -430,6 +440,7 @@ def render_index(lessons):
         items = '<p class="hint">The first lesson is on its way.</p>'
     desc = ("Behind the Move — weekly deep-dives that explain why currencies moved. "
             "Learn to read the market, not just the headlines.")
+    sv, lv = asset_v("styles.css"), asset_v("lessons.css")
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -448,8 +459,8 @@ def render_index(lessons):
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="{SITE}/og-behind-the-move.png" />
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="stylesheet" href="/lessons.css" />
+  <link rel="stylesheet" href="/styles.css?v={sv}" />
+  <link rel="stylesheet" href="/lessons.css?v={lv}" />
   <script>try{{document.documentElement.setAttribute('data-theme',localStorage.getItem('fxs_theme')||'dark');}}catch(e){{}}</script>
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
 </head>
