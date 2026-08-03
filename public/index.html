@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="Free Live Currency Strength Meter — FX, Gold, Silver & Bitcoin" />
   <meta name="twitter:description" content="See which currencies are strong right now — intraday, daily & weekly, plus gold, silver & Bitcoin. Free." />
   <meta name="twitter:image" content="https://fxstrength.org/og.svg" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=4" />
   <!-- Plausible analytics (privacy-friendly; tagged-events build enables custom goals) -->
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
   <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
@@ -105,16 +105,28 @@
   <main>
     <!-- Static, crawlable intro copy (SEO). Real numbers hydrate below. -->
     <section class="intro">
-      <h1>Live Currency Strength Meter</h1>
-      <p>
-        FXStrength shows the <strong>relative strength of the 8 major currencies</strong>
-        — USD, EUR, JPY, GBP, AUD, CHF, CAD, NZD — plus <strong>gold (XAU)</strong>,
-        <strong>silver (XAG)</strong> and <strong>Bitcoin (BTC)</strong>, across three
-        timeframes at once. Each score is the currency's average move against the other
-        seven, so you can see which currencies are strong, which are weak, and where the
-        daily, weekly and intraday reads line up. Bitcoin trades 24/7, so there's always
-        something live — even at the weekend when FX is closed.
-      </p>
+      <div class="intro-copy">
+        <h1>Live Currency Strength Meter</h1>
+        <p>
+          FXStrength shows the <strong>relative strength of the 8 major currencies</strong>
+          — USD, EUR, JPY, GBP, AUD, CHF, CAD, NZD — plus <strong>gold (XAU)</strong>,
+          <strong>silver (XAG)</strong> and <strong>Bitcoin (BTC)</strong>, across three
+          timeframes at once. Each score is the currency's average move against the other
+          seven, so you can see which currencies are strong, which are weak, and where the
+          daily, weekly and intraday reads line up. Bitcoin trades 24/7, so there's always
+          something live — even at the weekend when FX is closed.
+        </p>
+      </div>
+      <aside class="intro-cta">
+        <a class="ic-card" href="https://x.com/TheFXstrength" target="_blank" rel="noopener">
+          <span class="ic-title"><svg class="ic-x" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M18.9 1.6h3.5l-7.6 8.7L23.7 22h-6.9l-5.4-7-6.2 7H1.7l8.1-9.3L.9 1.6h7l4.9 6.5 5.1-6.5Zm-1.2 18.3h1.9L7.1 3.6H5.1l12.6 16.3Z"/></svg> Start with X</span>
+          <span class="ic-desc">Follow FXStrength for daily insights into why currencies move. →</span>
+        </a>
+        <a class="ic-card" href="#capture">
+          <span class="ic-title">Get regular market briefings</span>
+          <span class="ic-desc">Key events, the latest lesson, and what to watch next.</span>
+        </a>
+      </aside>
     </section>
 
     <section class="grid-wrap">
