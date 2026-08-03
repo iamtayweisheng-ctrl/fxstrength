@@ -475,11 +475,13 @@ def render_index(lessons):
     <div class="lib-grid">
 {items}
     </div>
+{CTA_HTML}
   </main>
   <footer class="foot">
 {DISCLAIMER}
     <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
   </footer>
+{CTA_SCRIPT}
   <script>
   (function(){{var tb=document.getElementById('theme-toggle');if(!tb)return;
     tb.addEventListener('click',function(){{var n=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';

@@ -40,6 +40,17 @@
     <div class="lib-grid">
 <a class="lib-card" href="/behind-the-move/why-aud-fell-after-cpi"><span class="lib-kicker">Issue #1 · 1 Aug 2026</span><span class="lib-title">Why Did AUD Fall After Softer-Than-Expected Inflation?</span><span class="lib-dek">A softer Australian inflation print sent the Aussie lower — but price held key support, and the real story is a repricing of expectations, not a change of course at the RBA.</span></a>
     </div>
+    <aside class="lesson-cta" id="lesson-cta">
+      <h2>New here?</h2>
+      <p>Get <strong>Behind the Move</strong> — the free breakdown of
+         <em>why</em> the market moved, before you trade it.</p>
+      <form id="cta-form" class="capture-form" novalidate>
+        <input type="email" id="cta-email" placeholder="you@email.com"
+               autocomplete="email" required aria-label="Your email" />
+        <button type="submit">Get the free report</button>
+      </form>
+      <p class="capture-note" id="cta-note">No spam. Unsubscribe anytime.</p>
+    </aside>
   </main>
   <footer class="foot">
       <p class="disclaimer">
@@ -49,6 +60,34 @@
       </p>
     <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
   </footer>
+  <script>
+  (function(){
+    var EP='https://95e1cb32.sibforms.com/serve/MUIFAIKhyQh6CGkKVNSeY3PosPVQD4EVB-LtNRAK6boe5Ftk9MfOVfqm8jCWu3t7Vr6jgB3f5szihJ4r_0drvErPkuxB-uBanxXUJqsebdxRjpqi-AM3eH-VtDQaKSWbsWQ54ntlFxGz9vd3mItlg_naooEP1Dfz1PSdgaDhyVoGYkxqmzzpUVlVhE02yNKtBiplU09v5l7Lnq6J8w==';
+    function track(g,p){try{window.plausible&&window.plausible(g,p?{props:p}:undefined);}catch(e){}}
+    var f=document.getElementById('cta-form');if(!f)return;
+    f.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      var note=document.getElementById('cta-note');
+      var email=document.getElementById('cta-email').value.trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){note.textContent='Please enter a valid email.';return;}
+      note.textContent='Adding you…';
+      try{var fd=new FormData();fd.append('EMAIL',email);fd.append('email_address_check','');fd.append('locale','en');
+        fetch(EP,{method:'POST',mode:'no-cors',body:fd});}catch(e){}
+      track('Signup',{src:'lesson'});
+      note.textContent="You're on the list — your first Behind the Move is on the way.";
+      f.reset();
+    });
+    // Theme toggle — mirrors app.js (key fxs_theme).
+    var tb=document.getElementById('theme-toggle');
+    if(tb){tb.addEventListener('click',function(){
+      var next=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+      document.documentElement.setAttribute('data-theme',next);
+      try{localStorage.setItem('fxs_theme',next);}catch(e){}
+      tb.textContent=next==='light'?'☀':'☾';
+    });
+    try{tb.textContent=(localStorage.getItem('fxs_theme')||'dark')==='light'?'☀':'☾';}catch(e){}}
+  })();
+  </script>
   <script>
   (function(){var tb=document.getElementById('theme-toggle');if(!tb)return;
     tb.addEventListener('click',function(){var n=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
