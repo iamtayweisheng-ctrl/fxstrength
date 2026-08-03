@@ -428,8 +428,8 @@ def render_index(lessons):
                   f'<span class="lib-dek">{html.escape(m.get("dek",""))}</span></a>')
     if not items:
         items = '<p class="hint">The first lesson is on its way.</p>'
-    desc = ("Behind the Move — weekly deep-dives that explain why currencies moved, "
-            "in plain English. Learn to read the market, not just the headlines.")
+    desc = ("Behind the Move — weekly deep-dives that explain why currencies moved. "
+            "Learn to read the market, not just the headlines.")
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
