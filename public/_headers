@@ -1,0 +1,9 @@
+# Always revalidate styling/scripts so updates appear right after deploy.
+# ETag makes this cheap: the browser gets a 304 (no re-download) when unchanged,
+# and only re-fetches when the file actually changed — no more hard-refresh needed.
+/styles.css
+  Cache-Control: no-cache
+/lessons.css
+  Cache-Control: no-cache
+/app.js
+  Cache-Control: no-cache
