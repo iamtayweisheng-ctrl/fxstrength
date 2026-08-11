@@ -153,7 +153,8 @@ def parse_attrs(s):
 def directive_html(name, attrs, inner_lines, ctx):
     """Render a `:::name ...:::` block. `ctx` carries page data (e.g. CTA copy)."""
     if name == "insight":
-        return (f'<aside class="insight"><span class="insight-tag">📌 Key Insight</span>'
+        tag = attrs.get("tag", "📌 Key Insight")
+        return (f'<aside class="insight"><span class="insight-tag">{html.escape(tag)}</span>'
                 f'<div class="insight-body">{render_blocks(inner_lines)}</div></aside>')
     if name == "figure":
         src = attrs.get("src", "").strip()
