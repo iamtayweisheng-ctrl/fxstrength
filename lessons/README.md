@@ -18,9 +18,20 @@ block · footer · `<head>` meta + Article/Breadcrumb JSON-LD · all styling (`p
 ## What's PER-LESSON (this file)
 Frontmatter metadata + the body content.
 
+### Sections
+Each file belongs to a **section** (a URL segment with its own index page), set via
+`section:` in frontmatter. Sections are configured in `build_lessons.py` (`SECTIONS`):
+- `behind-the-move` (default) → `/behind-the-move/<slug>`
+- `the-bigger-picture` → `/the-bigger-picture/<slug>` (evergreen macro frameworks)
+
+Each section has its own branded OG cover (`public/og-<section>.png`). Articles
+cross-link automatically in the "More reading" block.
+
 ### Frontmatter (all scalar `key: value`)
 | key | notes |
 |-----|-------|
+| `section` | `behind-the-move` (default) or `the-bigger-picture`. |
+| `kicker` | small label above the H1 (defaults to the section name; Behind the Move uses `newsletter_issue`). |
 | `title` | H1, question-style (SEO/AEO). |
 | `dek` | one-line sub-headline. |
 | `slug` | URL slug (optional; derived from title if omitted). |
@@ -56,7 +67,15 @@ Directive blocks:
 …
 ### How FXStrength Helps
 …
-:::                                ← end-summary cards
+:::                                ← end-summary cards (also used for any 2–3 column card row)
+
+:::quote
+A short pull-quote for visual rhythm.
+:::
+
+:::flow
+Fiscal position → Treasury supply → Yields → Relative returns → USD
+:::                                ← horizontal transmission chain (splits on →)
 ```
 
 ## Pre-publish gates (per the build brief)

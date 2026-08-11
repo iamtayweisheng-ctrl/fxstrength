@@ -26,9 +26,34 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 LESSONS_DIR = ROOT / "lessons"
-OUT_DIR = ROOT / "public" / "behind-the-move"
-SECTION = "behind-the-move"          # URL segment + brand ("Behind the Move")
 SITE = "https://fxstrength.org"
+
+# Content sections. Each is a URL segment with its own index page; a content file
+# picks its section via `section:` frontmatter (default: behind-the-move).
+DEFAULT_SECTION = "behind-the-move"
+SECTIONS = {
+    "behind-the-move": {
+        "name": "Behind the Move",
+        "tagline": "Why the market moved — explained.",
+        "index_h1": "Why the market moved — explained",
+        "index_desc": ("Behind the Move — deep-dives that explain why currencies moved, "
+                       "not just what happened. Learn to read the market, not just the headlines."),
+        "cover": "/og-behind-the-move.png",
+    },
+    "the-bigger-picture": {
+        "name": "The Bigger Picture",
+        "tagline": "A broader view of the economic forces shaping currencies and markets.",
+        "index_h1": "The Bigger Picture",
+        "index_desc": ("The Bigger Picture — a broader view of the economic forces shaping "
+                       "currencies and markets. Evergreen macro frameworks for FX traders."),
+        "cover": "/og-the-bigger-picture.png",
+    },
+}
+
+
+def sec_of(meta):
+    """The section key for a content file (validated; falls back to default)."""
+    return meta["section"] if meta.get("section") in SECTIONS else DEFAULT_SECTION
 
 MONTHS = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -155,6 +180,15 @@ def directive_html(name, attrs, inner_lines, ctx):
             f'<div class="summary-card"><h3>{inline(t)}</h3>{render_blocks(b)}</div>'
             for t, b in cards)
         return f'<div class="summary-cards">{html_cards}</div>'
+    if name == "quote":
+        return f'<blockquote class="pullquote">{render_blocks(inner_lines)}</blockquote>'
+    if name == "flow":
+        # A → B → C  (a horizontal transmission chain). Splits on → or ->.
+        text = " ".join(l.strip() for l in inner_lines if l.strip())
+        steps = [s.strip() for s in re.split(r"→|->", text) if s.strip()]
+        arrow = '<span class="flow-arrow" aria-hidden="true">→</span>'
+        chain = arrow.join(f'<span class="flow-step">{inline(s)}</span>' for s in steps)
+        return f'<div class="flow">{chain}</div>'
     if name == "cta":
         return ctx["cta"]
     # Unknown directive: render its contents plainly rather than dropping them.
@@ -205,16 +239,18 @@ def reading_time(body):
 
 # ── the LAYOUT (fixed shell shared by every lesson) ─────────────────────────
 def head_html(meta):
+    sec = sec_of(meta)
+    sinfo = SECTIONS[sec]
     slug = meta["slug"]
-    url = f"{SITE}/{SECTION}/{slug}"
+    url = f"{SITE}/{sec}/{slug}"
     title = meta["title"]
     desc = meta.get("description", meta.get("dek", ""))
     # Social share card — a real PNG (X and most scrapers don't render SVG og:images).
-    # Defaults to the branded "Behind the Move" cover; a lesson may override with a
+    # Defaults to the section's branded cover; a file may override with a
     # `cover: /img/whatever.png` (or full URL) in frontmatter.
     cover = meta.get("cover", "").strip()
-    og_img = (cover if cover.startswith("http") else f"{SITE}{cover}") if cover else f"{SITE}/og-behind-the-move.png"
-    og_alt = f"Behind the Move — {title}"
+    og_img = (cover if cover.startswith("http") else f"{SITE}{cover}") if cover else f"{SITE}{sinfo['cover']}"
+    og_alt = f"{sinfo['name']} — {title}"
     pub = meta.get("date", str(date.today()))
     ld_article = {
         '"@context"': '"https://schema.org"',
@@ -243,8 +279,8 @@ def head_html(meta):
         "@type": "BreadcrumbList",
         "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "FXStrength", "item": SITE + "/"},
-            {"@type": "ListItem", "position": 2, "name": "Behind the Move",
-             "item": f"{SITE}/{SECTION}/"},
+            {"@type": "ListItem", "position": 2, "name": sinfo["name"],
+             "item": f"{SITE}/{sec}/"},
             {"@type": "ListItem", "position": 3, "name": title, "item": url},
         ],
     }
@@ -357,11 +393,11 @@ DISCLAIMER = """      <p class="disclaimer">
 
 
 def topbar_html():
+    links = "".join(f'      <a href="/{k}/">{v["name"]}</a>\n' for k, v in SECTIONS.items())
     return f"""  <header class="topbar">
     <a class="brand" href="/"><span class="logo">▚▚</span> FXStrength</a>
     <nav class="topbar-right lesson-nav">
-      <a href="/{SECTION}/">Behind the Move</a>
-      <a href="/">Strength meter</a>
+{links}      <a href="/">Strength meter</a>
       <button class="refresh" id="theme-toggle" title="Light / dark"
               aria-label="Toggle light or dark theme">☾</button>
     </nav>
@@ -370,28 +406,33 @@ def topbar_html():
 
 def related_html(current, others):
     if not others:
-        return (f'<section class="related"><h2>More lessons</h2>'
-                f'<p class="hint">This is where the library begins. More <em>Behind the Move</em> '
+        secname = SECTIONS[sec_of(current)]["name"]
+        return (f'<section class="related"><h2>More reading</h2>'
+                f'<p class="hint">This is where the library begins. More <em>{html.escape(secname)}</em> '
                 f'articles land here as they publish — or '
                 f'<a href="/">explore the live strength meter</a> in the meantime.</p></section>')
     cards = ""
     for o in others[:4]:
-        cards += (f'<a class="related-card" href="/{SECTION}/{o["slug"]}">'
-                  f'<span class="related-kicker">Behind the Move</span>'
+        osec = sec_of(o)
+        cards += (f'<a class="related-card" href="/{osec}/{o["slug"]}">'
+                  f'<span class="related-kicker">{html.escape(SECTIONS[osec]["name"])}</span>'
                   f'<span class="related-title">{html.escape(o["title"])}</span>'
                   f'<span class="related-dek">{html.escape(o.get("dek", ""))}</span></a>')
-    return f'<section class="related"><h2>More lessons</h2><div class="related-grid">{cards}</div></section>'
+    return f'<section class="related"><h2>More reading</h2><div class="related-grid">{cards}</div></section>'
 
 
 def render_lesson(meta, body, others):
+    sec = sec_of(meta)
+    sinfo = SECTIONS[sec]
     ctx = {"cta": CTA_HTML}
     article_body = render_body(body, ctx)
-    kicker = meta.get("newsletter_issue", "Behind the Move")
-    meta_line_bits = [fmt_date(meta.get("date", ""))]
-    meta_line_bits.append(f'{reading_time(body)} min read')
+    kicker = meta.get("kicker") or meta.get("newsletter_issue") or sinfo["name"]
+    meta_line_bits = [fmt_date(meta.get("date", "")), f'{reading_time(body)} min read']
     if meta.get("confidence"):
         meta_line_bits.append(f'Confidence: {meta["confidence"]}')
     meta_line = " · ".join(b for b in meta_line_bits if b)
+    crumb_last = (f"Issue #{meta['issue_no']}" if meta.get("issue_no")
+                  else html.escape(meta["title"]))
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -403,8 +444,8 @@ def render_lesson(meta, body, others):
     <article>
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">FXStrength</a> <span>›</span>
-        <a href="/{SECTION}/">Behind the Move</a> <span>›</span>
-        <span>Issue #{meta.get('issue_no', '')}</span>
+        <a href="/{sec}/">{html.escape(sinfo['name'])}</a> <span>›</span>
+        <span>{crumb_last}</span>
       </nav>
       <p class="kicker">{html.escape(kicker)}</p>
       <h1>{html.escape(meta['title'])}</h1>
@@ -417,8 +458,8 @@ def render_lesson(meta, body, others):
 {related_html(meta, others)}
   </main>
   <footer class="foot">
-    <p class="foot-news">📬 More <strong>Behind the Move</strong> —
-       <a href="/{SECTION}/">read the archive</a> or subscribe above.</p>
+    <p class="foot-news">📬 More from <strong>{html.escape(sinfo['name'])}</strong> —
+       <a href="/{sec}/">read the archive</a> or subscribe above.</p>
 {DISCLAIMER}
     <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
   </footer>
@@ -429,36 +470,38 @@ def render_lesson(meta, body, others):
 """
 
 
-def render_index(lessons):
+def render_index(sec, articles):
+    sinfo = SECTIONS[sec]
     items = ""
-    for m in lessons:
-        items += (f'<a class="lib-card" href="/{SECTION}/{m["slug"]}">'
-                  f'<span class="lib-kicker">Issue #{m.get("issue_no","")} · {fmt_date(m.get("date",""))}</span>'
+    for m in articles:
+        kick = (f'Issue #{m["issue_no"]} · ' if m.get("issue_no") else "") + fmt_date(m.get("date", ""))
+        items += (f'<a class="lib-card" href="/{sec}/{m["slug"]}">'
+                  f'<span class="lib-kicker">{html.escape(kick)}</span>'
                   f'<span class="lib-title">{html.escape(m["title"])}</span>'
                   f'<span class="lib-dek">{html.escape(m.get("dek",""))}</span></a>')
     if not items:
-        items = '<p class="hint">The first lesson is on its way.</p>'
-    desc = ("Behind the Move — deep-dives that explain why currencies moved, "
-            "not just what happened. Learn to read the market, not just the headlines.")
+        items = '<p class="hint">The first article is on its way.</p>'
+    desc = sinfo["index_desc"]
+    cover = f'{SITE}{sinfo["cover"]}'
     sv, lv = asset_v("styles.css"), asset_v("lessons.css")
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Behind the Move — Why the Market Moved | FXStrength</title>
+  <title>{html.escape(sinfo["name"])} | FXStrength</title>
   <meta name="description" content="{html.escape(desc, quote=True)}" />
-  <link rel="canonical" href="{SITE}/{SECTION}/" />
+  <link rel="canonical" href="{SITE}/{sec}/" />
   <meta name="theme-color" content="#0b0f17" />
-  <meta property="og:title" content="Behind the Move — FXStrength" />
+  <meta property="og:title" content="{html.escape(sinfo["name"])} — FXStrength" />
   <meta property="og:description" content="{html.escape(desc, quote=True)}" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="{SITE}/{SECTION}/" />
-  <meta property="og:image" content="{SITE}/og-behind-the-move.png" />
+  <meta property="og:url" content="{SITE}/{sec}/" />
+  <meta property="og:image" content="{cover}" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="{SITE}/og-behind-the-move.png" />
+  <meta name="twitter:image" content="{cover}" />
   <link rel="stylesheet" href="/styles.css?v={sv}" />
   <link rel="stylesheet" href="/lessons.css?v={lv}" />
   <script>try{{document.documentElement.setAttribute('data-theme',localStorage.getItem('fxs_theme')||'dark');}}catch(e){{}}</script>
@@ -468,9 +511,9 @@ def render_index(lessons):
 {topbar_html()}
   <main class="lesson lib">
     <header class="lib-head">
-      <p class="kicker">Behind the Move</p>
-      <h1>Why the market moved — explained</h1>
-      <p class="dek">{html.escape(desc)}</p>
+      <p class="kicker">{html.escape(sinfo["name"])}</p>
+      <h1>{html.escape(sinfo["index_h1"])}</h1>
+      <p class="dek">{html.escape(sinfo["tagline"])}</p>
     </header>
     <div class="lib-grid">
 {items}
@@ -495,30 +538,40 @@ def render_index(lessons):
 
 def main():
     files = sorted(p for p in LESSONS_DIR.glob("*.md") if p.stem.lower() != "readme")
-    lessons = []
+    arts = []
     for f in files:
         meta, body = parse_frontmatter(f.read_text(encoding="utf-8"))
         if not meta.get("slug"):
             meta["slug"] = slugify(meta.get("title", f.stem))
         meta["_body"] = body
-        lessons.append(meta)
+        arts.append(meta)
 
     # newest first (by date string; ISO sorts correctly)
-    lessons.sort(key=lambda m: m.get("date", ""), reverse=True)
+    arts.sort(key=lambda m: m.get("date", ""), reverse=True)
 
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    for m in lessons:
-        others = [o for o in lessons if o["slug"] != m["slug"]]
+    for m in arts:
+        sec = sec_of(m)
+        # Related: same-section articles first, then the rest (cross-section).
+        same = [o for o in arts if o["slug"] != m["slug"] and sec_of(o) == sec]
+        cross = [o for o in arts if o["slug"] != m["slug"] and sec_of(o) != sec]
+        outdir = ROOT / "public" / sec
+        outdir.mkdir(parents=True, exist_ok=True)
         # Flat `<slug>.html` — Cloudflare Pages serves it at the clean URL
-        # `/behind-the-move/<slug>` directly (200, no trailing-slash redirect),
-        # so it matches the canonical tag and the email link exactly.
-        out = OUT_DIR / f"{m['slug']}.html"
-        out.write_text(render_lesson(m, m["_body"], others), encoding="utf-8")
+        # `/<section>/<slug>` directly (200, no trailing-slash redirect).
+        out = outdir / f"{m['slug']}.html"
+        out.write_text(render_lesson(m, m["_body"], same + cross), encoding="utf-8")
         print(f"  wrote {out.relative_to(ROOT)}")
 
-    (OUT_DIR / "index.html").write_text(render_index(lessons), encoding="utf-8")
-    print(f"  wrote {(OUT_DIR / 'index.html').relative_to(ROOT)}")
-    print(f"Done — {len(lessons)} lesson(s).")
+    for sec in SECTIONS:
+        sec_arts = [m for m in arts if sec_of(m) == sec]
+        if not sec_arts:
+            continue
+        outdir = ROOT / "public" / sec
+        outdir.mkdir(parents=True, exist_ok=True)
+        (outdir / "index.html").write_text(render_index(sec, sec_arts), encoding="utf-8")
+        print(f"  wrote {(outdir / 'index.html').relative_to(ROOT)}")
+
+    print(f"Done — {len(arts)} article(s) across {len(SECTIONS)} sections.")
 
 
 if __name__ == "__main__":

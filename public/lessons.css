@@ -64,6 +64,28 @@ main.lesson h1 {
 .insight-body p { margin: 0; font-size: 17px; color: var(--ink); }
 .insight-body p + p { margin-top: 10px; }
 
+/* ── pull quote ──────────────────────────────────────── */
+.pullquote {
+  margin: 28px 0; padding: 4px 0 4px 20px;
+  border-left: 3px solid var(--accent);
+  font-size: 21px; line-height: 1.4; font-weight: 600; color: var(--ink);
+}
+.pullquote p { margin: 0; color: var(--ink); }
+.pullquote p + p { margin-top: 8px; }
+
+/* ── transmission chain (A → B → C) ──────────────────── */
+.flow {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  margin: 24px 0; padding: 14px 16px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+}
+.flow-step {
+  font-weight: 700; font-size: 13.5px; color: var(--ink);
+  background: var(--panel-2); border: 1px solid var(--line);
+  border-radius: 8px; padding: 7px 11px;
+}
+.flow-arrow { color: var(--accent); font-weight: 800; }
+
 /* ── captioned figure ────────────────────────────────── */
 .lesson-figure { margin: 28px 0; position: relative; }
 .lesson-figure img {
