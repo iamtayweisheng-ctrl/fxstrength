@@ -60,22 +60,13 @@ body {
 .market.open { color: var(--strong); border-color: #1e5233; }
 .market.closed { color: var(--muted); }
 .updated { color: var(--muted); }
-/* "Behind the Move" nav link — amber underlined text (no pill, no arrow) so it
-   reads as a link, clearly distinct from the green Market-open status pill. The
-   underline gently pulses to draw the eye; respects reduced-motion. */
+/* Section nav links — static amber underline, distinct from the green Market-open
+   status pill. Two of them now, so no pulse (a pair of pulsing links reads busy). */
 .topbar-right .nav-link {
   color: var(--accent); text-decoration: none; font-weight: 700; font-size: 12.5px;
-  border-bottom: 2px solid rgba(245, 158, 11, .5); padding-bottom: 1px;
-  animation: btm-underline 2.6s ease-in-out infinite;
+  border-bottom: 2px solid rgba(245, 158, 11, .55); padding-bottom: 1px;
 }
-.topbar-right .nav-link:hover { color: #fbbf24; border-bottom-color: var(--accent); animation: none; }
-@keyframes btm-underline {
-  0%, 100% { border-bottom-color: rgba(245, 158, 11, .35); }
-  50% { border-bottom-color: rgba(245, 158, 11, .95); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .topbar-right .nav-link { animation: none; border-bottom-color: rgba(245, 158, 11, .7); }
-}
+.topbar-right .nav-link:hover { color: #fbbf24; border-bottom-color: var(--accent); }
 @media (max-width: 560px) { .topbar-right .nav-link { display: none; } }
 
 /* "Behind the Move" explainer + button below the subscription box */
