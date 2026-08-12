@@ -290,6 +290,19 @@ function datasets(lines) {
   });
 }
 
+// Countdown to the next 00:00 UTC — the moment the "since session open" chart zeroes
+// out and a fresh trading day begins. Only shown on the live "Today" view.
+function updateResetCountdown() {
+  const el = document.getElementById('chart-countdown');
+  if (!el) return;
+  if (chartDay !== 'today') { el.textContent = ''; return; }
+  const now = new Date();
+  const next = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 0, 0, 0, 0);
+  const s = Math.max(0, Math.floor((next - now.getTime()) / 1000));
+  const p = (n) => String(n).padStart(2, '0');
+  el.textContent = `🕒 resets in ${p(Math.floor(s / 3600))}:${p(Math.floor((s % 3600) / 60))}:${p(s % 60)}`;
+}
+
 function drawChart() {
   if (!intraData || typeof Chart === 'undefined') return;
   const day = intraData[chartDay];
@@ -297,6 +310,7 @@ function drawChart() {
   const dateEl = document.getElementById('chart-date');
   const el = document.getElementById('chart-main');
   if (!el) return;
+  updateResetCountdown();
   if (!day) {                              // e.g. no previous day yet
     if (label) label.textContent = chartDay === 'today' ? 'Today' : 'Previous day';
     if (chartMain) { chartMain.destroy(); chartMain = null; }
@@ -432,4 +446,6 @@ initCapture();
 initRefresh();
 initIdeasToggle();
 initChartToggle();
+updateResetCountdown();
+setInterval(updateResetCountdown, 1000);
 setInterval(load, REFRESH_MS);

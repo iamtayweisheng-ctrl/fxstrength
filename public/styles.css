@@ -313,6 +313,7 @@ h2 { font-size: 18px; margin: 0 0 8px; }
 }
 .chart-title { font-weight: 700; font-size: 14px; margin-bottom: 8px; }
 .chart-date { color: var(--muted); font-weight: 500; font-size: 12px; margin-left: 4px; }
+.chart-countdown { color: var(--accent); font-weight: 600; font-size: 12px; font-variant-numeric: tabular-nums; margin-left: 4px; }
 .chart-box { position: relative; height: 240px; }
 .chart-box.big { height: 380px; }
 @media (max-width: 700px) { .chart-grid { grid-template-columns: 1fr; } .chart-box.big { height: 300px; } }
