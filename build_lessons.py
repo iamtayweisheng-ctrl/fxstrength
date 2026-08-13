@@ -48,12 +48,12 @@ SECTIONS = {
                        "currencies and markets. Evergreen macro frameworks for FX traders."),
         "cover": "/og-the-bigger-picture.png",
     },
-    "guides": {
-        "name": "Guides",
-        "tagline": "Plain-English reference guides for FX traders.",
-        "index_h1": "FX Guides",
-        "index_desc": ("FXStrength guides — plain-English reference for FX traders: what drives "
-                       "each currency, how to read the market, and how the pieces fit together."),
+    "fx-drivers": {
+        "name": "FX Drivers",
+        "tagline": "What moves each major currency — the drivers behind every FX pair.",
+        "index_h1": "FX Drivers",
+        "index_desc": ("FXStrength FX Drivers — a plain-English reference for what drives each "
+                       "major currency, the less-obvious watches, and how the pieces fit together."),
         "cover": "/og-guides.png",
     },
 }

@@ -1,16 +1,22 @@
 ---
-section: guides
+section: fx-drivers
 title: What Drives the G10 Currencies?
 dek: A plain-English guide to what moves each major currency — and the less-obvious watch most retail traders miss. Build a view of a currency before you look at a pair.
 slug: what-drives-the-g10-currencies
 date: 2026-08-13
-kicker: Reference Guide
+kicker: FX Drivers
 cover: /og-g10-drivers.png
 description: What drives each of the G10 currencies (USD, EUR, JPY, GBP, CHF, CAD, AUD, NZD, NOK, SEK) — the core macro drivers, why they matter, and the less-obvious second-order signal most retail traders overlook. Learn to build a macro view of a currency before you look at a pair.
 summary: Every G10 currency has obvious drivers and a less-obvious watch most people miss. This guide covers all ten, teaches you to build a view of a currency before you look at a pair, and shows why FX is always relative — a pair is two currency stories netted, never just "short USD".
 ---
 
 Before you look at a single pair, it helps to know what actually moves each currency. This guide breaks down the **core drivers** of all ten G10 currencies — and, for each, the **less-obvious watch** that most retail traders overlook. The goal isn't a signal. It's to help you build a macro view of a currency *before* you look at a pair — because in FX, nothing moves alone.
+
+## Compare a Pair, Side by Side
+
+Pick a direction and a pair to see each leg's drivers with arrows — which way each would need to move to support the view. A pair is two stories that have to agree; the arrows make that concrete. (Education, not a signal.)
+
+:::pairpicker:::
 
 ## How to Use This Guide
 
@@ -131,12 +137,6 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 :::
 
 Every driver links to its **primary source** — the official place that defines and publishes that data. For an economic-calendar view of *when* things are released, a site like ForexFactory works; for the actual number, go to the primary source.
-
-## Compare a Pair, Side by Side
-
-Pick a direction and a pair to see each leg's drivers with arrows — which way each would need to move to support the view. A pair is two stories that have to agree; the arrows make that concrete. (Education, not a signal.)
-
-:::pairpicker:::
 
 ## A Currency Does Not Move Alone
 
