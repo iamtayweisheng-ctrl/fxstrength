@@ -36,7 +36,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 - [US data](https://fred.stlouisfed.org)
 - [Treasury yields](https://fred.stlouisfed.org)
 - yield differentials
-- risk sentiment
+- [risk sentiment](/#risk)
 
 **Less-obvious:** DXY is a readout, not a driver — when it moves, ask *why*.
 
@@ -55,7 +55,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 - [BoJ expectations](https://www.boj.or.jp/en)
 - US–Japan yield gap
 - Japanese inflation
-- risk sentiment
+- [risk sentiment](/#risk)
 
 **Less-obvious:** [Intervention risk](https://www.mof.go.jp/english) near sensitive USD/JPY levels — expectations move first.
 
@@ -73,7 +73,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 **Watch:**
 - [SNB expectations](https://www.snb.ch/en)
 - Swiss inflation
-- risk sentiment
+- [risk sentiment](/#risk)
 - European conditions
 - yield gaps
 
@@ -85,7 +85,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 - [BoC expectations](https://www.bankofcanada.ca)
 - Canadian data
 - US–Canada yield gap
-- risk sentiment
+- [risk sentiment](/#risk)
 
 **Less-obvious:** [Oil inventories](https://www.eia.gov) + the yield gap together — impulse vs actual demand.
 
@@ -95,7 +95,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 - [China CPI/PPI](https://www.stats.gov.cn/english)
 - [iron ore / commodities](https://tradingeconomics.com/commodity/iron-ore)
 - Australian data
-- risk sentiment
+- [risk sentiment](/#risk)
 
 **Less-obvious:** China CPI/PPI + iron ore hint at Chinese demand before Australian data.
 
@@ -105,7 +105,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 - [dairy prices — GDT](https://www.globaldairytrade.info)
 - NZ data
 - China growth
-- risk sentiment
+- [risk sentiment](/#risk)
 
 **Less-obvious:** GDT dairy auctions — an early read on external demand & terms of trade.
 
@@ -115,7 +115,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 - [oil prices](https://www.eia.gov)
 - Norwegian data
 - European growth
-- risk sentiment
+- [risk sentiment](/#risk)
 
 **Less-obvious:** European demand + oil together — weak Europe mutes an oil rally.
 
@@ -124,7 +124,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 - [Riksbank expectations](https://www.riksbank.se/en-gb)
 - Swedish data
 - European growth
-- risk sentiment
+- [risk sentiment](/#risk)
 - EUR/SEK
 
 **Less-obvious:** EUR/SEK shows if a move is genuinely Swedish or just European risk.
