@@ -90,6 +90,11 @@ main.lesson h1 {
 @media (max-width: 640px) { .cheat-grid { grid-template-columns: 1fr; } }
 
 /* ── pick-a-pair picker ──────────────────────────────── */
+.pp-home { margin: 30px 0; }
+.pp-home > h2 { font-size: 18px; margin: 0 0 6px; }
+.pp-home > p { color: var(--muted); font-size: 13.5px; max-width: 72ch; margin: 0 0 12px; }
+.pp-home > p a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.pp-home > p a:hover { color: #fbbf24; }
 .pairpicker { margin: 22px 0; padding: 16px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); }
 .pp-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
 .pp-lab { font-weight: 700; font-size: 13.5px; color: var(--ink); }

@@ -21,6 +21,7 @@
   <meta name="twitter:description" content="See which currencies are strong right now — intraday, daily & weekly, plus gold, silver & Bitcoin. Free." />
   <meta name="twitter:image" content="https://fxstrength.org/og.svg" />
   <link rel="stylesheet" href="styles.css?v=6" />
+  <link rel="stylesheet" href="/lessons.css?v=c405cf7a" />
   <!-- Plausible analytics (privacy-friendly; tagged-events build enables custom goals) -->
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
   <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
@@ -236,6 +237,27 @@
       <a class="btm-btn" href="/behind-the-move/">Read Behind the Move</a>
     </section>
 
+    <!-- Pick-a-pair module: drivers → currency strength → the meter -->
+    <section class="pp-home" id="pp-home" hidden>
+      <h2>Compare a pair</h2>
+      <p>Every pair is two currency stories. Pick a direction and a pair to see each leg's
+         drivers, with arrows for which way they'd need to move.
+         <a href="/fx-drivers/what-drives-the-g10-currencies">Full FX Drivers guide →</a></p>
+      <div class="pairpicker" id="pairpicker">
+        <div class="pp-controls">
+          <div class="pp-dir" role="group" aria-label="Direction">
+            <button type="button" class="active" data-dir="buy">Buy</button>
+            <button type="button" data-dir="sell">Sell</button>
+          </div>
+          <select class="pp-select" id="pp-pair" aria-label="Currency pair"></select>
+        </div>
+        <div class="pp-result" id="pp-result"></div>
+        <p class="pp-note">The arrows show what would need to line up for the view — a pair as
+           two stories that must agree. Not a signal to trade.</p>
+      </div>
+      <div id="pp-cards" hidden></div>
+    </section>
+
     <section class="about">
       <h2>What is a currency strength meter?</h2>
       <p>
@@ -338,5 +360,45 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
   <script src="app.js"></script>
+  <script>
+  /* Homepage pick-a-pair: pull the cheat cards from the FX Drivers page (one source
+     of truth) and run the picker. Stays hidden if the fetch fails — never breaks the page. */
+  (function(){
+    var host=document.getElementById('pp-home'); if(!host) return;
+    fetch('/fx-drivers/what-drives-the-g10-currencies').then(function(r){ return r.text(); }).then(function(html){
+      var doc=new DOMParser().parseFromString(html,'text/html');
+      var bin=document.getElementById('pp-cards');
+      var found=doc.querySelectorAll('.cheat-card[data-ccy]');
+      if(!found.length){ return; }
+      found.forEach(function(c){ bin.appendChild(document.importNode(c,true)); });
+      init();
+      host.removeAttribute('hidden');
+    }).catch(function(){ /* leave hidden */ });
+    function init(){
+      var pp=document.getElementById('pairpicker'); if(!pp) return;
+      var cards={};
+      document.querySelectorAll('.cheat-card[data-ccy]').forEach(function(c){ cards[c.getAttribute('data-ccy')]=c; });
+      var PRIORITY=['EUR','GBP','AUD','NZD','USD','CAD','CHF','JPY'];
+      var HAVEN={USD:1,JPY:1,CHF:1};
+      var sel=document.getElementById('pp-pair'), out=document.getElementById('pp-result'), dir='buy';
+      var pairs=[];
+      for(var i=0;i<PRIORITY.length;i++) for(var j=i+1;j<PRIORITY.length;j++){ if(cards[PRIORITY[i]]&&cards[PRIORITY[j]]) pairs.push(PRIORITY[i]+PRIORITY[j]); }
+      pairs.sort();
+      pairs.forEach(function(p){ var o=document.createElement('option'); o.value=p; o.textContent=p.slice(0,3)+'/'+p.slice(3); sel.appendChild(o); });
+      function bullish(code,text){ var t=text.toLowerCase(); if(t.indexOf('yield gap')>=0) return 'down'; if(t.indexOf('risk sentiment')>=0 && HAVEN[code]) return 'down'; return 'up'; }
+      function leg(code,side){
+        var clone=cards[code].cloneNode(true);
+        var badge=document.createElement('div'); badge.className='pp-leg '+side; badge.textContent=(side==='long'?'▲ Long ':'▼ Short ')+code; clone.insertBefore(badge, clone.firstChild);
+        clone.querySelectorAll('li').forEach(function(li){ var b=bullish(code, li.textContent); var arrow=(side==='long')?b:(b==='up'?'down':'up'); var s=document.createElement('span'); s.className='pp-arrow '+arrow; s.textContent=(arrow==='up'?'↑ ':'↓ '); li.insertBefore(s, li.firstChild); });
+        return clone;
+      }
+      function render(){ if(!sel.value) return; var base=sel.value.slice(0,3), quote=sel.value.slice(3); out.innerHTML=''; out.appendChild(leg(base, dir==='buy'?'long':'short')); out.appendChild(leg(quote, dir==='buy'?'short':'long')); }
+      pp.querySelectorAll('.pp-dir button').forEach(function(btn){ btn.addEventListener('click',function(){ dir=btn.getAttribute('data-dir'); pp.querySelectorAll('.pp-dir button').forEach(function(x){ x.classList.toggle('active', x===btn); }); render(); }); });
+      sel.addEventListener('change', render);
+      sel.value = pairs.indexOf('NZDCHF')>=0 ? 'NZDCHF' : pairs[0];
+      render();
+    }
+  })();
+  </script>
 </body>
 </html>
