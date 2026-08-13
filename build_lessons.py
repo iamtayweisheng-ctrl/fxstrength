@@ -135,9 +135,12 @@ def asset_v(name):
 def inline(text):
     """Escape, then apply the inline markdown subset: links, bold, italic, code."""
     out = html.escape(text, quote=False)
-    out = re.sub(r"\[([^\]]+)\]\(([^)]+)\)",
-                 lambda m: f'<a href="{html.escape(m.group(2), quote=True)}">{m.group(1)}</a>',
-                 out)
+
+    def _link(m):
+        href = m.group(2)
+        ext = ' target="_blank" rel="noopener"' if href.startswith("http") else ""
+        return f'<a href="{html.escape(href, quote=True)}"{ext}>{m.group(1)}</a>'
+    out = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", _link, out)
     out = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", out)
     out = re.sub(r"(?<![\*\w])\*([^*]+)\*(?!\w)", r"<em>\1</em>", out)
     out = re.sub(r"`([^`]+)`", r"<code>\1</code>", out)
@@ -232,6 +235,23 @@ def directive_html(name, attrs, inner_lines, ctx):
             f'<div class="faq-item"><h3>{inline(q)}</h3><p>{inline(a)}</p></div>'
             for q, a in parse_faq(inner_lines))
         return f'<div class="faq">{cards}</div>'
+    if name == "cheatsheet":
+        # Each `### Title | anchor` starts a scannable card that deep-links to #anchor.
+        entries = []
+        for ln in inner_lines:
+            if ln.startswith("### "):
+                t = ln[4:].strip()
+                title, anchor = (t.split("|", 1) + [""])[:2] if "|" in t else (t, "")
+                entries.append([title.strip(), anchor.strip(), []])
+            elif entries:
+                entries[-1][2].append(ln)
+        cards = ""
+        for title, anchor, lines in entries:
+            more = (f'<a class="cheat-more" href="#{anchor}">Full breakdown ↓</a>'
+                    if anchor else "")
+            cards += (f'<div class="cheat-card"><h3>{inline(title)}</h3>'
+                      f'{render_blocks(lines)}{more}</div>')
+        return f'<div class="cheat-grid">{cards}</div>'
     if name == "cta":
         return ctx["cta"]
     # Unknown directive: render its contents plainly rather than dropping them.

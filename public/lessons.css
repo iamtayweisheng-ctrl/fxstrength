@@ -73,6 +73,20 @@ main.lesson h1 {
 .pullquote p { margin: 0; color: var(--ink); }
 .pullquote p + p { margin-top: 8px; }
 
+/* ── cheat-sheet cards (scannable reference grid) ────── */
+.cheat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 22px 0; }
+.cheat-card {
+  background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--accent);
+  border-radius: var(--radius); padding: 14px 16px;
+}
+.cheat-card h3 { margin: 0 0 8px; font-size: 15px; color: var(--ink); }
+.cheat-card p { margin: 0 0 6px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+.cheat-card strong { color: var(--ink); }
+.cheat-card a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(245, 158, 11, .35); }
+.cheat-card a:hover { border-bottom-color: var(--accent); }
+.cheat-more { display: inline-block; margin-top: 4px; font-weight: 700; font-size: 12.5px; border-bottom: 0 !important; }
+@media (max-width: 640px) { .cheat-grid { grid-template-columns: 1fr; } }
+
 /* ── transmission chain (A → B → C) ──────────────────── */
 .flow {
   display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
