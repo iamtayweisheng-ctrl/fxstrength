@@ -38,19 +38,19 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 :::cheatsheet
 ### 🇺🇸 US Dollar (USD) | usd
 **Watch:**
-- [Fed expectations](https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html)
-- [US data](https://fred.stlouisfed.org)
-- [Treasury yields](https://fred.stlouisfed.org)
-- [yield differentials](https://fred.stlouisfed.org)
+- [Fed expectations](https://www.tradingview.com/symbols/ECONOMICS-USINTR/)
+- [US data (jobs)](https://www.tradingview.com/symbols/ECONOMICS-USNFP/)
+- [Treasury yields](https://www.tradingview.com/symbols/TVC-US10Y/)
+- [yield differentials](https://www.tradingview.com/symbols/TVC-US02Y/)
 - [risk sentiment](/#risk)
 
 **Less-obvious:** DXY is a readout, not a driver — when it moves, ask *why*.
 
 ### 🇪🇺 Euro (EUR) | eur
 **Watch:**
-- [ECB expectations](https://www.ecb.europa.eu)
-- [Eurozone data](https://ec.europa.eu/eurostat)
-- [German / EZ yields](https://www.bundesbank.de/en/statistics)
+- [ECB expectations](https://www.tradingview.com/symbols/ECONOMICS-EUINTR/)
+- [Eurozone data (GDP)](https://www.tradingview.com/symbols/ECONOMICS-EUGDP/)
+- [German / EZ yields](https://www.tradingview.com/symbols/TVC-DE10Y/)
 - [energy](https://tradingeconomics.com/commodity/eu-natural-gas)
 - [politics & fiscal](https://ec.europa.eu/eurostat/web/government-finance-statistics)
 
@@ -58,85 +58,85 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 
 ### 🇯🇵 Japanese Yen (JPY) | jpy
 **Watch:**
-- [BoJ expectations](https://www.boj.or.jp/en)
-- [US–Japan yield gap](https://fred.stlouisfed.org)
-- [Japanese inflation](https://www.stat.go.jp/english)
+- [BoJ expectations](https://www.tradingview.com/symbols/ECONOMICS-JPINTR/)
+- [US–Japan yield gap](https://www.tradingview.com/symbols/TVC-JP10Y/)
+- [Japanese inflation](https://www.tradingview.com/symbols/ECONOMICS-JPCPI/)
 - [risk sentiment](/#risk)
 
-**Less-obvious:** [Intervention risk](https://www.mof.go.jp/english) near sensitive USD/JPY levels — expectations move first.
+**Less-obvious:** [Intervention risk](https://www.mof.go.jp/english/policy/international_policy/reference/feio/) near sensitive USD/JPY levels — expectations move first.
 
 ### 🇬🇧 British Pound (GBP) | gbp
 **Watch:**
-- [BoE expectations](https://www.bankofengland.co.uk)
-- [UK inflation](https://www.ons.gov.uk/economy/inflationandpriceindices)
-- [labour market & wages](https://www.ons.gov.uk/employmentandlabourmarket)
-- [growth (GDP)](https://www.ons.gov.uk/economy/grossdomesticproductgdp)
-- [gilt yields](https://www.dmo.gov.uk)
+- [BoE expectations](https://www.tradingview.com/symbols/ECONOMICS-GBINTR/)
+- [UK inflation](https://www.tradingview.com/symbols/ECONOMICS-GBCPI/)
+- [labour market & wages](https://www.tradingview.com/symbols/ECONOMICS-GBWG/)
+- [growth (GDP)](https://www.tradingview.com/symbols/ECONOMICS-GBGDP/)
+- [gilt yields](https://www.tradingview.com/symbols/TVC-GB10Y/)
 
 **Less-obvious:** UK services inflation + wages can outweigh headline GDP for the BoE.
 
 ### 🇨🇭 Swiss Franc (CHF) | chf
 **Watch:**
-- [SNB expectations](https://www.snb.ch/en)
-- [Swiss inflation](https://www.bfs.admin.ch/bfs/en/home.html)
+- [SNB expectations](https://www.tradingview.com/symbols/ECONOMICS-CHINTR/)
+- [Swiss inflation](https://www.tradingview.com/symbols/ECONOMICS-CHCPI/)
 - [risk sentiment](/#risk)
-- [European conditions](https://ec.europa.eu/eurostat)
-- [yield gaps](https://fred.stlouisfed.org)
+- [European conditions](https://www.tradingview.com/symbols/ECONOMICS-EUGDP/)
+- [yield gaps](https://www.tradingview.com/symbols/TVC-CH10Y/)
 
 **Less-obvious:** Watch SNB communication on franc strength as much as the rate.
 
 ### 🇨🇦 Canadian Dollar (CAD) | cad
 **Watch:**
-- [WTI oil](https://www.eia.gov)
-- [BoC expectations](https://www.bankofcanada.ca)
-- [Canadian data](https://www.statcan.gc.ca)
-- [US–Canada yield gap](https://fred.stlouisfed.org)
+- [WTI oil](https://www.tradingview.com/symbols/TVC-USOIL/)
+- [BoC expectations](https://www.tradingview.com/symbols/ECONOMICS-CAINTR/)
+- [Canadian data (GDP)](https://www.tradingview.com/symbols/ECONOMICS-CAGDP/)
+- [US–Canada yield gap](https://www.tradingview.com/symbols/TVC-CA10Y/)
 - [risk sentiment](/#risk)
 
-**Less-obvious:** [Oil inventories](https://www.eia.gov) + the yield gap together — impulse vs actual demand.
+**Less-obvious:** [Oil inventories](https://www.eia.gov/petroleum/weekly/) + the yield gap together — impulse vs actual demand.
 
 ### 🇦🇺 Australian Dollar (AUD) | aud
 **Watch:**
-- [RBA expectations](https://www.rba.gov.au)
-- [China CPI/PPI](https://www.stats.gov.cn/english)
-- [iron ore / commodities](https://tradingeconomics.com/commodity/iron-ore)
-- [Australian data](https://www.abs.gov.au)
+- [RBA expectations](https://www.tradingview.com/symbols/ECONOMICS-AUINTR/)
+- [China CPI/PPI](https://www.tradingview.com/symbols/ECONOMICS-CNPPIYY/)
+- [iron ore / commodities](https://www.tradingview.com/symbols/COMEX-TIO1!/)
+- [Australian data (GDP)](https://www.tradingview.com/symbols/ECONOMICS-AUGDP/)
 - [risk sentiment](/#risk)
 
 **Less-obvious:** China CPI/PPI + iron ore hint at Chinese demand before Australian data.
 
 ### 🇳🇿 New Zealand Dollar (NZD) | nzd
 **Watch:**
-- [RBNZ expectations](https://www.rbnz.govt.nz)
+- [RBNZ expectations](https://www.tradingview.com/symbols/ECONOMICS-NZINTR/)
 - [dairy prices — GDT](https://www.globaldairytrade.info)
-- [NZ data](https://www.stats.govt.nz)
-- [China growth](https://www.stats.gov.cn/english)
+- [NZ data (GDP)](https://www.tradingview.com/symbols/ECONOMICS-NZGDP/)
+- [China growth](https://www.tradingview.com/symbols/ECONOMICS-CNGDP/)
 - [risk sentiment](/#risk)
 
 **Less-obvious:** GDT dairy auctions — an early read on external demand & terms of trade.
 
 ### 🇳🇴 Norwegian Krone (NOK) | nok
 **Watch:**
-- [Norges Bank expectations](https://www.norges-bank.no/en)
-- [oil prices](https://www.eia.gov)
-- [Norwegian data](https://www.ssb.no/en)
-- [European growth](https://ec.europa.eu/eurostat)
+- [Norges Bank expectations](https://www.tradingview.com/symbols/ECONOMICS-NOINTR/)
+- [oil prices (Brent)](https://www.tradingview.com/symbols/TVC-UKOIL/)
+- [Norwegian data (GDP)](https://www.tradingview.com/symbols/ECONOMICS-NOGDP/)
+- [European growth](https://www.tradingview.com/symbols/ECONOMICS-EUGDP/)
 - [risk sentiment](/#risk)
 
 **Less-obvious:** European demand + oil together — weak Europe mutes an oil rally.
 
 ### 🇸🇪 Swedish Krona (SEK) | sek
 **Watch:**
-- [Riksbank expectations](https://www.riksbank.se/en-gb)
-- [Swedish data](https://www.scb.se/en)
-- [European growth](https://ec.europa.eu/eurostat)
+- [Riksbank expectations](https://www.tradingview.com/symbols/ECONOMICS-SEINTR/)
+- [Swedish data (GDP)](https://www.tradingview.com/symbols/ECONOMICS-SEGDP/)
+- [European growth](https://www.tradingview.com/symbols/ECONOMICS-EUGDP/)
 - [risk sentiment](/#risk)
-- [EUR/SEK](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html)
+- [EUR/SEK](https://www.tradingview.com/symbols/FX_IDC-EURSEK/)
 
 **Less-obvious:** EUR/SEK shows if a move is genuinely Swedish or just European risk.
 :::
 
-Every driver links to its **primary source** — the official place that defines and publishes that data. For an economic-calendar view of *when* things are released, a site like ForexFactory works; for the actual number, go to the primary source.
+Each linked driver opens a **live chart or dataset** — a TradingView chart for prices, yields and macro series, or the primary source where TradingView has none. It's a data map: it hands you the inputs; you decide.
 
 ## A Currency Does Not Move Alone
 
