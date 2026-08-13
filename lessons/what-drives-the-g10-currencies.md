@@ -35,7 +35,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 - [Fed expectations](https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html)
 - [US data](https://fred.stlouisfed.org)
 - [Treasury yields](https://fred.stlouisfed.org)
-- yield differentials
+- [yield differentials](https://fred.stlouisfed.org)
 - [risk sentiment](/#risk)
 
 **Less-obvious:** DXY is a readout, not a driver — when it moves, ask *why*.
@@ -44,17 +44,17 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 **Watch:**
 - [ECB expectations](https://www.ecb.europa.eu)
 - [Eurozone data](https://ec.europa.eu/eurostat)
-- German/EZ yields
-- energy
-- politics & fiscal
+- [German / EZ yields](https://www.bundesbank.de/en/statistics)
+- [energy](https://tradingeconomics.com/commodity/eu-natural-gas)
+- [politics & fiscal](https://ec.europa.eu/eurostat/web/government-finance-statistics)
 
 **Less-obvious:** EUR/USD vs EUR/JPY shows if a move is euro-led or just dollar-led.
 
 ### 🇯🇵 Japanese Yen (JPY) | jpy
 **Watch:**
 - [BoJ expectations](https://www.boj.or.jp/en)
-- US–Japan yield gap
-- Japanese inflation
+- [US–Japan yield gap](https://fred.stlouisfed.org)
+- [Japanese inflation](https://www.stat.go.jp/english)
 - [risk sentiment](/#risk)
 
 **Less-obvious:** [Intervention risk](https://www.mof.go.jp/english) near sensitive USD/JPY levels — expectations move first.
@@ -62,20 +62,20 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 ### 🇬🇧 British Pound (GBP) | gbp
 **Watch:**
 - [BoE expectations](https://www.bankofengland.co.uk)
-- [UK inflation](https://www.ons.gov.uk)
-- [labour market & wages](https://www.ons.gov.uk)
-- growth
-- gilt yields
+- [UK inflation](https://www.ons.gov.uk/economy/inflationandpriceindices)
+- [labour market & wages](https://www.ons.gov.uk/employmentandlabourmarket)
+- [growth (GDP)](https://www.ons.gov.uk/economy/grossdomesticproductgdp)
+- [gilt yields](https://www.dmo.gov.uk)
 
 **Less-obvious:** UK services inflation + wages can outweigh headline GDP for the BoE.
 
 ### 🇨🇭 Swiss Franc (CHF) | chf
 **Watch:**
 - [SNB expectations](https://www.snb.ch/en)
-- Swiss inflation
+- [Swiss inflation](https://www.bfs.admin.ch/bfs/en/home.html)
 - [risk sentiment](/#risk)
-- European conditions
-- yield gaps
+- [European conditions](https://ec.europa.eu/eurostat)
+- [yield gaps](https://fred.stlouisfed.org)
 
 **Less-obvious:** Watch SNB communication on franc strength as much as the rate.
 
@@ -83,8 +83,8 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 **Watch:**
 - [WTI oil](https://www.eia.gov)
 - [BoC expectations](https://www.bankofcanada.ca)
-- Canadian data
-- US–Canada yield gap
+- [Canadian data](https://www.statcan.gc.ca)
+- [US–Canada yield gap](https://fred.stlouisfed.org)
 - [risk sentiment](/#risk)
 
 **Less-obvious:** [Oil inventories](https://www.eia.gov) + the yield gap together — impulse vs actual demand.
@@ -94,7 +94,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 - [RBA expectations](https://www.rba.gov.au)
 - [China CPI/PPI](https://www.stats.gov.cn/english)
 - [iron ore / commodities](https://tradingeconomics.com/commodity/iron-ore)
-- Australian data
+- [Australian data](https://www.abs.gov.au)
 - [risk sentiment](/#risk)
 
 **Less-obvious:** China CPI/PPI + iron ore hint at Chinese demand before Australian data.
@@ -103,8 +103,8 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 **Watch:**
 - [RBNZ expectations](https://www.rbnz.govt.nz)
 - [dairy prices — GDT](https://www.globaldairytrade.info)
-- NZ data
-- China growth
+- [NZ data](https://www.stats.govt.nz)
+- [China growth](https://www.stats.gov.cn/english)
 - [risk sentiment](/#risk)
 
 **Less-obvious:** GDT dairy auctions — an early read on external demand & terms of trade.
@@ -113,8 +113,8 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 **Watch:**
 - [Norges Bank expectations](https://www.norges-bank.no/en)
 - [oil prices](https://www.eia.gov)
-- Norwegian data
-- European growth
+- [Norwegian data](https://www.ssb.no/en)
+- [European growth](https://ec.europa.eu/eurostat)
 - [risk sentiment](/#risk)
 
 **Less-obvious:** European demand + oil together — weak Europe mutes an oil rally.
@@ -122,15 +122,15 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 ### 🇸🇪 Swedish Krona (SEK) | sek
 **Watch:**
 - [Riksbank expectations](https://www.riksbank.se/en-gb)
-- Swedish data
-- European growth
+- [Swedish data](https://www.scb.se/en)
+- [European growth](https://ec.europa.eu/eurostat)
 - [risk sentiment](/#risk)
-- EUR/SEK
+- [EUR/SEK](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html)
 
 **Less-obvious:** EUR/SEK shows if a move is genuinely Swedish or just European risk.
 :::
 
-Each linked driver goes to its **primary source**. For an economic-calendar view of *when* things are released, a site like ForexFactory works — but for the actual number, go to the primary source.
+Every driver links to its **primary source** — the official place that defines and publishes that data. For an economic-calendar view of *when* things are released, a site like ForexFactory works; for the actual number, go to the primary source.
 
 ## A Currency Does Not Move Alone
 
