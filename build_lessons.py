@@ -247,11 +247,10 @@ def directive_html(name, attrs, inner_lines, ctx):
                 entries[-1][2].append(ln)
         cards = ""
         for title, anchor, lines in entries:
-            # Each field (Watch / Less-obvious / Data) on its own row.
-            body = "".join(f"<p>{inline(ln.strip())}</p>" for ln in lines if ln.strip())
             more = (f'<a class="cheat-more" href="#{anchor}">Full breakdown ↓</a>'
                     if anchor else "")
-            cards += f'<div class="cheat-card"><h3>{inline(title)}</h3>{body}{more}</div>'
+            cards += (f'<div class="cheat-card"><h3>{inline(title)}</h3>'
+                      f'{render_blocks(lines)}{more}</div>')
         return f'<div class="cheat-grid">{cards}</div>'
     if name == "cta":
         return ctx["cta"]

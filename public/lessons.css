@@ -80,7 +80,9 @@ main.lesson h1 {
   border-radius: var(--radius); padding: 14px 16px;
 }
 .cheat-card h3 { margin: 0 0 8px; font-size: 15px; color: var(--ink); }
-.cheat-card p { margin: 0 0 6px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+.cheat-card p { margin: 0 0 4px; font-size: 13px; line-height: 1.5; color: var(--muted); }
+.cheat-card ul { margin: 2px 0 10px; padding-left: 18px; }
+.cheat-card li { font-size: 13px; line-height: 1.5; color: var(--muted); margin: 0 0 3px; }
 .cheat-card strong { color: var(--ink); }
 .cheat-card a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(245, 158, 11, .35); }
 .cheat-card a:hover { border-bottom-color: var(--accent); }

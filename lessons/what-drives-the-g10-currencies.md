@@ -31,57 +31,106 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 
 :::cheatsheet
 ### 🇺🇸 US Dollar (USD) | usd
-**Watch:** Fed expectations · US data · Treasury yields · yield differentials · risk sentiment
+**Watch:**
+- [Fed expectations](https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html)
+- [US data](https://fred.stlouisfed.org)
+- [Treasury yields](https://fred.stlouisfed.org)
+- yield differentials
+- risk sentiment
+
 **Less-obvious:** DXY is a readout, not a driver — when it moves, ask *why*.
-**Data → source:** [Fed & Treasury yields — FRED](https://fred.stlouisfed.org) · [rate-cut odds — CME FedWatch](https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html)
 
 ### 🇪🇺 Euro (EUR) | eur
-**Watch:** ECB expectations · Eurozone data · German/EZ yields · energy · politics & fiscal
+**Watch:**
+- [ECB expectations](https://www.ecb.europa.eu)
+- [Eurozone data](https://ec.europa.eu/eurostat)
+- German/EZ yields
+- energy
+- politics & fiscal
+
 **Less-obvious:** EUR/USD vs EUR/JPY shows if a move is euro-led or just dollar-led.
-**Data → source:** [ECB](https://www.ecb.europa.eu) · [Eurozone data — Eurostat](https://ec.europa.eu/eurostat)
 
 ### 🇯🇵 Japanese Yen (JPY) | jpy
-**Watch:** BoJ expectations · US–Japan yield gap · Japanese inflation · risk sentiment
-**Less-obvious:** Intervention risk near sensitive USD/JPY levels — expectations move first.
-**Data → source:** [BoJ](https://www.boj.or.jp/en) · [intervention — Japan MoF](https://www.mof.go.jp/english)
+**Watch:**
+- [BoJ expectations](https://www.boj.or.jp/en)
+- US–Japan yield gap
+- Japanese inflation
+- risk sentiment
+
+**Less-obvious:** [Intervention risk](https://www.mof.go.jp/english) near sensitive USD/JPY levels — expectations move first.
 
 ### 🇬🇧 British Pound (GBP) | gbp
-**Watch:** BoE expectations · UK inflation · labour market · growth · gilt yields
+**Watch:**
+- [BoE expectations](https://www.bankofengland.co.uk)
+- [UK inflation](https://www.ons.gov.uk)
+- [labour market & wages](https://www.ons.gov.uk)
+- growth
+- gilt yields
+
 **Less-obvious:** UK services inflation + wages can outweigh headline GDP for the BoE.
-**Data → source:** [BoE](https://www.bankofengland.co.uk) · [inflation & wages — ONS](https://www.ons.gov.uk)
 
 ### 🇨🇭 Swiss Franc (CHF) | chf
-**Watch:** SNB expectations · Swiss inflation · risk sentiment · European conditions · yield gaps
+**Watch:**
+- [SNB expectations](https://www.snb.ch/en)
+- Swiss inflation
+- risk sentiment
+- European conditions
+- yield gaps
+
 **Less-obvious:** Watch SNB communication on franc strength as much as the rate.
-**Data → source:** [SNB](https://www.snb.ch/en)
 
 ### 🇨🇦 Canadian Dollar (CAD) | cad
-**Watch:** WTI oil · Canadian data · BoC expectations · US–Canada yield gap · risk sentiment
-**Less-obvious:** Oil inventories + the yield gap together — impulse vs actual demand.
-**Data → source:** [WTI & oil inventories — EIA](https://www.eia.gov) · [BoC](https://www.bankofcanada.ca)
+**Watch:**
+- [WTI oil](https://www.eia.gov)
+- [BoC expectations](https://www.bankofcanada.ca)
+- Canadian data
+- US–Canada yield gap
+- risk sentiment
+
+**Less-obvious:** [Oil inventories](https://www.eia.gov) + the yield gap together — impulse vs actual demand.
 
 ### 🇦🇺 Australian Dollar (AUD) | aud
-**Watch:** RBA expectations · Australian data · China growth · iron ore/commodities · risk sentiment
+**Watch:**
+- [RBA expectations](https://www.rba.gov.au)
+- [China CPI/PPI](https://www.stats.gov.cn/english)
+- [iron ore / commodities](https://tradingeconomics.com/commodity/iron-ore)
+- Australian data
+- risk sentiment
+
 **Less-obvious:** China CPI/PPI + iron ore hint at Chinese demand before Australian data.
-**Data → source:** [China CPI/PPI — NBS](https://www.stats.gov.cn/english) · [iron ore — Trading Economics](https://tradingeconomics.com/commodity/iron-ore) · [RBA](https://www.rba.gov.au)
 
 ### 🇳🇿 New Zealand Dollar (NZD) | nzd
-**Watch:** RBNZ expectations · NZ data · dairy prices · China growth · risk sentiment
+**Watch:**
+- [RBNZ expectations](https://www.rbnz.govt.nz)
+- [dairy prices — GDT](https://www.globaldairytrade.info)
+- NZ data
+- China growth
+- risk sentiment
+
 **Less-obvious:** GDT dairy auctions — an early read on external demand & terms of trade.
-**Data → source:** [GDT dairy auctions](https://www.globaldairytrade.info) · [RBNZ](https://www.rbnz.govt.nz)
 
 ### 🇳🇴 Norwegian Krone (NOK) | nok
-**Watch:** Norges Bank expectations · oil prices · Norwegian data · European growth · risk sentiment
+**Watch:**
+- [Norges Bank expectations](https://www.norges-bank.no/en)
+- [oil prices](https://www.eia.gov)
+- Norwegian data
+- European growth
+- risk sentiment
+
 **Less-obvious:** European demand + oil together — weak Europe mutes an oil rally.
-**Data → source:** [oil — EIA](https://www.eia.gov) · [Norges Bank](https://www.norges-bank.no/en)
 
 ### 🇸🇪 Swedish Krona (SEK) | sek
-**Watch:** Riksbank expectations · Swedish data · European growth · risk sentiment · EUR/SEK
+**Watch:**
+- [Riksbank expectations](https://www.riksbank.se/en-gb)
+- Swedish data
+- European growth
+- risk sentiment
+- EUR/SEK
+
 **Less-obvious:** EUR/SEK shows if a move is genuinely Swedish or just European risk.
-**Data → source:** [Riksbank](https://www.riksbank.se/en-gb)
 :::
 
-For an economic-calendar view of *when* things are released, a site like ForexFactory works — but for the actual number, go to the primary source above.
+Each linked driver goes to its **primary source**. For an economic-calendar view of *when* things are released, a site like ForexFactory works — but for the actual number, go to the primary source.
 
 ## A Currency Does Not Move Alone
 
