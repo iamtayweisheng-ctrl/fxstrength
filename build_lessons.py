@@ -48,6 +48,14 @@ SECTIONS = {
                        "currencies and markets. Evergreen macro frameworks for FX traders."),
         "cover": "/og-the-bigger-picture.png",
     },
+    "guides": {
+        "name": "Guides",
+        "tagline": "Plain-English reference guides for FX traders.",
+        "index_h1": "FX Guides",
+        "index_desc": ("FXStrength guides — plain-English reference for FX traders: what drives "
+                       "each currency, how to read the market, and how the pieces fit together."),
+        "cover": "/og-guides.png",
+    },
 }
 
 
@@ -83,6 +91,37 @@ def parse_frontmatter(text):
 
 def slugify(s):
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+
+
+def heading(tag, text):
+    """Render an h2/h3 with an auto or explicit `{#id}` anchor (for AEO deep-links)."""
+    m = re.search(r"\s*\{#([A-Za-z0-9_-]+)\}\s*$", text)
+    if m:
+        anchor, text = m.group(1), text[:m.start()].rstrip()
+    else:
+        anchor = slugify(text)
+    return f'<{tag} id="{anchor}">{inline(text)}</{tag}>'
+
+
+def parse_faq(lines):
+    """Parse `### Question` / answer pairs from a block into [(q, a), ...]."""
+    items, q, a = [], None, []
+    for ln in lines:
+        if ln.startswith("### "):
+            if q is not None:
+                items.append((q, " ".join(a).strip()))
+            q, a = ln[4:].strip(), []
+        elif ln.strip():
+            a.append(ln.strip())
+    if q is not None:
+        items.append((q, " ".join(a).strip()))
+    return items
+
+
+def extract_faq(body):
+    """Pull the :::faq block's Q/A out of the body so head can emit FAQPage schema."""
+    m = re.search(r"^:::faq\s*$(.*?)^:::\s*$", body, re.M | re.S)
+    return parse_faq(m.group(1).splitlines()) if m else []
 
 
 def asset_v(name):
@@ -130,12 +169,10 @@ def render_blocks(lines):
             flush_para(); flush_li(); continue
         if line.startswith("### "):
             flush_para(); flush_li()
-            t = line[4:].strip()
-            parts.append(f'<h3 id="{slugify(t)}">{inline(t)}</h3>')
+            parts.append(heading("h3", line[4:].strip()))
         elif line.startswith("## "):
             flush_para(); flush_li()
-            t = line[3:].strip()
-            parts.append(f'<h2 id="{slugify(t)}">{inline(t)}</h2>')
+            parts.append(heading("h2", line[3:].strip()))
         elif line.lstrip().startswith("- "):
             flush_para()
             li.append(line.lstrip()[2:].strip())
@@ -190,6 +227,11 @@ def directive_html(name, attrs, inner_lines, ctx):
         arrow = '<span class="flow-arrow" aria-hidden="true">→</span>'
         chain = arrow.join(f'<span class="flow-step">{inline(s)}</span>' for s in steps)
         return f'<div class="flow">{chain}</div>'
+    if name == "faq":
+        cards = "".join(
+            f'<div class="faq-item"><h3>{inline(q)}</h3><p>{inline(a)}</p></div>'
+            for q, a in parse_faq(inner_lines))
+        return f'<div class="faq">{cards}</div>'
     if name == "cta":
         return ctx["cta"]
     # Unknown directive: render its contents plainly rather than dropping them.
@@ -239,7 +281,7 @@ def reading_time(body):
 
 
 # ── the LAYOUT (fixed shell shared by every lesson) ─────────────────────────
-def head_html(meta):
+def head_html(meta, faq=None):
     sec = sec_of(meta)
     sinfo = SECTIONS[sec]
     slug = meta["slug"]
@@ -285,6 +327,18 @@ def head_html(meta):
             {"@type": "ListItem", "position": 3, "name": title, "item": url},
         ],
     }
+    faq_ld = ""
+    if faq:
+        faqpage = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {"@type": "Question", "name": q,
+                 "acceptedAnswer": {"@type": "Answer", "text": a}}
+                for q, a in faq
+            ],
+        }
+        faq_ld = f'\n  <script type="application/ld+json">{json.dumps(faqpage)}</script>'
     e = lambda s: html.escape(s, quote=True)
     sv, lv = asset_v("styles.css"), asset_v("lessons.css")
     return f"""  <meta charset="utf-8" />
@@ -316,7 +370,7 @@ def head_html(meta):
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
   <script>window.plausible=window.plausible||function(){{(window.plausible.q=window.plausible.q||[]).push(arguments)}}</script>
   <script type="application/ld+json">{json.dumps(article)}</script>
-  <script type="application/ld+json">{json.dumps(breadcrumb)}</script>"""
+  <script type="application/ld+json">{json.dumps(breadcrumb)}</script>{faq_ld}"""
 
 
 CTA_HTML = """    <aside class="lesson-cta" id="lesson-cta">
@@ -427,6 +481,7 @@ def render_lesson(meta, body, others):
     sinfo = SECTIONS[sec]
     ctx = {"cta": CTA_HTML}
     article_body = render_body(body, ctx)
+    faq = extract_faq(body)
     kicker = meta.get("kicker") or meta.get("newsletter_issue") or sinfo["name"]
     meta_line_bits = [fmt_date(meta.get("date", "")), f'{reading_time(body)} min read']
     if meta.get("confidence"):
@@ -437,7 +492,7 @@ def render_lesson(meta, body, others):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-{head_html(meta)}
+{head_html(meta, faq)}
 </head>
 <body class="lesson-page">
 {topbar_html()}
