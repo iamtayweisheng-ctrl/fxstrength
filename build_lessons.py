@@ -256,15 +256,17 @@ def directive_html(name, attrs, inner_lines, ctx):
     if name == "pairpicker":
         return (
             '<div class="pairpicker" id="pairpicker">'
-            '<div class="pp-controls"><span class="pp-lab">Compare a pair:</span>'
-            '<select class="pp-select" id="pp-a" aria-label="First currency"></select>'
-            '<span class="pp-vs">vs</span>'
-            '<select class="pp-select" id="pp-b" aria-label="Second currency"></select></div>'
+            '<div class="pp-controls">'
+            '<div class="pp-dir" role="group" aria-label="Direction">'
+            '<button type="button" class="active" data-dir="buy">Buy</button>'
+            '<button type="button" data-dir="sell">Sell</button></div>'
+            '<select class="pp-select" id="pp-pair" aria-label="Currency pair"></select>'
+            '</div>'
             '<div class="pp-result" id="pp-result"></div>'
-            '<p class="pp-note">When one currency’s drivers are turning stronger and the '
-            'other’s weaker, the pair has a clearer story — the '
-            '<a href="/">strength meter</a> shows whether it’s actually showing up across the '
-            'board. This is education, not a signal.</p></div>')
+            '<p class="pp-note">The arrows show <strong>what would need to line up</strong> for '
+            'the view — the direction each driver would have to move to support it. It shows a '
+            'pair as two stories that must agree; it is <strong>not</strong> a signal to trade. '
+            'The <a href="/">strength meter</a> shows whether it is actually happening.</p></div>')
     if name == "cta":
         return ctx["cta"]
     # Unknown directive: render its contents plainly rather than dropping them.
@@ -476,21 +478,55 @@ LIGHTBOX_SCRIPT = """  <script>
 PICKER_SCRIPT = """  <script>
   (function(){
     var pp=document.getElementById('pairpicker'); if(!pp) return;
-    var cards={}, order=[];
-    document.querySelectorAll('.cheat-card[data-ccy]').forEach(function(c){
-      var code=c.getAttribute('data-ccy'); cards[code]=c; order.push(code);
+    var cards={};
+    document.querySelectorAll('.cheat-card[data-ccy]').forEach(function(c){ cards[c.getAttribute('data-ccy')]=c; });
+    var PRIORITY=['EUR','GBP','AUD','NZD','USD','CAD','CHF','JPY'];  // base priority; NOK/SEK excluded
+    var HAVEN={USD:1,JPY:1,CHF:1};
+    var sel=document.getElementById('pp-pair'), out=document.getElementById('pp-result'), dir='buy';
+    var pairs=[];
+    for(var i=0;i<PRIORITY.length;i++) for(var j=i+1;j<PRIORITY.length;j++){
+      if(cards[PRIORITY[i]]&&cards[PRIORITY[j]]) pairs.push(PRIORITY[i]+PRIORITY[j]);
+    }
+    pairs.sort();
+    pairs.forEach(function(p){ var o=document.createElement('option'); o.value=p; o.textContent=p.slice(0,3)+'/'+p.slice(3); sel.appendChild(o); });
+    function bullish(code,text){                       // the driver direction that STRENGTHENS this currency
+      var t=text.toLowerCase();
+      if(t.indexOf('yield gap')>=0) return 'down';      // wider gap = this (lower-yield) currency weaker
+      if(t.indexOf('risk sentiment')>=0 && HAVEN[code]) return 'down';  // havens firm on risk-OFF
+      return 'up';
+    }
+    function leg(code,side){
+      var clone=cards[code].cloneNode(true);
+      var badge=document.createElement('div');
+      badge.className='pp-leg '+side;
+      badge.textContent=(side==='long'?'▲ Long ':'▼ Short ')+code;
+      clone.insertBefore(badge, clone.firstChild);
+      clone.querySelectorAll('li').forEach(function(li){
+        var b=bullish(code, li.textContent);
+        var arrow=(side==='long')?b:(b==='up'?'down':'up');
+        var s=document.createElement('span');
+        s.className='pp-arrow '+arrow;
+        s.textContent=(arrow==='up'?'↑ ':'↓ ');
+        li.insertBefore(s, li.firstChild);
+      });
+      return clone;
+    }
+    function render(){
+      if(!sel.value) return;
+      var base=sel.value.slice(0,3), quote=sel.value.slice(3);
+      out.innerHTML='';
+      out.appendChild(leg(base, dir==='buy'?'long':'short'));
+      out.appendChild(leg(quote, dir==='buy'?'short':'long'));
+    }
+    pp.querySelectorAll('.pp-dir button').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        dir=btn.getAttribute('data-dir');
+        pp.querySelectorAll('.pp-dir button').forEach(function(x){ x.classList.toggle('active', x===btn); });
+        render();
+      });
     });
-    if(order.length<2) return;
-    var a=document.getElementById('pp-a'), b=document.getElementById('pp-b'),
-        out=document.getElementById('pp-result');
-    function nameOf(code){ var m=cards[code].querySelector('h3').textContent.match(/([A-Za-z ]+)\\(/); return m?m[1].trim():code; }
-    order.forEach(function(code){
-      [a,b].forEach(function(sel){ var o=document.createElement('option'); o.value=code; o.textContent=code+' — '+nameOf(code); sel.appendChild(o); });
-    });
-    function render(){ out.innerHTML=''; [a.value,b.value].forEach(function(code){ if(cards[code]) out.appendChild(cards[code].cloneNode(true)); }); }
-    a.value = cards['AUD']?'AUD':order[0];
-    b.value = cards['CHF']?'CHF':order[1];
-    a.addEventListener('change',render); b.addEventListener('change',render);
+    sel.addEventListener('change', render);
+    sel.value = pairs.indexOf('NZDCHF')>=0 ? 'NZDCHF' : pairs[0];
     render();
   })();
   </script>"""

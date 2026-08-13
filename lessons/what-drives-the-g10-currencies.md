@@ -134,7 +134,7 @@ Every driver links to its **primary source** — the official place that defines
 
 ## Compare a Pair, Side by Side
 
-Pick two currencies to see their drivers next to each other — the two stories a pair is really made of.
+Pick a direction and a pair to see each leg's drivers with arrows — which way each would need to move to support the view. A pair is two stories that have to agree; the arrows make that concrete. (Education, not a signal.)
 
 :::pairpicker:::
 
