@@ -132,6 +132,12 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 
 Every driver links to its **primary source** — the official place that defines and publishes that data. For an economic-calendar view of *when* things are released, a site like ForexFactory works; for the actual number, go to the primary source.
 
+## Compare a Pair, Side by Side
+
+Pick two currencies to see their drivers next to each other — the two stories a pair is really made of.
+
+:::pairpicker:::
+
 ## A Currency Does Not Move Alone
 
 "Oil is rising, so CAD should strengthen" is an incomplete thought. The real question is: *is CAD strengthening more than the currency you're comparing it against?*

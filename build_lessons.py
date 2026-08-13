@@ -249,9 +249,22 @@ def directive_html(name, attrs, inner_lines, ctx):
         for title, anchor, lines in entries:
             more = (f'<a class="cheat-more" href="#{anchor}">Full breakdown ↓</a>'
                     if anchor else "")
-            cards += (f'<div class="cheat-card"><h3>{inline(title)}</h3>'
+            dc = f' data-ccy="{anchor.upper()}"' if anchor else ""
+            cards += (f'<div class="cheat-card"{dc}><h3>{inline(title)}</h3>'
                       f'{render_blocks(lines)}{more}</div>')
         return f'<div class="cheat-grid">{cards}</div>'
+    if name == "pairpicker":
+        return (
+            '<div class="pairpicker" id="pairpicker">'
+            '<div class="pp-controls"><span class="pp-lab">Compare a pair:</span>'
+            '<select class="pp-select" id="pp-a" aria-label="First currency"></select>'
+            '<span class="pp-vs">vs</span>'
+            '<select class="pp-select" id="pp-b" aria-label="Second currency"></select></div>'
+            '<div class="pp-result" id="pp-result"></div>'
+            '<p class="pp-note">When one currency’s drivers are turning stronger and the '
+            'other’s weaker, the pair has a clearer story — the '
+            '<a href="/">strength meter</a> shows whether it’s actually showing up across the '
+            'board. This is education, not a signal.</p></div>')
     if name == "cta":
         return ctx["cta"]
     # Unknown directive: render its contents plainly rather than dropping them.
@@ -460,6 +473,28 @@ LIGHTBOX_SCRIPT = """  <script>
   })();
   </script>"""
 
+PICKER_SCRIPT = """  <script>
+  (function(){
+    var pp=document.getElementById('pairpicker'); if(!pp) return;
+    var cards={}, order=[];
+    document.querySelectorAll('.cheat-card[data-ccy]').forEach(function(c){
+      var code=c.getAttribute('data-ccy'); cards[code]=c; order.push(code);
+    });
+    if(order.length<2) return;
+    var a=document.getElementById('pp-a'), b=document.getElementById('pp-b'),
+        out=document.getElementById('pp-result');
+    function nameOf(code){ var m=cards[code].querySelector('h3').textContent.match(/([A-Za-z ]+)\\(/); return m?m[1].trim():code; }
+    order.forEach(function(code){
+      [a,b].forEach(function(sel){ var o=document.createElement('option'); o.value=code; o.textContent=code+' — '+nameOf(code); sel.appendChild(o); });
+    });
+    function render(){ out.innerHTML=''; [a.value,b.value].forEach(function(code){ if(cards[code]) out.appendChild(cards[code].cloneNode(true)); }); }
+    a.value = cards['AUD']?'AUD':order[0];
+    b.value = cards['CHF']?'CHF':order[1];
+    a.addEventListener('change',render); b.addEventListener('change',render);
+    render();
+  })();
+  </script>"""
+
 DISCLAIMER = """      <p class="disclaimer">
         FXStrength provides market information for educational purposes only and is
         <strong>not financial advice</strong>. Nothing here is a recommendation to buy
@@ -541,6 +576,7 @@ def render_lesson(meta, body, others):
   </footer>
 {CTA_SCRIPT}
 {LIGHTBOX_SCRIPT}
+{PICKER_SCRIPT}
 </body>
 </html>
 """
