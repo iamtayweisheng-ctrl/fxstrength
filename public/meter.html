@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Live Driver Meter — v0 (private)</title>
+  <!-- Private dogfooding tool. Not indexed, not linked from the site. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0b0f17" />
+  <style>
+    :root{
+      --bg:#0b0f17; --panel:#121826; --panel-2:#0f1420; --line:#1e2740;
+      --ink:#e7ecf5; --muted:#8a97b1; --accent:#f59e0b;
+      --green:#22c55e; --amber:#eab308; --red:#ef4444;
+      --green-dim:rgba(34,197,94,.16); --amber-dim:rgba(234,179,8,.16); --red-dim:rgba(239,68,68,.16);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);
+      font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+    a{color:var(--accent);text-decoration:none}
+    .wrap{max-width:1080px;margin:0 auto;padding:20px 18px 60px}
+    header.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between;
+      padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:18px}
+    h1{font-size:20px;margin:0}
+    .sub{color:var(--muted);font-size:13px;margin:2px 0 0}
+    .pill{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+      color:#1a1200;background:var(--accent);padding:2px 8px;border-radius:999px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin:0 0 18px}
+    .panel h2{font-size:15px;margin:0 0 4px}
+    .panel .hint{color:var(--muted);font-size:12.5px;margin:0 0 14px;max-width:80ch}
+    /* segmented 3-state control */
+    .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--panel-2)}
+    .seg button{appearance:none;border:0;background:transparent;color:var(--muted);
+      padding:6px 10px;font-size:15px;cursor:pointer;line-height:1;min-width:34px}
+    .seg button+button{border-left:1px solid var(--line)}
+    .seg button.up.active{background:var(--green-dim);color:var(--green)}
+    .seg button.flat.active{background:var(--amber-dim);color:var(--amber)}
+    .seg button.down.active{background:var(--red-dim);color:var(--red)}
+    .globals{display:flex;flex-wrap:wrap;gap:22px}
+    .gctl{display:flex;flex-direction:column;gap:6px}
+    .gctl .lab{font-size:13px;font-weight:600}
+    .gctl .desc{font-size:11.5px;color:var(--muted)}
+    /* horizon selector */
+    .hz{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+    .hz button{appearance:none;border:0;background:var(--panel-2);color:var(--muted);
+      padding:6px 12px;font-size:13px;cursor:pointer}
+    .hz button+button{border-left:1px solid var(--line)}
+    .hz button.active{background:var(--accent);color:#1a1200;font-weight:700}
+    /* currency grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+    .cc{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:13px 14px}
+    .cc .ccrow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .cc .name{font-weight:700}
+    .cc .code{color:var(--muted);font-weight:600;font-size:12px;margin-right:6px}
+    .tilt{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+    .tilt.g{background:var(--green-dim);color:var(--green)}
+    .tilt.a{background:var(--amber-dim);color:var(--amber)}
+    .tilt.r{background:var(--red-dim);color:var(--red)}
+    .cc .score{color:var(--muted);font-size:11px;margin-left:6px;font-variant-numeric:tabular-nums}
+    .yl{display:flex;align-items:center;gap:8px;margin:11px 0 12px}
+    .yl .yll{font-size:12.5px;color:var(--muted)}
+    .drv{display:flex;flex-direction:column;gap:7px}
+    .drv .d{display:grid;grid-template-columns:14px 1fr auto;align-items:center;gap:9px;font-size:12.5px}
+    .dot{width:10px;height:10px;border-radius:50%;justify-self:center}
+    .dot.g{background:var(--green)} .dot.a{background:var(--amber)} .dot.r{background:var(--red)}
+    .dname{color:var(--ink)}
+    .wbar{width:64px;height:5px;border-radius:3px;background:var(--line);position:relative;overflow:hidden}
+    .wbar>i{position:absolute;left:0;top:0;bottom:0;background:var(--muted);opacity:.7}
+    .note{color:var(--muted);font-size:11.5px;margin:11px 0 0;line-height:1.45}
+    /* pair readout */
+    .pctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+    .dir{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+    .dir button{appearance:none;border:0;background:var(--panel-2);color:var(--muted);padding:7px 14px;cursor:pointer;font-weight:600}
+    .dir button+button{border-left:1px solid var(--line)}
+    .dir button.active{background:var(--green-dim);color:var(--green)}
+    select{background:var(--panel-2);border:1px solid var(--line);color:var(--ink);
+      border-radius:8px;padding:8px 10px;font-size:14px}
+    .legs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .leg{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:13px 14px}
+    .leg .lh{font-weight:700;font-size:13px;margin-bottom:2px}
+    .leg .lh.long{color:var(--green)} .leg .lh.short{color:var(--red)}
+    .pverdict{margin:12px 0 0;padding:12px 14px;border:1px dashed var(--line);border-radius:10px;
+      font-size:13px;line-height:1.5}
+    .shared{margin:10px 0 0;font-size:12px;color:var(--muted)}
+    footer{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:11.5px;line-height:1.55}
+    footer strong{color:var(--ink)}
+    .btn{appearance:none;border:1px solid var(--line);background:var(--panel-2);color:var(--muted);
+      border-radius:8px;padding:6px 11px;font-size:12px;cursor:pointer}
+    .btn:hover{color:var(--ink)}
+    @media(max-width:560px){.legs{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Live Driver Meter <span class="pill">v0 · private</span></h1>
+        <p class="sub">Hand-enter today's driver reads → see each currency's macro tilt. Manual test build — no live feed yet.</p>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <div class="hz" id="hz" role="group" aria-label="Horizon">
+          <button data-hz="reactive">Reactive</button>
+          <button data-hz="swing" class="active">Swing</button>
+          <button data-hz="position">Position</button>
+        </div>
+        <button class="btn" id="reset">Reset snapshot</button>
+      </div>
+    </header>
+
+    <!-- GLOBAL DRIVERS -->
+    <section class="panel">
+      <h2>Global drivers</h2>
+      <p class="hint" id="hz-hint">Set the market-wide reads for the chosen horizon. Enter the direction of the move
+        over the window (▲ up / — flat / ▼ down). These feed every currency, weighted by how sensitive each one is.</p>
+      <div class="globals">
+        <div class="gctl">
+          <span class="lab">Risk sentiment</span>
+          <span class="desc">Equities / risk appetite. ▲ = risk-<strong>on</strong>, ▼ = risk-<strong>off</strong>.</span>
+          <div class="seg" data-global="risk" role="group" aria-label="Risk sentiment"></div>
+        </div>
+        <div class="gctl">
+          <span class="lab">Commodity / growth cycle</span>
+          <span class="desc">Iron ore &amp; the global growth cycle. ▲ = stronger, ▼ = weaker.</span>
+          <div class="seg" data-global="ore" role="group" aria-label="Commodity growth cycle"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CURRENCY GRID -->
+    <section class="panel">
+      <h2>Currency tilt</h2>
+      <p class="hint">Each currency also has its own <strong>yield advantage</strong> read (is its rate/yield edge
+        widening or narrowing). Tilt = its stable drivers, combined by weight. Green = drivers lean in the currency's
+        favour, red = lean against, amber = mixed / flat. Direction of evidence — not a buy/sell call.</p>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <!-- PAIR READOUT -->
+    <section class="panel">
+      <h2>Pair readout</h2>
+      <div class="pctl">
+        <div class="dir" id="dir" role="group" aria-label="Direction">
+          <button data-dir="buy" class="active">Buy</button>
+          <button data-dir="sell">Sell</button>
+        </div>
+        <select id="pair" aria-label="Pair"></select>
+      </div>
+      <div class="legs" id="legs"></div>
+      <div class="pverdict" id="pverdict"></div>
+      <div class="shared" id="shared"></div>
+    </section>
+
+    <footer>
+      <p><strong>How to read this.</strong> It shows the <strong>direction of the evidence</strong> at your chosen
+      horizon — not the size of the move, and not whether it's already priced in. The rules and weights are fixed
+      and transparent; the tool will <strong>not</strong> auto-detect regime flips (e.g. yields rising from fiscal
+      stress, or "too-hot" inflation turning risk-off) — use your own judgement to override.</p>
+      <p><strong>It is never a buy/sell signal.</strong> It organises the evidence; what you do with it is your call.</p>
+      <p>Weights are data-derived (multivariate rolling OLS, 2016→, FRED data) and show only statistically stable
+      drivers per currency. "Commodity / growth cycle" is a literal iron-ore link for AUD/NZD/CAD and a global
+      risk-cycle proxy elsewhere. JPY is honestly a one-driver currency (rate differential). China demand reaches
+      AUD/NZD through iron ore and risk — it isn't a separate arrow here.</p>
+    </footer>
+  </div>
+
+  <script>
+  // ── Data-derived stable drivers per currency (from g10_driver_weights.json, `stable` flags only). ──
+  // dir is on the NATURAL axis of each input: RISK = risk-ON (higher = risk appetite up),
+  // YIELD = that currency's yield advantage (higher = wider edge), ORE = commodity/growth cycle (higher = stronger).
+  // NOTE: the JSON "Risk" beta is fear-oriented; we flipped its sign here to the risk-ON axis
+  //   (so AUD is +1 = green on risk-on, USD is -1 = green on risk-off), matching the definition doc.
+  var DRIVERS = {
+    EUR:[{k:'YIELD',dir:+1,w:0.451},{k:'ORE',dir:+1,w:0.279},{k:'RISK',dir:+1,w:0.191}],
+    GBP:[{k:'RISK',dir:+1,w:0.612},{k:'ORE',dir:+1,w:0.173},{k:'YIELD',dir:+1,w:0.127}],
+    AUD:[{k:'RISK',dir:+1,w:0.504},{k:'YIELD',dir:+1,w:0.249},{k:'ORE',dir:+1,w:0.175}],
+    NZD:[{k:'RISK',dir:+1,w:0.475},{k:'YIELD',dir:+1,w:0.241},{k:'ORE',dir:+1,w:0.206}],
+    USD:[{k:'RISK',dir:-1,w:0.388},{k:'YIELD',dir:+1,w:0.357},{k:'ORE',dir:-1,w:0.212}],
+    CAD:[{k:'RISK',dir:+1,w:0.328},{k:'YIELD',dir:+1,w:0.312},{k:'ORE',dir:+1,w:0.183}],
+    CHF:[{k:'YIELD',dir:+1,w:0.465},{k:'ORE',dir:+1,w:0.219}],
+    JPY:[{k:'YIELD',dir:+1,w:0.834}]
+  };
+  var ORDER = ['EUR','GBP','AUD','NZD','USD','CAD','CHF','JPY'];
+  var NAMES = {EUR:'Euro',GBP:'British Pound',AUD:'Australian Dollar',NZD:'New Zealand Dollar',
+    USD:'US Dollar',CAD:'Canadian Dollar',CHF:'Swiss Franc',JPY:'Japanese Yen'};
+  // Per-currency short note (educational context — NOT part of the weighted tilt).
+  var NOTE = {
+    EUR:'Energy is inverted for EUR (net importer): energy ↑ tends to weigh on EUR. Also watch ECB path & HICP.',
+    GBP:'Mildly pro-cyclical. Watch BoE path, services CPI & wages. Gilt selloff in fiscal stress can flip yields negative.',
+    AUD:'Strongest high-beta. China demand comes through iron ore + risk (not a separate arrow). Watch RBA path.',
+    NZD:'High-beta; dairy (GDT) is its idiosyncratic export. Watch RBNZ path. Lower China sensitivity than AUD.',
+    USD:'Partial reserve haven — leans green when risk is OFF. Watch Fed path; yields from fiscal stress can flip.',
+    CAD:'Oil is real but high-variance, so it is left out of the weighted tilt. Watch BoC path & US–CA yield gap.',
+    CHF:'Strong haven and the AUD/CHF flip partner. Its risk beta is sign-unstable, so risk is omitted from the tilt. SNB can lean against excessive strength.',
+    JPY:'Honestly one driver: the rate/yield differential. Narrowing gap (JP up or US down) = JPY positive. Watch MoF intervention near sensitive USDJPY levels.'
+  };
+  // Driver display labels (ORE relabels for non-commodity currencies).
+  var COMMOD_CCY = {AUD:1,NZD:1,CAD:1};
+  function dLabel(ccy,k){
+    if(k==='RISK') return 'Risk sentiment';
+    if(k==='YIELD') return 'Yield advantage';
+    if(k==='ORE') return COMMOD_CCY[ccy] ? 'Iron ore / commodities' : 'Global growth cycle';
+    return k;
+  }
+  var BAND = 0.20;               // |score| below this = amber (mixed/flat). Editable.
+  var HZ_HINT = {
+    reactive:'REACTIVE (day / scalp): read the latest move — last few days, or the newest print vs consensus.',
+    swing:'SWING (1–6 weeks, default): read the ~4–6 week slope, or the direction of the last 2–3 prints.',
+    position:'POSITION (2–6 months): read the ~3–6 month slope, or the year-on-year direction.'
+  };
+
+  // ── State (persisted per horizon) ──
+  var horizon = 'swing';
+  var state;   // {risk, ore, yields:{CCY:val}}  each val in {-1,0,1}
+  function blank(){ var y={}; ORDER.forEach(function(c){y[c]=0;}); return {risk:0,ore:0,yields:y}; }
+  function key(){ return 'fxsmeter_'+horizon; }
+  function load(){ try{var s=JSON.parse(localStorage.getItem(key())); if(s&&s.yields){ORDER.forEach(function(c){if(typeof s.yields[c]!=='number')s.yields[c]=0;}); return s;}}catch(e){} return blank(); }
+  function save(){ try{localStorage.setItem(key(),JSON.stringify(state));}catch(e){} }
+
+  // ── Tilt computation ──
+  function inputFor(ccy,k){ if(k==='RISK')return state.risk; if(k==='ORE')return state.ore; if(k==='YIELD')return state.yields[ccy]; return 0; }
+  function tilt(ccy){
+    var ds=DRIVERS[ccy], num=0, den=0;
+    ds.forEach(function(d){ num += d.dir*d.w*inputFor(ccy,d.k); den += d.w; });
+    return den? num/den : 0;
+  }
+  function band(score){ if(score> BAND)return 'g'; if(score< -BAND)return 'r'; return 'a'; }
+  function tiltLabel(cls){ return cls==='g'?'Leaning stronger':cls==='r'?'Leaning weaker':'Mixed / flat'; }
+  function contribCls(dir,inp){ var v=dir*inp; return v>0?'g':v<0?'r':'a'; }
+
+  // ── Segmented control builder ──
+  function seg(container,val,onChange){
+    container.innerHTML='';
+    [['up','▲',1],['flat','—',0],['down','▼',-1]].forEach(function(o){
+      var b=document.createElement('button'); b.className=o[0]+(val===o[2]?' active':''); b.textContent=o[1];
+      b.setAttribute('aria-label',o[0]);
+      b.onclick=function(){ onChange(o[2]); };
+      container.appendChild(b);
+    });
+  }
+
+  // ── Render ──
+  function renderGlobals(){
+    document.querySelectorAll('.seg[data-global]').forEach(function(el){
+      var g=el.getAttribute('data-global');
+      seg(el, g==='risk'?state.risk:state.ore, function(v){ if(g==='risk')state.risk=v; else state.ore=v; save(); renderAll(); });
+    });
+  }
+  function renderGrid(){
+    var grid=document.getElementById('grid'); grid.innerHTML='';
+    ORDER.forEach(function(ccy){
+      var sc=tilt(ccy), cls=band(sc);
+      var card=document.createElement('div'); card.className='cc';
+      var drvHtml=DRIVERS[ccy].map(function(d){
+        var cc=contribCls(d.dir,inputFor(ccy,d.k));
+        var wpct=Math.round(d.w*100);
+        return '<div class="d"><span class="dot '+cc+'"></span>'+
+               '<span class="dname">'+dLabel(ccy,d.k)+'</span>'+
+               '<span class="wbar" title="weight '+d.w.toFixed(2)+'"><i style="width:'+wpct+'%"></i></span></div>';
+      }).join('');
+      card.innerHTML =
+        '<div class="ccrow"><div><span class="code">'+ccy+'</span><span class="name">'+NAMES[ccy]+'</span></div>'+
+        '<div><span class="tilt '+cls+'">'+tiltLabel(cls)+'</span><span class="score">'+(sc>=0?'+':'')+sc.toFixed(2)+'</span></div></div>'+
+        '<div class="yl"><span class="yll">Yield advantage</span><span class="seg" data-yl="'+ccy+'"></span></div>'+
+        '<div class="drv">'+drvHtml+'</div>'+
+        '<p class="note">'+NOTE[ccy]+'</p>';
+      grid.appendChild(card);
+    });
+    // wire yield segments
+    document.querySelectorAll('.seg[data-yl]').forEach(function(el){
+      var c=el.getAttribute('data-yl');
+      seg(el, state.yields[c], function(v){ state.yields[c]=v; save(); renderAll(); });
+    });
+  }
+
+  // ── Pair readout ──
+  var pairDir='buy';
+  function buildPairs(){
+    var sel=document.getElementById('pair'), opts=[];
+    for(var i=0;i<ORDER.length;i++) for(var j=i+1;j<ORDER.length;j++) opts.push(ORDER[i]+'/'+ORDER[j]);
+    sel.innerHTML=opts.map(function(p){return '<option>'+p+'</option>';}).join('');
+  }
+  function legHtml(ccy,isLong){
+    var sc=tilt(ccy); // long benefits when ccy leans stronger; short benefits when it leans weaker
+    var eff = isLong? sc : -sc;
+    var cls=band(eff);
+    var lab = cls==='g'?'supports':cls==='r'?'works against':'mixed for';
+    return '<div class="leg"><div class="lh '+(isLong?'long':'short')+'">'+(isLong?'LONG ':'SHORT ')+ccy+' · '+NAMES[ccy]+'</div>'+
+      '<div class="note" style="margin-top:6px">Currency tilt '+(sc>=0?'+':'')+sc.toFixed(2)+
+      ' → this leg is <strong style="color:var(--'+(cls==='g'?'green':cls==='r'?'red':'amber')+')">'+lab+'</strong> the trade.</div>'+
+      '<div class="drv" style="margin-top:10px">'+DRIVERS[ccy].map(function(d){
+        var cc=contribCls(d.dir,inputFor(ccy,d.k));
+        return '<div class="d"><span class="dot '+cc+'"></span><span class="dname">'+dLabel(ccy,d.k)+
+          '</span><span class="wbar"><i style="width:'+Math.round(d.w*100)+'%"></i></span></div>';
+      }).join('')+'</div></div>';
+  }
+  function renderPair(){
+    var p=document.getElementById('pair').value; if(!p)return;
+    var parts=p.split('/'), base=parts[0], quote=parts[1];
+    var longC = pairDir==='buy'?base:quote, shortC = pairDir==='buy'?quote:base;
+    document.getElementById('legs').innerHTML = legHtml(longC,true)+legHtml(shortC,false);
+    // verdict
+    var net = tilt(longC) - tilt(shortC); // >0 drivers favour the pair direction
+    var vcls=band(net/2); // net spans -2..2
+    var vtxt, col=(vcls==='g'?'green':vcls==='r'?'red':'amber');
+    if(vcls==='g') vtxt='The driver evidence <strong>aligns with</strong> going '+pairDir.toUpperCase()+' '+p+' — '+longC+' leans stronger while '+shortC+' leans weaker.';
+    else if(vcls==='r') vtxt='The driver evidence <strong>works against</strong> going '+pairDir.toUpperCase()+' '+p+' — the legs point the other way.';
+    else vtxt='The driver evidence is <strong>mixed</strong> for '+pairDir.toUpperCase()+' '+p+' — no clear lean either way right now.';
+    document.getElementById('pverdict').innerHTML='<span style="color:var(--'+col+')">●</span> '+vtxt+
+      ' <span style="color:var(--muted)">(net '+(net>=0?'+':'')+net.toFixed(2)+' · evidence, not a signal)</span>';
+    // shared drivers
+    var lk={}; DRIVERS[longC].forEach(function(d){lk[d.k]=d.w;});
+    var sh=DRIVERS[shortC].filter(function(d){return lk[d.k]!=null;}).map(function(d){
+      var lw=lk[d.k], hi = lw>d.w? longC : shortC, name=dLabel(longC,d.k);
+      return name+' hits <strong>'+hi+'</strong> harder ('+Math.max(lw,d.w).toFixed(2)+' vs '+Math.min(lw,d.w).toFixed(2)+')';
+    });
+    document.getElementById('shared').innerHTML = sh.length? 'Shared drivers: '+sh.join('; ')+'.' :
+      'No shared drivers — these legs move on different stories (a cleaner separator).';
+  }
+
+  function renderAll(){ renderGlobals(); renderGrid(); renderPair(); }
+
+  // ── Wire controls ──
+  document.getElementById('hz').addEventListener('click',function(e){
+    var b=e.target.closest('button[data-hz]'); if(!b)return;
+    horizon=b.getAttribute('data-hz');
+    [].forEach.call(this.querySelectorAll('button'),function(x){x.classList.toggle('active',x===b);});
+    document.getElementById('hz-hint').textContent=HZ_HINT[horizon];
+    state=load(); renderAll();
+  });
+  document.getElementById('dir').addEventListener('click',function(e){
+    var b=e.target.closest('button[data-dir]'); if(!b)return;
+    pairDir=b.getAttribute('data-dir');
+    [].forEach.call(this.querySelectorAll('button'),function(x){x.classList.toggle('active',x===b);});
+    renderPair();
+  });
+  document.getElementById('pair').addEventListener('change',renderPair);
+  document.getElementById('reset').addEventListener('click',function(){ state=blank(); save(); renderAll(); });
+
+  // ── Init ──
+  state=load();
+  document.getElementById('hz-hint').textContent=HZ_HINT[horizon];
+  buildPairs();
+  renderAll();
+  </script>
+</body>
+</html>
