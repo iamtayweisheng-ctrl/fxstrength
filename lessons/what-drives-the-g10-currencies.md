@@ -14,7 +14,7 @@ Before you look at a single pair, it helps to know what actually moves each curr
 
 ## Compare a Pair, Side by Side
 
-Pick a direction and a pair to see each leg's drivers with arrows — which way each would need to move to support the view. A pair is two stories that have to agree; the arrows make that concrete. (Education, not a signal.)
+A pair is a **relative trade** — the question isn't "is AUD strong?" but "**is the AUD story stronger than the NZD story?**" Pick a direction and a pair. The **idiosyncratic** drivers (unique to one currency — dairy for NZD, iron ore for AUD) are the clean separators; **◆ shared** drivers (China, risk, oil) hit both sides, so they turn on *who's more sensitive*.
 
 :::pairpicker:::
 
@@ -49,7 +49,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 ### 🇪🇺 Euro (EUR) | eur
 **Watch:**
 - [ECB expectations](https://www.tradingview.com/symbols/ECONOMICS-EUINTR/)
-- [Eurozone data (GDP)](https://www.tradingview.com/symbols/ECONOMICS-EUGDP/)
+- [Eurozone data](https://www.tradingview.com/symbols/ECONOMICS-EUGDP/)
 - [German / EZ yields](https://www.tradingview.com/symbols/TVC-DE10Y/)
 - [energy](https://tradingeconomics.com/commodity/eu-natural-gas)
 - [politics & fiscal](https://ec.europa.eu/eurostat/web/government-finance-statistics)
@@ -70,7 +70,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 - [BoE expectations](https://www.tradingview.com/symbols/ECONOMICS-GBINTR/)
 - [UK inflation](https://www.tradingview.com/symbols/ECONOMICS-GBCPI/)
 - [labour market & wages](https://www.tradingview.com/symbols/ECONOMICS-GBWG/)
-- [growth (GDP)](https://www.tradingview.com/symbols/ECONOMICS-GBGDP/)
+- [growth](https://www.tradingview.com/symbols/ECONOMICS-GBGDP/)
 - [gilt yields](https://www.tradingview.com/symbols/TVC-GB10Y/)
 
 **Less-obvious:** UK services inflation + wages can outweigh headline GDP for the BoE.
@@ -89,7 +89,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 **Watch:**
 - [WTI oil](https://www.tradingview.com/symbols/TVC-USOIL/)
 - [BoC expectations](https://www.tradingview.com/symbols/ECONOMICS-CAINTR/)
-- [Canadian data (GDP)](https://www.tradingview.com/symbols/ECONOMICS-CAGDP/)
+- [Canadian data](https://www.tradingview.com/symbols/ECONOMICS-CAGDP/)
 - [US–Canada yield gap](https://www.tradingview.com/symbols/TVC-CA10Y/)
 - [risk sentiment](/#risk)
 
@@ -98,9 +98,9 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 ### 🇦🇺 Australian Dollar (AUD) | aud
 **Watch:**
 - [RBA expectations](https://www.tradingview.com/symbols/ECONOMICS-AUINTR/)
-- [China CPI/PPI](https://www.tradingview.com/symbols/ECONOMICS-CNPPIYY/)
+- [China growth](https://www.tradingview.com/symbols/ECONOMICS-CNGDP/)
 - [iron ore / commodities](https://www.tradingview.com/symbols/COMEX-TIO1!/)
-- [Australian data (GDP)](https://www.tradingview.com/symbols/ECONOMICS-AUGDP/)
+- [Australian data](https://www.tradingview.com/symbols/ECONOMICS-AUGDP/)
 - [risk sentiment](/#risk)
 
 **Less-obvious:** China CPI/PPI + iron ore hint at Chinese demand before Australian data.
@@ -109,7 +109,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 **Watch:**
 - [RBNZ expectations](https://www.tradingview.com/symbols/ECONOMICS-NZINTR/)
 - [dairy prices — GDT](https://www.globaldairytrade.info)
-- [NZ data (GDP)](https://www.tradingview.com/symbols/ECONOMICS-NZGDP/)
+- [NZ data](https://www.tradingview.com/symbols/ECONOMICS-NZGDP/)
 - [China growth](https://www.tradingview.com/symbols/ECONOMICS-CNGDP/)
 - [risk sentiment](/#risk)
 
@@ -119,7 +119,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 **Watch:**
 - [Norges Bank expectations](https://www.tradingview.com/symbols/ECONOMICS-NOINTR/)
 - [oil prices (Brent)](https://www.tradingview.com/symbols/TVC-UKOIL/)
-- [Norwegian data (GDP)](https://www.tradingview.com/symbols/ECONOMICS-NOGDP/)
+- [Norwegian data](https://www.tradingview.com/symbols/ECONOMICS-NOGDP/)
 - [European growth](https://www.tradingview.com/symbols/ECONOMICS-EUGDP/)
 - [risk sentiment](/#risk)
 
@@ -128,7 +128,7 @@ Read every driver as a *tendency*, not a rule — "oil up tends to support CAD,"
 ### 🇸🇪 Swedish Krona (SEK) | sek
 **Watch:**
 - [Riksbank expectations](https://www.tradingview.com/symbols/ECONOMICS-SEINTR/)
-- [Swedish data (GDP)](https://www.tradingview.com/symbols/ECONOMICS-SEGDP/)
+- [Swedish data](https://www.tradingview.com/symbols/ECONOMICS-SEGDP/)
 - [European growth](https://www.tradingview.com/symbols/ECONOMICS-EUGDP/)
 - [risk sentiment](/#risk)
 - [EUR/SEK](https://www.tradingview.com/symbols/FX_IDC-EURSEK/)

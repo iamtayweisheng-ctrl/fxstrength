@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://fxstrength.org/og-behind-the-move.png" />
   <meta name="twitter:image:alt" content="Behind the Move — Why Did AUD Fall After Softer-Than-Expected Inflation?" />
   <link rel="stylesheet" href="/styles.css?v=715b84ab" />
-  <link rel="stylesheet" href="/lessons.css?v=c405cf7a" />
+  <link rel="stylesheet" href="/lessons.css?v=d26eb46c" />
   <script>/* apply saved theme before paint (no flash) */
   try{document.documentElement.setAttribute('data-theme',localStorage.getItem('fxs_theme')||'dark');}catch(e){}</script>
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
@@ -170,6 +170,27 @@
     document.querySelectorAll('.cheat-card[data-ccy]').forEach(function(c){ cards[c.getAttribute('data-ccy')]=c; });
     var PRIORITY=['EUR','GBP','AUD','NZD','USD','CAD','CHF','JPY'];  // base priority; NOK/SEK excluded
     var HAVEN={USD:1,JPY:1,CHF:1};
+    // qualitative relative sensitivity to a shared macro force (higher = more levered)
+    var SENS={risk:{AUD:3,NZD:2,CAD:2,NOK:2,SEK:2,USD:2,JPY:3,CHF:2},china:{AUD:3,NZD:2},oil:{CAD:3,NOK:3}};
+    function forceOf(text){ var t=text.toLowerCase();
+      if(t.indexOf('risk sentiment')>=0) return 'risk';
+      if(t.indexOf('china')>=0) return 'china';
+      if(t.indexOf('oil')>=0) return 'oil';
+      return ''; }
+    function bullish(code,text){                       // the driver direction that STRENGTHENS this currency
+      var t=text.toLowerCase();
+      if(t.indexOf('yield gap')>=0) return 'down';      // wider gap = this (lower-yield) currency weaker
+      if(t.indexOf('risk sentiment')>=0 && HAVEN[code]) return 'down';  // havens firm on risk-OFF
+      return 'up';
+    }
+    function bullForce(code,f){ return (f==='risk' && HAVEN[code]) ? 'down' : 'up'; }
+    function sensNote(f,a,b){ var m=SENS[f]||{}, sa=m[a]||2, sb=m[b]||2;
+      return sa>sb ? a+' more sensitive' : (sb>sa ? b+' more sensitive' : 'affects both'); }
+    // which shared macro forces each currency carries
+    var codeForces={};
+    Object.keys(cards).forEach(function(code){ var set={};
+      cards[code].querySelectorAll('li').forEach(function(li){ var f=forceOf(li.textContent); if(f) set[f]=1; });
+      codeForces[code]=set; });
     var sel=document.getElementById('pp-pair'), out=document.getElementById('pp-result'), dir='buy';
     var pairs=[];
     for(var i=0;i<PRIORITY.length;i++) for(var j=i+1;j<PRIORITY.length;j++){
@@ -177,25 +198,25 @@
     }
     pairs.sort();
     pairs.forEach(function(p){ var o=document.createElement('option'); o.value=p; o.textContent=p.slice(0,3)+'/'+p.slice(3); sel.appendChild(o); });
-    function bullish(code,text){                       // the driver direction that STRENGTHENS this currency
-      var t=text.toLowerCase();
-      if(t.indexOf('yield gap')>=0) return 'down';      // wider gap = this (lower-yield) currency weaker
-      if(t.indexOf('risk sentiment')>=0 && HAVEN[code]) return 'down';  // havens firm on risk-OFF
-      return 'up';
-    }
-    function leg(code,side){
+    function leg(code,side,other){
       var clone=cards[code].cloneNode(true);
       var badge=document.createElement('div');
       badge.className='pp-leg '+side;
       badge.textContent=(side==='long'?'▲ Long ':'▼ Short ')+code;
       clone.insertBefore(badge, clone.firstChild);
       clone.querySelectorAll('li').forEach(function(li){
-        var b=bullish(code, li.textContent);
-        var arrow=(side==='long')?b:(b==='up'?'down':'up');
-        var s=document.createElement('span');
-        s.className='pp-arrow '+arrow;
-        s.textContent=(arrow==='up'?'↑ ':'↓ ');
-        li.insertBefore(s, li.firstChild);
+        var txt=li.textContent, f=forceOf(txt);
+        // "muddy" shared = both currencies carry this force AND react the same way (no clean separation)
+        var muddy = f && codeForces[other] && codeForces[other][f] && bullForce(other,f)===bullForce(code,f);
+        if(muddy){
+          li.classList.add('pp-shared-li');
+          var m=document.createElement('span'); m.className='pp-shared'; m.textContent='◆ '; li.insertBefore(m, li.firstChild);
+          var n=document.createElement('span'); n.className='pp-sens'; n.textContent=' · shared ('+sensNote(f,code,other)+')'; li.appendChild(n);
+        } else {
+          var b=bullish(code, txt);
+          var arrow=(side==='long')?b:(b==='up'?'down':'up');
+          var s=document.createElement('span'); s.className='pp-arrow '+arrow; s.textContent=(arrow==='up'?'↑ ':'↓ '); li.insertBefore(s, li.firstChild);
+        }
       });
       return clone;
     }
@@ -203,8 +224,8 @@
       if(!sel.value) return;
       var base=sel.value.slice(0,3), quote=sel.value.slice(3);
       out.innerHTML='';
-      out.appendChild(leg(base, dir==='buy'?'long':'short'));
-      out.appendChild(leg(quote, dir==='buy'?'short':'long'));
+      out.appendChild(leg(base, dir==='buy'?'long':'short', quote));
+      out.appendChild(leg(quote, dir==='buy'?'short':'long', base));
     }
     pp.querySelectorAll('.pp-dir button').forEach(function(btn){
       btn.addEventListener('click',function(){

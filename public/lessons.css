@@ -112,6 +112,9 @@ main.lesson h1 {
 .pp-arrow { font-weight: 800; }
 .pp-arrow.up { color: var(--strong); }
 .pp-arrow.down { color: var(--weak); }
+.pp-shared { color: var(--muted); font-weight: 800; }
+.pp-shared-li { color: var(--muted); }
+.pp-sens { color: var(--muted); font-size: 11px; }
 .pp-result { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .pp-result .cheat-card { margin: 0; }
 .pp-note { margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: var(--muted); }

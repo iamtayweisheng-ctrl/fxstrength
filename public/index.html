@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="See which currencies are strong right now — intraday, daily & weekly, plus gold, silver & Bitcoin. Free." />
   <meta name="twitter:image" content="https://fxstrength.org/og.svg" />
   <link rel="stylesheet" href="styles.css?v=6" />
-  <link rel="stylesheet" href="/lessons.css?v=c405cf7a" />
+  <link rel="stylesheet" href="/lessons.css?v=d26eb46c" />
   <!-- Plausible analytics (privacy-friendly; tagged-events build enables custom goals) -->
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
   <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
@@ -252,8 +252,9 @@
           <select class="pp-select" id="pp-pair" aria-label="Currency pair"></select>
         </div>
         <div class="pp-result" id="pp-result"></div>
-        <p class="pp-note">The arrows show what would need to line up for the view — a pair as
-           two stories that must agree. Not a signal to trade.</p>
+        <p class="pp-note">A pair is a <strong>relative trade</strong> — two currency stories, not one
+           in isolation. Idiosyncratic drivers separate the pair; <strong>◆ shared</strong> drivers hit
+           both sides. Not a signal to trade.</p>
       </div>
       <div id="pp-cards" hidden></div>
     </section>
@@ -380,19 +381,35 @@
       document.querySelectorAll('.cheat-card[data-ccy]').forEach(function(c){ cards[c.getAttribute('data-ccy')]=c; });
       var PRIORITY=['EUR','GBP','AUD','NZD','USD','CAD','CHF','JPY'];
       var HAVEN={USD:1,JPY:1,CHF:1};
+      var SENS={risk:{AUD:3,NZD:2,CAD:2,NOK:2,SEK:2,USD:2,JPY:3,CHF:2},china:{AUD:3,NZD:2},oil:{CAD:3,NOK:3}};
+      function forceOf(text){ var t=text.toLowerCase(); if(t.indexOf('risk sentiment')>=0)return 'risk'; if(t.indexOf('china')>=0)return 'china'; if(t.indexOf('oil')>=0)return 'oil'; return ''; }
+      function bullish(code,text){ var t=text.toLowerCase(); if(t.indexOf('yield gap')>=0) return 'down'; if(t.indexOf('risk sentiment')>=0 && HAVEN[code]) return 'down'; return 'up'; }
+      function bullForce(code,f){ return (f==='risk' && HAVEN[code]) ? 'down' : 'up'; }
+      function sensNote(f,a,b){ var m=SENS[f]||{}, sa=m[a]||2, sb=m[b]||2; return sa>sb?a+' more sensitive':(sb>sa?b+' more sensitive':'affects both'); }
+      var codeForces={};
+      Object.keys(cards).forEach(function(code){ var set={}; cards[code].querySelectorAll('li').forEach(function(li){ var f=forceOf(li.textContent); if(f) set[f]=1; }); codeForces[code]=set; });
       var sel=document.getElementById('pp-pair'), out=document.getElementById('pp-result'), dir='buy';
       var pairs=[];
       for(var i=0;i<PRIORITY.length;i++) for(var j=i+1;j<PRIORITY.length;j++){ if(cards[PRIORITY[i]]&&cards[PRIORITY[j]]) pairs.push(PRIORITY[i]+PRIORITY[j]); }
       pairs.sort();
       pairs.forEach(function(p){ var o=document.createElement('option'); o.value=p; o.textContent=p.slice(0,3)+'/'+p.slice(3); sel.appendChild(o); });
-      function bullish(code,text){ var t=text.toLowerCase(); if(t.indexOf('yield gap')>=0) return 'down'; if(t.indexOf('risk sentiment')>=0 && HAVEN[code]) return 'down'; return 'up'; }
-      function leg(code,side){
+      function leg(code,side,other){
         var clone=cards[code].cloneNode(true);
         var badge=document.createElement('div'); badge.className='pp-leg '+side; badge.textContent=(side==='long'?'▲ Long ':'▼ Short ')+code; clone.insertBefore(badge, clone.firstChild);
-        clone.querySelectorAll('li').forEach(function(li){ var b=bullish(code, li.textContent); var arrow=(side==='long')?b:(b==='up'?'down':'up'); var s=document.createElement('span'); s.className='pp-arrow '+arrow; s.textContent=(arrow==='up'?'↑ ':'↓ '); li.insertBefore(s, li.firstChild); });
+        clone.querySelectorAll('li').forEach(function(li){
+          var txt=li.textContent, f=forceOf(txt);
+          var muddy = f && codeForces[other] && codeForces[other][f] && bullForce(other,f)===bullForce(code,f);
+          if(muddy){
+            li.classList.add('pp-shared-li');
+            var m=document.createElement('span'); m.className='pp-shared'; m.textContent='◆ '; li.insertBefore(m, li.firstChild);
+            var n=document.createElement('span'); n.className='pp-sens'; n.textContent=' · shared ('+sensNote(f,code,other)+')'; li.appendChild(n);
+          } else {
+            var b=bullish(code, txt); var arrow=(side==='long')?b:(b==='up'?'down':'up'); var s=document.createElement('span'); s.className='pp-arrow '+arrow; s.textContent=(arrow==='up'?'↑ ':'↓ '); li.insertBefore(s, li.firstChild);
+          }
+        });
         return clone;
       }
-      function render(){ if(!sel.value) return; var base=sel.value.slice(0,3), quote=sel.value.slice(3); out.innerHTML=''; out.appendChild(leg(base, dir==='buy'?'long':'short')); out.appendChild(leg(quote, dir==='buy'?'short':'long')); }
+      function render(){ if(!sel.value) return; var base=sel.value.slice(0,3), quote=sel.value.slice(3); out.innerHTML=''; out.appendChild(leg(base, dir==='buy'?'long':'short', quote)); out.appendChild(leg(quote, dir==='buy'?'short':'long', base)); }
       pp.querySelectorAll('.pp-dir button').forEach(function(btn){ btn.addEventListener('click',function(){ dir=btn.getAttribute('data-dir'); pp.querySelectorAll('.pp-dir button').forEach(function(x){ x.classList.toggle('active', x===btn); }); render(); }); });
       sel.addEventListener('change', render);
       sel.value = pairs.indexOf('NZDCHF')>=0 ? 'NZDCHF' : pairs[0];
