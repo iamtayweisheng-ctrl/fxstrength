@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="See which currencies are strong right now — intraday, daily & weekly, plus gold, silver & Bitcoin. Free." />
   <meta name="twitter:image" content="https://fxstrength.org/og.svg" />
   <link rel="stylesheet" href="styles.css?v=6" />
-  <link rel="stylesheet" href="/lessons.css?v=6bb0f70e" />
+  <link rel="stylesheet" href="/lessons.css?v=b2411a95" />
   <!-- Plausible analytics (privacy-friendly; tagged-events build enables custom goals) -->
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
   <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
@@ -250,6 +250,17 @@
            both sides. Not a signal to trade.</p>
       </div>
       <div id="pp-cards" hidden></div>
+      <div class="pp-waitlist" id="pp-waitlist">
+        <p class="pp-wl-lead"><strong>Coming soon:</strong> a live version that shows each driver's
+           <em>current</em> state — so you see a currency's whole macro tilt at a glance.
+           Want first access?</p>
+        <form id="waitlist-form" class="pp-wl-form" novalidate>
+          <input type="email" id="waitlist-email" placeholder="you@email.com"
+                 autocomplete="email" required />
+          <button type="submit">Join the waitlist</button>
+        </form>
+        <p class="pp-wl-note" id="waitlist-note">Separate list. We'll only email you when the live tool is ready.</p>
+      </div>
     </section>
 
     <!-- Introduce "Behind the Move" to new visitors + link to the library -->
@@ -371,6 +382,29 @@
     if(x) x.addEventListener('click',function(){ bar.classList.add('hidden'); try{ localStorage.setItem('fxs_annobar','x'); }catch(e){} });
     var cta=document.getElementById('annobar-cta');
     if(cta) cta.addEventListener('click',function(){ try{ window.plausible&&window.plausible('DriverBar'); }catch(e){} });
+  })();
+
+  /* Waitlist fake-door → SEPARATE Brevo list (distinct from the newsletter) + Plausible goal. */
+  (function(){
+    var WAITLIST_ENDPOINT='https://95e1cb32.sibforms.com/serve/MUIFABvEl_xm-OfIzAty0_yziL-ngoTHkJbZ2SGOzlnkp9AwdzeceN0lDVr4C4RvQLiMKkIB3Kjy02Z0XWayVi7HslmQgGwt2reSQ2dxrOpIUiC63NP4v8bWa2gr-SPsmcifggD9uQYf8K5LOHojLfHj4w15wU-GSBjYa_kPVWJ744atOkASGv4GHNXbXiFgBfc8f_cH40pgHZXhnQ==';
+    var form=document.getElementById('waitlist-form'); if(!form) return;
+    var note=document.getElementById('waitlist-note');
+    form.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      var email=(document.getElementById('waitlist-email').value||'').trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ note.textContent='Please enter a valid email.'; return; }
+      note.textContent='Adding you…';
+      try{
+        var fd=new FormData();
+        fd.append('EMAIL',email);
+        fd.append('email_address_check','');   // Brevo honeypot — stays empty
+        fd.append('locale','en');
+        fetch(WAITLIST_ENDPOINT,{method:'POST',mode:'no-cors',body:fd});
+      }catch(e){ /* opaque no-cors response; treat as sent */ }
+      try{ window.plausible&&window.plausible('WaitlistSignup'); }catch(e){}
+      note.textContent="You're on the waitlist — we'll email you when the live tool is ready.";
+      form.reset();
+    });
   })();
   </script>
   <button class="to-top" aria-label="Back to top" title="Back to top">↑</button>
