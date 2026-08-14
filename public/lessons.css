@@ -151,7 +151,9 @@ main.lesson h1 {
 .pp-note a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(245,158,11,.35); }
 .pp-waitlist { margin: 18px 0 0; padding: 16px 0 0; border-top: 1px dashed var(--line); }
 .pp-wl-lead { margin: 0 0 10px; font-size: 13.5px; line-height: 1.55; color: var(--ink); max-width: 72ch; }
+.pp-wl-lead { margin-bottom: 4px; }
 .pp-wl-lead em { font-style: italic; color: var(--muted); }
+.pp-wl-sub { margin: 0 0 10px; font-size: 13.5px; line-height: 1.55; color: var(--ink); max-width: 72ch; }
 .pp-wl-form { display: flex; gap: 8px; flex-wrap: wrap; }
 .pp-wl-form input {
   flex: 1; min-width: 220px;
