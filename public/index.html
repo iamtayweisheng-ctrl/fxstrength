@@ -20,7 +20,7 @@
   <meta name="twitter:title" content="Free Live Currency Strength Meter — FX, Gold, Silver & Bitcoin" />
   <meta name="twitter:description" content="See which currencies are strong right now — intraday, daily & weekly, plus gold, silver & Bitcoin. Free." />
   <meta name="twitter:image" content="https://fxstrength.org/og.svg" />
-  <link rel="stylesheet" href="styles.css?v=6" />
+  <link rel="stylesheet" href="styles.css?v=7" />
   <link rel="stylesheet" href="/lessons.css?v=b2411a95" />
   <!-- Plausible analytics (privacy-friendly; tagged-events build enables custom goals) -->
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
@@ -216,20 +216,6 @@
       <div id="ideas-list" class="ideas-list"><p class="loading">Loading…</p></div>
     </section>
 
-    <!-- Funnel: email capture (the bridge to FXFlow). Needs a form backend wired. -->
-    <section class="capture" id="capture">
-      <h2>Understand the move, before you trade it.</h2>
-      <p>
-        Learn how macro, central banks, and market expectations move currencies.
-      </p>
-      <form id="capture-form" class="capture-form" novalidate>
-        <input type="email" id="capture-email" placeholder="you@email.com"
-               autocomplete="email" required />
-        <button type="submit">Get Updates</button>
-      </form>
-      <p class="capture-note" id="capture-note">No spam. Just better market understanding.</p>
-    </section>
-
     <!-- Pick-a-pair module: drivers → currency strength → the meter -->
     <section class="pp-home" id="pp-home" hidden>
       <h2>Compare a pair</h2>
@@ -248,19 +234,35 @@
         <p class="pp-note">A pair is a <strong>relative trade</strong> — two currency stories, not one
            in isolation. Idiosyncratic drivers separate the pair; <strong>◆ shared</strong> drivers hit
            both sides. Not a signal to trade.</p>
+        <div class="pp-waitlist" id="pp-waitlist">
+          <p class="pp-wl-lead"><strong>Coming soon:</strong> a live version that shows each driver's
+             <em>current</em> state — so you see a currency's whole macro tilt at a glance.
+             Want first access?</p>
+          <form id="waitlist-form" class="pp-wl-form" novalidate>
+            <input type="email" id="waitlist-email" placeholder="you@email.com"
+                   autocomplete="email" required />
+            <button type="submit">Join the waitlist</button>
+          </form>
+          <p class="pp-wl-note" id="waitlist-note">Separate list. We'll only email you when the live tool is ready.</p>
+        </div>
       </div>
       <div id="pp-cards" hidden></div>
-      <div class="pp-waitlist" id="pp-waitlist">
-        <p class="pp-wl-lead"><strong>Coming soon:</strong> a live version that shows each driver's
-           <em>current</em> state — so you see a currency's whole macro tilt at a glance.
-           Want first access?</p>
-        <form id="waitlist-form" class="pp-wl-form" novalidate>
-          <input type="email" id="waitlist-email" placeholder="you@email.com"
-                 autocomplete="email" required />
-          <button type="submit">Join the waitlist</button>
-        </form>
-        <p class="pp-wl-note" id="waitlist-note">Separate list. We'll only email you when the live tool is ready.</p>
-      </div>
+    </section>
+
+    <hr class="sec-divider" />
+
+    <!-- Funnel: email capture (the bridge to FXFlow). Needs a form backend wired. -->
+    <section class="capture" id="capture">
+      <h2>Understand the move, before you trade it.</h2>
+      <p>
+        Learn how macro, central banks, and market expectations move currencies.
+      </p>
+      <form id="capture-form" class="capture-form" novalidate>
+        <input type="email" id="capture-email" placeholder="you@email.com"
+               autocomplete="email" required />
+        <button type="submit">Get Updates</button>
+      </form>
+      <p class="capture-note" id="capture-note">No spam. Just better market understanding.</p>
     </section>
 
     <!-- Introduce "Behind the Move" to new visitors + link to the library -->

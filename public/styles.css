@@ -354,6 +354,7 @@ h2 { font-size: 18px; margin: 0 0 8px; }
 }
 .capture-form button:hover { filter: brightness(1.06); }
 .capture-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+.sec-divider { border: 0; border-top: 1px solid var(--line); margin: 30px 0; }
 
 /* ── about / footer ──────────────────────────────────── */
 .about { margin-top: 30px; }
