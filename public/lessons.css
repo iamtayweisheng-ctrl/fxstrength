@@ -89,6 +89,18 @@ main.lesson h1 {
 .cheat-more { display: inline-block; margin-top: 4px; font-weight: 700; font-size: 12.5px; border-bottom: 0 !important; }
 @media (max-width: 640px) { .cheat-grid { grid-template-columns: 1fr; } }
 
+/* ── back-to-top button ──────────────────────────────── */
+.to-top {
+  position: fixed; right: 18px; bottom: 18px; z-index: 50;
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid var(--line); background: var(--panel); color: var(--accent);
+  font-size: 18px; line-height: 1; cursor: pointer;
+  display: none; align-items: center; justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+}
+.to-top.show { display: inline-flex; }
+.to-top:hover { border-color: var(--accent); }
+
 /* ── pick-a-pair picker ──────────────────────────────── */
 .pp-home { margin: 30px 0; }
 .pp-home > h2 { font-size: 18px; margin: 0 0 6px; }

@@ -553,6 +553,15 @@ PICKER_SCRIPT = """  <script>
   })();
   </script>"""
 
+TOTOP = '  <button class="to-top" aria-label="Back to top" title="Back to top">↑</button>'
+TOTOP_SCRIPT = """  <script>
+  (function(){ var b=document.querySelector('.to-top'); if(!b) return;
+    function t(){ b.classList.toggle('show', window.scrollY>600); }
+    window.addEventListener('scroll',t,{passive:true}); t();
+    b.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+  })();
+  </script>"""
+
 DISCLAIMER = """      <p class="disclaimer">
         FXStrength provides market information for educational purposes only and is
         <strong>not financial advice</strong>. Nothing here is a recommendation to buy
@@ -632,9 +641,11 @@ def render_lesson(meta, body, others):
 {DISCLAIMER}
     <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
   </footer>
+{TOTOP}
 {CTA_SCRIPT}
 {LIGHTBOX_SCRIPT}
 {PICKER_SCRIPT}
+{TOTOP_SCRIPT}
 </body>
 </html>
 """
@@ -694,7 +705,9 @@ def render_index(sec, articles):
 {DISCLAIMER}
     <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
   </footer>
+{TOTOP}
 {CTA_SCRIPT}
+{TOTOP_SCRIPT}
   <script>
   (function(){{var tb=document.getElementById('theme-toggle');if(!tb)return;
     tb.addEventListener('click',function(){{var n=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';

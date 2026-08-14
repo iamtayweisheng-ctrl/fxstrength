@@ -24,7 +24,7 @@
   <meta name="twitter:image" content="https://fxstrength.org/og-the-bigger-picture.png" />
   <meta name="twitter:image:alt" content="The Bigger Picture — The US Debt Crisis. Why Should FX Traders Care?" />
   <link rel="stylesheet" href="/styles.css?v=715b84ab" />
-  <link rel="stylesheet" href="/lessons.css?v=d26eb46c" />
+  <link rel="stylesheet" href="/lessons.css?v=564d1bb7" />
   <script>/* apply saved theme before paint (no flash) */
   try{document.documentElement.setAttribute('data-theme',localStorage.getItem('fxs_theme')||'dark');}catch(e){}</script>
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
@@ -173,6 +173,7 @@
       </p>
     <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
   </footer>
+  <button class="to-top" aria-label="Back to top" title="Back to top">↑</button>
   <script>
   (function(){
     var EP='https://95e1cb32.sibforms.com/serve/MUIFAIKhyQh6CGkKVNSeY3PosPVQD4EVB-LtNRAK6boe5Ftk9MfOVfqm8jCWu3t7Vr6jgB3f5szihJ4r_0drvErPkuxB-uBanxXUJqsebdxRjpqi-AM3eH-VtDQaKSWbsWQ54ntlFxGz9vd3mItlg_naooEP1Dfz1PSdgaDhyVoGYkxqmzzpUVlVhE02yNKtBiplU09v5l7Lnq6J8w==';
@@ -299,6 +300,13 @@
     sel.addEventListener('change', render);
     sel.value = pairs.indexOf('NZDCHF')>=0 ? 'NZDCHF' : pairs[0];
     render();
+  })();
+  </script>
+  <script>
+  (function(){ var b=document.querySelector('.to-top'); if(!b) return;
+    function t(){ b.classList.toggle('show', window.scrollY>600); }
+    window.addEventListener('scroll',t,{passive:true}); t();
+    b.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
   })();
   </script>
 </body>

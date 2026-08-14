@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="See which currencies are strong right now — intraday, daily & weekly, plus gold, silver & Bitcoin. Free." />
   <meta name="twitter:image" content="https://fxstrength.org/og.svg" />
   <link rel="stylesheet" href="styles.css?v=6" />
-  <link rel="stylesheet" href="/lessons.css?v=d26eb46c" />
+  <link rel="stylesheet" href="/lessons.css?v=564d1bb7" />
   <!-- Plausible analytics (privacy-friendly; tagged-events build enables custom goals) -->
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
   <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
@@ -359,6 +359,14 @@
     <p class="src">Data: <span id="src">Yahoo Finance</span></p>
   </footer>
 
+  <button class="to-top" aria-label="Back to top" title="Back to top">↑</button>
+  <script>
+  (function(){ var b=document.querySelector('.to-top'); if(!b) return;
+    function t(){ b.classList.toggle('show', window.scrollY>600); }
+    window.addEventListener('scroll',t,{passive:true}); t();
+    b.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+  })();
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
   <script src="app.js"></script>
   <script>
@@ -371,7 +379,13 @@
       var bin=document.getElementById('pp-cards');
       var found=doc.querySelectorAll('.cheat-card[data-ccy]');
       if(!found.length){ return; }
-      found.forEach(function(c){ bin.appendChild(document.importNode(c,true)); });
+      found.forEach(function(c){
+        var n=document.importNode(c,true);
+        // "Full breakdown" anchors (#aud) only exist on the guide page — make them absolute.
+        var more=n.querySelector('.cheat-more');
+        if(more){ var hr=more.getAttribute('href')||''; if(hr.charAt(0)==='#') more.setAttribute('href','/fx-drivers/what-drives-the-g10-currencies'+hr); }
+        bin.appendChild(n);
+      });
       init();
       host.removeAttribute('hidden');
     }).catch(function(){ /* leave hidden */ });
