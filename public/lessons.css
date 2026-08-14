@@ -89,6 +89,24 @@ main.lesson h1 {
 .cheat-more { display: inline-block; margin-top: 4px; font-weight: 700; font-size: 12.5px; border-bottom: 0 !important; }
 @media (max-width: 640px) { .cheat-grid { grid-template-columns: 1fr; } }
 
+/* ── homepage announcement bar ───────────────────────── */
+.annobar {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  position: relative; padding: 9px 42px 9px 16px; text-align: center; font-size: 13px;
+  background: linear-gradient(90deg, rgba(245,158,11,.16), rgba(245,158,11,.07));
+  border-bottom: 1px solid var(--line);
+}
+.annobar-link { color: var(--accent); text-decoration: none; }
+.annobar-link:hover { text-decoration: underline; }
+.annobar-x {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  background: none; border: 0; color: var(--muted); font-size: 20px; line-height: 1;
+  cursor: pointer; padding: 0 6px;
+}
+.annobar-x:hover { color: var(--ink); }
+.annobar.hidden { display: none; }
+#pp-home { scroll-margin-top: 74px; }
+
 /* ── back-to-top button ──────────────────────────────── */
 .to-top {
   position: fixed; right: 18px; bottom: 18px; z-index: 50;

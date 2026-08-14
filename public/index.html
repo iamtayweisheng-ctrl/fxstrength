@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="See which currencies are strong right now — intraday, daily & weekly, plus gold, silver & Bitcoin. Free." />
   <meta name="twitter:image" content="https://fxstrength.org/og.svg" />
   <link rel="stylesheet" href="styles.css?v=6" />
-  <link rel="stylesheet" href="/lessons.css?v=564d1bb7" />
+  <link rel="stylesheet" href="/lessons.css?v=6bb0f70e" />
   <!-- Plausible analytics (privacy-friendly; tagged-events build enables custom goals) -->
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
   <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
@@ -87,6 +87,10 @@
   </script>
 </head>
 <body>
+  <div class="annobar" id="annobar">
+    <a class="annobar-link" id="annobar-cta" href="#pp-home">🆕 New — see what's driving every G10 currency. <strong>Try the driver tool →</strong></a>
+    <button class="annobar-x" id="annobar-x" aria-label="Dismiss announcement">×</button>
+  </div>
   <header class="topbar">
     <div class="brand">
       <span class="logo">▚▚</span> FXStrength
@@ -226,17 +230,6 @@
       <p class="capture-note" id="capture-note">No spam. Just better market understanding.</p>
     </section>
 
-    <!-- Introduce "Behind the Move" to new visitors + link to the library -->
-    <section class="btm-promo">
-      <div>
-        <h3>New here? Start with Behind the Move</h3>
-        <p class="btm-lead">Understand why currencies moved—not just what happened.</p>
-        <p>Every article connects the macro events, central bank decisions and
-           market expectations behind the move.</p>
-      </div>
-      <a class="btm-btn" href="/behind-the-move/">Read Behind the Move</a>
-    </section>
-
     <!-- Pick-a-pair module: drivers → currency strength → the meter -->
     <section class="pp-home" id="pp-home" hidden>
       <h2>Compare a pair</h2>
@@ -257,6 +250,17 @@
            both sides. Not a signal to trade.</p>
       </div>
       <div id="pp-cards" hidden></div>
+    </section>
+
+    <!-- Introduce "Behind the Move" to new visitors + link to the library -->
+    <section class="btm-promo">
+      <div>
+        <h3>New here? Start with Behind the Move</h3>
+        <p class="btm-lead">Understand why currencies moved—not just what happened.</p>
+        <p>Every article connects the macro events, central bank decisions and
+           market expectations behind the move.</p>
+      </div>
+      <a class="btm-btn" href="/behind-the-move/">Read Behind the Move</a>
     </section>
 
     <section class="about">
@@ -359,6 +363,16 @@
     <p class="src">Data: <span id="src">Yahoo Finance</span></p>
   </footer>
 
+  <script>
+  /* Announcement bar: dismiss persistently + Plausible event on the CTA click. */
+  (function(){ var bar=document.getElementById('annobar'); if(!bar) return;
+    try{ if(localStorage.getItem('fxs_annobar')==='x'){ bar.classList.add('hidden'); return; } }catch(e){}
+    var x=document.getElementById('annobar-x');
+    if(x) x.addEventListener('click',function(){ bar.classList.add('hidden'); try{ localStorage.setItem('fxs_annobar','x'); }catch(e){} });
+    var cta=document.getElementById('annobar-cta');
+    if(cta) cta.addEventListener('click',function(){ try{ window.plausible&&window.plausible('DriverBar'); }catch(e){} });
+  })();
+  </script>
   <button class="to-top" aria-label="Back to top" title="Back to top">↑</button>
   <script>
   (function(){ var b=document.querySelector('.to-top'); if(!b) return;
