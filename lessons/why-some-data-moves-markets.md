@@ -4,7 +4,9 @@ title: Why Some Economic Data Moves Markets — And Some Doesn't
 dek: The question isn't whether the number was good or bad. It's whether the number changed anyone's expectations.
 slug: why-some-data-moves-markets
 date: 2026-08-14
-kicker: Behind the Move · Market Lesson
+issue_no: 3
+lesson_no: 3
+newsletter_issue: Behind the Move · Issue #003 · Market Lesson
 description: Why some economic releases move currencies and others don't — a five-step framework (Actual → Expected → Surprise → What Changes → Market Confirmation) for reading data through expectations, not "good vs bad" headlines.
 summary: Markets don't react to data because it's good or bad — they react when it changes what traders expect next. This lesson gives you the five-step framework (expected → actual → surprise → what changed → confirmation), so the same number can be ignored, celebrated or feared depending on context.
 ---
