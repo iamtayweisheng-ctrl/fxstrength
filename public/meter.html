@@ -122,9 +122,8 @@
           <div class="ctl">
             <span class="lab">Period</span>
             <div class="segrow per" id="per" role="group" aria-label="Period">
-              <button data-per="reactive">Reactive</button>
-              <button data-per="swing" class="active">Swing</button>
-              <button data-per="position">Position</button>
+              <button data-per="daily" class="active">Daily</button>
+              <button data-per="weekly">Weekly</button>
             </div>
           </div>
         </div>
@@ -156,12 +155,11 @@
     USD:'US Dollar',CAD:'Canadian Dollar',CHF:'Swiss Franc',JPY:'Japanese Yen'};
   var ORDER=['EUR','GBP','AUD','NZD','USD','CAD','CHF','JPY'];
   var EXPLAIN={
-    reactive:['⚡','<b>Reactive — what just changed.</b> The most recent 1-month move in each driver. Good for spotting a fresh shift.'],
-    swing:['📈','<b>Swing — the multi-week trend.</b> The 3-month direction of each driver. The default read for a swing view.'],
-    position:['🗓️','<b>Position — the multi-month trend.</b> The 12-month (year-on-year) direction. The slow, structural backdrop.']
+    daily:['📊','<b>Daily — the ~30-day picture.</b> Matches the strength meter’s daily window, so the two line up: this explains <i>why</i> a currency is where the meter shows it over the past month.'],
+    weekly:['🗓️','<b>Weekly — the ~26-week trend.</b> Matches the strength meter’s weekly window — the slower, multi-month backdrop behind the score.']
   };
   var LEAN_BAND=0.10;  // |tilt| below this = "roughly balanced / mixed"
-  var DATA=null, state={dir:'buy',per:'swing',pair:'NZD/CHF'};
+  var DATA=null, state={dir:'buy',per:'daily',pair:'NZD/CHF'};
 
   var MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
   var MONA=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -170,7 +168,8 @@
     return MONA[parseInt(p[1],10)-1]+' '+parseInt(p[2],10)+', '+p[0]; }
   function asofLine(){
     if(DATA.as_of_risk||DATA.as_of_slow)
-      return 'Risk: as of '+fmtDay(DATA.as_of_risk)+' · Rates & commodities: as of '+fmtMonth(DATA.as_of_slow)+'.';
+      return 'Risk & US rates: as of '+fmtDay(DATA.as_of_risk)+
+             ' · Foreign rates & commodities: as of '+fmtMonth(DATA.as_of_slow)+'.';
     return 'Data as of '+fmtMonth(DATA.as_of)+'.';
   }
   function leanClass(t){ if(t> LEAN_BAND)return 'g'; if(t< -LEAN_BAND)return 'r'; return 'a'; }
@@ -222,7 +221,9 @@
     else { head='For a '+dirW+' '+state.pair+', the evidence is balanced right now.';
       sub='Neither '+longC+'’s nor '+shortC+'’s story is clearly stronger at this period.'; }
     document.getElementById('rhead').textContent=head;
-    document.getElementById('rsub').innerHTML=sub+' <span style="color:var(--muted)">Not a signal — evidence only.</span>';
+    var align=(/JPY|CHF/.test(longC)||/JPY|CHF/.test(shortC))?
+      ' <span style="color:var(--amber)">Note: JPY and CHF still rely on monthly foreign-yield data, so this pair isn’t fully aligned with the strength meter yet.</span>':'';
+    document.getElementById('rsub').innerHTML=sub+' <span style="color:var(--muted)">Not a signal — evidence only.</span>'+align;
     // explainer
     document.getElementById('ei').textContent=EXPLAIN[state.per][0];
     document.getElementById('et').innerHTML=EXPLAIN[state.per][1];

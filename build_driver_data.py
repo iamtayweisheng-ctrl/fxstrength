@@ -1,53 +1,31 @@
-#!/usr/bin/env python3
 """
-build_driver_data.py  —  FXStrength Live Driver Meter data pipeline.
+Driver Meter v3 — ALIGNED to the strength meter.  (Brain's authoritative generator.)
+Windows match the strength meter exactly: daily = ~30 calendar days, weekly = ~26 weeks.
+Drivers computed over those windows using DAILY data (VIX, US 2Y/10Y, WTI from FRED),
+so the meter moves at the strength meter's speed and EXPLAINS its scores.
+Weights are the FRED-calibrated (fixed) values. Evidence, not a signal.
 
-Pulls the FRED series (free CSV, no API key), computes each currency-driver's
-current reading for all three periods (Reactive / Swing / Position), and writes
-ONE small JSON (public/driver-data.json) that the meter frontend reads.
-
-Freshness by driver (deliberate — see Brain's data-lag note):
-  * Risk (VIX)  → DAILY. The highest-weight driver, current to ~yesterday.
-  * Yield diff  → MONTHLY. The foreign 10Y leg is monthly-only on free data.
-  * Iron ore    → MONTHLY.
-Each driver carries its OWN `as_of`; top level exposes `as_of_risk` (daily) and
-`as_of_slow` (monthly) so the frontend can date them honestly and never claim a
-slow driver is fresher than it is.
-
-Nothing is manual: colours come from the data via fixed rules + the pre-computed
-weights in g10_driver_weights.json. Re-run on a schedule to refresh.
-
-Stdlib only (urllib/csv/json) — matches build_lessons.py, no pip installs.
+FXS note: identical to G10/build_driver_data_v3.py except the output path — this
+writes public/driver-data.json (relative to the repo) so the CI + Cloudflare serve it.
+Requires pandas + numpy (the CI installs them).
 """
-
-import csv
-import io
+from __future__ import annotations
 import json
 import os
-import statistics
-import urllib.request
 from datetime import datetime, timezone
+import numpy as np
+import pandas as pd
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "public", "driver-data.json")
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "public", "driver-data.json")
 
-FRED = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={}"
+START = "2015-01-01"
+# Strength-meter-matched windows, in TRADING days (~21/day-month, ~130/26-weeks).
+WIN = {"daily": 21, "weekly": 130}
+Z_FLAT = 0.5
+Z_TRAIL = 252
 
-# ── Series ────────────────────────────────────────────────────────────────
-VIX = "VIXCLS"
-IRON = "PIORECRUSDM"
-YIELD = {  # 10Y government yields (monthly)
-    "US": "IRLTLT01USM156N", "DE": "IRLTLT01DEM156N", "GB": "IRLTLT01GBM156N",
-    "JP": "IRLTLT01JPM156N", "CH": "IRLTLT01CHM156N", "CA": "IRLTLT01CAM156N",
-    "AU": "IRLTLT01AUM156N", "NZ": "IRLTLT01NZM156N",
-}
-CCY_COUNTRY = {"EUR": "DE", "GBP": "GB", "JPY": "JP", "CHF": "CH",
-               "CAD": "CA", "AUD": "AU", "NZD": "NZ"}  # USD handled specially
-
-# ── Drivers + signs + weights (from g10_driver_weights.json — stable only) ──
-# sign is on each series' NATURAL axis: VIX up = risk-off; yield-diff up = wider
-# edge; iron ore up = commodity/growth cycle stronger. Colour = sign * change.
-DRIVERS = {
+CURRENCIES = ["EUR", "GBP", "AUD", "NZD", "USD", "CAD", "CHF", "JPY"]
+CONFIG = {  # (key, sign, weight) — FRED-calibrated stable drivers
     "EUR": [("yield", +1, 0.451), ("iron", +1, 0.279), ("risk", -1, 0.191)],
     "GBP": [("risk", -1, 0.612), ("iron", +1, 0.173), ("yield", +1, 0.127)],
     "AUD": [("risk", -1, 0.504), ("yield", +1, 0.249), ("iron", +1, 0.175)],
@@ -57,190 +35,124 @@ DRIVERS = {
     "CHF": [("yield", +1, 0.465), ("iron", +1, 0.219)],
     "JPY": [("yield", +1, 0.834)],
 }
-ORDER = ["EUR", "GBP", "AUD", "NZD", "USD", "CAD", "CHF", "JPY"]
-
-# "iron" driver labelling: literal iron ore ONLY for AUD; NZD/CAD are commodity
-# exporters but not iron-ore, so "Commodity cycle"; the rest = "Global risk cycle".
-def iron_group(ccy):
-    if ccy == "AUD":
-        return "ironore"
-    if ccy in ("NZD", "CAD"):
-        return "commodity"
-    return "globalrisk"
-
-# Period lookbacks: months for the slow (monthly) drivers, trading-days for risk.
-PERIODS_M = {"reactive": 1, "swing": 3, "position": 12}
-PERIODS_D = {"reactive": 21, "swing": 63, "position": 252}
-STD_M = 36      # trailing months for slow-driver volatility
-STD_D = 504     # trailing trading days (~2y) for risk volatility
-FLAT_Z = 0.5    # |z| below this = amber (flat)
+IRON_LITERAL = {"AUD"}
+COMMODITY_CYCLE = {"NZD", "CAD"}
+LOCAL10 = {"EUR": "IRLTLT01DEM156N", "GBP": "IRLTLT01GBM156N", "JPY": "IRLTLT01JPM156N",
+           "CHF": "IRLTLT01CHM156N", "CAD": "IRLTLT01CAM156N", "AUD": "IRLTLT01AUM156N",
+           "NZD": "IRLTLT01NZM156N"}
 
 
-def fetch_rows(series_id):
-    """Fetch a FRED CSV → ordered [(date 'YYYY-MM-DD', float)], skipping gaps."""
-    url = FRED.format(series_id)
-    with urllib.request.urlopen(url, timeout=30) as r:
-        text = r.read().decode("utf-8")
-    out = []
-    for row in csv.reader(io.StringIO(text)):
-        if len(row) < 2 or row[0] in ("DATE", "observation_date"):
-            continue
-        date, val = row[0].strip(), row[1].strip()
-        if val in (".", ""):
-            continue
-        try:
-            out.append((date, float(val)))
-        except ValueError:
-            continue
-    out.sort()
-    return out
+def fred(sid: str) -> pd.Series:
+    url = f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}&cosd={START}"
+    df = pd.read_csv(url, parse_dates=["observation_date"], na_values=["."])
+    return df.set_index("observation_date")[sid].astype(float).dropna().sort_index()
 
 
-def to_monthly(rows):
-    """Collapse daily/any rows to month-end values → ordered [(YYYY-MM, val)]."""
-    m = {}
-    for date, val in rows:
-        m[date[:7]] = val  # later date in the month overwrites → month-end
-    return sorted(m.items())
+# --- DAILY series on a common business-day index ---
+idx = pd.bdate_range(START, pd.Timestamp.today())
+vix = fred("VIXCLS").reindex(idx).ffill()
+us10 = fred("DGS10").reindex(idx).ffill()                 # US 10Y, DAILY
+iron = np.log(fred("PIORECRUSDM")).reindex(idx).ffill()   # monthly -> ffilled daily
+local10 = {c: fred(s).reindex(idx).ffill() for c, s in LOCAL10.items()}  # monthly -> ffilled
+exus = pd.concat(local10.values(), axis=1).mean(axis=1)
+yadv = {c: (local10[c] - us10) for c in LOCAL10}
+yadv["USD"] = (us10 - exus)
 
 
-def diff_series(local, us):
-    """local10Y - us10Y over shared months → ordered [(YYYY-MM, diff)]."""
-    ld, ud = dict(local), dict(us)
-    return [(ym, ld[ym] - ud[ym]) for ym in sorted(set(ld) & set(ud))]
-
-
-def usd_yield_series(monthly_by_country):
-    """USD yield advantage = US10Y minus the equal-weight mean of the other seven."""
-    us = dict(monthly_by_country["US"])
-    others = [c for c in monthly_by_country if c != "US"]
-    od = {c: dict(monthly_by_country[c]) for c in others}
-    out = []
-    for ym in sorted(us):
-        vals = [od[c][ym] for c in others if ym in od[c]]
-        if len(vals) >= 4:
-            out.append((ym, us[ym] - statistics.mean(vals)))
-    return out
-
-
-def zscore(series, window, std_window):
-    """
-    series: ordered [(date, level)]. Returns (change_now, z, latest_date) for the
-    given lookback, standardized by trailing std of that same change measure.
-    """
-    if len(series) <= window + 2:
-        return 0.0, 0.0, (series[-1][0] if series else None)
-    vals = [v for _, v in series]
-    changes = [vals[i] - vals[i - window] for i in range(window, len(vals))]
-    change_now = changes[-1]
-    hist = changes[-(std_window + 1):-1] if len(changes) > std_window else changes[:-1]
-    latest = series[-1][0]
-    if len(hist) < 6:
-        return change_now, 0.0, latest
-    sd = statistics.pstdev(hist)
-    z = change_now / sd if sd > 1e-9 else 0.0
-    return change_now, z, latest
-
-
-def reason(key, ccy, direction, colour):
-    """Plain-English reason string (no numbers)."""
+def change_series(key: str, ccy: str, w: int) -> pd.Series:
     if key == "risk":
-        phrase = "Risk-off" if direction > 0 else "Risk-on" if direction < 0 else "Risk steady"
-    elif key == "yield":
-        phrase = ("Yield edge widening" if direction > 0 else
-                  "Yield edge narrowing" if direction < 0 else "Yield edge steady")
-    else:  # iron
-        g = iron_group(ccy)
-        if g == "ironore":
-            phrase = ("Iron ore rising" if direction > 0 else
-                      "Iron ore falling" if direction < 0 else "Iron ore steady")
-        elif g == "commodity":
-            phrase = ("Commodity cycle strengthening" if direction > 0 else
-                      "Commodity cycle weakening" if direction < 0 else "Commodity cycle steady")
-        else:
-            phrase = ("Global risk cycle strengthening" if direction > 0 else
-                      "Global risk cycle weakening" if direction < 0 else "Global risk cycle steady")
-    # "currently" reinforces evidence-not-signal (a driver's effect isn't permanent).
-    effect = ("currently supports " + ccy if colour == "green" else
-              "currently weighs on " + ccy if colour == "red" else "neutral")
-    return phrase + " — " + effect
+        return vix - vix.shift(w)
+    if key == "iron":
+        return iron - iron.shift(w)
+    if key == "yield":
+        return yadv[ccy] - yadv[ccy].shift(w)
+    raise ValueError(key)
 
 
-def label(key, ccy):
+def reading(key: str, sign: int, ccy: str, w: int):
+    s = change_series(key, ccy, w).dropna()
+    trail = s.iloc[-Z_TRAIL:]
+    sd = trail.std(ddof=1)
+    z = 0.0 if (sd == 0 or np.isnan(sd)) else float((s.iloc[-1] - trail.mean()) / sd)
+    raw = float(s.iloc[-1])
+    if abs(z) < Z_FLAT:
+        return "amber", 0, raw
+    support = (1 if raw > 0 else -1) * sign
+    return ("green" if support > 0 else "red"), support, raw
+
+
+def label_for(key, ccy):
     if key == "risk":
         return "Risk sentiment"
     if key == "yield":
         return "Yield advantage"
-    g = iron_group(ccy)
-    return ("Iron ore / commodities" if g == "ironore" else
-            "Commodity cycle" if g == "commodity" else "Global risk cycle")
+    if ccy in IRON_LITERAL:
+        return "Iron ore / commodities"
+    return "Commodity cycle" if ccy in COMMODITY_CYCLE else "Global risk cycle"
 
 
-def main():
-    print("Fetching FRED series...")
-    vix_daily = fetch_rows(VIX)                 # DAILY — kept daily
-    iron_monthly = to_monthly(fetch_rows(IRON))  # monthly
-    yields_monthly = {c: to_monthly(fetch_rows(sid)) for c, sid in YIELD.items()}
-    print("  VIX daily obs:", len(vix_daily), "| iron months:", len(iron_monthly),
-          "| yield months:", {c: len(v) for c, v in yields_monthly.items()})
-
-    # Per-driver level series.
-    risk_series = vix_daily
-    iron_series = iron_monthly
-    yld_series = {"USD": usd_yield_series(yields_monthly)}
-    for ccy, country in CCY_COUNTRY.items():
-        yld_series[ccy] = diff_series(yields_monthly[country], yields_monthly["US"])
-
-    as_of_risk = risk_series[-1][0] if risk_series else None       # daily YYYY-MM-DD
-    slow_dates = [iron_series[-1][0]] + [s[-1][0] for s in yld_series.values() if s]
-    as_of_slow = min(slow_dates) if slow_dates else None           # monthly YYYY-MM
-
-    out_periods = {}
-    for pname in PERIODS_M:
-        wm, wd = PERIODS_M[pname], PERIODS_D[pname]
-        per = {}
-        for ccy in ORDER:
-            drivers_out, tilt = [], 0.0
-            for key, sign, weight in DRIVERS[ccy]:
-                if key == "risk":
-                    series, win, sw = risk_series, wd, STD_D
-                elif key == "iron":
-                    series, win, sw = iron_series, wm, STD_M
-                else:
-                    series, win, sw = yld_series[ccy], wm, STD_M
-                change_now, z, latest = zscore(series, win, sw)
-                if abs(z) < FLAT_Z:
-                    colour, cval = "amber", 0
-                else:
-                    supports = sign * (1 if change_now > 0 else -1)
-                    colour, cval = ("green", 1) if supports > 0 else ("red", -1)
-                tilt += cval * weight
-                rdir = 0 if colour == "amber" else (1 if change_now > 0 else -1)
-                drivers_out.append({
-                    "key": key,
-                    "label": label(key, ccy),
-                    "colour": colour,
-                    "reason": reason(key, ccy, rdir, colour),
-                    "weight": round(weight, 3),
-                    "as_of": latest,
-                })
-            drivers_out.sort(key=lambda d: d["weight"], reverse=True)
-            per[ccy] = {"tilt": round(tilt, 4), "drivers": drivers_out}
-        out_periods[pname] = per
-
-    data = {
-        "as_of": as_of_slow,          # legacy field = the most-lagged (honest) month
-        "as_of_risk": as_of_risk,     # daily
-        "as_of_slow": as_of_slow,     # monthly (rates & commodities)
-        "generated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "note": "Direction of evidence, not a signal. Colours computed from FRED data via fixed rules + calibrated weights.",
-        "periods": out_periods,
-    }
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    with open(OUT, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
-    print("Wrote", OUT, "| risk as of", as_of_risk, "| rates/commodities as of", as_of_slow)
+def reason_for(key, colour, ccy, raw, w):
+    if key == "risk":
+        move = f"VIX {'+' if raw >= 0 else ''}{raw:.1f} over {w//21 or 1}m"
+        if colour == "green":
+            return f"Risk-on ({move}) — supports {ccy}"
+        if colour == "red":
+            return f"Risk-off ({move}) — weighs on {ccy}"
+        return f"Risk roughly flat ({move})"
+    if key == "yield":
+        move = f"{'+' if raw >= 0 else ''}{raw*100:.0f}bp"
+        if colour == "green":
+            return f"Yield edge widening ({move}) — supports {ccy}"
+        if colour == "red":
+            return f"Yield edge narrowing ({move}) — weighs on {ccy}"
+        return f"Yield edge steady ({move})"
+    noun = ("Commodity demand" if ccy in IRON_LITERAL
+            else "Commodity cycle" if ccy in COMMODITY_CYCLE else "Global risk cycle")
+    if colour == "green":
+        return f"{noun} firming — supports {ccy}"
+    if colour == "red":
+        return f"{noun} softening — weighs on {ccy}"
+    return f"{noun} roughly flat"
 
 
-if __name__ == "__main__":
-    main()
+CVAL = {"green": 1, "amber": 0, "red": -1}
+out = {
+    "as_of_risk": pd.Timestamp(fred("VIXCLS").index[-1]).strftime("%Y-%m-%d"),
+    "as_of_rates_us": pd.Timestamp(fred("DGS10").index[-1]).strftime("%Y-%m-%d"),
+    "as_of_slow": pd.Timestamp(fred("PIORECRUSDM").index[-1]).strftime("%Y-%m"),
+    "generated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+    "windows": {"daily": "~30 days (matches strength meter)", "weekly": "~26 weeks"},
+    "note": ("Explains the strength meter over matching windows. Risk & US rates daily; "
+             "foreign rates & commodities monthly. Evidence, not a signal."),
+    "periods": {},
+}
+for pname, w in WIN.items():
+    out["periods"][pname] = {}
+    for ccy in CURRENCIES:
+        drivers, tilt = [], 0.0
+        for key, sign, weight in CONFIG[ccy]:
+            colour, _s, raw = reading(key, sign, ccy, w)
+            tilt += CVAL[colour] * weight
+            drivers.append({"key": key, "label": label_for(key, ccy), "colour": colour,
+                            "reason": reason_for(key, colour, ccy, raw, w),
+                            "weight": round(weight, 3)})
+        drivers.sort(key=lambda d: d["weight"], reverse=True)
+        out["periods"][pname][ccy] = {"tilt": round(tilt, 3), "drivers": drivers}
+
+with open(OUT, "w", encoding="utf-8") as f:
+    json.dump(out, f, indent=2)
+print("Wrote", OUT)
+
+# ---- ALIGNMENT CHECK vs live strength meter ----
+try:
+    import urllib.request
+    m = json.loads(urllib.request.urlopen(
+        "https://raw.githubusercontent.com/iamtayweisheng-ctrl/fxstrength/data/matrix.json", timeout=20).read())
+    print("ALIGNMENT CHECK — driver tilt vs strength score (daily/30d window):")
+    print(f"{'ccy':<5}{'driver_tilt':>12}{'strength_score':>16}{'strength_dir':>14}")
+    for ccy in CURRENCIES:
+        t = out["periods"]["daily"][ccy]["tilt"]
+        sc = m["timeframes"]["daily"]["scores"].get(ccy, {})
+        print(f"{ccy:<5}{t:>12.3f}{sc.get('score','?'):>16}{sc.get('arrow','?'):>14}")
+except Exception as e:
+    print("alignment check skipped:", e)

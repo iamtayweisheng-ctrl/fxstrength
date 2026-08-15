@@ -1,182 +1,357 @@
 {
-  "as_of": "2026-06",
   "as_of_risk": "2026-08-13",
+  "as_of_rates_us": "2026-08-13",
   "as_of_slow": "2026-06",
-  "generated": "2026-08-15T08:01:23Z",
-  "note": "Direction of evidence, not a signal. Colours computed from FRED data via fixed rules + calibrated weights.",
+  "generated": "2026-08-15T19:35:11Z",
+  "windows": {
+    "daily": "~30 days (matches strength meter)",
+    "weekly": "~26 weeks"
+  },
+  "note": "Explains the strength meter over matching windows. Risk & US rates daily; foreign rates & commodities monthly. Evidence, not a signal.",
   "periods": {
-    "reactive": {
+    "daily": {
       "EUR": {
-        "tilt": -0.279,
+        "tilt": 0.191,
         "drivers": [
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "amber",
-            "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.451,
-            "as_of": "2026-06"
+            "reason": "Yield edge steady (-6bp)",
+            "weight": 0.451
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
-            "colour": "red",
-            "reason": "Global risk cycle weakening \u2014 currently weighs on EUR",
-            "weight": 0.279,
-            "as_of": "2026-06"
+            "colour": "amber",
+            "reason": "Global risk cycle roughly flat",
+            "weight": 0.279
           },
           {
             "key": "risk",
             "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.191,
-            "as_of": "2026-08-13"
+            "colour": "green",
+            "reason": "Risk-on (VIX -2.1 over 1m) \u2014 supports EUR",
+            "weight": 0.191
           }
         ]
       },
       "GBP": {
-        "tilt": -0.3,
+        "tilt": 0.612,
         "drivers": [
           {
             "key": "risk",
             "label": "Risk sentiment",
+            "colour": "green",
+            "reason": "Risk-on (VIX -2.1 over 1m) \u2014 supports GBP",
+            "weight": 0.612
+          },
+          {
+            "key": "iron",
+            "label": "Global risk cycle",
             "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.612,
-            "as_of": "2026-08-13"
+            "reason": "Global risk cycle roughly flat",
+            "weight": 0.173
+          },
+          {
+            "key": "yield",
+            "label": "Yield advantage",
+            "colour": "amber",
+            "reason": "Yield edge steady (-6bp)",
+            "weight": 0.127
+          }
+        ]
+      },
+      "AUD": {
+        "tilt": 0.504,
+        "drivers": [
+          {
+            "key": "risk",
+            "label": "Risk sentiment",
+            "colour": "green",
+            "reason": "Risk-on (VIX -2.1 over 1m) \u2014 supports AUD",
+            "weight": 0.504
+          },
+          {
+            "key": "yield",
+            "label": "Yield advantage",
+            "colour": "amber",
+            "reason": "Yield edge steady (-6bp)",
+            "weight": 0.249
+          },
+          {
+            "key": "iron",
+            "label": "Iron ore / commodities",
+            "colour": "amber",
+            "reason": "Commodity demand roughly flat",
+            "weight": 0.175
+          }
+        ]
+      },
+      "NZD": {
+        "tilt": 0.475,
+        "drivers": [
+          {
+            "key": "risk",
+            "label": "Risk sentiment",
+            "colour": "green",
+            "reason": "Risk-on (VIX -2.1 over 1m) \u2014 supports NZD",
+            "weight": 0.475
+          },
+          {
+            "key": "yield",
+            "label": "Yield advantage",
+            "colour": "amber",
+            "reason": "Yield edge steady (-6bp)",
+            "weight": 0.241
+          },
+          {
+            "key": "iron",
+            "label": "Commodity cycle",
+            "colour": "amber",
+            "reason": "Commodity cycle roughly flat",
+            "weight": 0.206
+          }
+        ]
+      },
+      "USD": {
+        "tilt": -0.388,
+        "drivers": [
+          {
+            "key": "risk",
+            "label": "Risk sentiment",
+            "colour": "red",
+            "reason": "Risk-off (VIX -2.1 over 1m) \u2014 weighs on USD",
+            "weight": 0.388
+          },
+          {
+            "key": "yield",
+            "label": "Yield advantage",
+            "colour": "amber",
+            "reason": "Yield edge steady (+6bp)",
+            "weight": 0.357
+          },
+          {
+            "key": "iron",
+            "label": "Global risk cycle",
+            "colour": "amber",
+            "reason": "Global risk cycle roughly flat",
+            "weight": 0.212
+          }
+        ]
+      },
+      "CAD": {
+        "tilt": 0.328,
+        "drivers": [
+          {
+            "key": "risk",
+            "label": "Risk sentiment",
+            "colour": "green",
+            "reason": "Risk-on (VIX -2.1 over 1m) \u2014 supports CAD",
+            "weight": 0.328
+          },
+          {
+            "key": "yield",
+            "label": "Yield advantage",
+            "colour": "amber",
+            "reason": "Yield edge steady (-6bp)",
+            "weight": 0.312
+          },
+          {
+            "key": "iron",
+            "label": "Commodity cycle",
+            "colour": "amber",
+            "reason": "Commodity cycle roughly flat",
+            "weight": 0.183
+          }
+        ]
+      },
+      "CHF": {
+        "tilt": 0.0,
+        "drivers": [
+          {
+            "key": "yield",
+            "label": "Yield advantage",
+            "colour": "amber",
+            "reason": "Yield edge steady (-6bp)",
+            "weight": 0.465
+          },
+          {
+            "key": "iron",
+            "label": "Global risk cycle",
+            "colour": "amber",
+            "reason": "Global risk cycle roughly flat",
+            "weight": 0.219
+          }
+        ]
+      },
+      "JPY": {
+        "tilt": -0.834,
+        "drivers": [
+          {
+            "key": "yield",
+            "label": "Yield advantage",
+            "colour": "red",
+            "reason": "Yield edge narrowing (-6bp) \u2014 weighs on JPY",
+            "weight": 0.834
+          }
+        ]
+      }
+    },
+    "weekly": {
+      "EUR": {
+        "tilt": -0.539,
+        "drivers": [
+          {
+            "key": "yield",
+            "label": "Yield advantage",
+            "colour": "red",
+            "reason": "Yield edge narrowing (-43bp) \u2014 weighs on EUR",
+            "weight": 0.451
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "red",
-            "reason": "Global risk cycle weakening \u2014 currently weighs on GBP",
-            "weight": 0.173,
-            "as_of": "2026-06"
+            "reason": "Global risk cycle softening \u2014 weighs on EUR",
+            "weight": 0.279
           },
           {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "red",
-            "reason": "Yield edge narrowing \u2014 currently weighs on GBP",
-            "weight": 0.127,
-            "as_of": "2026-06"
+            "key": "risk",
+            "label": "Risk sentiment",
+            "colour": "green",
+            "reason": "Risk-on (VIX -6.0 over 6m) \u2014 supports EUR",
+            "weight": 0.191
           }
         ]
       },
-      "AUD": {
-        "tilt": -0.424,
+      "GBP": {
+        "tilt": 0.312,
         "drivers": [
           {
             "key": "risk",
             "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.504,
-            "as_of": "2026-08-13"
+            "colour": "green",
+            "reason": "Risk-on (VIX -6.0 over 6m) \u2014 supports GBP",
+            "weight": 0.612
+          },
+          {
+            "key": "iron",
+            "label": "Global risk cycle",
+            "colour": "red",
+            "reason": "Global risk cycle softening \u2014 weighs on GBP",
+            "weight": 0.173
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 currently weighs on AUD",
-            "weight": 0.249,
-            "as_of": "2026-06"
+            "reason": "Yield edge narrowing (-24bp) \u2014 weighs on GBP",
+            "weight": 0.127
+          }
+        ]
+      },
+      "AUD": {
+        "tilt": 0.08,
+        "drivers": [
+          {
+            "key": "risk",
+            "label": "Risk sentiment",
+            "colour": "green",
+            "reason": "Risk-on (VIX -6.0 over 6m) \u2014 supports AUD",
+            "weight": 0.504
+          },
+          {
+            "key": "yield",
+            "label": "Yield advantage",
+            "colour": "red",
+            "reason": "Yield edge narrowing (-51bp) \u2014 weighs on AUD",
+            "weight": 0.249
           },
           {
             "key": "iron",
             "label": "Iron ore / commodities",
             "colour": "red",
-            "reason": "Iron ore falling \u2014 currently weighs on AUD",
-            "weight": 0.175,
-            "as_of": "2026-06"
+            "reason": "Commodity demand softening \u2014 weighs on AUD",
+            "weight": 0.175
           }
         ]
       },
       "NZD": {
-        "tilt": -0.447,
+        "tilt": 0.028,
         "drivers": [
           {
             "key": "risk",
             "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.475,
-            "as_of": "2026-08-13"
+            "colour": "green",
+            "reason": "Risk-on (VIX -6.0 over 6m) \u2014 supports NZD",
+            "weight": 0.475
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 currently weighs on NZD",
-            "weight": 0.241,
-            "as_of": "2026-06"
+            "reason": "Yield edge narrowing (-64bp) \u2014 weighs on NZD",
+            "weight": 0.241
           },
           {
             "key": "iron",
             "label": "Commodity cycle",
             "colour": "red",
-            "reason": "Commodity cycle weakening \u2014 currently weighs on NZD",
-            "weight": 0.206,
-            "as_of": "2026-06"
+            "reason": "Commodity cycle softening \u2014 weighs on NZD",
+            "weight": 0.206
           }
         ]
       },
       "USD": {
-        "tilt": 0.569,
+        "tilt": 0.181,
         "drivers": [
           {
             "key": "risk",
             "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.388,
-            "as_of": "2026-08-13"
+            "colour": "red",
+            "reason": "Risk-off (VIX -6.0 over 6m) \u2014 weighs on USD",
+            "weight": 0.388
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "green",
-            "reason": "Yield edge widening \u2014 currently supports USD",
-            "weight": 0.357,
-            "as_of": "2026-06"
+            "reason": "Yield edge widening (+44bp) \u2014 supports USD",
+            "weight": 0.357
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "green",
-            "reason": "Global risk cycle weakening \u2014 currently supports USD",
-            "weight": 0.212,
-            "as_of": "2026-06"
+            "reason": "Global risk cycle firming \u2014 supports USD",
+            "weight": 0.212
           }
         ]
       },
       "CAD": {
-        "tilt": -0.495,
+        "tilt": -0.167,
         "drivers": [
           {
             "key": "risk",
             "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.328,
-            "as_of": "2026-08-13"
+            "colour": "green",
+            "reason": "Risk-on (VIX -6.0 over 6m) \u2014 supports CAD",
+            "weight": 0.328
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 currently weighs on CAD",
-            "weight": 0.312,
-            "as_of": "2026-06"
+            "reason": "Yield edge narrowing (-57bp) \u2014 weighs on CAD",
+            "weight": 0.312
           },
           {
             "key": "iron",
             "label": "Commodity cycle",
             "colour": "red",
-            "reason": "Commodity cycle weakening \u2014 currently weighs on CAD",
-            "weight": 0.183,
-            "as_of": "2026-06"
+            "reason": "Commodity cycle softening \u2014 weighs on CAD",
+            "weight": 0.183
           }
         ]
       },
@@ -187,450 +362,27 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 currently weighs on CHF",
-            "weight": 0.465,
-            "as_of": "2026-06"
+            "reason": "Yield edge narrowing (-55bp) \u2014 weighs on CHF",
+            "weight": 0.465
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "red",
-            "reason": "Global risk cycle weakening \u2014 currently weighs on CHF",
-            "weight": 0.219,
-            "as_of": "2026-06"
+            "reason": "Global risk cycle softening \u2014 weighs on CHF",
+            "weight": 0.219
           }
         ]
       },
       "JPY": {
-        "tilt": 0.0,
-        "drivers": [
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "amber",
-            "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.834,
-            "as_of": "2026-06"
-          }
-        ]
-      }
-    },
-    "swing": {
-      "EUR": {
-        "tilt": -0.451,
+        "tilt": -0.834,
         "drivers": [
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 currently weighs on EUR",
-            "weight": 0.451,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "iron",
-            "label": "Global risk cycle",
-            "colour": "amber",
-            "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.279,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "risk",
-            "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.191,
-            "as_of": "2026-08-13"
-          }
-        ]
-      },
-      "GBP": {
-        "tilt": 0.0,
-        "drivers": [
-          {
-            "key": "risk",
-            "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.612,
-            "as_of": "2026-08-13"
-          },
-          {
-            "key": "iron",
-            "label": "Global risk cycle",
-            "colour": "amber",
-            "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.173,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "amber",
-            "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.127,
-            "as_of": "2026-06"
-          }
-        ]
-      },
-      "AUD": {
-        "tilt": -0.249,
-        "drivers": [
-          {
-            "key": "risk",
-            "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.504,
-            "as_of": "2026-08-13"
-          },
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "red",
-            "reason": "Yield edge narrowing \u2014 currently weighs on AUD",
-            "weight": 0.249,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "iron",
-            "label": "Iron ore / commodities",
-            "colour": "amber",
-            "reason": "Iron ore steady \u2014 neutral",
-            "weight": 0.175,
-            "as_of": "2026-06"
-          }
-        ]
-      },
-      "NZD": {
-        "tilt": -0.241,
-        "drivers": [
-          {
-            "key": "risk",
-            "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.475,
-            "as_of": "2026-08-13"
-          },
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "red",
-            "reason": "Yield edge narrowing \u2014 currently weighs on NZD",
-            "weight": 0.241,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "iron",
-            "label": "Commodity cycle",
-            "colour": "amber",
-            "reason": "Commodity cycle steady \u2014 neutral",
-            "weight": 0.206,
-            "as_of": "2026-06"
-          }
-        ]
-      },
-      "USD": {
-        "tilt": 0.357,
-        "drivers": [
-          {
-            "key": "risk",
-            "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.388,
-            "as_of": "2026-08-13"
-          },
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "green",
-            "reason": "Yield edge widening \u2014 currently supports USD",
-            "weight": 0.357,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "iron",
-            "label": "Global risk cycle",
-            "colour": "amber",
-            "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.212,
-            "as_of": "2026-06"
-          }
-        ]
-      },
-      "CAD": {
-        "tilt": -0.312,
-        "drivers": [
-          {
-            "key": "risk",
-            "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.328,
-            "as_of": "2026-08-13"
-          },
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "red",
-            "reason": "Yield edge narrowing \u2014 currently weighs on CAD",
-            "weight": 0.312,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "iron",
-            "label": "Commodity cycle",
-            "colour": "amber",
-            "reason": "Commodity cycle steady \u2014 neutral",
-            "weight": 0.183,
-            "as_of": "2026-06"
-          }
-        ]
-      },
-      "CHF": {
-        "tilt": -0.465,
-        "drivers": [
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "red",
-            "reason": "Yield edge narrowing \u2014 currently weighs on CHF",
-            "weight": 0.465,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "iron",
-            "label": "Global risk cycle",
-            "colour": "amber",
-            "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.219,
-            "as_of": "2026-06"
-          }
-        ]
-      },
-      "JPY": {
-        "tilt": 0.0,
-        "drivers": [
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "amber",
-            "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.834,
-            "as_of": "2026-06"
-          }
-        ]
-      }
-    },
-    "position": {
-      "EUR": {
-        "tilt": 0.451,
-        "drivers": [
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "green",
-            "reason": "Yield edge widening \u2014 currently supports EUR",
-            "weight": 0.451,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "iron",
-            "label": "Global risk cycle",
-            "colour": "amber",
-            "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.279,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "risk",
-            "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.191,
-            "as_of": "2026-08-13"
-          }
-        ]
-      },
-      "GBP": {
-        "tilt": 0.0,
-        "drivers": [
-          {
-            "key": "risk",
-            "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.612,
-            "as_of": "2026-08-13"
-          },
-          {
-            "key": "iron",
-            "label": "Global risk cycle",
-            "colour": "amber",
-            "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.173,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "amber",
-            "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.127,
-            "as_of": "2026-06"
-          }
-        ]
-      },
-      "AUD": {
-        "tilt": 0.249,
-        "drivers": [
-          {
-            "key": "risk",
-            "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.504,
-            "as_of": "2026-08-13"
-          },
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "green",
-            "reason": "Yield edge widening \u2014 currently supports AUD",
-            "weight": 0.249,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "iron",
-            "label": "Iron ore / commodities",
-            "colour": "amber",
-            "reason": "Iron ore steady \u2014 neutral",
-            "weight": 0.175,
-            "as_of": "2026-06"
-          }
-        ]
-      },
-      "NZD": {
-        "tilt": -0.241,
-        "drivers": [
-          {
-            "key": "risk",
-            "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.475,
-            "as_of": "2026-08-13"
-          },
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "red",
-            "reason": "Yield edge narrowing \u2014 currently weighs on NZD",
-            "weight": 0.241,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "iron",
-            "label": "Commodity cycle",
-            "colour": "amber",
-            "reason": "Commodity cycle steady \u2014 neutral",
-            "weight": 0.206,
-            "as_of": "2026-06"
-          }
-        ]
-      },
-      "USD": {
-        "tilt": -0.357,
-        "drivers": [
-          {
-            "key": "risk",
-            "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.388,
-            "as_of": "2026-08-13"
-          },
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "red",
-            "reason": "Yield edge narrowing \u2014 currently weighs on USD",
-            "weight": 0.357,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "iron",
-            "label": "Global risk cycle",
-            "colour": "amber",
-            "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.212,
-            "as_of": "2026-06"
-          }
-        ]
-      },
-      "CAD": {
-        "tilt": 0.0,
-        "drivers": [
-          {
-            "key": "risk",
-            "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk steady \u2014 neutral",
-            "weight": 0.328,
-            "as_of": "2026-08-13"
-          },
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "amber",
-            "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.312,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "iron",
-            "label": "Commodity cycle",
-            "colour": "amber",
-            "reason": "Commodity cycle steady \u2014 neutral",
-            "weight": 0.183,
-            "as_of": "2026-06"
-          }
-        ]
-      },
-      "CHF": {
-        "tilt": 0.0,
-        "drivers": [
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "amber",
-            "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.465,
-            "as_of": "2026-06"
-          },
-          {
-            "key": "iron",
-            "label": "Global risk cycle",
-            "colour": "amber",
-            "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.219,
-            "as_of": "2026-06"
-          }
-        ]
-      },
-      "JPY": {
-        "tilt": 0.834,
-        "drivers": [
-          {
-            "key": "yield",
-            "label": "Yield advantage",
-            "colour": "green",
-            "reason": "Yield edge widening \u2014 currently supports JPY",
-            "weight": 0.834,
-            "as_of": "2026-06"
+            "reason": "Yield edge narrowing (-16bp) \u2014 weighs on JPY",
+            "weight": 0.834
           }
         ]
       }

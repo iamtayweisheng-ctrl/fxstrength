@@ -24,6 +24,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install deps
+        run: pip install --quiet pandas numpy
+
       - name: Generate driver-data.json
         run: python build_driver_data.py
 
