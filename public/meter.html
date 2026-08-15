@@ -177,7 +177,7 @@
   function leanWord(t){ var c=leanClass(t); return c==='g'?'stronger':c==='r'?'weaker':'about level'; }
 
   function buildPairs(){
-    var sel=document.getElementById('pair'),opts=[],cc=ORDER.slice().sort();  // alphabetical
+    var sel=document.getElementById('pair'),opts=[],cc=ORDER;  // same priority order as the static pair-picker
     for(var i=0;i<cc.length;i++)for(var j=i+1;j<cc.length;j++)opts.push(cc[i]+'/'+cc[j]);
     sel.innerHTML=opts.map(function(p){return '<option'+(p===state.pair?' selected':'')+'>'+p+'</option>';}).join('');
   }
