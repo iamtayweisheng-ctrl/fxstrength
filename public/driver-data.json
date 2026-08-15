@@ -1,6 +1,8 @@
 {
   "as_of": "2026-06",
-  "generated": "2026-08-15T05:51:51Z",
+  "as_of_risk": "2026-08-13",
+  "as_of_slow": "2026-06",
+  "generated": "2026-08-15T08:01:23Z",
   "note": "Direction of evidence, not a signal. Colours computed from FRED data via fixed rules + calibrated weights.",
   "periods": {
     "reactive": {
@@ -12,21 +14,24 @@
             "label": "Yield advantage",
             "colour": "amber",
             "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.451
+            "weight": 0.451,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "red",
-            "reason": "Global risk cycle weakening \u2014 weighs on EUR",
-            "weight": 0.279
+            "reason": "Global risk cycle weakening \u2014 currently weighs on EUR",
+            "weight": 0.279,
+            "as_of": "2026-06"
           },
           {
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.191
+            "weight": 0.191,
+            "as_of": "2026-08-13"
           }
         ]
       },
@@ -38,21 +43,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.612
+            "weight": 0.612,
+            "as_of": "2026-08-13"
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "red",
-            "reason": "Global risk cycle weakening \u2014 weighs on GBP",
-            "weight": 0.173
+            "reason": "Global risk cycle weakening \u2014 currently weighs on GBP",
+            "weight": 0.173,
+            "as_of": "2026-06"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 weighs on GBP",
-            "weight": 0.127
+            "reason": "Yield edge narrowing \u2014 currently weighs on GBP",
+            "weight": 0.127,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -64,21 +72,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.504
+            "weight": 0.504,
+            "as_of": "2026-08-13"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 weighs on AUD",
-            "weight": 0.249
+            "reason": "Yield edge narrowing \u2014 currently weighs on AUD",
+            "weight": 0.249,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
             "label": "Iron ore / commodities",
             "colour": "red",
-            "reason": "Iron ore falling \u2014 weighs on AUD",
-            "weight": 0.175
+            "reason": "Iron ore falling \u2014 currently weighs on AUD",
+            "weight": 0.175,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -90,21 +101,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.475
+            "weight": 0.475,
+            "as_of": "2026-08-13"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 weighs on NZD",
-            "weight": 0.241
+            "reason": "Yield edge narrowing \u2014 currently weighs on NZD",
+            "weight": 0.241,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
-            "label": "Iron ore / commodities",
+            "label": "Commodity cycle",
             "colour": "red",
-            "reason": "Iron ore falling \u2014 weighs on NZD",
-            "weight": 0.206
+            "reason": "Commodity cycle weakening \u2014 currently weighs on NZD",
+            "weight": 0.206,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -116,21 +130,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.388
+            "weight": 0.388,
+            "as_of": "2026-08-13"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "green",
-            "reason": "Yield edge widening \u2014 supports USD",
-            "weight": 0.357
+            "reason": "Yield edge widening \u2014 currently supports USD",
+            "weight": 0.357,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "green",
-            "reason": "Global risk cycle weakening \u2014 supports USD",
-            "weight": 0.212
+            "reason": "Global risk cycle weakening \u2014 currently supports USD",
+            "weight": 0.212,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -142,21 +159,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.328
+            "weight": 0.328,
+            "as_of": "2026-08-13"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 weighs on CAD",
-            "weight": 0.312
+            "reason": "Yield edge narrowing \u2014 currently weighs on CAD",
+            "weight": 0.312,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
-            "label": "Iron ore / commodities",
+            "label": "Commodity cycle",
             "colour": "red",
-            "reason": "Iron ore falling \u2014 weighs on CAD",
-            "weight": 0.183
+            "reason": "Commodity cycle weakening \u2014 currently weighs on CAD",
+            "weight": 0.183,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -167,15 +187,17 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 weighs on CHF",
-            "weight": 0.465
+            "reason": "Yield edge narrowing \u2014 currently weighs on CHF",
+            "weight": 0.465,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "red",
-            "reason": "Global risk cycle weakening \u2014 weighs on CHF",
-            "weight": 0.219
+            "reason": "Global risk cycle weakening \u2014 currently weighs on CHF",
+            "weight": 0.219,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -187,7 +209,8 @@
             "label": "Yield advantage",
             "colour": "amber",
             "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.834
+            "weight": 0.834,
+            "as_of": "2026-06"
           }
         ]
       }
@@ -200,22 +223,25 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 weighs on EUR",
-            "weight": 0.451
+            "reason": "Yield edge narrowing \u2014 currently weighs on EUR",
+            "weight": 0.451,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "amber",
             "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.279
+            "weight": 0.279,
+            "as_of": "2026-06"
           },
           {
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.191
+            "weight": 0.191,
+            "as_of": "2026-08-13"
           }
         ]
       },
@@ -227,21 +253,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.612
+            "weight": 0.612,
+            "as_of": "2026-08-13"
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "amber",
             "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.173
+            "weight": 0.173,
+            "as_of": "2026-06"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "amber",
             "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.127
+            "weight": 0.127,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -253,21 +282,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.504
+            "weight": 0.504,
+            "as_of": "2026-08-13"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 weighs on AUD",
-            "weight": 0.249
+            "reason": "Yield edge narrowing \u2014 currently weighs on AUD",
+            "weight": 0.249,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
             "label": "Iron ore / commodities",
             "colour": "amber",
             "reason": "Iron ore steady \u2014 neutral",
-            "weight": 0.175
+            "weight": 0.175,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -279,21 +311,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.475
+            "weight": 0.475,
+            "as_of": "2026-08-13"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 weighs on NZD",
-            "weight": 0.241
+            "reason": "Yield edge narrowing \u2014 currently weighs on NZD",
+            "weight": 0.241,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
-            "label": "Iron ore / commodities",
+            "label": "Commodity cycle",
             "colour": "amber",
-            "reason": "Iron ore steady \u2014 neutral",
-            "weight": 0.206
+            "reason": "Commodity cycle steady \u2014 neutral",
+            "weight": 0.206,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -305,21 +340,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.388
+            "weight": 0.388,
+            "as_of": "2026-08-13"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "green",
-            "reason": "Yield edge widening \u2014 supports USD",
-            "weight": 0.357
+            "reason": "Yield edge widening \u2014 currently supports USD",
+            "weight": 0.357,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "amber",
             "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.212
+            "weight": 0.212,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -331,21 +369,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.328
+            "weight": 0.328,
+            "as_of": "2026-08-13"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 weighs on CAD",
-            "weight": 0.312
+            "reason": "Yield edge narrowing \u2014 currently weighs on CAD",
+            "weight": 0.312,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
-            "label": "Iron ore / commodities",
+            "label": "Commodity cycle",
             "colour": "amber",
-            "reason": "Iron ore steady \u2014 neutral",
-            "weight": 0.183
+            "reason": "Commodity cycle steady \u2014 neutral",
+            "weight": 0.183,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -356,15 +397,17 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 weighs on CHF",
-            "weight": 0.465
+            "reason": "Yield edge narrowing \u2014 currently weighs on CHF",
+            "weight": 0.465,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "amber",
             "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.219
+            "weight": 0.219,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -376,7 +419,8 @@
             "label": "Yield advantage",
             "colour": "amber",
             "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.834
+            "weight": 0.834,
+            "as_of": "2026-06"
           }
         ]
       }
@@ -389,22 +433,25 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "green",
-            "reason": "Yield edge widening \u2014 supports EUR",
-            "weight": 0.451
+            "reason": "Yield edge widening \u2014 currently supports EUR",
+            "weight": 0.451,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "amber",
             "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.279
+            "weight": 0.279,
+            "as_of": "2026-06"
           },
           {
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.191
+            "weight": 0.191,
+            "as_of": "2026-08-13"
           }
         ]
       },
@@ -416,21 +463,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.612
+            "weight": 0.612,
+            "as_of": "2026-08-13"
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "amber",
             "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.173
+            "weight": 0.173,
+            "as_of": "2026-06"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "amber",
             "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.127
+            "weight": 0.127,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -442,21 +492,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.504
+            "weight": 0.504,
+            "as_of": "2026-08-13"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "green",
-            "reason": "Yield edge widening \u2014 supports AUD",
-            "weight": 0.249
+            "reason": "Yield edge widening \u2014 currently supports AUD",
+            "weight": 0.249,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
             "label": "Iron ore / commodities",
             "colour": "amber",
             "reason": "Iron ore steady \u2014 neutral",
-            "weight": 0.175
+            "weight": 0.175,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -468,21 +521,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.475
+            "weight": 0.475,
+            "as_of": "2026-08-13"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 weighs on NZD",
-            "weight": 0.241
+            "reason": "Yield edge narrowing \u2014 currently weighs on NZD",
+            "weight": 0.241,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
-            "label": "Iron ore / commodities",
+            "label": "Commodity cycle",
             "colour": "amber",
-            "reason": "Iron ore steady \u2014 neutral",
-            "weight": 0.206
+            "reason": "Commodity cycle steady \u2014 neutral",
+            "weight": 0.206,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -494,21 +550,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.388
+            "weight": 0.388,
+            "as_of": "2026-08-13"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing \u2014 weighs on USD",
-            "weight": 0.357
+            "reason": "Yield edge narrowing \u2014 currently weighs on USD",
+            "weight": 0.357,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "amber",
             "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.212
+            "weight": 0.212,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -520,21 +579,24 @@
             "label": "Risk sentiment",
             "colour": "amber",
             "reason": "Risk steady \u2014 neutral",
-            "weight": 0.328
+            "weight": 0.328,
+            "as_of": "2026-08-13"
           },
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "amber",
             "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.312
+            "weight": 0.312,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
-            "label": "Iron ore / commodities",
+            "label": "Commodity cycle",
             "colour": "amber",
-            "reason": "Iron ore steady \u2014 neutral",
-            "weight": 0.183
+            "reason": "Commodity cycle steady \u2014 neutral",
+            "weight": 0.183,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -546,14 +608,16 @@
             "label": "Yield advantage",
             "colour": "amber",
             "reason": "Yield edge steady \u2014 neutral",
-            "weight": 0.465
+            "weight": 0.465,
+            "as_of": "2026-06"
           },
           {
             "key": "iron",
             "label": "Global risk cycle",
             "colour": "amber",
             "reason": "Global risk cycle steady \u2014 neutral",
-            "weight": 0.219
+            "weight": 0.219,
+            "as_of": "2026-06"
           }
         ]
       },
@@ -564,8 +628,9 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "green",
-            "reason": "Yield edge widening \u2014 supports JPY",
-            "weight": 0.834
+            "reason": "Yield edge widening \u2014 currently supports JPY",
+            "weight": 0.834,
+            "as_of": "2026-06"
           }
         ]
       }

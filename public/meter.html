@@ -163,15 +163,22 @@
   var LEAN_BAND=0.10;  // |tilt| below this = "roughly balanced / mixed"
   var DATA=null, state={dir:'buy',per:'swing',pair:'AUD/NZD'};
 
-  function fmtMonth(ym){ if(!ym)return ''; var p=ym.split('-'),
-    m=['January','February','March','April','May','June','July','August','September','October','November','December'];
-    return m[parseInt(p[1],10)-1]+' '+p[0]; }
+  var MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var MONA=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fmtMonth(ym){ if(!ym)return ''; var p=ym.split('-'); return MON[parseInt(p[1],10)-1]+' '+p[0]; }
+  function fmtDay(ymd){ if(!ymd)return ''; var p=ymd.split('-'); if(p.length<3)return fmtMonth(ymd);
+    return MONA[parseInt(p[1],10)-1]+' '+parseInt(p[2],10)+', '+p[0]; }
+  function asofLine(){
+    if(DATA.as_of_risk||DATA.as_of_slow)
+      return 'Risk: as of '+fmtDay(DATA.as_of_risk)+' · Rates & commodities: as of '+fmtMonth(DATA.as_of_slow)+'.';
+    return 'Data as of '+fmtMonth(DATA.as_of)+'.';
+  }
   function leanClass(t){ if(t> LEAN_BAND)return 'g'; if(t< -LEAN_BAND)return 'r'; return 'a'; }
   function leanWord(t){ var c=leanClass(t); return c==='g'?'stronger':c==='r'?'weaker':'about level'; }
 
   function buildPairs(){
-    var sel=document.getElementById('pair'),opts=[];
-    for(var i=0;i<ORDER.length;i++)for(var j=i+1;j<ORDER.length;j++)opts.push(ORDER[i]+'/'+ORDER[j]);
+    var sel=document.getElementById('pair'),opts=[],cc=ORDER.slice().sort();  // alphabetical
+    for(var i=0;i<cc.length;i++)for(var j=i+1;j<cc.length;j++)opts.push(cc[i]+'/'+cc[j]);
     sel.innerHTML=opts.map(function(p){return '<option'+(p===state.pair?' selected':'')+'>'+p+'</option>';}).join('');
   }
 
@@ -190,8 +197,8 @@
       'separate light here; the commodity reading above reflects the broader global commodity cycle the data links to NZD.</div>';
     return '<div class="card '+side+'">'+
       '<div class="chead"><div><span class="ccode">'+ccy+'</span><span class="cname">'+NAMES[ccy]+'</span></div>'+
-      '<span class="side '+side+'">'+side+'</span></div>'+
-      '<p class="ctilt">Overall: this currency’s drivers are <b class="'+cls+'">'+word+'</b> right now.</p>'+
+      '<span class="side '+side+'">'+(side==='long'?'BUY SIDE':'SELL SIDE')+'</span></div>'+
+      '<p class="ctilt">Net evidence: <b class="'+cls+'">'+word+'</b> right now.</p>'+
       '<div class="drv">'+drv+'</div>'+china+'</div>';
   }
 
@@ -228,7 +235,7 @@
       state.dir=b.getAttribute('data-dir');[].forEach.call(this.children,function(x){x.classList.toggle('active',x===b);});render();});
     document.getElementById('per').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
       state.per=b.getAttribute('data-per');[].forEach.call(this.children,function(x){x.classList.toggle('active',x===b);});render();});
-    var asof='Data as of '+fmtMonth(DATA.as_of)+'.';
+    var asof=asofLine();
     document.getElementById('asof').textContent=asof;
     document.getElementById('asof2').textContent=asof;
     render();
