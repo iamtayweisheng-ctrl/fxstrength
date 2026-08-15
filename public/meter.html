@@ -79,6 +79,8 @@
     .smallprint{color:var(--muted);font-size:11.5px;line-height:1.55;margin-top:6px}
     .smallprint b{color:var(--ink)}
     .asof{font-size:12px;color:var(--muted)}
+    .legend{color:var(--muted);font-size:11.5px;line-height:1.5;text-align:center;margin:14px 4px 0}
+    .legend a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(245,158,11,.35)}
     .loading{color:var(--muted);text-align:center;padding:30px}
     @media(max-width:560px){.cards{grid-template-columns:1fr}.rhead{font-size:17px}}
   </style>
@@ -147,6 +149,12 @@
         The rules and weights are fixed; it won't catch regime shifts (e.g. yields rising from fiscal stress),
         so use your own judgement. <span id="asof2"></span></p>
       </section>
+
+      <!-- SOURCES LEGEND — one compact linked line, not repeated per driver -->
+      <p class="legend">Data: Risk = <a href="https://fred.stlouisfed.org/series/VIXCLS" target="_blank" rel="noopener">CBOE VIX</a>
+        · Rates = <a href="https://fred.stlouisfed.org/series/DGS10" target="_blank" rel="noopener">10Y government yields</a>
+        · Commodities = <a href="https://fred.stlouisfed.org/series/PIORECRUSDM" target="_blank" rel="noopener">IMF iron ore</a>
+        — all via <a href="https://fred.stlouisfed.org/" target="_blank" rel="noopener">FRED</a>. Updated weekly.</p>
     </template>
   </div>
 
