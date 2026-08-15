@@ -161,7 +161,7 @@
     position:['🗓️','<b>Position — the multi-month trend.</b> The 12-month (year-on-year) direction. The slow, structural backdrop.']
   };
   var LEAN_BAND=0.10;  // |tilt| below this = "roughly balanced / mixed"
-  var DATA=null, state={dir:'buy',per:'swing',pair:'AUD/NZD'};
+  var DATA=null, state={dir:'buy',per:'swing',pair:'NZD/CHF'};
 
   var MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
   var MONA=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -177,9 +177,13 @@
   function leanWord(t){ var c=leanClass(t); return c==='g'?'stronger':c==='r'?'weaker':'about level'; }
 
   function buildPairs(){
-    var sel=document.getElementById('pair'),opts=[],cc=ORDER;  // same priority order as the static pair-picker
-    for(var i=0;i<cc.length;i++)for(var j=i+1;j<cc.length;j++)opts.push(cc[i]+'/'+cc[j]);
-    sel.innerHTML=opts.map(function(p){return '<option'+(p===state.pair?' selected':'')+'>'+p+'</option>';}).join('');
+    // Match the homepage pair-picker exactly: build with PRIORITY orientation
+    // (base = earlier in ORDER), then sort the concatenated 6-char string.
+    var sel=document.getElementById('pair'),pairs=[];
+    for(var i=0;i<ORDER.length;i++)for(var j=i+1;j<ORDER.length;j++)pairs.push(ORDER[i]+ORDER[j]);
+    pairs.sort();
+    sel.innerHTML=pairs.map(function(p){var v=p.slice(0,3)+'/'+p.slice(3);
+      return '<option'+(v===state.pair?' selected':'')+'>'+v+'</option>';}).join('');
   }
 
   function card(ccy,side){
