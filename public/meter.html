@@ -94,17 +94,6 @@
     <div id="app"><p class="loading">Loading live driver data…</p></div>
 
     <template id="tpl">
-      <!-- PAIR READOUT — ON TOP -->
-      <section class="panel readout">
-        <div class="rverdict">
-          <span class="rdot" id="rdot"></span>
-          <div>
-            <p class="rhead" id="rhead"></p>
-            <p class="rsub" id="rsub"></p>
-          </div>
-        </div>
-      </section>
-
       <!-- CONTROLS -->
       <section class="panel">
         <div class="controls">
@@ -139,6 +128,17 @@
 
       <!-- CURRENCY CARDS -->
       <div class="cards" id="cards"></div>
+
+      <!-- PAIR READOUT — second from bottom, between the cards and the small print -->
+      <section class="panel readout" style="margin-top:16px">
+        <div class="rverdict">
+          <span class="rdot" id="rdot"></span>
+          <div>
+            <p class="rhead" id="rhead"></p>
+            <p class="rsub" id="rsub"></p>
+          </div>
+        </div>
+      </section>
 
       <!-- SMALL PRINT -->
       <section class="panel" style="margin-top:16px">
