@@ -1,0 +1,41 @@
+name: refresh-driver-data
+
+# Refreshes the Live Driver Meter's data (public/driver-data.json) once a week.
+# build_driver_data.py pulls the free FRED CSVs, computes each driver's reading
+# for all three periods, and writes the JSON the /meter.html frontend fetches.
+# Weekly is deliberate: the yield & iron-ore series are MONTHLY, so nothing
+# changes intra-week. Committing to main lets Cloudflare Pages serve the fresh
+# file at /driver-data.json on its normal build.
+on:
+  schedule:
+    - cron: '15 6 * * 1'        # Mondays 06:15 UTC
+  workflow_dispatch:            # allow manual runs
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate driver-data.json
+        run: python build_driver_data.py
+
+      - name: Commit if the data changed
+        run: |
+          git config --global user.name  "fxstrength-bot"
+          git config --global user.email "bot@users.noreply.github.com"
+          if git diff --quiet -- public/driver-data.json; then
+            echo "No change in driver-data.json — nothing to commit."
+          else
+            git add public/driver-data.json
+            git commit -q -m "data: refresh driver meter (FRED)"
+            git push "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:main
+            echo "Pushed refreshed driver-data.json."
+          fi
