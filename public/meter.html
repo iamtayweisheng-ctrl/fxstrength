@@ -123,6 +123,18 @@
     <div id="app"><p class="loading">Loading live driver data…</p></div>
 
     <template id="tpl">
+      <!-- PAIR READOUT — always on top of the page -->
+      <section class="panel readout">
+        <div class="rverdict">
+          <span class="rdot" id="rdot"></span>
+          <div>
+            <p class="rhead" id="rhead"></p>
+            <p class="rsub" id="rsub"></p>
+            <p class="rwhy" id="rwhy"></p>
+          </div>
+        </div>
+      </section>
+
       <!-- HOW THIS WORKS (plain-English formula) -->
       <details class="how">
         <summary>How this works</summary>
@@ -132,19 +144,6 @@
         weighted drivers lean more positive is the "stronger story." Nothing here predicts price —
         it organises the evidence.</p>
       </details>
-
-      <!-- RISK BACKDROP — global, display-only (NOT in the per-currency tilt) -->
-      <section class="panel riskstrip" id="riskstrip" hidden>
-        <div class="rs-head">
-          <span class="rs-title">Risk backdrop</span>
-          <span class="rs-verdict" id="rs-verdict"></span>
-        </div>
-        <div class="rs-chips" id="rs-chips"></div>
-        <p class="rs-note">Three different markets' read on risk — <b>options</b> (VIX), <b>equities</b>
-          (S&amp;P 500) and <b>FX</b> (currency strength). When all three agree the risk read is strong; when
-          they split, treat it cautiously. Context only — this is separate from the per-currency scores below
-          and does <b>not</b> feed them.</p>
-      </section>
 
       <!-- CONTROLS -->
       <section class="panel">
@@ -181,16 +180,17 @@
       <!-- CURRENCY CARDS -->
       <div class="cards" id="cards"></div>
 
-      <!-- PAIR READOUT — second from bottom, between the cards and the small print -->
-      <section class="panel readout" style="margin-top:16px">
-        <div class="rverdict">
-          <span class="rdot" id="rdot"></span>
-          <div>
-            <p class="rhead" id="rhead"></p>
-            <p class="rsub" id="rsub"></p>
-            <p class="rwhy" id="rwhy"></p>
-          </div>
+      <!-- RISK BACKDROP — moved here: between the cards and the small print. Display-only. -->
+      <section class="panel riskstrip" id="riskstrip" hidden style="margin-top:16px">
+        <div class="rs-head">
+          <span class="rs-title">Risk backdrop</span>
+          <span class="rs-verdict" id="rs-verdict"></span>
         </div>
+        <div class="rs-chips" id="rs-chips"></div>
+        <p class="rs-note">Three different markets' read on risk — <b>options</b> (VIX), <b>equities</b>
+          (S&amp;P 500) and <b>FX</b> (currency strength). When all three agree the risk read is strong; when
+          they split, treat it cautiously. Context only — this is separate from the per-currency scores above
+          and does <b>not</b> feed them.</p>
       </section>
 
       <!-- SMALL PRINT -->
