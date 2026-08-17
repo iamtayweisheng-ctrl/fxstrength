@@ -43,6 +43,23 @@
     .how[open] summary::before{content:"▾ "}
     .how p{margin:0 0 14px;color:var(--muted);font-size:13px;line-height:1.6}
     .how .hg{color:var(--green);font-weight:600} .how .ha{color:var(--amber);font-weight:600} .how .hr{color:var(--red);font-weight:600}
+    /* risk backdrop strip (display-only, not in the tilt) */
+    .riskstrip{margin:0 0 16px}
+    .rs-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .rs-title{font-weight:700;font-size:14px}
+    .rs-verdict{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px}
+    .rs-verdict.g{background:var(--green-dim);color:var(--green)}
+    .rs-verdict.a{background:var(--amber-dim);color:var(--amber)}
+    .rs-verdict.r{background:var(--red-dim);color:var(--red)}
+    .rs-chips{display:flex;gap:10px;flex-wrap:wrap}
+    .rs-chip{flex:1;min-width:150px;background:var(--panel-2);border:1px solid var(--line);
+      border-left:3px solid var(--line);border-radius:8px;padding:9px 12px}
+    .rs-chip.g{border-left-color:var(--green)} .rs-chip.a{border-left-color:var(--amber)} .rs-chip.r{border-left-color:var(--red)}
+    .rs-chip .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+    .rs-chip .v{font-size:14px;font-weight:700;margin-top:2px}
+    .rs-chip .v small{font-weight:500;color:var(--muted);font-size:11.5px}
+    .rs-note{margin:11px 0 0;font-size:11.5px;line-height:1.55;color:var(--muted)}
+    .rs-note b{color:var(--ink)}
 
     /* CONTROLS */
     .controls{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
@@ -115,6 +132,19 @@
         weighted drivers lean more positive is the "stronger story." Nothing here predicts price —
         it organises the evidence.</p>
       </details>
+
+      <!-- RISK BACKDROP — global, display-only (NOT in the per-currency tilt) -->
+      <section class="panel riskstrip" id="riskstrip" hidden>
+        <div class="rs-head">
+          <span class="rs-title">Risk backdrop</span>
+          <span class="rs-verdict" id="rs-verdict"></span>
+        </div>
+        <div class="rs-chips" id="rs-chips"></div>
+        <p class="rs-note">Three different markets' read on risk — <b>options</b> (VIX), <b>equities</b>
+          (S&amp;P 500) and <b>FX</b> (currency strength). When all three agree the risk read is strong; when
+          they split, treat it cautiously. Context only — this is separate from the per-currency scores below
+          and does <b>not</b> feed them.</p>
+      </section>
 
       <!-- CONTROLS -->
       <section class="panel">
@@ -291,6 +321,51 @@
     document.getElementById('asof').textContent=asof;
     document.getElementById('asof2').textContent=asof;
     render();
+    loadRiskBackdrop();
+  }
+
+  // ── Risk backdrop strip: display-only, reads the LIVE site matrix (VIX + S&P + FX gauge). ──
+  // NOT part of the calibrated tilt — three independent markets shown for confluence only.
+  var MATRIX_URL='https://raw.githubusercontent.com/iamtayweisheng-ctrl/fxstrength/data/matrix.json';
+  function avgScore(sc,arr){var t=0,n=0;arr.forEach(function(c){if(sc[c]){t+=sc[c].score;n++;}});return n?t/n:5;}
+  function loadRiskBackdrop(){
+    fetch(MATRIX_URL+'?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();})
+      .then(renderRisk).catch(function(){
+        fetch('/data/matrix.json').then(function(r){return r.json();}).then(renderRisk).catch(function(){});
+      });
+  }
+  function renderRisk(m){
+    try{
+      var strip=document.getElementById('riskstrip'); if(!strip||!m) return;
+      var mk=m.market||{};
+      var tf=(m.timeframes&&(m.timeframes.daily||m.timeframes[(m.timeframe_order||[])[0]]))||{};
+      var sc=tf.scores||{};
+      var gauge=avgScore(sc,['AUD','NZD','CAD'])-avgScore(sc,['USD','JPY','CHF']);
+      var vx=mk.vix?mk.vix.level:null, vixSign=vx==null?0:(vx<18?1:vx>22?-1:0);
+      var sp=mk.sp500?mk.sp500.pct:null, spSign=sp==null?0:(sp>=0.05?1:sp<=-0.05?-1:0);
+      var fxSign=gauge>1.5?1:gauge<-1.5?-1:0;
+      function cls(s){return s>0?'g':s<0?'r':'a';}
+      function word(s){return s>0?'risk-on':s<0?'risk-off':'neutral';}
+      var chips=[
+        {k:'Options · VIX', main:(vx!=null?vx.toFixed(1):'—'),
+         sub:(mk.vix?((mk.vix.chg>=0?'+':'')+mk.vix.chg+' · '):'')+word(vixSign), s:vixSign},
+        {k:'Equities · S&P 500', main:(sp!=null?(sp>=0?'+':'')+sp+'%':'—'),
+         sub:(mk.sp500?(mk.sp500.level+' · '):'')+word(spSign), s:spSign},
+        {k:'FX · currency strength', main:(gauge>=0?'+':'')+gauge.toFixed(1),
+         sub:'risk-on vs havens · '+word(fxSign), s:fxSign}
+      ];
+      document.getElementById('rs-chips').innerHTML=chips.map(function(c){
+        return '<div class="rs-chip '+cls(c.s)+'"><div class="k">'+c.k+'</div>'+
+               '<div class="v">'+c.main+' <small>'+c.sub+'</small></div></div>';
+      }).join('');
+      var signs=[vixSign,spSign,fxSign];
+      var allOn=signs.every(function(s){return s>0;}), allOff=signs.every(function(s){return s<0;});
+      var vd=document.getElementById('rs-verdict');
+      if(allOn){vd.className='rs-verdict g';vd.textContent='Risk-ON — all three markets agree';}
+      else if(allOff){vd.className='rs-verdict r';vd.textContent='Risk-OFF — all three markets agree';}
+      else{vd.className='rs-verdict a';vd.textContent='Mixed — markets split, read risk cautiously';}
+      strip.hidden=false;
+    }catch(e){}
   }
 
   fetch('/driver-data.json',{cache:'no-cache'}).then(function(r){return r.json();}).then(function(d){
