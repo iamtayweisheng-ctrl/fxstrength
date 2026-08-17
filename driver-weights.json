@@ -1,0 +1,149 @@
+{
+  "calibrated_at": "2026-08-17",
+  "window_months": 36,
+  "note": "Data-driven driver sensitivities; auto-selected (meaningful + reliable sign). 'beta' = raw |median beta|, comparable ACROSS currencies (use for cross-pair tilt). 'weight' = within-currency share (card ordering only). China excluded (mediated by iron ore + risk).",
+  "currencies": {
+    "EUR": [
+      {
+        "key": "yield",
+        "sign": 1,
+        "beta": 0.398,
+        "weight": 0.515
+      },
+      {
+        "key": "iron",
+        "sign": 1,
+        "beta": 0.24,
+        "weight": 0.295
+      },
+      {
+        "key": "risk",
+        "sign": -1,
+        "beta": 0.159,
+        "weight": 0.191
+      }
+    ],
+    "GBP": [
+      {
+        "key": "risk",
+        "sign": -1,
+        "beta": 0.405,
+        "weight": 0.786
+      },
+      {
+        "key": "iron",
+        "sign": 1,
+        "beta": 0.129,
+        "weight": 0.214
+      }
+    ],
+    "AUD": [
+      {
+        "key": "risk",
+        "sign": -1,
+        "beta": 0.493,
+        "weight": 0.531
+      },
+      {
+        "key": "yield",
+        "sign": 1,
+        "beta": 0.256,
+        "weight": 0.275
+      },
+      {
+        "key": "iron",
+        "sign": 1,
+        "beta": 0.191,
+        "weight": 0.194
+      }
+    ],
+    "NZD": [
+      {
+        "key": "risk",
+        "sign": -1,
+        "beta": 0.432,
+        "weight": 0.531
+      },
+      {
+        "key": "yield",
+        "sign": 1,
+        "beta": 0.212,
+        "weight": 0.256
+      },
+      {
+        "key": "iron",
+        "sign": 1,
+        "beta": 0.18,
+        "weight": 0.213
+      }
+    ],
+    "USD": [
+      {
+        "key": "yield",
+        "sign": 1,
+        "beta": 0.369,
+        "weight": 0.406
+      },
+      {
+        "key": "risk",
+        "sign": 1,
+        "beta": 0.342,
+        "weight": 0.377
+      },
+      {
+        "key": "iron",
+        "sign": -1,
+        "beta": 0.199,
+        "weight": 0.217
+      }
+    ],
+    "CAD": [
+      {
+        "key": "yield",
+        "sign": 1,
+        "beta": 0.387,
+        "weight": 0.346
+      },
+      {
+        "key": "risk",
+        "sign": -1,
+        "beta": 0.337,
+        "weight": 0.302
+      },
+      {
+        "key": "iron",
+        "sign": 1,
+        "beta": 0.203,
+        "weight": 0.182
+      },
+      {
+        "key": "oil",
+        "sign": 1,
+        "beta": 0.222,
+        "weight": 0.17
+      }
+    ],
+    "CHF": [
+      {
+        "key": "yield",
+        "sign": 1,
+        "beta": 0.317,
+        "weight": 0.674
+      },
+      {
+        "key": "iron",
+        "sign": 1,
+        "beta": 0.17,
+        "weight": 0.326
+      }
+    ],
+    "JPY": [
+      {
+        "key": "yield",
+        "sign": 1,
+        "beta": 0.463,
+        "weight": 1.0
+      }
+    ]
+  }
+}

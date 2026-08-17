@@ -36,6 +36,9 @@
     .rwhy{color:var(--ink);font-size:13px;line-height:1.55;margin:10px 0 0;padding:10px 12px;
       background:var(--panel-2);border:1px solid var(--line);border-radius:8px}
     .rwhy b{color:var(--ink)}
+    .rdiverge{margin:10px 0 0;padding:10px 12px;border-radius:8px;font-size:12.5px;line-height:1.55;
+      background:var(--amber-dim);border:1px solid rgba(234,179,8,.35);color:var(--ink)}
+    .rdiverge b{color:var(--amber)}
     .how{margin:0 0 16px;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:0 14px}
     .how summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:13.5px;color:var(--accent);list-style:none}
     .how summary::-webkit-details-marker{display:none}
@@ -176,6 +179,7 @@
             <p class="rhead" id="rhead"></p>
             <p class="rsub" id="rsub"></p>
             <p class="rwhy" id="rwhy"></p>
+            <p class="rdiverge" id="rdiverge" hidden></p>
           </div>
         </div>
       </section>
@@ -218,7 +222,7 @@
     weekly:['🗓️','<b>Weekly — the ~26-week trend.</b> Matches the strength meter’s weekly window — the slower, multi-month backdrop behind the score.']
   };
   var LEAN_BAND=0.10;  // |tilt| below this = "roughly balanced / mixed"
-  var DATA=null, state={dir:'buy',per:'daily',pair:'NZD/CHF'};
+  var DATA=null, MATRIX=null, state={dir:'buy',per:'daily',pair:'NZD/CHF'};
 
   var MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
   var MONA=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -239,7 +243,8 @@
   function contribMap(ccy){  // driver key → {signed contribution, colour, weight, label}
     var m={};
     DATA.periods[state.per][ccy].drivers.forEach(function(d){
-      m[d.key]={c:CVALW[d.colour]*d.weight, colour:d.colour, w:d.weight, label:d.label};
+      var sens=(typeof d.beta==='number')?d.beta:d.weight;  // beta = cross-currency comparable
+      m[d.key]={c:CVALW[d.colour]*sens, colour:d.colour, w:sens, label:d.label};
     });
     return m;
   }
@@ -326,6 +331,28 @@
       ' <span style="color:var(--amber)">Note: JPY and CHF still rely on monthly foreign-yield data, so this pair isn’t fully aligned with the strength meter yet.</span>':'';
     document.getElementById('rsub').innerHTML=sub+' <span style="color:var(--muted)">Not a signal — evidence only.</span>'+align;
     document.getElementById('rwhy').innerHTML=whyLine(longC,shortC,cls);
+    // divergence-guard: does the driver verdict disagree with the live strength grid?
+    var dg=document.getElementById('rdiverge'); dg.hidden=true; dg.innerHTML='';
+    var notes=[];
+    if(MATRIX&&MATRIX.timeframes){
+      var tf=MATRIX.timeframes[state.per]||MATRIX.timeframes.daily, gsc=tf&&tf.scores;
+      if(gsc&&gsc[longC]&&gsc[shortC]){
+        var gl=gsc[longC].score, gs=gsc[shortC].score;
+        var driverStrong=lt>=st?longC:shortC, gridStrong=gl>=gs?longC:shortC;
+        if(driverStrong!==gridStrong && Math.abs(gl-gs)>=1){
+          notes.push('<b>Heads up:</b> the drivers lean '+driverStrong+', but the strength grid currently shows <b>'+
+            gridStrong+'</b> stronger — the move may be driven by factors outside these drivers.');
+        }
+      }
+    }
+    // low-confidence note: on this window only risk is live (yields/commodities monthly → flat)
+    var pr=DATA.periods[state.per], activeKeys={};
+    pr[longC].drivers.concat(pr[shortC].drivers).forEach(function(d){ if(d.colour!=='amber') activeKeys[d.key]=1; });
+    var ak=Object.keys(activeKeys);
+    if(ak.length===1 && ak[0]==='risk'){
+      notes.push('<b>Confidence: low</b> — only risk sentiment is live on this window (yields &amp; commodities update monthly), so this is a risk-tilt read.');
+    }
+    if(notes.length){ dg.innerHTML=notes.join('<br>'); dg.hidden=false; }
     // explainer
     document.getElementById('ei').textContent=EXPLAIN[state.per][0];
     document.getElementById('et').innerHTML=EXPLAIN[state.per][1];
@@ -362,6 +389,7 @@
   function renderRisk(m){
     try{
       var strip=document.getElementById('riskstrip'); if(!strip||!m) return;
+      MATRIX=m; if(DATA) render();   // strength grid arrived → refresh the divergence check
       var mk=m.market||{};
       var tf=(m.timeframes&&(m.timeframes.daily||m.timeframes[(m.timeframe_order||[])[0]]))||{};
       var sc=tf.scores||{};

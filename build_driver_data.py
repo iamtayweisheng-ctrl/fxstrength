@@ -3,11 +3,14 @@ Driver Meter v3 — ALIGNED to the strength meter.  (Brain's authoritative gener
 Windows match the strength meter exactly: daily = ~30 calendar days, weekly = ~26 weeks.
 Drivers computed over those windows using DAILY data (VIX, US 2Y/10Y, WTI from FRED),
 so the meter moves at the strength meter's speed and EXPLAINS its scores.
-Weights are the FRED-calibrated (fixed) values. Evidence, not a signal.
 
-FXS note: identical to G10/build_driver_data_v3.py except the output path — this
-writes public/driver-data.json (relative to the repo) so the CI + Cloudflare serve it.
-Requires pandas + numpy (the CI installs them).
+Fix 1 (2026-08-17): the tilt is now computed from RAW betas (cross-currency comparable)
+instead of within-currency-normalized weights, so the "which side is stronger" verdict
+ranks correctly across pairs. Each driver exposes both `weight` (within-currency share,
+card ordering) and `beta` (raw sensitivity). Weights load from driver-weights.json.
+
+FXS note: identical to G10/build_driver_data_v3.py except the two file paths — reads
+driver-weights.json and writes public/driver-data.json relative to this repo. Needs pandas+numpy (CI installs them).
 """
 from __future__ import annotations
 import json
@@ -16,7 +19,9 @@ from datetime import datetime, timezone
 import numpy as np
 import pandas as pd
 
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "public", "driver-data.json")
+HERE = os.path.dirname(os.path.abspath(__file__))
+WEIGHTS_PATH = os.path.join(HERE, "driver-weights.json")
+OUT = os.path.join(HERE, "public", "driver-data.json")
 
 START = "2015-01-01"
 # Strength-meter-matched windows, in TRADING days (~21/day-month, ~130/26-weeks).
@@ -25,16 +30,31 @@ Z_FLAT = 0.5
 Z_TRAIL = 252
 
 CURRENCIES = ["EUR", "GBP", "AUD", "NZD", "USD", "CAD", "CHF", "JPY"]
-CONFIG = {  # (key, sign, weight) — FRED-calibrated stable drivers
-    "EUR": [("yield", +1, 0.451), ("iron", +1, 0.279), ("risk", -1, 0.191)],
-    "GBP": [("risk", -1, 0.612), ("iron", +1, 0.173), ("yield", +1, 0.127)],
-    "AUD": [("risk", -1, 0.504), ("yield", +1, 0.249), ("iron", +1, 0.175)],
-    "NZD": [("risk", -1, 0.475), ("yield", +1, 0.241), ("iron", +1, 0.206)],
-    "USD": [("risk", +1, 0.388), ("yield", +1, 0.357), ("iron", -1, 0.212)],
-    "CAD": [("risk", -1, 0.328), ("yield", +1, 0.312), ("iron", +1, 0.183)],
-    "CHF": [("yield", +1, 0.465), ("iron", +1, 0.219)],
-    "JPY": [("yield", +1, 0.834)],
+
+# Weights come from driver-weights.json (written by recalibrate.py).
+# tuples = (key, sign, weight[within-currency share, card ordering], beta[raw sensitivity, cross-pair tilt])
+_FALLBACK = {
+    "EUR": [("yield", +1, 0.515, 0.398), ("iron", +1, 0.295, 0.240), ("risk", -1, 0.191, 0.159)],
+    "GBP": [("risk", -1, 0.786, 0.405), ("iron", +1, 0.214, 0.129)],
+    "AUD": [("risk", -1, 0.531, 0.493), ("yield", +1, 0.275, 0.256), ("iron", +1, 0.194, 0.191)],
+    "NZD": [("risk", -1, 0.531, 0.432), ("yield", +1, 0.256, 0.212), ("iron", +1, 0.213, 0.180)],
+    "USD": [("yield", +1, 0.406, 0.369), ("risk", +1, 0.377, 0.342), ("iron", -1, 0.217, 0.199)],
+    "CAD": [("yield", +1, 0.346, 0.387), ("risk", -1, 0.302, 0.337), ("iron", +1, 0.182, 0.203), ("oil", +1, 0.170, 0.222)],
+    "CHF": [("yield", +1, 0.674, 0.317), ("iron", +1, 0.326, 0.170)],
+    "JPY": [("yield", +1, 1.0, 0.463)],
 }
+
+
+def _load_config():
+    try:
+        w = json.load(open(WEIGHTS_PATH, encoding="utf-8"))["currencies"]
+        return {c: [(d["key"], int(d["sign"]), float(d["weight"]),
+                     float(d.get("beta", d["weight"]))) for d in w[c]] for c in w}
+    except Exception:
+        return _FALLBACK
+
+
+CONFIG = _load_config()
 IRON_LITERAL = {"AUD"}
 COMMODITY_CYCLE = {"NZD", "CAD"}
 LOCAL10 = {"EUR": "IRLTLT01DEM156N", "GBP": "IRLTLT01GBM156N", "JPY": "IRLTLT01JPM156N",
@@ -52,6 +72,7 @@ def fred(sid: str) -> pd.Series:
 idx = pd.bdate_range(START, pd.Timestamp.today())
 vix = fred("VIXCLS").reindex(idx).ffill()
 us10 = fred("DGS10").reindex(idx).ffill()                 # US 10Y, DAILY
+oil = np.log(fred("DCOILWTICO")).reindex(idx).ffill()     # WTI, DAILY (log level)
 iron = np.log(fred("PIORECRUSDM")).reindex(idx).ffill()   # monthly -> ffilled daily
 local10 = {c: fred(s).reindex(idx).ffill() for c, s in LOCAL10.items()}  # monthly -> ffilled
 exus = pd.concat(local10.values(), axis=1).mean(axis=1)
@@ -62,6 +83,8 @@ yadv["USD"] = (us10 - exus)
 def change_series(key: str, ccy: str, w: int) -> pd.Series:
     if key == "risk":
         return vix - vix.shift(w)
+    if key == "oil":
+        return oil - oil.shift(w)
     if key == "iron":
         return iron - iron.shift(w)
     if key == "yield":
@@ -86,6 +109,8 @@ def label_for(key, ccy):
         return "Risk sentiment"
     if key == "yield":
         return "Yield advantage"
+    if key == "oil":
+        return "Oil (WTI)"
     if ccy in IRON_LITERAL:
         return "Iron ore / commodities"
     return "Commodity cycle" if ccy in COMMODITY_CYCLE else "Global risk cycle"
@@ -106,6 +131,12 @@ def reason_for(key, colour, ccy, raw, w):
         if colour == "red":
             return f"Yield edge narrowing ({move}) — weighs on {ccy}"
         return f"Yield edge steady ({move})"
+    if key == "oil":
+        if colour == "green":
+            return f"Oil rising — supports {ccy}"
+        if colour == "red":
+            return f"Oil falling — weighs on {ccy}"
+        return "Oil roughly flat"
     noun = ("Commodity demand" if ccy in IRON_LITERAL
             else "Commodity cycle" if ccy in COMMODITY_CYCLE else "Global risk cycle")
     if colour == "green":
@@ -130,15 +161,16 @@ for pname, w in WIN.items():
     out["periods"][pname] = {}
     for ccy in CURRENCIES:
         drivers, tilt = [], 0.0
-        for key, sign, weight in CONFIG[ccy]:
+        for key, sign, weight, beta in CONFIG[ccy]:
             colour, _s, raw = reading(key, sign, ccy, w)
-            tilt += CVAL[colour] * weight
+            tilt += CVAL[colour] * beta          # RAW beta -> tilt is comparable ACROSS currencies
             drivers.append({"key": key, "label": label_for(key, ccy), "colour": colour,
                             "reason": reason_for(key, colour, ccy, raw, w),
-                            "weight": round(weight, 3)})
+                            "weight": round(weight, 3), "beta": round(beta, 3)})
         drivers.sort(key=lambda d: d["weight"], reverse=True)
         out["periods"][pname][ccy] = {"tilt": round(tilt, 3), "drivers": drivers}
 
+os.makedirs(os.path.dirname(OUT), exist_ok=True)
 with open(OUT, "w", encoding="utf-8") as f:
     json.dump(out, f, indent=2)
 print("Wrote", OUT)
