@@ -123,18 +123,6 @@
     <div id="app"><p class="loading">Loading live driver data…</p></div>
 
     <template id="tpl">
-      <!-- PAIR READOUT — always on top of the page -->
-      <section class="panel readout">
-        <div class="rverdict">
-          <span class="rdot" id="rdot"></span>
-          <div>
-            <p class="rhead" id="rhead"></p>
-            <p class="rsub" id="rsub"></p>
-            <p class="rwhy" id="rwhy"></p>
-          </div>
-        </div>
-      </section>
-
       <!-- HOW THIS WORKS (plain-English formula) -->
       <details class="how">
         <summary>How this works</summary>
@@ -180,7 +168,19 @@
       <!-- CURRENCY CARDS -->
       <div class="cards" id="cards"></div>
 
-      <!-- RISK BACKDROP — moved here: between the cards and the small print. Display-only. -->
+      <!-- PAIR READOUT — sits just above the risk backdrop -->
+      <section class="panel readout" style="margin-top:16px">
+        <div class="rverdict">
+          <span class="rdot" id="rdot"></span>
+          <div>
+            <p class="rhead" id="rhead"></p>
+            <p class="rsub" id="rsub"></p>
+            <p class="rwhy" id="rwhy"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- RISK BACKDROP — between the pair readout and the small print. Display-only. -->
       <section class="panel riskstrip" id="riskstrip" hidden style="margin-top:16px">
         <div class="rs-head">
           <span class="rs-title">Risk backdrop</span>
@@ -235,20 +235,45 @@
   function leanWord(t){ var c=leanClass(t); return c==='g'?'stronger':c==='r'?'weaker':'about level'; }
   function lc(s){ return s.charAt(0).toLowerCase()+s.slice(1); }
   function eff(colour){ return colour==='green'?'supporting it':colour==='red'?'weighing on it':'flat'; }
-  function topDriver(ccy){ return DATA.periods[state.per][ccy].drivers[0]; }  // drivers are weight-sorted
-  // "Why" line: name the deciding driver via each side's top-weight driver.
+  var CVALW={green:1,amber:0,red:-1};
+  function contribMap(ccy){  // driver key → {signed contribution, colour, weight, label}
+    var m={};
+    DATA.periods[state.per][ccy].drivers.forEach(function(d){
+      m[d.key]={c:CVALW[d.colour]*d.weight, colour:d.colour, w:d.weight, label:d.label};
+    });
+    return m;
+  }
+  // "Why" line: find the driver that contributes MOST to the gap between the two sides,
+  // then explain it — including the case where the SAME driver helps both but weighs more
+  // on one (a sensitivity/weight difference, not a direction difference).
   function whyLine(longC,shortC,cls){
     var tail=' <span style="color:var(--muted)">See the drivers above and the data sources below.</span>';
+    var per=DATA.periods[state.per];
     if(cls==='a'){
-      return '<b>Why:</b> '+longC+' and '+shortC+' are evenly matched right now — '+longC+'’s '+
-        lc(topDriver(longC).label)+' and '+shortC+'’s '+lc(topDriver(shortC).label)+' roughly offset.'+tail;
+      return '<b>Why:</b> '+longC+' and '+shortC+' are evenly matched right now — their drivers roughly offset.'+tail;
     }
-    var lt=DATA.periods[state.per][longC].tilt, st=DATA.periods[state.per][shortC].tilt;
-    var strong=lt>=st?longC:shortC, weak=lt>=st?shortC:longC;
-    var sd=topDriver(strong), wd=topDriver(weak);
-    return '<b>Why:</b> '+strong+'’s biggest driver is '+lc(sd.label)+', and it’s '+eff(sd.colour)+
-      ' right now. '+weak+'’s main driver is '+lc(wd.label)+', which is '+eff(wd.colour)+
-      ' — so '+strong+'’s story edges ahead.'+tail;
+    var strong=per[longC].tilt>=per[shortC].tilt?longC:shortC, weak=strong===longC?shortC:longC;
+    var sm=contribMap(strong), wm=contribMap(weak), keys={};
+    Object.keys(sm).forEach(function(k){keys[k]=1;}); Object.keys(wm).forEach(function(k){keys[k]=1;});
+    var best=null,bestGap=-Infinity;
+    Object.keys(keys).forEach(function(k){
+      var g=(sm[k]?sm[k].c:0)-(wm[k]?wm[k].c:0);
+      if(g>bestGap){bestGap=g;best=k;}
+    });
+    var sd=sm[best], wd=wm[best], dl=lc((sd&&sd.label)||(wd&&wd.label)||best), msg;
+    if(sd&&wd&&sd.colour===wd.colour&&sd.colour!=='amber'){
+      var verb=sd.colour==='green'?'supported by':'weighed down by';
+      msg='both are '+verb+' '+dl+', but '+strong+' is the more sensitive of the two — the same move counts '+
+          'for more on '+strong+', so its story edges ahead';
+    } else if(sd&&sd.colour!=='amber'){
+      var weakPart=wd?(weak+'’s is '+eff(wd.colour)):(weak+' isn’t sensitive to it');
+      msg=strong+'’s '+dl+' is '+eff(sd.colour)+', while '+weakPart+' — so '+strong+'’s story edges ahead';
+    } else if(wd&&wd.colour!=='amber'){
+      msg=weak+'’s '+dl+' is '+eff(wd.colour)+' while it isn’t moving '+strong+' — so '+strong+'’s story edges ahead';
+    } else {
+      msg=strong+'’s drivers lean a little more positive than '+weak+'’s right now';
+    }
+    return '<b>Why:</b> '+msg.charAt(0).toUpperCase()+msg.slice(1)+'.'+tail;
   }
 
   function buildPairs(){
