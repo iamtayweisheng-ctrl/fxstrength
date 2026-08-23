@@ -151,6 +151,17 @@ Markets do not always move when expectations change. Sometimes they wait for a c
 - Breaking an important level is stronger evidence than a move that stays within a range.
 - New information is not the same as confirmed market repricing.
 
+:::cards
+### What You Learned
+A market can hold a changed expectation for days before acting on it. The move comes when a catalyst finally gives traders a reason to commit to a story they'd been quietly building — so learn to tell a *developing* narrative from a *confirmed* one.
+
+### What Price Is Saying
+A negative narrative can sit in the background while price stays rangebound. The signal isn't the first flicker — it's follow-through: a break of an important level that persists across sessions. That's price telling you the market is now *acting* on the story, not just thinking about it.
+
+### How FXStrength Helps
+FXStrength shows whether a move is broad or isolated. When USD weakness is genuine, you should see it across the dollar's crosses and holding across timeframes — not in one noisy pair. It organizes the price evidence so you can tell confirmation from a one-session blip; it doesn't predict the catalyst or tell you how to trade.
+:::
+
 ## Question of the Week
 
 :::insight tag="🧭 Question of the Week"
