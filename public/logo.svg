@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="48" viewBox="0 0 250 48" role="img" aria-label="FXStrength">
+  <!-- ▚▚ mark, drawn as vector quadrants (amber) -->
+  <g fill="#f59e0b">
+    <rect x="22" y="10" width="14" height="14"/>
+    <rect x="8"  y="24" width="14" height="14"/>
+    <rect x="48" y="10" width="14" height="14"/>
+    <rect x="34" y="24" width="14" height="14"/>
+  </g>
+  <!-- wordmark (site font) -->
+  <text x="72" y="34" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+        font-size="30" font-weight="800" letter-spacing="-0.5" fill="#e7ecf5">FXStrength</text>
+</svg>

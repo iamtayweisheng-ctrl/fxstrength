@@ -637,7 +637,7 @@ def render_lesson(meta, body, others):
   </main>
   <footer class="foot">
     <p class="foot-news">📬 More from <strong>{html.escape(sinfo['name'])}</strong> —
-       <a href="/{sec}/">read the archive</a> or subscribe above.</p>
+       <a href="/{sec}/">read the archive</a>.</p>
 {DISCLAIMER}
     <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
   </footer>
