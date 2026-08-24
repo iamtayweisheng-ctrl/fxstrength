@@ -19,7 +19,7 @@ const CCY_NAME = {
 const ARROWS = { up: '▲', down: '▼', flat: '—' };
 const LINE_COLORS = {
   USD: '#f59e0b', EUR: '#ef4444', JPY: '#22d3ee', GBP: '#22c55e',
-  AUD: '#3b82f6', CHF: '#a78bfa', CAD: '#ec4899', NZD: '#14b8a6',
+  AUD: '#3b82f6', CHF: '#a78bfa', CAD: '#a3e635', NZD: '#d946ef',
   XAU: '#fde047', XAG: '#cbd5e1', BTC: '#f7931a',
 };
 const LINE_ORDER = ['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'CHF', 'CAD', 'NZD', 'XAU', 'XAG', 'BTC'];
