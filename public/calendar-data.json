@@ -1,0 +1,114 @@
+{
+  "generated": "2026-08-28T06:40:54Z",
+  "source": "ForexFactory weekly calendar (High-impact)",
+  "note": "This week's high-impact events, mapped to the meter's drivers. Context, not signals.",
+  "order": [
+    "USD",
+    "AUD",
+    "CAD"
+  ],
+  "currencies": {
+    "AUD": [
+      {
+        "title": "CPI m/m",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Tue",
+        "date": "2026-08-26T01:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "0.9%",
+        "previous": "-0.1%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "CPI y/y",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Tue",
+        "date": "2026-08-26T01:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "3.3%",
+        "previous": "3.8%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "Trimmed Mean CPI m/m",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Tue",
+        "date": "2026-08-26T01:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "0.4%",
+        "previous": "0.3%",
+        "actual": "",
+        "surprise": null
+      }
+    ],
+    "USD": [
+      {
+        "title": "Core PCE Price Index m/m",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Wed",
+        "date": "2026-08-26T12:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "0.2%",
+        "previous": "0.1%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "Prelim GDP q/q",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Wed",
+        "date": "2026-08-26T12:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "1.5%",
+        "previous": "1.5%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "Fed Chairman Warsh Speaks",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Fri",
+        "date": "2026-08-28T14:00:00+00:00",
+        "when": "upcoming",
+        "forecast": "",
+        "previous": "",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "Prelim Benchmark Payrolls Revision",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Fri",
+        "date": "2026-08-28T14:00:00+00:00",
+        "when": "upcoming",
+        "forecast": "",
+        "previous": "-911K",
+        "actual": "",
+        "surprise": null
+      }
+    ],
+    "CAD": [
+      {
+        "title": "GDP m/m",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Fri",
+        "date": "2026-08-28T12:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "0.2%",
+        "previous": "0.3%",
+        "actual": "",
+        "surprise": null
+      }
+    ]
+  }
+}

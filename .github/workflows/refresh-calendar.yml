@@ -1,0 +1,41 @@
+name: refresh-calendar
+
+# Refreshes the Live Driver Meter's calendar layer (public/calendar-data.json) daily.
+# build_calendar_data.py pulls ForexFactory's free weekly JSON, keeps High-impact
+# events, maps each to the meter's drivers, and writes the JSON /meter.html fetches.
+# Daily (not weekly) so "released" events and their actual-vs-forecast surprise show
+# up the same day. Committing to main lets Cloudflare Pages serve the fresh file at
+# /calendar-data.json on its normal build. Stdlib only — no pip deps.
+on:
+  schedule:
+    - cron: '20 6 * * *'        # every day 06:20 UTC
+  workflow_dispatch:            # allow manual runs
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate calendar-data.json
+        run: python build_calendar_data.py
+
+      - name: Commit if the data changed
+        run: |
+          git config --global user.name  "fxstrength-bot"
+          git config --global user.email "bot@users.noreply.github.com"
+          if git diff --quiet -- public/calendar-data.json; then
+            echo "No change in calendar-data.json — nothing to commit."
+          else
+            git add public/calendar-data.json
+            git commit -q -m "data: refresh calendar layer (ForexFactory)"
+            git push "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:main
+            echo "Pushed refreshed calendar-data.json."
+          fi

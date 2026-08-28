@@ -63,6 +63,30 @@
     .rs-chip .v small{font-weight:500;color:var(--muted);font-size:11.5px}
     .rs-note{margin:11px 0 0;font-size:11.5px;line-height:1.55;color:var(--muted)}
     .rs-note b{color:var(--ink)}
+    /* CALENDAR LAYER — this week's events, tagged to drivers */
+    .cal{margin:16px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:0 18px}
+    .cal summary{cursor:pointer;padding:16px 0;font-weight:700;font-size:15px;color:var(--ink);list-style:none}
+    .cal summary::-webkit-details-marker{display:none}
+    .cal summary::before{content:"▸ ";color:var(--accent)}
+    .cal[open] summary::before{content:"▾ "}
+    .cal-note{margin:0 0 14px;color:var(--muted);font-size:12.5px;line-height:1.5}
+    .cal-body{padding-bottom:16px;display:flex;flex-direction:column;gap:16px}
+    .cal-ccy-h{font-weight:700;font-size:13px;margin:0 0 8px;color:var(--ink)}
+    .cal-ccy-h .cal-name{color:var(--muted);font-weight:500;font-size:12px;margin-left:6px}
+    .cal-events{display:flex;flex-direction:column;gap:8px}
+    .cal-ev{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;
+      background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:9px 12px}
+    .cal-day{font-size:11px;font-weight:700;color:var(--accent);background:var(--amber-dim);
+      padding:2px 7px;border-radius:6px;white-space:nowrap;margin-top:1px}
+    .cal-ev-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+    .cal-ev-top{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+    .cal-ev-title{font-weight:600;font-size:13px;color:var(--ink)}
+    .cal-driver{font-size:11px;color:var(--muted);white-space:nowrap}
+    .cal-driver::before{content:"→ watch "}
+    .cal-nums{font-size:12px;color:var(--muted)}
+    .cal-nums b{color:var(--ink);font-weight:600}
+    .cal-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;
+      color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 5px}
 
     /* CONTROLS */
     .controls{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
@@ -196,6 +220,13 @@
           they split, treat it cautiously. Context only — this is separate from the per-currency scores above
           and does <b>not</b> feed them.</p>
       </section>
+
+      <!-- THIS WEEK'S EVENTS — calendar layer, each release tagged to the driver it moves -->
+      <details class="cal" id="cal" hidden>
+        <summary>This week's events driving the meter</summary>
+        <p class="cal-note" id="cal-note">This week's high-impact releases, tagged to the driver each one moves. Context, not signals.</p>
+        <div class="cal-body" id="cal-body"></div>
+      </details>
 
       <!-- SMALL PRINT -->
       <section class="panel" style="margin-top:16px">
@@ -374,6 +405,56 @@
     document.getElementById('asof2').textContent=asof;
     render();
     loadRiskBackdrop();
+    loadCalendar();
+  }
+
+  // ── Calendar layer: this week's high-impact events, tagged to the meter's drivers. ──
+  // Reads /calendar-data.json (same-origin, refreshed daily by CI). Context, not signals.
+  function loadCalendar(){
+    fetch('/calendar-data.json?t='+Date.now(),{cache:'no-store'})
+      .then(function(r){return r.json();}).then(renderCalendar).catch(function(){});
+  }
+  function esc(s){return String(s==null?'':s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  function renderCalendar(c){
+    try{
+      var el=document.getElementById('cal');
+      if(!el||!c||!c.order||!c.order.length) return;
+      var body=document.getElementById('cal-body');
+      body.innerHTML=c.order.map(function(ccy){
+        var evs=(c.currencies&&c.currencies[ccy])||[];
+        // released first, then upcoming (each already date-sorted by the generator)
+        evs=evs.slice().sort(function(a,b){
+          var ra=a.when==='released'?0:1, rb=b.when==='released'?0:1;
+          return ra-rb;
+        });
+        var rows=evs.map(function(e){
+          var nums, tag;
+          if(e.when==='released'){
+            tag='<span class="cal-tag">released</span>';
+            var s=e.surprise?' <b>'+esc(e.surprise)+' forecast</b>':'';
+            nums='actual '+esc(e.actual||'—')+(e.forecast?' vs forecast '+esc(e.forecast):'')+s;
+          }else{
+            tag='<span class="cal-tag">upcoming</span>';
+            var bits=[];
+            if(e.forecast) bits.push('forecast '+esc(e.forecast));
+            if(e.previous) bits.push('prev '+esc(e.previous));
+            nums=bits.length?bits.join(' · '):'scheduled';
+          }
+          return '<div class="cal-ev">'+
+            '<span class="cal-day">'+esc(e.day||'')+'</span>'+
+            '<div class="cal-ev-body">'+
+              '<div class="cal-ev-top"><span class="cal-ev-title">'+esc(e.title)+'</span>'+
+                tag+'<span class="cal-driver">'+esc(e.driver_label)+'</span></div>'+
+              '<div class="cal-nums">'+nums+'</div>'+
+            '</div></div>';
+        }).join('');
+        return '<div class="cal-ccy"><div class="cal-ccy-h">'+esc(ccy)+
+          '<span class="cal-name">'+esc(NAMES[ccy]||'')+'</span></div>'+
+          '<div class="cal-events">'+rows+'</div></div>';
+      }).join('');
+      if(c.note) document.getElementById('cal-note').textContent=c.note;
+      el.hidden=false;
+    }catch(err){}
   }
 
   // ── Risk backdrop strip: display-only, reads the LIVE site matrix (VIX + S&P + FX gauge). ──
