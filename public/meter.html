@@ -85,6 +85,7 @@
     .cal-driver::before{content:"→ watch "}
     .cal-nums{font-size:12px;color:var(--muted)}
     .cal-nums b{color:var(--ink);font-weight:600}
+    .cal-time{color:var(--muted);white-space:nowrap}
     .cal-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;
       color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 5px}
 
@@ -415,6 +416,17 @@
       .then(function(r){return r.json();}).then(renderCalendar).catch(function(){});
   }
   function esc(s){return String(s==null?'':s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  // Format an event's UTC timestamp into the viewer's own local date + time.
+  function calWhen(e){
+    var d=e.date?new Date(e.date):null;
+    if(!d||isNaN(d.getTime())) return {date:e.day||'', time:''};
+    var date, time;
+    try{ date=d.toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'}); }
+    catch(x){ date=e.day||''; }
+    try{ time=d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit',timeZoneName:'short'}); }
+    catch(x){ time=''; }
+    return {date:date, time:time};
+  }
   function renderCalendar(c){
     try{
       var el=document.getElementById('cal');
@@ -440,12 +452,14 @@
             if(e.previous) bits.push('prev '+esc(e.previous));
             nums=bits.length?bits.join(' · '):'scheduled';
           }
+          var w=calWhen(e);
+          var timeHtml=w.time?' · <span class="cal-time">'+esc(w.time)+'</span>':'';
           return '<div class="cal-ev">'+
-            '<span class="cal-day">'+esc(e.day||'')+'</span>'+
+            '<span class="cal-day">'+esc(w.date)+'</span>'+
             '<div class="cal-ev-body">'+
               '<div class="cal-ev-top"><span class="cal-ev-title">'+esc(e.title)+'</span>'+
                 tag+'<span class="cal-driver">'+esc(e.driver_label)+'</span></div>'+
-              '<div class="cal-nums">'+nums+'</div>'+
+              '<div class="cal-nums">'+nums+timeHtml+'</div>'+
             '</div></div>';
         }).join('');
         return '<div class="cal-ccy"><div class="cal-ccy-h">'+esc(ccy)+
