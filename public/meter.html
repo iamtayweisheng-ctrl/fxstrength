@@ -124,6 +124,8 @@
     .metals-title{font-weight:700;font-size:15px;color:var(--ink)}
     .metals-note{margin:6px 0 14px;color:var(--muted);font-size:12.5px;line-height:1.5}
     .metals-note b{color:var(--ink)}
+    .metals-caveat{margin:14px 0 0;color:var(--muted);font-size:11.5px;line-height:1.5;font-style:italic}
+    .metals-caveat b{color:var(--ink);font-style:normal}
     .side.short{background:var(--red-dim);color:var(--red)}
     .ctilt{font-size:12.5px;color:var(--muted);margin:0 0 13px}
     .ctilt b.g{color:var(--green)} .ctilt b.a{color:var(--amber)} .ctilt b.r{color:var(--red)}
@@ -223,6 +225,9 @@
           driving it — real yields, the dollar, risk sentiment. The dollar shows up <b>inside</b> the card as one
           of the metal's drivers, not as an opponent. Context, not a signal.</p>
         <div class="cards" id="metals-cards"></div>
+        <p class="metals-caveat">Metals driver weights are based on <b>established macro relationships</b>
+          (real yields, the dollar, risk sentiment) — not yet statistically calibrated from price history like
+          the currency scores. Treat the direction as principled context, not a precise measurement.</p>
       </section>
 
       <!-- RISK BACKDROP — between the pair readout and the small print. Display-only. -->
@@ -565,9 +570,22 @@
     }catch(e){}
   }
 
+  // Metals live in a separate file (metals-data.json) so they refresh on their own schedule
+  // and never collide with the weekly regeneration of driver-data.json. Merge them into DATA
+  // at load; if the file is missing the meter still works (the metals section stays hidden).
+  function mergeMetals(m){
+    if(!m||!m.metals_periods||!DATA||!DATA.periods) return;
+    ['daily','weekly'].forEach(function(p){
+      var src=m.metals_periods[p]; if(!src||!DATA.periods[p]) return;
+      METALS.forEach(function(code){ if(src[code]) DATA.periods[p][code]=src[code]; });
+    });
+    if(m.as_of_metals) DATA.as_of_metals=m.as_of_metals;
+  }
   fetch('/driver-data.json',{cache:'no-cache'}).then(function(r){return r.json();}).then(function(d){
-    DATA=d; mount();
-  }).catch(function(e){
+    DATA=d;
+    return fetch('/metals-data.json',{cache:'no-cache'}).then(function(r){return r.json();})
+      .then(mergeMetals).catch(function(){});   // metals optional
+  }).then(function(){ mount(); }).catch(function(e){
     document.getElementById('app').innerHTML='<p class="loading">Could not load driver data. '+
       'Run <code>python build_driver_data.py</code> and redeploy.</p>';
   });

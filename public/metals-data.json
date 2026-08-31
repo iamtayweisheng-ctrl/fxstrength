@@ -1,0 +1,127 @@
+{
+  "_metals_note": "Principled weights (established gold/silver macro), not yet data-calibrated. Real yields dominant, USD second, risk-off (haven) third. Silver more risk-sensitive; its risk relationship is least certain \u2014 recalibrate when price data available.",
+  "as_of_metals": "2026-08-27",
+  "generated": "2026-08-31T07:42:52Z",
+  "metals_periods": {
+    "daily": {
+      "XAU": {
+        "tilt": 0.8,
+        "drivers": [
+          {
+            "key": "realyield",
+            "label": "Real yields (US 10Y)",
+            "colour": "green",
+            "reason": "Real yields falling \u2014 supports XAU",
+            "weight": 0.5,
+            "beta": 0.5
+          },
+          {
+            "key": "usd",
+            "label": "US dollar",
+            "colour": "green",
+            "reason": "Dollar softening \u2014 supports XAU",
+            "weight": 0.3,
+            "beta": 0.3
+          },
+          {
+            "key": "risk",
+            "label": "Risk sentiment",
+            "colour": "amber",
+            "reason": "Risk sentiment roughly flat",
+            "weight": 0.2,
+            "beta": 0.2
+          }
+        ]
+      },
+      "XAG": {
+        "tilt": 0.73,
+        "drivers": [
+          {
+            "key": "realyield",
+            "label": "Real yields (US 10Y)",
+            "colour": "green",
+            "reason": "Real yields falling \u2014 supports XAG",
+            "weight": 0.4,
+            "beta": 0.45
+          },
+          {
+            "key": "risk",
+            "label": "Risk sentiment",
+            "colour": "amber",
+            "reason": "Risk sentiment roughly flat",
+            "weight": 0.35,
+            "beta": 0.35
+          },
+          {
+            "key": "usd",
+            "label": "US dollar",
+            "colour": "green",
+            "reason": "Dollar softening \u2014 supports XAG",
+            "weight": 0.25,
+            "beta": 0.28
+          }
+        ]
+      }
+    },
+    "weekly": {
+      "XAU": {
+        "tilt": -0.7,
+        "drivers": [
+          {
+            "key": "realyield",
+            "label": "Real yields (US 10Y)",
+            "colour": "red",
+            "reason": "Real yields rising \u2014 weighs on XAU",
+            "weight": 0.5,
+            "beta": 0.5
+          },
+          {
+            "key": "usd",
+            "label": "US dollar",
+            "colour": "amber",
+            "reason": "Dollar roughly flat",
+            "weight": 0.3,
+            "beta": 0.3
+          },
+          {
+            "key": "risk",
+            "label": "Risk sentiment",
+            "colour": "red",
+            "reason": "Risk-on \u2014 weighs on XAU",
+            "weight": 0.2,
+            "beta": 0.2
+          }
+        ]
+      },
+      "XAG": {
+        "tilt": -0.8,
+        "drivers": [
+          {
+            "key": "realyield",
+            "label": "Real yields (US 10Y)",
+            "colour": "red",
+            "reason": "Real yields rising \u2014 weighs on XAG",
+            "weight": 0.4,
+            "beta": 0.45
+          },
+          {
+            "key": "risk",
+            "label": "Risk sentiment",
+            "colour": "red",
+            "reason": "Risk-on \u2014 weighs on XAG",
+            "weight": 0.35,
+            "beta": 0.35
+          },
+          {
+            "key": "usd",
+            "label": "US dollar",
+            "colour": "amber",
+            "reason": "Dollar roughly flat",
+            "weight": 0.25,
+            "beta": 0.28
+          }
+        ]
+      }
+    }
+  }
+}
