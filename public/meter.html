@@ -119,6 +119,11 @@
     .ccode{color:var(--muted);font-weight:600;font-size:12px;margin-right:6px}
     .side{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:2px 8px;border-radius:999px}
     .side.long{background:var(--green-dim);color:var(--green)}
+    .side.metal{background:var(--amber-dim);color:var(--amber)}
+    .metals{padding:16px 18px}
+    .metals-title{font-weight:700;font-size:15px;color:var(--ink)}
+    .metals-note{margin:6px 0 14px;color:var(--muted);font-size:12.5px;line-height:1.5}
+    .metals-note b{color:var(--ink)}
     .side.short{background:var(--red-dim);color:var(--red)}
     .ctilt{font-size:12.5px;color:var(--muted);margin:0 0 13px}
     .ctilt b.g{color:var(--green)} .ctilt b.a{color:var(--amber)} .ctilt b.r{color:var(--red)}
@@ -209,6 +214,17 @@
         </div>
       </section>
 
+      <!-- METALS — standalone single-instrument driver cards (XAU/XAG). Shown only when the
+           data carries them. Not part of the A/B pair picker: a metal is a single-asset read,
+           and the dollar is one of its drivers, not its opponent. -->
+      <section class="panel metals" id="metals" hidden style="margin-top:16px">
+        <div class="metals-head"><span class="metals-title">Metals — standalone driver reads</span></div>
+        <p class="metals-note">Gold and silver aren't traded as a "side" here. Each gets its own read of what's
+          driving it — real yields, the dollar, risk sentiment. The dollar shows up <b>inside</b> the card as one
+          of the metal's drivers, not as an opponent. Context, not a signal.</p>
+        <div class="cards" id="metals-cards"></div>
+      </section>
+
       <!-- RISK BACKDROP — between the pair readout and the small print. Display-only. -->
       <section class="panel riskstrip" id="riskstrip" hidden style="margin-top:16px">
         <div class="rs-head">
@@ -249,6 +265,9 @@
   var NAMES={EUR:'Euro',GBP:'British Pound',AUD:'Australian Dollar',NZD:'New Zealand Dollar',
     USD:'US Dollar',CAD:'Canadian Dollar',CHF:'Swiss Franc',JPY:'Japanese Yen'};
   var ORDER=['EUR','GBP','AUD','NZD','USD','CAD','CHF','JPY'];
+  var METALS=['XAU','XAG'];                       // single-instrument reads, not in the pair picker
+  NAMES.XAU='Gold'; NAMES.XAG='Silver';
+  var METAL_SHORT={XAU:'gold', XAG:'silver'};
   var EXPLAIN={
     daily:['📊','<b>Daily — the ~30-day picture.</b> Matches the strength meter’s daily window, so the two line up: this explains <i>why</i> a currency is where the meter shows it over the past month.'],
     weekly:['🗓️','<b>Weekly — the ~26-week trend.</b> Matches the strength meter’s weekly window — the slower, multi-month backdrop behind the score.']
@@ -343,6 +362,35 @@
       '<div class="drv">'+drv+'</div>'+china+'</div>';
   }
 
+  // Single-instrument metal card: same driver rows as a currency card, but no A/B side and
+  // no "which side wins" verdict — a metal is a single-asset read. The USD leg lives inside
+  // the drivers (real yields / dollar / risk), not as an opponent.
+  function metalCard(code){
+    var per=DATA.periods[state.per][code];
+    var cls=leanClass(per.tilt);
+    var word=cls==='g'?'net supportive':cls==='r'?'net soft':'mixed / flat';
+    var name=METAL_SHORT[code]||code;
+    var drv=per.drivers.map(function(d){
+      return '<div class="d"><span class="dot '+d.colour+'"></span>'+
+        '<div><div class="dl">'+d.label+'</div><div class="dr">'+d.reason+'</div></div></div>';
+    }).join('');
+    return '<div class="card metal">'+
+      '<div class="chead"><div><span class="ccode">'+code+'</span><span class="cname">'+(NAMES[code]||'')+'</span></div>'+
+      '<span class="side metal">METAL</span></div>'+
+      '<p class="ctilt">What’s driving '+name+' right now: <b class="'+cls+'">'+word+'</b>.</p>'+
+      '<div class="drv">'+drv+'</div>'+
+      '<div class="china">The US dollar is one of '+name+'’s <b>drivers</b> (shown above), not its opponent — '+
+      'so "a weaker dollar supporting '+name+'" appears inside this card, where it belongs.</div></div>';
+  }
+  function renderMetals(){
+    var host=document.getElementById('metals'); if(!host) return;
+    var per=DATA.periods[state.per]||{};
+    var codes=METALS.filter(function(c){return per[c]&&per[c].drivers;});
+    if(!codes.length){ host.hidden=true; return; }
+    document.getElementById('metals-cards').innerHTML=codes.map(metalCard).join('');
+    host.hidden=false;
+  }
+
   function render(){
     var parts=state.pair.split('/'),base=parts[0],quote=parts[1];
     var longC=state.dir==='buy'?base:quote, shortC=state.dir==='buy'?quote:base;
@@ -390,6 +438,7 @@
     document.getElementById('et').innerHTML=EXPLAIN[state.per][1];
     // cards (long first)
     document.getElementById('cards').innerHTML=card(longC,'long')+card(shortC,'short');
+    renderMetals();
   }
 
   function mount(){
