@@ -22,8 +22,37 @@ import json
 import statistics
 import time
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta, date
 from pathlib import Path
+
+
+# ── FX trading day ────────────────────────────────────────────────────
+# The intraday session resets at the 17:00 New York close — the standard FX
+# daily rollover. In UTC that's 21:00 during US daylight time and 22:00 in
+# winter, i.e. ~5am SGT (summer) / 6am SGT (winter): the thin-volume window
+# around gold's CME break. DST is derived from the US rules so we stay
+# stdlib-only (no tzdata dependency).
+def _nth_sunday(year, month, n):
+    first = date(year, month, 1)
+    first_sun = 1 + (6 - first.weekday()) % 7          # weekday(): Mon=0 … Sun=6
+    return date(year, month, first_sun + (n - 1) * 7)
+
+
+def _us_eastern_is_dst(dt_utc):
+    y = dt_utc.year
+    start = datetime(y, 3, _nth_sunday(y, 3, 2).day, 7, tzinfo=timezone.utc)    # 2am ET, 2nd Sun Mar
+    end = datetime(y, 11, _nth_sunday(y, 11, 1).day, 6, tzinfo=timezone.utc)    # 2am ET, 1st Sun Nov
+    return start <= dt_utc < end
+
+
+def session_key(iso_min):
+    """Trading-day key (YYYY-MM-DD) for a UTC 'YYYY-MM-DDTHH:MM' timestamp,
+    with the day boundary at the 17:00 New York close. The key is the session's
+    opening UTC date, so 'today' = the session that opened at the last NY close."""
+    dt = datetime(int(iso_min[0:4]), int(iso_min[5:7]), int(iso_min[8:10]),
+                  int(iso_min[11:13]), int(iso_min[14:16]), tzinfo=timezone.utc)
+    close_hour = 21 if _us_eastern_is_dst(dt) else 22   # UTC hour of 17:00 New York
+    return (dt - timedelta(hours=close_hour)).strftime("%Y-%m-%d")
 
 # ── universe ──────────────────────────────────────────────────────────
 CCYS = ["USD", "EUR", "JPY", "GBP", "AUD", "CHF", "CAD", "NZD"]
@@ -54,7 +83,7 @@ MODES = {
                "label": "Weekly · last 26 weeks"},
 }
 INTRADAY = {"range": "5d", "interval": "15m",
-            "label": "Intraday · today (resets 00:00 UTC, 15-min steps)"}
+            "label": "Intraday · today (resets 17:00 New York ~5–6am SGT, 15-min steps)"}
 TIMEFRAME_ORDER = ["intraday", "daily", "weekly"]
 
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -189,7 +218,7 @@ def compute_mode(mode):
 
 
 def compute_intraday():
-    """Intraday strength as a per-day time series that resets at 00:00 UTC.
+    """Intraday strength as a per-day time series that resets at the 17:00 NY close.
 
     Emits today's line (for the chart + the grid's intraday column) and the
     previous trading day's line, so the two sessions can be compared.
@@ -201,10 +230,10 @@ def compute_intraday():
         return None
 
     axis, filled = align(maps)
-    # group timestamp indices by UTC date
+    # group timestamp indices by trading day (resets at the 17:00 NY close)
     by_day = {}
     for i, t in enumerate(axis):
-        by_day.setdefault(t[:10], []).append(i)
+        by_day.setdefault(session_key(t), []).append(i)
     days = [d for d in sorted(by_day) if len(by_day[d]) >= 3]
     if not days:
         return None

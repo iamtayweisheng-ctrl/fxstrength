@@ -85,7 +85,7 @@ function render(matrix) {
 
   // header row (with a "how to read" tooltip per timeframe)
   const TF_HELP = {
-    intraday: 'Intraday — strength since 00:00 UTC today. 0 = weakest → 10 = strongest; ▲ rising / ▼ falling / — flat over recent bars.',
+    intraday: 'Intraday — strength since the session open (5pm New York close, ~5–6am SGT). 0 = weakest → 10 = strongest; ▲ rising / ▼ falling / — flat over recent bars.',
     daily: 'Daily — strength over the last ~30 days. 0 = weakest → 10 = strongest.',
     weekly: 'Weekly — strength over the last ~26 weeks. 0 = weakest → 10 = strongest.',
   };
@@ -264,7 +264,7 @@ function chartOpts() {
     scales: {
       x: { ticks: { color: tick, maxTicksLimit: 12, font: { size: 10 } }, grid: { color: grid } },
       y: {
-        title: { display: true, text: '% move vs the other currencies (since 00:00 UTC)', color: tick, font: { size: 10 } },
+        title: { display: true, text: '% move vs the other currencies (since the NY-close session open)', color: tick, font: { size: 10 } },
         ticks: { color: tick, font: { size: 10 }, callback: (v) => v.toFixed(2) + '%' },
         grid: { color: grid },
       },
@@ -290,14 +290,32 @@ function datasets(lines) {
   });
 }
 
-// Countdown to the next 00:00 UTC — the moment the "since session open" chart zeroes
-// out and a fresh trading day begins. Only shown on the live "Today" view.
+// The intraday chart resets at the 17:00 New York close (the standard FX daily
+// rollover): 21:00 UTC in US summer, 22:00 UTC in winter — ~5–6am SGT, when gold
+// has its CME break and volume is thin. These helpers derive that boundary in a
+// DST-aware way from the America/New_York zone, and must stay in lockstep with
+// session_key() in worker/build_matrix.py.
+function etOffsetHours(d) {                     // e.g. -4 (EDT) or -5 (EST)
+  const et = new Date(d.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+  const utc = new Date(d.toLocaleString('en-US', { timeZone: 'UTC' }));
+  return Math.round((et - utc) / 3600000);
+}
+function nyCloseUTCHour(d) { return 17 - etOffsetHours(d); }   // UTC hour of 17:00 New York
+// The session's opening UTC date — matches build_matrix.session_key().
+function currentSessionKey(now) {
+  const shifted = new Date(now.getTime() - nyCloseUTCHour(now) * 3600000);
+  return shifted.toISOString().slice(0, 10);
+}
+
+// Countdown to the next 17:00 New York close — the moment the "since session open"
+// chart zeroes out and a fresh trading day begins. Only shown on the live "Today" view.
 function updateResetCountdown() {
   const el = document.getElementById('chart-countdown');
   if (!el) return;
   if (chartDay !== 'today') { el.textContent = ''; return; }
   const now = new Date();
-  const next = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1, 0, 0, 0, 0);
+  let next = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), nyCloseUTCHour(now), 0, 0, 0);
+  if (next <= now.getTime()) next += 86400000;
   const s = Math.max(0, Math.floor((next - now.getTime()) / 1000));
   const p = (n) => String(n).padStart(2, '0');
   el.textContent = `🕒 resets in ${p(Math.floor(s / 3600))}:${p(Math.floor((s % 3600) / 60))}:${p(s % 60)}`;
@@ -317,12 +335,12 @@ function drawChart() {
     if (dateEl) dateEl.textContent = '(no data)';
     return;
   }
-  // Be honest about "Today": if the latest session isn't the current UTC date
+  // Be honest about "Today": if the latest session isn't the current trading day
   // (weekend / market closed), it's the last completed session, not a live day.
-  const nowUTCDate = new Date().toISOString().slice(0, 10);
-  const isLiveToday = chartDay === 'today' && day.date === nowUTCDate;
+  const sessionNow = currentSessionKey(new Date());
+  const isLiveToday = chartDay === 'today' && day.date === sessionNow;
   if (label) label.textContent = chartDay === 'today' ? (isLiveToday ? 'Today (live)' : 'Latest session') : 'Previous day';
-  if (dateEl) dateEl.textContent = day.date + ' UTC' + (chartDay === 'today' && !isLiveToday ? ' · market closed' : '');
+  if (dateEl) dateEl.textContent = 'session opened ' + day.date + (chartDay === 'today' && !isLiveToday ? ' · market closed' : '');
   const ds = datasets(day.lines);
   if (chartMain) {                         // update in place, keep legend toggles
     chartMain.data.labels = day.times;
