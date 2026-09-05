@@ -9,5 +9,8 @@
 # Lesson #004 retitled (what-happens-after-expectations-change → when-the-market-believes-the-story)
 /behind-the-move/what-happens-after-expectations-change  /behind-the-move/when-the-market-believes-the-story  301
 
+# Lesson #007 retitled (reaction-is-not-confirmation → when-good-news-isnt-enough)
+/behind-the-move/reaction-is-not-confirmation  /behind-the-move/when-good-news-isnt-enough  301
+
 # Section renamed (guides → fx-drivers)
 /guides/*  /fx-drivers/:splat  301
