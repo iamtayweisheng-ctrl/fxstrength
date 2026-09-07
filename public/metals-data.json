@@ -1,25 +1,25 @@
 {
   "_metals_note": "Principled weights (established gold/silver macro), not yet data-calibrated. Real yields dominant, USD second, risk-off (haven) third. Silver more risk-sensitive; its risk relationship is least certain \u2014 recalibrate when price data available.",
-  "as_of_metals": "2026-08-27",
-  "generated": "2026-08-31T07:42:52Z",
+  "as_of_metals": "2026-09-03",
+  "generated": "2026-09-07T12:45:45Z",
   "metals_periods": {
     "daily": {
       "XAU": {
-        "tilt": 0.8,
+        "tilt": 0.0,
         "drivers": [
           {
             "key": "realyield",
             "label": "Real yields (US 10Y)",
-            "colour": "green",
-            "reason": "Real yields falling \u2014 supports XAU",
+            "colour": "amber",
+            "reason": "Real yields roughly flat",
             "weight": 0.5,
             "beta": 0.5
           },
           {
             "key": "usd",
             "label": "US dollar",
-            "colour": "green",
-            "reason": "Dollar softening \u2014 supports XAU",
+            "colour": "amber",
+            "reason": "Dollar roughly flat",
             "weight": 0.3,
             "beta": 0.3
           },
@@ -34,13 +34,13 @@
         ]
       },
       "XAG": {
-        "tilt": 0.73,
+        "tilt": 0.0,
         "drivers": [
           {
             "key": "realyield",
             "label": "Real yields (US 10Y)",
-            "colour": "green",
-            "reason": "Real yields falling \u2014 supports XAG",
+            "colour": "amber",
+            "reason": "Real yields roughly flat",
             "weight": 0.4,
             "beta": 0.45
           },
@@ -55,8 +55,8 @@
           {
             "key": "usd",
             "label": "US dollar",
-            "colour": "green",
-            "reason": "Dollar softening \u2014 supports XAG",
+            "colour": "amber",
+            "reason": "Dollar roughly flat",
             "weight": 0.25,
             "beta": 0.28
           }
