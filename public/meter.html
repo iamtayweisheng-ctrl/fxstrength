@@ -288,9 +288,18 @@
   function fmtDay(ymd){ if(!ymd)return ''; var p=ymd.split('-'); if(p.length<3)return fmtMonth(ymd);
     return MONA[parseInt(p[1],10)-1]+' '+parseInt(p[2],10)+', '+p[0]; }
   function asofLine(){
-    if(DATA.as_of_risk||DATA.as_of_slow)
-      return 'Risk & US rates: as of '+fmtDay(DATA.as_of_risk)+
-             ' · Foreign rates & commodities: as of '+fmtMonth(DATA.as_of_slow)+'.';
+    if(DATA.as_of_risk||DATA.as_of_slow){
+      var line='Risk & US rates: as of '+fmtDay(DATA.as_of_risk);
+      // Oil is now a daily source (Yahoo CL=F); show it under its own fresh date once the
+      // generator emits as_of_oil, instead of lumping it under the monthly iron-ore date.
+      if(DATA.as_of_oil){
+        line+=' · Oil: as of '+fmtDay(DATA.as_of_oil)+
+              ' · Foreign rates & iron ore: as of '+fmtMonth(DATA.as_of_slow)+'.';
+      } else {
+        line+=' · Foreign rates & commodities: as of '+fmtMonth(DATA.as_of_slow)+'.';
+      }
+      return line;
+    }
     return 'Data as of '+fmtMonth(DATA.as_of)+'.';
   }
   function leanClass(t){ if(t> LEAN_BAND)return 'g'; if(t< -LEAN_BAND)return 'r'; return 'a'; }
