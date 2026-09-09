@@ -1,7 +1,7 @@
 """
 Driver Meter v3 — ALIGNED to the strength meter.  (Brain's authoritative generator.)
 Windows match the strength meter exactly: daily = ~30 calendar days, weekly = ~26 weeks.
-Drivers computed over those windows using DAILY data (VIX, US 2Y/10Y, WTI from FRED),
+Drivers computed over those windows using DAILY data (VIX & US 2Y/10Y from FRED, WTI from Yahoo CL=F),
 so the meter moves at the strength meter's speed and EXPLAINS its scores.
 
 Fix 1 (2026-08-17): the tilt is now computed from RAW betas (cross-currency comparable)
@@ -15,9 +15,13 @@ driver-weights.json and writes public/driver-data.json relative to this repo. Ne
 from __future__ import annotations
 import json
 import os
+import urllib.request
 from datetime import datetime, timezone
 import numpy as np
 import pandas as pd
+
+_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+       "(KHTML, like Gecko) Chrome/120.0 Safari/537.36")
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 WEIGHTS_PATH = os.path.join(HERE, "driver-weights.json")
@@ -68,11 +72,34 @@ def fred(sid: str) -> pd.Series:
     return df.set_index("observation_date")[sid].astype(float).dropna().sort_index()
 
 
+def yahoo_daily(sym: str) -> pd.Series:
+    """Daily closes for a Yahoo symbol back to START, as a date-indexed Series.
+    Used for oil (CL=F, front-month WTI) — near-real-time, unlike FRED's ~1-week
+    lagged DCOILWTICO. The 21d/130d log-changes match DCOILWTICO's at r≈0.996, so
+    the calibrated oil beta transfers unchanged (Brain's call, 2026-09-09)."""
+    p1 = int(pd.Timestamp(START).timestamp())
+    p2 = int(pd.Timestamp.today().timestamp()) + 86400
+    url = (f"https://query1.finance.yahoo.com/v8/finance/chart/{sym}"
+           f"?period1={p1}&period2={p2}&interval=1d")
+    req = urllib.request.Request(url, headers={"User-Agent": _UA})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        j = json.load(r)
+    res = j["chart"]["result"][0]
+    ts = res["timestamp"]
+    closes = res["indicators"]["quote"][0]["close"]
+    s = pd.Series({pd.Timestamp(t, unit="s").normalize(): c
+                   for t, c in zip(ts, closes) if c is not None})
+    return s.astype(float).sort_index()
+
+
 # --- DAILY series on a common business-day index ---
 idx = pd.bdate_range(START, pd.Timestamp.today())
 vix = fred("VIXCLS").reindex(idx).ffill()
 us10 = fred("DGS10").reindex(idx).ffill()                 # US 10Y, DAILY
-oil = np.log(fred("DCOILWTICO")).reindex(idx).ffill()     # WTI, DAILY (log level)
+# Oil = Yahoo CL=F (front-month WTI), near-real-time. Reindex + ffill exactly like the
+# other series (a ffilled gap → log-change 0 for that day = "no new info"); bfill only the
+# head so no leading NaN feeds into log(). Replaces FRED DCOILWTICO, which lagged ~1 week.
+oil = np.log(yahoo_daily("CL=F").reindex(idx).ffill().bfill())   # WTI front-month, DAILY (log level)
 iron = np.log(fred("PIORECRUSDM")).reindex(idx).ffill()   # monthly -> ffilled daily
 local10 = {c: fred(s).reindex(idx).ffill() for c, s in LOCAL10.items()}  # monthly -> ffilled
 exus = pd.concat(local10.values(), axis=1).mean(axis=1)

@@ -1,8 +1,8 @@
 {
-  "as_of_risk": "2026-09-03",
-  "as_of_rates_us": "2026-09-03",
+  "as_of_risk": "2026-09-07",
+  "as_of_rates_us": "2026-09-04",
   "as_of_slow": "2026-07",
-  "generated": "2026-09-07T12:35:18Z",
+  "generated": "2026-09-09T04:58:00Z",
   "windows": {
     "daily": "~30 days (matches strength meter)",
     "weekly": "~26 weeks"
@@ -11,13 +11,13 @@
   "periods": {
     "daily": {
       "EUR": {
-        "tilt": -0.398,
+        "tilt": 0.0,
         "drivers": [
           {
             "key": "yield",
             "label": "Yield advantage",
-            "colour": "red",
-            "reason": "Yield edge narrowing (-12bp) \u2014 weighs on EUR",
+            "colour": "amber",
+            "reason": "Yield edge steady (-8bp)",
             "weight": 0.515,
             "beta": 0.398
           },
@@ -33,7 +33,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
-            "reason": "Risk roughly flat (VIX -0.6 over 1m)",
+            "reason": "Risk roughly flat (VIX +0.0 over 1m)",
             "weight": 0.191,
             "beta": 0.159
           }
@@ -46,7 +46,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
-            "reason": "Risk roughly flat (VIX -0.6 over 1m)",
+            "reason": "Risk roughly flat (VIX +0.0 over 1m)",
             "weight": 0.786,
             "beta": 0.405
           },
@@ -61,21 +61,21 @@
         ]
       },
       "AUD": {
-        "tilt": -0.256,
+        "tilt": 0.0,
         "drivers": [
           {
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
-            "reason": "Risk roughly flat (VIX -0.6 over 1m)",
+            "reason": "Risk roughly flat (VIX +0.0 over 1m)",
             "weight": 0.531,
             "beta": 0.493
           },
           {
             "key": "yield",
             "label": "Yield advantage",
-            "colour": "red",
-            "reason": "Yield edge narrowing (-12bp) \u2014 weighs on AUD",
+            "colour": "amber",
+            "reason": "Yield edge steady (-8bp)",
             "weight": 0.275,
             "beta": 0.256
           },
@@ -96,7 +96,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
-            "reason": "Risk roughly flat (VIX -0.6 over 1m)",
+            "reason": "Risk roughly flat (VIX +0.0 over 1m)",
             "weight": 0.531,
             "beta": 0.432
           },
@@ -104,7 +104,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "amber",
-            "reason": "Yield edge steady (-12bp)",
+            "reason": "Yield edge steady (-8bp)",
             "weight": 0.256,
             "beta": 0.212
           },
@@ -119,13 +119,13 @@
         ]
       },
       "USD": {
-        "tilt": 0.369,
+        "tilt": 0.0,
         "drivers": [
           {
             "key": "yield",
             "label": "Yield advantage",
-            "colour": "green",
-            "reason": "Yield edge widening (+12bp) \u2014 supports USD",
+            "colour": "amber",
+            "reason": "Yield edge steady (+8bp)",
             "weight": 0.406,
             "beta": 0.369
           },
@@ -133,7 +133,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
-            "reason": "Risk roughly flat (VIX -0.6 over 1m)",
+            "reason": "Risk roughly flat (VIX +0.0 over 1m)",
             "weight": 0.377,
             "beta": 0.342
           },
@@ -148,13 +148,13 @@
         ]
       },
       "CAD": {
-        "tilt": -0.165,
+        "tilt": 0.222,
         "drivers": [
           {
             "key": "yield",
             "label": "Yield advantage",
-            "colour": "red",
-            "reason": "Yield edge narrowing (-12bp) \u2014 weighs on CAD",
+            "colour": "amber",
+            "reason": "Yield edge steady (-8bp)",
             "weight": 0.346,
             "beta": 0.387
           },
@@ -162,7 +162,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
-            "reason": "Risk roughly flat (VIX -0.6 over 1m)",
+            "reason": "Risk roughly flat (VIX +0.0 over 1m)",
             "weight": 0.302,
             "beta": 0.337
           },
@@ -185,13 +185,13 @@
         ]
       },
       "CHF": {
-        "tilt": -0.317,
+        "tilt": 0.0,
         "drivers": [
           {
             "key": "yield",
             "label": "Yield advantage",
-            "colour": "red",
-            "reason": "Yield edge narrowing (-12bp) \u2014 weighs on CHF",
+            "colour": "amber",
+            "reason": "Yield edge steady (-8bp)",
             "weight": 0.674,
             "beta": 0.317
           },
@@ -212,7 +212,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-12bp) \u2014 weighs on JPY",
+            "reason": "Yield edge narrowing (-8bp) \u2014 weighs on JPY",
             "weight": 1.0,
             "beta": 0.463
           }
@@ -227,7 +227,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-49bp) \u2014 weighs on EUR",
+            "reason": "Yield edge narrowing (-41bp) \u2014 weighs on EUR",
             "weight": 0.515,
             "beta": 0.398
           },
@@ -243,7 +243,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "green",
-            "reason": "Risk-on (VIX -11.2 over 6m) \u2014 supports EUR",
+            "reason": "Risk-on (VIX -8.9 over 6m) \u2014 supports EUR",
             "weight": 0.191,
             "beta": 0.159
           }
@@ -256,7 +256,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "green",
-            "reason": "Risk-on (VIX -11.2 over 6m) \u2014 supports GBP",
+            "reason": "Risk-on (VIX -8.9 over 6m) \u2014 supports GBP",
             "weight": 0.786,
             "beta": 0.405
           },
@@ -277,7 +277,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "green",
-            "reason": "Risk-on (VIX -11.2 over 6m) \u2014 supports AUD",
+            "reason": "Risk-on (VIX -8.9 over 6m) \u2014 supports AUD",
             "weight": 0.531,
             "beta": 0.493
           },
@@ -285,7 +285,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-57bp) \u2014 weighs on AUD",
+            "reason": "Yield edge narrowing (-49bp) \u2014 weighs on AUD",
             "weight": 0.275,
             "beta": 0.256
           },
@@ -306,7 +306,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "green",
-            "reason": "Risk-on (VIX -11.2 over 6m) \u2014 supports NZD",
+            "reason": "Risk-on (VIX -8.9 over 6m) \u2014 supports NZD",
             "weight": 0.531,
             "beta": 0.432
           },
@@ -314,7 +314,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-70bp) \u2014 weighs on NZD",
+            "reason": "Yield edge narrowing (-62bp) \u2014 weighs on NZD",
             "weight": 0.256,
             "beta": 0.212
           },
@@ -335,7 +335,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "green",
-            "reason": "Yield edge widening (+50bp) \u2014 supports USD",
+            "reason": "Yield edge widening (+42bp) \u2014 supports USD",
             "weight": 0.406,
             "beta": 0.369
           },
@@ -343,7 +343,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX -11.2 over 6m) \u2014 weighs on USD",
+            "reason": "Risk-off (VIX -8.9 over 6m) \u2014 weighs on USD",
             "weight": 0.377,
             "beta": 0.342
           },
@@ -358,13 +358,13 @@
         ]
       },
       "CAD": {
-        "tilt": -0.475,
+        "tilt": -0.253,
         "drivers": [
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-63bp) \u2014 weighs on CAD",
+            "reason": "Yield edge narrowing (-55bp) \u2014 weighs on CAD",
             "weight": 0.346,
             "beta": 0.387
           },
@@ -372,7 +372,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "green",
-            "reason": "Risk-on (VIX -11.2 over 6m) \u2014 supports CAD",
+            "reason": "Risk-on (VIX -8.9 over 6m) \u2014 supports CAD",
             "weight": 0.302,
             "beta": 0.337
           },
@@ -387,8 +387,8 @@
           {
             "key": "oil",
             "label": "Oil (WTI)",
-            "colour": "red",
-            "reason": "Oil falling \u2014 weighs on CAD",
+            "colour": "amber",
+            "reason": "Oil roughly flat",
             "weight": 0.17,
             "beta": 0.222
           }
@@ -401,7 +401,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-61bp) \u2014 weighs on CHF",
+            "reason": "Yield edge narrowing (-53bp) \u2014 weighs on CHF",
             "weight": 0.674,
             "beta": 0.317
           },
@@ -422,7 +422,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-22bp) \u2014 weighs on JPY",
+            "reason": "Yield edge narrowing (-14bp) \u2014 weighs on JPY",
             "weight": 1.0,
             "beta": 0.463
           }
