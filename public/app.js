@@ -248,6 +248,7 @@ function chartOpts() {
   const tick = cs.getPropertyValue('--chart-tick').trim() || '#5b6884';
   const grid = cs.getPropertyValue('--chart-grid').trim() || 'rgba(30,39,64,.5)';
   const legend = cs.getPropertyValue('--muted').trim() || '#8a97b1';
+  const zero = cs.getPropertyValue('--ink').trim() || '#e7ecf5';   // prominent 0.0 baseline
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -266,7 +267,10 @@ function chartOpts() {
       y: {
         title: { display: true, text: '% move vs the other currencies (since the NY-close session open)', color: tick, font: { size: 10 } },
         ticks: { color: tick, font: { size: 10 }, callback: (v) => v.toFixed(2) + '%' },
-        grid: { color: grid },
+        grid: {
+          color: (ctx) => (ctx.tick && ctx.tick.value === 0 ? zero : grid),
+          lineWidth: (ctx) => (ctx.tick && ctx.tick.value === 0 ? 1.5 : 1),
+        },
       },
     },
   };
@@ -286,8 +290,13 @@ function buildTrendPairs() {
   for (let i = 0; i < PAIR_BASE.length; i++)
     for (let j = i + 1; j < PAIR_BASE.length; j++) pairs.push(PAIR_BASE[i] + PAIR_BASE[j]);
   pairs.sort();
+  const fiatOpts = pairs.map((p) => { const v = p.slice(0, 3) + '/' + p.slice(3); return `<option value="${v}">${v}</option>`; }).join('');
+  // Metals & crypto vs USD — the filter isolates the asset + USD; the y-axis auto-scales
+  // to fit their larger swings (which is why they're hidden in the default all-fiats view).
+  const assetOpts = ['XAU/USD', 'XAG/USD', 'BTC/USD'].map((v) => `<option value="${v}">${v}</option>`).join('');
   sel.innerHTML = '<option value="all">All pairs</option>' +
-    pairs.map((p) => { const v = p.slice(0, 3) + '/' + p.slice(3); return `<option value="${v}">${v}</option>`; }).join('');
+    `<optgroup label="Currencies">${fiatOpts}</optgroup>` +
+    `<optgroup label="Metals &amp; crypto">${assetOpts}</optgroup>`;
 }
 function applyPairFilter(pair) {
   if (!chartMain) return;
