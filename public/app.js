@@ -272,6 +272,40 @@ function chartOpts() {
   };
 }
 
+// ── Focus-pair filter for the strength-trend chart ──────────────────────
+// Selecting a pair isolates its two currencies (hides the rest); "Show all"
+// restores the default view (fiats on, metals/BTC off). Same 28 crosses as the
+// driver meter's pair picker. Applied only when the chart is (re)created, so a
+// live data refresh still preserves the user's own legend toggles.
+const PAIR_BASE = ['EUR', 'GBP', 'AUD', 'NZD', 'USD', 'CAD', 'CHF', 'JPY'];
+let trendPair = 'all';
+function buildTrendPairs() {
+  const sel = document.getElementById('trend-pair');
+  if (!sel) return;
+  const pairs = [];
+  for (let i = 0; i < PAIR_BASE.length; i++)
+    for (let j = i + 1; j < PAIR_BASE.length; j++) pairs.push(PAIR_BASE[i] + PAIR_BASE[j]);
+  pairs.sort();
+  sel.innerHTML = '<option value="all">All pairs</option>' +
+    pairs.map((p) => { const v = p.slice(0, 3) + '/' + p.slice(3); return `<option value="${v}">${v}</option>`; }).join('');
+}
+function applyPairFilter(pair) {
+  if (!chartMain) return;
+  const two = (pair && pair !== 'all') ? pair.split('/') : null;
+  chartMain.data.datasets.forEach((d, i) => {
+    const visible = two ? two.includes(d.label) : !VOLATILE.includes(d.label);
+    chartMain.setDatasetVisibility(i, visible);
+  });
+  chartMain.update('none');
+}
+function initTrendFilter() {
+  buildTrendPairs();
+  const sel = document.getElementById('trend-pair');
+  const all = document.getElementById('trend-showall');
+  if (sel) sel.addEventListener('change', () => { trendPair = sel.value; applyPairFilter(trendPair); });
+  if (all) all.addEventListener('click', () => { trendPair = 'all'; if (sel) sel.value = 'all'; applyPairFilter('all'); });
+}
+
 function datasets(lines) {
   return LINE_ORDER.filter((c) => lines[c]).map((c) => {
     const vol = VOLATILE.includes(c);
@@ -349,6 +383,7 @@ function drawChart() {
     chartMain.update('none');
   } else {
     chartMain = new Chart(el, { type: 'line', data: { labels: day.times, datasets: ds }, options: chartOpts() });
+    if (trendPair !== 'all') applyPairFilter(trendPair);   // restore focus after a rebuild
   }
 }
 
@@ -464,6 +499,7 @@ initCapture();
 initRefresh();
 initIdeasToggle();
 initChartToggle();
+initTrendFilter();
 updateResetCountdown();
 setInterval(updateResetCountdown, 1000);
 setInterval(load, REFRESH_MS);
