@@ -6,9 +6,15 @@ name: refresh-calendar
 # Daily (not weekly) so "released" events and their actual-vs-forecast surprise show
 # up the same day. Committing to main lets Cloudflare Pages serve the fresh file at
 # /calendar-data.json on its normal build. Stdlib only — no pip deps.
+# Timed to the strength-trend reset (17:00 New York close), like the driver-data and
+# metals refreshes, so the whole meter turns over together with the trading day. Cron
+# is UTC-only and can't track US DST, so two entries cover the close year-round —
+# 21:00 UTC (EDT summer) and 22:00 UTC (EST winter). Idempotent commit => the off-
+# season extra run is harmless.
 on:
   schedule:
-    - cron: '20 6 * * *'        # every day 06:20 UTC
+    - cron: '10 21 * * *'       # 21:10 UTC — 17:10 New York (EDT / US summer)
+    - cron: '10 22 * * *'       # 22:10 UTC — 17:10 New York (EST / US winter)
   workflow_dispatch:            # allow manual runs
 
 permissions:
