@@ -24,6 +24,13 @@
     .sub{color:var(--muted);font-size:13px;margin:2px 0 0}
     .pill{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
       color:#1a1200;background:var(--accent);padding:2px 8px;border-radius:999px}
+    .tophead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .topctl{display:flex;align-items:center;gap:10px}
+    .upd{color:var(--muted);font-size:12px;white-space:nowrap}
+    .refresh{background:var(--panel-2);border:1px solid var(--line);color:var(--muted);
+      border-radius:8px;padding:6px 12px;font-size:12.5px;font-weight:600;cursor:pointer}
+    .refresh:hover{color:var(--ink);border-color:var(--accent)}
+    .refresh[disabled]{opacity:.6;cursor:default}
     .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:0 0 16px}
 
     /* PAIR READOUT (headline, on top) */
@@ -150,7 +157,14 @@
 <body>
   <div class="wrap">
     <header class="top">
-      <h1>Live Driver Meter <span class="pill">v0 · private</span></h1>
+      <div class="tophead">
+        <h1>Live Driver Meter <span class="pill">v0 · private</span></h1>
+        <div class="topctl">
+          <span class="upd" id="upd"></span>
+          <button class="refresh" id="refresh" type="button"
+            title="Re-fetch the latest published data. The driver data rebuilds weekly, so this mainly confirms you're on the newest snapshot.">⟳ Refresh</button>
+        </div>
+      </div>
       <p class="sub">Pick a pair, a direction and a time period. Which side's macro story is currently stronger —
         computed from live data, not opinion. <span class="asof" id="asof"></span></p>
     </header>
@@ -281,6 +295,20 @@
   };
   var LEAN_BAND=0.10;  // |tilt| below this = "roughly balanced / mixed"
   var DATA=null, MATRIX=null, state={dir:'buy',per:'daily',pair:'NZD/CHF'};
+  // Remember the user's pair/direction/period across reloads (per-browser).
+  var STORE_KEY='fxs_driver_meter_state';
+  function loadState(){
+    try{
+      var s=JSON.parse(localStorage.getItem(STORE_KEY)||'{}');
+      if(s.pair) state.pair=s.pair;
+      if(s.dir==='buy'||s.dir==='sell') state.dir=s.dir;
+      if(s.per==='daily'||s.per==='weekly') state.per=s.per;
+    }catch(e){/* private mode / bad JSON — keep defaults */}
+  }
+  function saveState(){
+    try{ localStorage.setItem(STORE_KEY,JSON.stringify({pair:state.pair,dir:state.dir,per:state.per})); }
+    catch(e){/* ignore */}
+  }
 
   var MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
   var MONA=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -457,21 +485,44 @@
     renderMetals();
   }
 
+  function syncControls(){
+    // Reflect the restored state in the controls (they default to buy/daily in the template).
+    var pairEl=document.getElementById('pair');
+    if(pairEl){ pairEl.value=state.pair; state.pair=pairEl.value; }   // normalize to a valid option
+    [].forEach.call(document.querySelectorAll('#dir button'),function(x){x.classList.toggle('active',x.getAttribute('data-dir')===state.dir);});
+    [].forEach.call(document.querySelectorAll('#per button'),function(x){x.classList.toggle('active',x.getAttribute('data-per')===state.per);});
+  }
   function mount(){
     var tpl=document.getElementById('tpl').content.cloneNode(true);
     var app=document.getElementById('app'); app.innerHTML=''; app.appendChild(tpl);
     buildPairs();
-    document.getElementById('pair').addEventListener('change',function(){state.pair=this.value;render();});
+    syncControls();
+    document.getElementById('pair').addEventListener('change',function(){state.pair=this.value;saveState();render();});
     document.getElementById('dir').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
-      state.dir=b.getAttribute('data-dir');[].forEach.call(this.children,function(x){x.classList.toggle('active',x===b);});render();});
+      state.dir=b.getAttribute('data-dir');[].forEach.call(this.children,function(x){x.classList.toggle('active',x===b);});saveState();render();});
     document.getElementById('per').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
-      state.per=b.getAttribute('data-per');[].forEach.call(this.children,function(x){x.classList.toggle('active',x===b);});render();});
+      state.per=b.getAttribute('data-per');[].forEach.call(this.children,function(x){x.classList.toggle('active',x===b);});saveState();render();});
     var asof=asofLine();
     document.getElementById('asof').textContent=asof;
     document.getElementById('asof2').textContent=asof;
+    updateUpdatedLabel();
     render();
     loadRiskBackdrop();
     loadCalendar();
+  }
+
+  // "Updated" readout in the header: when the data snapshot was built (DATA.generated),
+  // shown in the viewer's local time with a relative age.
+  function updateUpdatedLabel(){
+    var el=document.getElementById('upd'); if(!el) return;
+    var g=DATA&&DATA.generated?new Date(DATA.generated):null;
+    if(!g||isNaN(g.getTime())){ el.textContent=''; return; }
+    var mins=Math.max(0,Math.round((Date.now()-g.getTime())/60000)), ago;
+    if(mins<60) ago=mins+'m ago';
+    else if(mins<1440) ago=Math.round(mins/60)+'h ago';
+    else ago=Math.round(mins/1440)+'d ago';
+    var when=g.toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+    el.textContent='Updated '+when+' · '+ago;
   }
 
   // ── Calendar layer: this week's high-impact events, tagged to the meter's drivers. ──
@@ -592,11 +643,33 @@
     });
     if(m.as_of_metals) DATA.as_of_metals=m.as_of_metals;
   }
-  fetch('/driver-data.json',{cache:'no-cache'}).then(function(r){return r.json();}).then(function(d){
-    DATA=d;
-    return fetch('/metals-data.json',{cache:'no-cache'}).then(function(r){return r.json();})
-      .then(mergeMetals).catch(function(){});   // metals optional
-  }).then(function(){ mount(); }).catch(function(e){
+  // Fetch driver-data.json + merge metals. Cache-busted + no-store so Refresh truly re-pulls.
+  function loadData(){
+    return fetch('/driver-data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+      DATA=d;
+      return fetch('/metals-data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();})
+        .then(mergeMetals).catch(function(){});   // metals optional
+    });
+  }
+  // Manual refresh: re-pull and re-render in place, keeping the current pair/direction/period.
+  function refresh(){
+    var btn=document.getElementById('refresh');
+    if(btn){ btn.disabled=true; btn.textContent='⟳ Refreshing…'; }
+    loadData().then(function(){
+      var asof=asofLine();
+      document.getElementById('asof').textContent=asof;
+      document.getElementById('asof2').textContent=asof;
+      updateUpdatedLabel();
+      render(); loadRiskBackdrop(); loadCalendar();
+    }).catch(function(){}).then(function(){
+      if(btn){ btn.disabled=false; btn.textContent='⟳ Refresh'; }
+    });
+  }
+  loadState();
+  loadData().then(function(){
+    mount();
+    var btn=document.getElementById('refresh'); if(btn) btn.addEventListener('click',refresh);
+  }).catch(function(e){
     document.getElementById('app').innerHTML='<p class="loading">Could not load driver data. '+
       'Run <code>python build_driver_data.py</code> and redeploy.</p>';
   });
