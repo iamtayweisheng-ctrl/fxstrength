@@ -8,9 +8,15 @@ name: refresh-driver-data
 # day. The slow series (foreign 10Y yields, iron ore) are monthly and simply
 # don't change intra-week, but re-pulling them daily is harmless. Committing to
 # main lets Cloudflare Pages serve the fresh file at /driver-data.json.
+# Timed to the strength-trend reset (17:00 New York close), so the meter's daily
+# data turns over with the trading day. GitHub cron is UTC-only and can't follow
+# US DST, so two entries cover the close year-round — 21:00 UTC (EDT summer) and
+# 22:00 UTC (EST winter). The build commits only if the data changed, so the
+# extra run each day is harmless.
 on:
   schedule:
-    - cron: '30 6 * * *'        # every day 06:30 UTC (just after the 06:20 calendar refresh)
+    - cron: '0 21 * * *'        # 21:00 UTC — 17:00 New York (EDT / US summer)
+    - cron: '0 22 * * *'        # 22:00 UTC — 17:00 New York (EST / US winter)
   workflow_dispatch:            # allow manual runs
 
 permissions:

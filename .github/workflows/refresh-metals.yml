@@ -1,13 +1,18 @@
 name: refresh-metals
 
-# Refreshes the meter's metals block (public/metals-data.json) weekly, on the same
-# cadence as the currency generator. build_metals_data.py pulls the metal FACTORS from
-# FRED (real yields, broad USD, VIX) — all free/daily — and emits XAU/XAG driver blocks
-# in the shape meter.html merges at load. Weights are principled (established macro), not
-# yet data-calibrated, and labelled as such on the cards.
+# Refreshes the meter's metals block (public/metals-data.json) daily, in lockstep with
+# the currency generator. build_metals_data.py pulls the metal FACTORS from FRED (real
+# yields, broad USD, VIX) — all daily — and emits XAU/XAG driver blocks in the shape
+# meter.html merges at load. Weights are principled (established macro), not yet
+# data-calibrated, and labelled as such on the cards.
+# Timed to the strength-trend reset (17:00 New York close). GitHub cron is UTC-only and
+# can't follow US DST, so two entries cover the close year-round — 21:00 UTC (EDT summer)
+# and 22:00 UTC (EST winter). The build commits only if the data changed, so the extra
+# run each day is harmless.
 on:
   schedule:
-    - cron: '25 6 * * 1'        # Mondays 06:25 UTC (just after refresh-driver-data)
+    - cron: '5 21 * * *'        # 21:05 UTC — 17:05 New York (EDT / US summer)
+    - cron: '5 22 * * *'        # 22:05 UTC — 17:05 New York (EST / US winter)
   workflow_dispatch:            # allow manual runs
 
 permissions:
