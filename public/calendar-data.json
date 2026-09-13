@@ -1,23 +1,189 @@
 {
-  "generated": "2026-09-12T23:58:32Z",
+  "generated": "2026-09-13T23:05:17Z",
   "source": "ForexFactory weekly calendar (High-impact)",
   "note": "This week's high-impact events, mapped to the meter's drivers. Context, not signals.",
   "order": [
+    "GBP",
     "USD",
-    "EUR",
-    "GBP"
+    "CAD",
+    "JPY",
+    "NZD"
   ],
   "currencies": {
-    "EUR": [
+    "CAD": [
       {
-        "title": "Main Refinancing Rate",
+        "title": "CPI m/m",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Mon",
+        "date": "2026-09-14T12:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "-0.1%",
+        "previous": "0.5%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "Median CPI y/y",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Mon",
+        "date": "2026-09-14T12:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "2.0%",
+        "previous": "2.0%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "Trimmed CPI y/y",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Mon",
+        "date": "2026-09-14T12:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "1.9%",
+        "previous": "1.9%",
+        "actual": "",
+        "surprise": null
+      }
+    ],
+    "GBP": [
+      {
+        "title": "Claimant Count Change",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Tue",
+        "date": "2026-09-15T06:00:00+00:00",
+        "when": "upcoming",
+        "forecast": "8.3K",
+        "previous": "-11.0K",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "CPI y/y",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Wed",
+        "date": "2026-09-16T06:00:00+00:00",
+        "when": "upcoming",
+        "forecast": "3.1%",
+        "previous": "2.9%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "Monetary Policy Summary",
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Thu",
-        "date": "2026-09-10T12:15:00+00:00",
+        "date": "2026-09-17T11:00:00+00:00",
         "when": "upcoming",
-        "forecast": "2.65%",
-        "previous": "2.40%",
+        "forecast": "",
+        "previous": "",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "MPC Official Bank Rate Votes",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Thu",
+        "date": "2026-09-17T11:00:00+00:00",
+        "when": "upcoming",
+        "forecast": "3-0-6",
+        "previous": "3-0-6",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "Official Bank Rate",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Thu",
+        "date": "2026-09-17T11:00:00+00:00",
+        "when": "upcoming",
+        "forecast": "3.75%",
+        "previous": "3.75%",
+        "actual": "",
+        "surprise": null
+      }
+    ],
+    "USD": [
+      {
+        "title": "Federal Funds Rate",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Wed",
+        "date": "2026-09-16T18:00:00+00:00",
+        "when": "upcoming",
+        "forecast": "4.00%",
+        "previous": "3.75%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "FOMC Economic Projections",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Wed",
+        "date": "2026-09-16T18:00:00+00:00",
+        "when": "upcoming",
+        "forecast": "",
+        "previous": "",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "FOMC Statement",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Wed",
+        "date": "2026-09-16T18:00:00+00:00",
+        "when": "upcoming",
+        "forecast": "",
+        "previous": "",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "FOMC Press Conference",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Wed",
+        "date": "2026-09-16T18:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "",
+        "previous": "",
+        "actual": "",
+        "surprise": null
+      }
+    ],
+    "NZD": [
+      {
+        "title": "GDP q/q",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Wed",
+        "date": "2026-09-16T22:45:00+00:00",
+        "when": "upcoming",
+        "forecast": "0.1%",
+        "previous": "0.8%",
+        "actual": "",
+        "surprise": null
+      }
+    ],
+    "JPY": [
+      {
+        "title": "BOJ Policy Rate",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Thu",
+        "date": "2026-09-18T02:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "<1.25%",
+        "previous": "<1.00%",
         "actual": "",
         "surprise": null
       },
@@ -26,7 +192,7 @@
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Thu",
-        "date": "2026-09-10T12:15:00+00:00",
+        "date": "2026-09-18T02:30:00+00:00",
         "when": "upcoming",
         "forecast": "",
         "previous": "",
@@ -34,102 +200,14 @@
         "surprise": null
       },
       {
-        "title": "ECB Press Conference",
+        "title": "BOJ Press Conference",
         "driver": "yield",
         "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-09-10T12:45:00+00:00",
+        "day": "Fri",
+        "date": "2026-09-18T05:30:00+00:00",
         "when": "upcoming",
         "forecast": "",
         "previous": "",
-        "actual": "",
-        "surprise": null
-      }
-    ],
-    "USD": [
-      {
-        "title": "Core PPI m/m",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-09-10T12:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "0.3%",
-        "previous": "0.2%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "PPI m/m",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-09-10T12:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "0.4%",
-        "previous": "0.0%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "Core CPI m/m",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Fri",
-        "date": "2026-09-11T12:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "0.2%",
-        "previous": "0.2%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "Core CPI y/y",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Fri",
-        "date": "2026-09-11T12:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "2.4%",
-        "previous": "2.5%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "CPI m/m",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Fri",
-        "date": "2026-09-11T12:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "0.4%",
-        "previous": "0.1%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "CPI y/y",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Fri",
-        "date": "2026-09-11T12:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "3.4%",
-        "previous": "3.4%",
-        "actual": "",
-        "surprise": null
-      }
-    ],
-    "GBP": [
-      {
-        "title": "GDP m/m",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Fri",
-        "date": "2026-09-11T06:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "0.0%",
-        "previous": "0.3%",
         "actual": "",
         "surprise": null
       }
