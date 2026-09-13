@@ -243,6 +243,16 @@ function initIdeasToggle() {
 // ── intraday line chart (single, full-width, Today / Previous-day toggle) ──
 let intraData = null;      // stashed intraday block for toggle + theme rebuilds
 
+// Custom hover mode: like 'nearest', but always resolves to a SINGLE element — so the
+// tooltip shows only the line under the cursor, even where several lines overlap at the
+// same pixel (which 'nearest' returns as a tie). Deterministic: first of the tie wins.
+if (typeof Chart !== 'undefined' && Chart.Interaction && !Chart.Interaction.modes.single) {
+  Chart.Interaction.modes.single = function (chart, e, options, useFinalPosition) {
+    const items = Chart.Interaction.modes.nearest(chart, e, options, useFinalPosition);
+    return items.length ? [items[0]] : items;
+  };
+}
+
 function chartOpts() {
   const cs = getComputedStyle(document.body);
   const tick = cs.getPropertyValue('--chart-tick').trim() || '#5b6884';
@@ -253,7 +263,8 @@ function chartOpts() {
     responsive: true,
     maintainAspectRatio: false,
     animation: false,
-    interaction: { mode: 'index', intersect: false },
+    // 'single' → hovering shows only the one line under the cursor, not every currency at that x.
+    interaction: { mode: 'single', intersect: false },
     plugins: {
       legend: { labels: { color: legend, boxWidth: 10, boxHeight: 10, font: { size: 11 } } },
       tooltip: {
