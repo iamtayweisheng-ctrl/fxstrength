@@ -1,7 +1,7 @@
 {
   "_metals_note": "Principled weights (established gold/silver macro), not yet data-calibrated. Real yields dominant, USD second, risk-off (haven) third. Silver more risk-sensitive; its risk relationship is least certain \u2014 recalibrate when price data available.",
-  "as_of_metals": "2026-09-14",
-  "generated": "2026-09-16T00:06:02Z",
+  "as_of_metals": "2026-09-15",
+  "generated": "2026-09-16T23:36:06Z",
   "metals_periods": {
     "daily": {
       "XAU": {
