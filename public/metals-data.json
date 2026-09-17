@@ -1,11 +1,11 @@
 {
   "_metals_note": "Principled weights (established gold/silver macro), not yet data-calibrated. Real yields dominant, USD second, risk-off (haven) third. Silver more risk-sensitive; its risk relationship is least certain \u2014 recalibrate when price data available.",
   "as_of_metals": "2026-09-15",
-  "generated": "2026-09-16T23:36:06Z",
+  "generated": "2026-09-17T00:17:03Z",
   "metals_periods": {
     "daily": {
       "XAU": {
-        "tilt": -0.5,
+        "tilt": -0.3,
         "drivers": [
           {
             "key": "realyield",
@@ -26,15 +26,15 @@
           {
             "key": "risk",
             "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk sentiment roughly flat",
+            "colour": "green",
+            "reason": "Risk-off \u2014 supports XAU (haven)",
             "weight": 0.2,
             "beta": 0.2
           }
         ]
       },
       "XAG": {
-        "tilt": -0.45,
+        "tilt": -0.1,
         "drivers": [
           {
             "key": "realyield",
@@ -47,8 +47,8 @@
           {
             "key": "risk",
             "label": "Risk sentiment",
-            "colour": "amber",
-            "reason": "Risk sentiment roughly flat",
+            "colour": "green",
+            "reason": "Risk-off \u2014 supports XAG (haven)",
             "weight": 0.35,
             "beta": 0.35
           },
@@ -65,7 +65,7 @@
     },
     "weekly": {
       "XAU": {
-        "tilt": -0.7,
+        "tilt": -0.4,
         "drivers": [
           {
             "key": "realyield",
@@ -78,8 +78,8 @@
           {
             "key": "usd",
             "label": "US dollar",
-            "colour": "amber",
-            "reason": "Dollar roughly flat",
+            "colour": "green",
+            "reason": "Dollar softening \u2014 supports XAU",
             "weight": 0.3,
             "beta": 0.3
           },
@@ -94,7 +94,7 @@
         ]
       },
       "XAG": {
-        "tilt": -0.8,
+        "tilt": -0.52,
         "drivers": [
           {
             "key": "realyield",
@@ -115,8 +115,8 @@
           {
             "key": "usd",
             "label": "US dollar",
-            "colour": "amber",
-            "reason": "Dollar roughly flat",
+            "colour": "green",
+            "reason": "Dollar softening \u2014 supports XAG",
             "weight": 0.25,
             "beta": 0.28
           }
