@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-18T00:11:42Z",
+  "generated": "2026-09-18T23:12:43Z",
   "source": "ForexFactory weekly calendar (High-impact)",
   "note": "This week's high-impact events, mapped to the meter's drivers. Context, not signals.",
   "order": [
@@ -180,7 +180,7 @@
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Thu",
-        "date": "2026-09-18T02:30:00+00:00",
+        "date": "2026-09-18T02:54:00+00:00",
         "when": "upcoming",
         "forecast": "<1.25%",
         "previous": "<1.00%",
@@ -192,7 +192,7 @@
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Thu",
-        "date": "2026-09-18T02:30:00+00:00",
+        "date": "2026-09-18T02:54:00+00:00",
         "when": "upcoming",
         "forecast": "",
         "previous": "",
@@ -204,7 +204,7 @@
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Fri",
-        "date": "2026-09-18T05:30:00+00:00",
+        "date": "2026-09-18T06:30:00+00:00",
         "when": "upcoming",
         "forecast": "",
         "previous": "",
