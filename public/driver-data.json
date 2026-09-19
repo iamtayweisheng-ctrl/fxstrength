@@ -2,7 +2,7 @@
   "as_of_risk": "2026-09-17",
   "as_of_rates_us": "2026-09-17",
   "as_of_slow": "2026-07",
-  "generated": "2026-09-18T23:52:37Z",
+  "generated": "2026-09-19T22:41:21Z",
   "windows": {
     "daily": "~30 days (matches strength meter)",
     "weekly": "~26 weeks"
@@ -148,7 +148,7 @@
         ]
       },
       "CAD": {
-        "tilt": -0.387,
+        "tilt": -0.165,
         "drivers": [
           {
             "key": "yield",
@@ -177,8 +177,8 @@
           {
             "key": "oil",
             "label": "Oil (WTI)",
-            "colour": "amber",
-            "reason": "Oil roughly flat",
+            "colour": "green",
+            "reason": "Oil rising \u2014 supports CAD",
             "weight": 0.17,
             "beta": 0.222
           }
@@ -358,7 +358,7 @@
         ]
       },
       "CAD": {
-        "tilt": -0.475,
+        "tilt": -0.031,
         "drivers": [
           {
             "key": "yield",
@@ -387,8 +387,8 @@
           {
             "key": "oil",
             "label": "Oil (WTI)",
-            "colour": "red",
-            "reason": "Oil falling \u2014 weighs on CAD",
+            "colour": "green",
+            "reason": "Oil rising \u2014 supports CAD",
             "weight": 0.17,
             "beta": 0.222
           }
