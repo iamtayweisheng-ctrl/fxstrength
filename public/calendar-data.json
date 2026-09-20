@@ -1,210 +1,96 @@
 {
-  "generated": "2026-09-20T00:07:13Z",
+  "generated": "2026-09-20T23:10:13Z",
   "source": "ForexFactory weekly calendar (High-impact)",
   "note": "This week's high-impact events, mapped to the meter's drivers. Context, not signals.",
   "order": [
-    "GBP",
-    "USD",
-    "CAD",
-    "JPY",
-    "NZD"
+    "AUD",
+    "CHF",
+    "GBP"
   ],
   "currencies": {
-    "CAD": [
+    "AUD": [
       {
-        "title": "CPI m/m",
+        "title": "RBA Gov Bullock Speaks",
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Mon",
-        "date": "2026-09-14T12:30:00+00:00",
+        "date": "2026-09-22T03:10:00+00:00",
         "when": "upcoming",
-        "forecast": "-0.1%",
-        "previous": "0.5%",
+        "forecast": "",
+        "previous": "",
         "actual": "",
         "surprise": null
       },
       {
-        "title": "Median CPI y/y",
+        "title": "Employment Change",
         "driver": "yield",
         "driver_label": "Yield advantage",
-        "day": "Mon",
-        "date": "2026-09-14T12:30:00+00:00",
+        "day": "Wed",
+        "date": "2026-09-24T01:30:00+00:00",
         "when": "upcoming",
-        "forecast": "2.0%",
-        "previous": "2.0%",
+        "forecast": "20.9K",
+        "previous": "-15.8K",
         "actual": "",
         "surprise": null
       },
       {
-        "title": "Trimmed CPI y/y",
+        "title": "Unemployment Rate",
         "driver": "yield",
         "driver_label": "Yield advantage",
-        "day": "Mon",
-        "date": "2026-09-14T12:30:00+00:00",
+        "day": "Wed",
+        "date": "2026-09-24T01:30:00+00:00",
         "when": "upcoming",
-        "forecast": "1.9%",
-        "previous": "1.9%",
+        "forecast": "4.5%",
+        "previous": "4.5%",
+        "actual": "",
+        "surprise": null
+      }
+    ],
+    "CHF": [
+      {
+        "title": "SNB Monetary Policy Assessment",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Thu",
+        "date": "2026-09-24T07:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "",
+        "previous": "",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "SNB Policy Rate",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Thu",
+        "date": "2026-09-24T07:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "0.00%",
+        "previous": "0.00%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "SNB Press Conference",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Thu",
+        "date": "2026-09-24T08:00:00+00:00",
+        "when": "upcoming",
+        "forecast": "",
+        "previous": "",
         "actual": "",
         "surprise": null
       }
     ],
     "GBP": [
       {
-        "title": "Claimant Count Change",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Tue",
-        "date": "2026-09-15T06:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "8.3K",
-        "previous": "-11.0K",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "CPI y/y",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Wed",
-        "date": "2026-09-16T06:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "3.1%",
-        "previous": "2.9%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "Monetary Policy Summary",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-09-17T11:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "MPC Official Bank Rate Votes",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-09-17T11:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "3-0-6",
-        "previous": "3-0-6",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "Official Bank Rate",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-09-17T11:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "3.75%",
-        "previous": "3.75%",
-        "actual": "",
-        "surprise": null
-      }
-    ],
-    "USD": [
-      {
-        "title": "Federal Funds Rate",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Wed",
-        "date": "2026-09-16T18:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "4.00%",
-        "previous": "3.75%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "FOMC Economic Projections",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Wed",
-        "date": "2026-09-16T18:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "FOMC Statement",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Wed",
-        "date": "2026-09-16T18:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "FOMC Press Conference",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Wed",
-        "date": "2026-09-16T18:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      }
-    ],
-    "NZD": [
-      {
-        "title": "GDP q/q",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Wed",
-        "date": "2026-09-16T22:45:00+00:00",
-        "when": "upcoming",
-        "forecast": "0.1%",
-        "previous": "0.8%",
-        "actual": "",
-        "surprise": null
-      }
-    ],
-    "JPY": [
-      {
-        "title": "BOJ Policy Rate",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-09-18T02:54:00+00:00",
-        "when": "upcoming",
-        "forecast": "<1.25%",
-        "previous": "<1.00%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "Monetary Policy Statement",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-09-18T02:54:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "BOJ Press Conference",
+        "title": "BOE Gov Bailey Speaks",
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Fri",
-        "date": "2026-09-18T06:30:00+00:00",
+        "date": "2026-09-25T09:15:00+00:00",
         "when": "upcoming",
         "forecast": "",
         "previous": "",
