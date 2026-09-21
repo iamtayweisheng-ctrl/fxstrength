@@ -451,6 +451,20 @@ CTA_SCRIPT = """  <script>
   })();
   </script>"""
 
+# Persistent waitlist CTA at the end of every post — separate Brevo list + its own Plausible
+# goal (WaitlistCTA_post), wired by /waitlist-cta.js. Distinct from the newsletter :::cta:::.
+WL_CTA_BAND = """    <section class="wl-cta-band" aria-label="Live Driver Meter waitlist">
+      <p class="wl-cta-title">Get the live Driver Meter first</p>
+      <p class="wl-cta-sub">A live version is coming — free early access when it launches, and there's no payment system yet. One email when it's ready.</p>
+      <form class="wl-cta" data-goal="WaitlistCTA_post" novalidate>
+        <input type="email" placeholder="you@email.com" autocomplete="email" aria-label="Email for the Driver Meter waitlist" required />
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <p class="wl-cta-note">Free early access. No payment system yet.</p>
+    </section>"""
+
+WL_CTA_SCRIPT = '  <script src="/waitlist-cta.js?v=1" defer></script>'
+
 LIGHTBOX_SCRIPT = """  <script>
   (function(){
     var imgs=document.querySelectorAll('.lesson-figure img');
@@ -633,6 +647,7 @@ def render_lesson(meta, body, others):
 {article_body}
       </div>
     </article>
+{WL_CTA_BAND}
 {related_html(meta, others)}
   </main>
   <footer class="foot">
@@ -643,6 +658,7 @@ def render_lesson(meta, body, others):
   </footer>
 {TOTOP}
 {CTA_SCRIPT}
+{WL_CTA_SCRIPT}
 {LIGHTBOX_SCRIPT}
 {PICKER_SCRIPT}
 {TOTOP_SCRIPT}
