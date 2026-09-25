@@ -1,8 +1,8 @@
 {
   "as_of_risk": "2026-09-22",
-  "as_of_rates_us": "2026-09-23",
+  "as_of_rates_us": "2026-09-24",
   "as_of_slow": "2026-07",
-  "generated": "2026-09-25T00:16:27Z",
+  "generated": "2026-09-25T23:50:29Z",
   "windows": {
     "daily": "~30 days (matches strength meter)",
     "weekly": "~26 weeks"
@@ -17,7 +17,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-44bp) \u2014 weighs on EUR",
+            "reason": "Yield edge narrowing (-51bp) \u2014 weighs on EUR",
             "weight": 0.515,
             "beta": 0.398
           },
@@ -75,7 +75,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-44bp) \u2014 weighs on AUD",
+            "reason": "Yield edge narrowing (-51bp) \u2014 weighs on AUD",
             "weight": 0.275,
             "beta": 0.256
           },
@@ -104,7 +104,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-44bp) \u2014 weighs on NZD",
+            "reason": "Yield edge narrowing (-51bp) \u2014 weighs on NZD",
             "weight": 0.256,
             "beta": 0.212
           },
@@ -125,7 +125,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "green",
-            "reason": "Yield edge widening (+44bp) \u2014 supports USD",
+            "reason": "Yield edge widening (+51bp) \u2014 supports USD",
             "weight": 0.406,
             "beta": 0.369
           },
@@ -148,13 +148,13 @@
         ]
       },
       "CAD": {
-        "tilt": -0.165,
+        "tilt": -0.387,
         "drivers": [
           {
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-44bp) \u2014 weighs on CAD",
+            "reason": "Yield edge narrowing (-51bp) \u2014 weighs on CAD",
             "weight": 0.346,
             "beta": 0.387
           },
@@ -177,8 +177,8 @@
           {
             "key": "oil",
             "label": "Oil (WTI)",
-            "colour": "green",
-            "reason": "Oil rising \u2014 supports CAD",
+            "colour": "amber",
+            "reason": "Oil roughly flat",
             "weight": 0.17,
             "beta": 0.222
           }
@@ -191,7 +191,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-44bp) \u2014 weighs on CHF",
+            "reason": "Yield edge narrowing (-51bp) \u2014 weighs on CHF",
             "weight": 0.674,
             "beta": 0.317
           },
@@ -212,7 +212,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-44bp) \u2014 weighs on JPY",
+            "reason": "Yield edge narrowing (-51bp) \u2014 weighs on JPY",
             "weight": 1.0,
             "beta": 0.463
           }
@@ -227,7 +227,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-41bp) \u2014 weighs on EUR",
+            "reason": "Yield edge narrowing (-48bp) \u2014 weighs on EUR",
             "weight": 0.515,
             "beta": 0.398
           },
@@ -285,7 +285,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-50bp) \u2014 weighs on AUD",
+            "reason": "Yield edge narrowing (-57bp) \u2014 weighs on AUD",
             "weight": 0.275,
             "beta": 0.256
           },
@@ -314,7 +314,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-57bp) \u2014 weighs on NZD",
+            "reason": "Yield edge narrowing (-64bp) \u2014 weighs on NZD",
             "weight": 0.256,
             "beta": 0.212
           },
@@ -335,7 +335,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "green",
-            "reason": "Yield edge widening (+40bp) \u2014 supports USD",
+            "reason": "Yield edge widening (+47bp) \u2014 supports USD",
             "weight": 0.406,
             "beta": 0.369
           },
@@ -364,7 +364,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-53bp) \u2014 weighs on CAD",
+            "reason": "Yield edge narrowing (-60bp) \u2014 weighs on CAD",
             "weight": 0.346,
             "beta": 0.387
           },
@@ -401,7 +401,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-46bp) \u2014 weighs on CHF",
+            "reason": "Yield edge narrowing (-53bp) \u2014 weighs on CHF",
             "weight": 0.674,
             "beta": 0.317
           },
@@ -422,7 +422,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "red",
-            "reason": "Yield edge narrowing (-12bp) \u2014 weighs on JPY",
+            "reason": "Yield edge narrowing (-19bp) \u2014 weighs on JPY",
             "weight": 1.0,
             "beta": 0.463
           }
