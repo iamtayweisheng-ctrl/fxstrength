@@ -110,10 +110,6 @@ The next step is not to assume what the 10-Year *must* do — it's to watch what
 - **Scenario 3 — Yields fall despite strong data.** Suggests investors are becoming more comfortable with the long-term inflation outlook, or more concerned about future growth.
 - **Scenario 4 — Yields rise but the Dollar does not.** Particularly important: it could suggest the move is increasingly driven by fiscal or term-premium concerns rather than stronger expectations for US returns.
 
-## What Price Is Saying
-
-The 10-Year moving above 5% tells us the bond market is demanding a higher return to hold long-duration US debt — but the yield itself does not tell us exactly why. That is the key distinction. The evidence this week points to a combination of **stronger US growth + persistent inflation risk + higher policy expectations + greater long-duration risk.** The next question is whether those forces persist.
-
 ## The Lesson
 
 :::quote
