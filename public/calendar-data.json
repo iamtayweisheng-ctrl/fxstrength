@@ -1,20 +1,31 @@
 {
-  "generated": "2026-09-27T00:31:31Z",
+  "generated": "2026-09-27T23:46:08Z",
   "source": "ForexFactory weekly calendar (High-impact)",
   "note": "This week's high-impact events, mapped to the meter's drivers. Context, not signals.",
   "order": [
     "AUD",
-    "CHF",
-    "GBP"
+    "USD"
   ],
   "currencies": {
     "AUD": [
       {
-        "title": "RBA Gov Bullock Speaks",
+        "title": "Cash Rate",
         "driver": "yield",
         "driver_label": "Yield advantage",
-        "day": "Mon",
-        "date": "2026-09-22T03:10:00+00:00",
+        "day": "Tue",
+        "date": "2026-09-29T04:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "4.60%",
+        "previous": "4.35%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "RBA Rate Statement",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Tue",
+        "date": "2026-09-29T04:30:00+00:00",
         "when": "upcoming",
         "forecast": "",
         "previous": "",
@@ -22,14 +33,88 @@
         "surprise": null
       },
       {
-        "title": "Employment Change",
+        "title": "CPI m/m",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Tue",
+        "date": "2026-09-30T01:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "0.5%",
+        "previous": "1.0%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "CPI y/y",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Tue",
+        "date": "2026-09-30T01:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "4.1%",
+        "previous": "3.5%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "Trimmed Mean CPI m/m",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Tue",
+        "date": "2026-09-30T01:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "0.3%",
+        "previous": "0.5%",
+        "actual": "",
+        "surprise": null
+      }
+    ],
+    "USD": [
+      {
+        "title": "Core PCE Price Index m/m",
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Wed",
-        "date": "2026-09-24T01:30:00+00:00",
+        "date": "2026-09-30T12:30:00+00:00",
         "when": "upcoming",
-        "forecast": "21.5K",
-        "previous": "-15.8K",
+        "forecast": "0.3%",
+        "previous": "0.2%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "Final GDP q/q",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Wed",
+        "date": "2026-09-30T12:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "1.5%",
+        "previous": "1.5%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "Average Hourly Earnings m/m",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Fri",
+        "date": "2026-10-02T12:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "0.3%",
+        "previous": "0.3%",
+        "actual": "",
+        "surprise": null
+      },
+      {
+        "title": "Non-Farm Employment Change",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Fri",
+        "date": "2026-10-02T12:30:00+00:00",
+        "when": "upcoming",
+        "forecast": "98K",
+        "previous": "162K",
         "actual": "",
         "surprise": null
       },
@@ -37,63 +122,11 @@
         "title": "Unemployment Rate",
         "driver": "yield",
         "driver_label": "Yield advantage",
-        "day": "Wed",
-        "date": "2026-09-24T01:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "4.5%",
-        "previous": "4.5%",
-        "actual": "",
-        "surprise": null
-      }
-    ],
-    "CHF": [
-      {
-        "title": "SNB Monetary Policy Assessment",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-09-24T07:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "SNB Policy Rate",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-09-24T07:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "0.00%",
-        "previous": "0.00%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "SNB Press Conference",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-09-24T08:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      }
-    ],
-    "GBP": [
-      {
-        "title": "BOE Gov Bailey Speaks",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
         "day": "Fri",
-        "date": "2026-09-25T09:15:00+00:00",
+        "date": "2026-10-02T12:30:00+00:00",
         "when": "upcoming",
-        "forecast": "",
-        "previous": "",
+        "forecast": "4.1%",
+        "previous": "4.1%",
         "actual": "",
         "surprise": null
       }
