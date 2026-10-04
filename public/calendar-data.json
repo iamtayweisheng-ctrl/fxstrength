@@ -1,120 +1,51 @@
 {
-  "generated": "2026-10-04T00:33:21Z",
+  "generated": "2026-10-04T23:55:15Z",
   "source": "ForexFactory weekly calendar (High-impact)",
   "note": "This week's high-impact events, mapped to the meter's drivers. Context, not signals.",
   "order": [
-    "AUD",
+    "CAD",
+    "JPY",
     "USD"
   ],
   "currencies": {
-    "AUD": [
+    "JPY": [
       {
-        "title": "Cash Rate",
+        "title": "BOJ Gov Ueda Speaks",
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Tue",
-        "date": "2026-09-29T04:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "4.60%",
-        "previous": "4.35%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "RBA Rate Statement",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Tue",
-        "date": "2026-09-29T04:30:00+00:00",
+        "date": "2026-10-06T06:35:00+00:00",
         "when": "upcoming",
         "forecast": "",
         "previous": "",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "CPI m/m",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Tue",
-        "date": "2026-09-30T01:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "0.5%",
-        "previous": "1.0%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "CPI y/y",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Tue",
-        "date": "2026-09-30T01:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "4.1%",
-        "previous": "3.5%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "Trimmed Mean CPI m/m",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Tue",
-        "date": "2026-09-30T01:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "0.3%",
-        "previous": "0.5%",
         "actual": "",
         "surprise": null
       }
     ],
     "USD": [
       {
-        "title": "Core PCE Price Index m/m",
+        "title": "FOMC Meeting Minutes",
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Wed",
-        "date": "2026-09-30T12:30:00+00:00",
+        "date": "2026-10-07T18:00:00+00:00",
         "when": "upcoming",
-        "forecast": "0.3%",
-        "previous": "0.2%",
+        "forecast": "",
+        "previous": "",
         "actual": "",
         "surprise": null
-      },
+      }
+    ],
+    "CAD": [
       {
-        "title": "Final GDP q/q",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Wed",
-        "date": "2026-09-30T12:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "1.5%",
-        "previous": "1.5%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "Average Hourly Earnings m/m",
+        "title": "Employment Change",
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Fri",
-        "date": "2026-10-02T12:30:00+00:00",
+        "date": "2026-10-09T12:30:00+00:00",
         "when": "upcoming",
-        "forecast": "0.3%",
-        "previous": "0.3%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "Non-Farm Employment Change",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Fri",
-        "date": "2026-10-02T12:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "89K",
-        "previous": "162K",
+        "forecast": "9.0K",
+        "previous": "-41.7K",
         "actual": "",
         "surprise": null
       },
@@ -123,10 +54,10 @@
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Fri",
-        "date": "2026-10-02T12:30:00+00:00",
+        "date": "2026-10-09T12:30:00+00:00",
         "when": "upcoming",
-        "forecast": "4.1%",
-        "previous": "4.1%",
+        "forecast": "6.5%",
+        "previous": "6.4%",
         "actual": "",
         "surprise": null
       }
