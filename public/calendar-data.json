@@ -1,9 +1,10 @@
 {
-  "generated": "2026-10-05T00:51:31Z",
+  "generated": "2026-10-06T01:43:27Z",
   "source": "ForexFactory weekly calendar (High-impact)",
   "note": "This week's high-impact events, mapped to the meter's drivers. Context, not signals.",
   "order": [
     "CAD",
+    "GBP",
     "JPY",
     "USD"
   ],
@@ -36,6 +37,20 @@
         "surprise": null
       }
     ],
+    "GBP": [
+      {
+        "title": "BOE Gov Bailey Speaks",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Thu",
+        "date": "2026-10-08T12:15:00+00:00",
+        "when": "upcoming",
+        "forecast": "",
+        "previous": "",
+        "actual": "",
+        "surprise": null
+      }
+    ],
     "CAD": [
       {
         "title": "Employment Change",
@@ -44,7 +59,7 @@
         "day": "Fri",
         "date": "2026-10-09T12:30:00+00:00",
         "when": "upcoming",
-        "forecast": "9.0K",
+        "forecast": "6.2K",
         "previous": "-41.7K",
         "actual": "",
         "surprise": null
