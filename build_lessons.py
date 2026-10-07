@@ -735,6 +735,37 @@ def render_index(sec, articles):
 """
 
 
+# Static, crawlable pages that aren't lessons (keep in sync if we add more).
+# meter.html is deliberately excluded — it's private/v0 and disallowed in robots.txt.
+STATIC_URLS = [
+    ("/", "1.0", "daily"),
+    ("/prop-firm-discount-codes", "0.6", "monthly"),
+]
+
+
+def write_sitemap(arts):
+    """Regenerate public/sitemap.xml from every published page so it never goes stale:
+    the homepage + static pages, each section index, and every article."""
+    today = date.today().isoformat()
+    rows = []
+    for loc, prio, freq in STATIC_URLS:
+        rows.append((f"{SITE}{loc}", today, freq, prio))
+    for sec in SECTIONS:
+        if any(sec_of(m) == sec for m in arts):
+            rows.append((f"{SITE}/{sec}/", today, "weekly", "0.7"))
+    for m in arts:
+        rows.append((f"{SITE}/{sec_of(m)}/{m['slug']}", m.get("date", today), "monthly", "0.8"))
+    body = "\n".join(
+        f"  <url>\n    <loc>{html.escape(loc)}</loc>\n    <lastmod>{lm}</lastmod>"
+        f"\n    <changefreq>{freq}</changefreq>\n    <priority>{prio}</priority>\n  </url>"
+        for loc, lm, freq, prio in rows)
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           f"{body}\n</urlset>\n")
+    (ROOT / "public" / "sitemap.xml").write_text(xml, encoding="utf-8")
+    print(f"  wrote public/sitemap.xml ({len(rows)} URLs)")
+
+
 def main():
     files = sorted(p for p in LESSONS_DIR.glob("*.md") if p.stem.lower() != "readme")
     arts = []
@@ -770,6 +801,7 @@ def main():
         (outdir / "index.html").write_text(render_index(sec, sec_arts), encoding="utf-8")
         print(f"  wrote {(outdir / 'index.html').relative_to(ROOT)}")
 
+    write_sitemap(arts)
     print(f"Done — {len(arts)} article(s) across {len(SECTIONS)} sections.")
 
 
