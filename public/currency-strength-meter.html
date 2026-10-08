@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What Is a Currency Strength Meter? (And How to Read One)</title>
+  <meta name="description" content="A currency strength meter ranks each currency by its move against the others, so you see strength and weakness directly. Learn how to read and use one." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0b0f17" />
+  <link rel="canonical" href="https://fxstrength.org/currency-strength-meter" />
+  <meta property="og:site_name" content="FXStrength" />
+  <meta property="og:title" content="What Is a Currency Strength Meter? (And How to Read One)" />
+  <meta property="og:description" content="A plain guide to currency strength meters: what they measure, how they're calculated, how to read the scores, and how traders use strong-vs-weak to pick pairs." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://fxstrength.org/currency-strength-meter" />
+  <meta property="og:image" content="https://fxstrength.org/og.svg" />
+  <link rel="stylesheet" href="styles.css?v=8" />
+  <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
+  <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
+  <style>
+    .page{max-width:760px;margin:0 auto;padding:0 18px 48px}
+    .page h1{font-size:28px;line-height:1.2;margin:20px 0 10px}
+    .page h2{font-size:21px;margin:30px 0 6px}
+    .page h3{font-size:16px;margin:18px 0 4px}
+    .page p,.page li{font-size:15px;line-height:1.7;color:var(--ink)}
+    .lead-summary{font-size:16px;line-height:1.6;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+      border-left:3px solid var(--accent);border-radius:10px;padding:14px 16px;margin:0 0 20px}
+    .page .muted{color:var(--muted)}
+    .page ul{padding-left:20px}
+    .page li{margin:4px 0}
+    .page strong{color:var(--ink)}
+    .example{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+    .example table{border-collapse:collapse;width:100%;max-width:360px;font-size:14px}
+    .example td,.example th{text-align:left;padding:4px 10px;border-bottom:1px solid var(--line)}
+    .example th{color:var(--muted);font-weight:600}
+    .meter-cta{display:block;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);
+      border-radius:12px;padding:18px 20px;margin:26px 0;text-decoration:none;color:var(--ink)}
+    .meter-cta b{color:var(--ink)} .meter-cta .go{color:var(--accent);font-weight:700}
+    .faqwrap{margin-top:8px}
+    .page .foot-ref{font-size:13px;color:var(--muted);margin-top:28px}
+    .page .foot-ref a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">▚▚</span> <a href="/" style="color:inherit;text-decoration:none">FXStrength</a></div>
+    <div class="topbar-right">
+      <a class="nav-link" href="/behind-the-move/">Behind the Move</a>
+      <a class="nav-link" href="/the-bigger-picture/">The Bigger Picture</a>
+      <a class="nav-link" href="/fx-drivers/">FX Drivers</a>
+      <a class="nav-link" href="/meter.html">Strength meter</a>
+      <button class="refresh" id="theme-toggle" title="Light / dark" aria-label="Toggle light or dark theme">☾</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <h1>What is a currency strength meter? (And how to read one)</h1>
+
+    <p class="lead-summary"><strong>A currency strength meter ranks each currency by its average percentage move against a basket of the others</strong>, so instead of staring at one pair you can see whether a move is strength in one currency, weakness in the other, or both — and pick the pair that puts the strongest against the weakest.</p>
+
+    <h2>What it actually measures</h2>
+    <p>Every currency only trades <em>in a pair</em>, so a single chart mixes two stories. When EUR/USD rises, is the euro strong, the dollar weak, or both? You can't tell from that one pair alone.</p>
+    <p>A strength meter untangles this. For each currency, it averages how that currency has moved against <em>each of the other majors</em> over a chosen window, then ranks them from strongest to weakest. The euro's score blends EUR/USD, EUR/GBP, EUR/JPY and the rest — so it reflects the euro's own behaviour, not just its story against one counterpart.</p>
+
+    <h2>How it's calculated</h2>
+    <p>The common method is simple in principle:</p>
+    <ul>
+      <li>Take the 8 major currencies (USD, EUR, GBP, JPY, CHF, CAD, AUD, NZD) and all 28 pairs between them.</li>
+      <li>Measure each currency's percentage change against every other, over a chosen lookback (say 30 days).</li>
+      <li>Average those signed moves into one score per currency.</li>
+    </ul>
+    <p>Different tools present that score on different scales — 0 to 10, −100 to +100, or a raw % — but the idea is identical: a league table of currencies, strongest at the top.</p>
+
+    <h2>How to read the scores</h2>
+    <p>Read a meter the way you'd read a league table — the <strong>ranking and the gaps</strong> matter more than any single number.</p>
+    <div class="example">
+      <table>
+        <tr><th>Currency</th><th>Strength</th></tr>
+        <tr><td>GBP</td><td>8.2</td></tr>
+        <tr><td>USD</td><td>6.8</td></tr>
+        <tr><td>EUR</td><td>5.5</td></tr>
+        <tr><td>JPY</td><td>3.1</td></tr>
+        <tr><td>CHF</td><td>2.4</td></tr>
+      </table>
+      <p class="muted" style="margin:10px 0 0">A higher score means the currency has been relatively strong over the window; a lower score, relatively weak. The useful signal is the <strong>distance between them</strong>: GBP 8.2 vs JPY 3.1 is a wide gap, so GBP/JPY is where the imbalance is clearest.</p>
+    </div>
+
+    <h2>How traders use it: strongest vs weakest</h2>
+    <p>The classic workflow is to pair the extremes:</p>
+    <ul>
+      <li><strong>Buy the strongest, sell the weakest.</strong> Strongest GBP + weakest JPY → look at <strong>GBP/JPY</strong> for a potential long.</li>
+      <li><strong>Avoid the middle.</strong> Two currencies with similar, mid-table scores have little imbalance between them — less to trade.</li>
+    </ul>
+    <p>But a meter tells you <em>where the imbalance is</em>, not <em>when to enter</em>. It's context, not a trade signal. You still confirm with the chart — trend, levels, volatility — and manage risk.</p>
+
+    <h2>Why the timeframe matters</h2>
+    <p>A currency can be strong intraday, weak over the month and flat over the year — all at once. So always check which window the meter is using, and match it to your horizon. The most reliable reads are where <strong>several timeframes agree</strong>: a currency that's strong on the intraday, daily <em>and</em> weekly views is aligned, not just reacting to one session.</p>
+
+    <h2>The most common mistake</h2>
+    <p>A strength meter is <strong>descriptive, not predictive</strong>. It measures what currencies have <em>already</em> done. Buying a currency simply because it tops the meter can mean buying after the move — the strength you're seeing may be the end of the run, not the start. Use it to find candidates, then let price and context decide.</p>
+
+    <a class="meter-cta" href="/" data-cta="csm-guide">
+      <b>See it live.</b> FXStrength is a free currency strength meter for the 8 majors <b>plus gold, silver and Bitcoin</b>,
+      across intraday, daily and weekly timeframes on one grid — so you can spot where several timeframes line up.
+      <span class="go">Open the live meter →</span>
+    </a>
+
+    <h2>How FXStrength does it</h2>
+    <p>FXStrength scores the 8 majors the standard way — each currency's average move against the other seven across all 28 pairs — on <strong>intraday, daily and weekly</strong> windows at once, so you can see where the reads line up. It also adds <strong>gold (XAU), silver (XAG) and Bitcoin (BTC)</strong>, scored against their own normal volatility (so a strong gold day reads as strong <em>for gold</em>, not on the same raw scale as the currencies). And a companion <a href="/meter.html">driver meter</a> shows <em>why</em> a currency sits where it does — rate expectations, risk sentiment, commodities — because a score is more useful when you know what's behind it. None of it is a signal to buy or sell; it organises the evidence so you can judge a pair for yourself.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faqwrap">
+      <div class="faq">
+        <div class="faq-item">
+          <h3>What is a currency strength meter?</h3>
+          <p>A tool that ranks currencies by how strong or weak each one is relative to a basket of the others over a chosen period. Instead of reading a single pair like EUR/USD — which mixes two currencies' stories — it isolates each currency so you can see whether a move is strength, weakness, or both.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How is currency strength calculated?</h3>
+          <p>For each currency, you average its percentage move against each of the other majors across all the pairs between them, over a chosen lookback. That average becomes a single strength score, and the currencies are ranked from strongest to weakest. Tools differ only in the display scale (0–10, −100 to +100, or raw %).</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do I read a currency strength meter?</h3>
+          <p>Read it like a league table: the ranking and the gaps matter more than any single number. A high score means relative strength, a low score relative weakness, and the clearest opportunities are the widest gaps — the strongest currency against the weakest. Always check which timeframe it's showing and match it to your trading horizon.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do traders use a currency strength meter?</h3>
+          <p>The common approach is to buy the strongest currency and sell the weakest, then trade the pair that combines them — and to avoid pairs where both currencies score near the middle, since there's little imbalance. The meter identifies where the imbalance is; you still confirm the entry with price action and manage risk.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What timeframe should a currency strength meter use?</h3>
+          <p>Match it to how you trade: intraday windows show short-term momentum, daily and weekly windows show the broader trend. A currency can be strong on one timeframe and weak on another, so the most reliable reads are where several timeframes agree.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can you trade directly off a currency strength meter?</h3>
+          <p>Not on its own. A strength meter is descriptive, not predictive — it measures what currencies have already done, so it's best used as context to find candidate pairs, not as an entry signal. Confirm with the chart (trend, levels, volatility) before acting, and remember it won't catch regime shifts on its own.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="foot-ref">Related: <a href="/">the live strength meter</a> · <a href="/fx-drivers/">what drives each G10 currency</a> · <a href="/behind-the-move/">Behind the Move</a>.</p>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-links">Read: <a href="/behind-the-move/">Behind the Move</a> · <a href="/the-bigger-picture/">The Bigger Picture</a> · <a href="/fx-drivers/">FX Drivers</a></p>
+    <p class="disclaimer">
+      FXStrength provides market information for educational purposes only and is <strong>not financial advice</strong>.
+      Trading foreign exchange and CFDs carries a high risk of loss.
+    </p>
+    <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
+  </footer>
+
+  <!-- Article + publisher entity so assistants know who this source is. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What is a currency strength meter? (And how to read one)",
+    "description": "A plain guide to currency strength meters: what they measure, how they're calculated, how to read the scores, and how traders use strong-vs-weak to pick pairs.",
+    "datePublished": "2026-10-08",
+    "dateModified": "2026-10-08",
+    "author": { "@type": "Organization", "name": "FXStrength", "url": "https://fxstrength.org/" },
+    "publisher": { "@type": "Organization", "name": "FXStrength", "url": "https://fxstrength.org/", "logo": { "@type": "ImageObject", "url": "https://fxstrength.org/logo.png" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://fxstrength.org/currency-strength-meter" },
+    "isPartOf": { "@type": "WebSite", "@id": "https://fxstrength.org/#website", "name": "FXStrength", "url": "https://fxstrength.org/" },
+    "isAccessibleForFree": true
+  }
+  </script>
+
+  <!-- FAQPage — matches the visible Q&As verbatim. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is a currency strength meter?", "acceptedAnswer": { "@type": "Answer", "text": "A tool that ranks currencies by how strong or weak each one is relative to a basket of the others over a chosen period. Instead of reading a single pair like EUR/USD — which mixes two currencies' stories — it isolates each currency so you can see whether a move is strength, weakness, or both." } },
+      { "@type": "Question", "name": "How is currency strength calculated?", "acceptedAnswer": { "@type": "Answer", "text": "For each currency, you average its percentage move against each of the other majors across all the pairs between them, over a chosen lookback. That average becomes a single strength score, and the currencies are ranked from strongest to weakest. Tools differ only in the display scale (0–10, −100 to +100, or raw %)." } },
+      { "@type": "Question", "name": "How do I read a currency strength meter?", "acceptedAnswer": { "@type": "Answer", "text": "Read it like a league table: the ranking and the gaps matter more than any single number. A high score means relative strength, a low score relative weakness, and the clearest opportunities are the widest gaps — the strongest currency against the weakest. Always check which timeframe it's showing and match it to your trading horizon." } },
+      { "@type": "Question", "name": "How do traders use a currency strength meter?", "acceptedAnswer": { "@type": "Answer", "text": "The common approach is to buy the strongest currency and sell the weakest, then trade the pair that combines them — and to avoid pairs where both currencies score near the middle, since there's little imbalance. The meter identifies where the imbalance is; you still confirm the entry with price action and manage risk." } },
+      { "@type": "Question", "name": "What timeframe should a currency strength meter use?", "acceptedAnswer": { "@type": "Answer", "text": "Match it to how you trade: intraday windows show short-term momentum, daily and weekly windows show the broader trend. A currency can be strong on one timeframe and weak on another, so the most reliable reads are where several timeframes agree." } },
+      { "@type": "Question", "name": "Can you trade directly off a currency strength meter?", "acceptedAnswer": { "@type": "Answer", "text": "Not on its own. A strength meter is descriptive, not predictive — it measures what currencies have already done, so it's best used as context to find candidate pairs, not as an entry signal. Confirm with the chart (trend, levels, volatility) before acting, and remember it won't catch regime shifts on its own." } }
+    ]
+  }
+  </script>
+
+  <script>
+  (function(){
+    try{document.documentElement.setAttribute('data-theme',localStorage.getItem('fxs_theme')||'dark');}catch(e){}
+    var tb=document.getElementById('theme-toggle');
+    function sync(){try{tb.textContent=(localStorage.getItem('fxs_theme')||'dark')==='light'?'☀':'☾';}catch(e){}}
+    if(tb){tb.addEventListener('click',function(){
+      var next=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+      document.documentElement.setAttribute('data-theme',next);
+      try{localStorage.setItem('fxs_theme',next);}catch(e){}sync();
+    });sync();}
+    var c=document.querySelector('a[data-cta="csm-guide"]');
+    if(c)c.addEventListener('click',function(){try{window.plausible&&window.plausible('CSMGuideToMeter');}catch(e){}});
+  })();
+  </script>
+</body>
+</html>

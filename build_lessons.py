@@ -753,6 +753,7 @@ def render_index(sec, articles):
 # meter.html is deliberately excluded — it's private/v0 and disallowed in robots.txt.
 STATIC_URLS = [
     ("/", "1.0", "daily"),
+    ("/currency-strength-meter", "0.8", "monthly"),
     ("/prop-firm-discount-codes", "0.6", "monthly"),
 ]
 
