@@ -38,15 +38,34 @@ jobs:
       - name: Generate driver-data.json
         run: python build_driver_data.py
 
-      - name: Commit if the data changed
+      # Stamp the homepage's schema dateModified to today. The homepage's whole
+      # proposition is live data, which this job refreshes daily — so a daily date
+      # is honest and keeps the freshness signal from going stale. (We deliberately
+      # do NOT stamp the affiliate page — its date reflects manual code re-checks.)
+      - name: Stamp homepage freshness
+        run: |
+          python - <<'PY'
+          import re, datetime, pathlib
+          p = pathlib.Path("public/index.html")
+          t = p.read_text(encoding="utf-8")
+          today = datetime.datetime.utcnow().strftime("%Y-%m-%d")
+          t2 = re.sub(r'"dateModified": "\d{4}-\d{2}-\d{2}"', '"dateModified": "%s"' % today, t, count=1)
+          if t2 != t:
+              p.write_text(t2, encoding="utf-8")
+              print("stamped dateModified:", today)
+          else:
+              print("dateModified already current")
+          PY
+
+      - name: Commit if anything changed
         run: |
           git config --global user.name  "fxstrength-bot"
           git config --global user.email "bot@users.noreply.github.com"
-          if git diff --quiet -- public/driver-data.json; then
-            echo "No change in driver-data.json — nothing to commit."
+          git add public/driver-data.json public/index.html
+          if git diff --cached --quiet; then
+            echo "Nothing changed — nothing to commit."
           else
-            git add public/driver-data.json
-            git commit -q -m "data: refresh driver meter (FRED)"
+            git commit -q -m "data: refresh driver meter (FRED) + homepage freshness stamp"
             git push "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:main
-            echo "Pushed refreshed driver-data.json."
+            echo "Pushed."
           fi

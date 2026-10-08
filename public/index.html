@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Free Live Currency Strength Meter — Multi-Timeframe (Gold, Silver, Bitcoin)</title>
-  <meta name="description" content="Free live currency strength meter across intraday, daily and weekly timeframes for the 8 major currencies plus gold, silver and Bitcoin. See which currencies are strong or weak at a glance, on one grid." />
+  <title>Free Live Currency Strength Meter — FX, Gold & Bitcoin</title>
+  <meta name="description" content="Free live currency strength meter for the 8 majors plus gold, silver and Bitcoin. See which currencies are strong or weak right now, across three timeframes." />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#0b0f17" />
   <link rel="canonical" href="https://fxstrength.org/" />
@@ -39,11 +39,39 @@
     "browserRequirements": "Requires JavaScript.",
     "isAccessibleForFree": true,
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@id": "https://fxstrength.org/#organization" },
+    "mainEntityOfPage": "https://fxstrength.org/",
+    "dateModified": "2026-10-08",
     "featureList": [
       "Live relative strength for USD, EUR, JPY, GBP, AUD, CHF, CAD and NZD",
       "Gold (XAU), silver (XAG) and Bitcoin (BTC)",
       "Intraday, daily and weekly timeframes on one grid",
       "Strength-trend charts and trade-idea highlights"
+    ]
+  }
+  </script>
+  <!-- Organization + WebSite entity graph: tells assistants WHO this source is, not just that a page exists. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://fxstrength.org/#organization",
+        "name": "FXStrength",
+        "url": "https://fxstrength.org/",
+        "logo": { "@type": "ImageObject", "url": "https://fxstrength.org/logo.png", "width": 500, "height": 96 },
+        "description": "Free educational tools and analysis for retail foreign exchange traders, including a live currency strength meter.",
+        "sameAs": ["https://x.com/TheFXstrength"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://fxstrength.org/#website",
+        "url": "https://fxstrength.org/",
+        "name": "FXStrength",
+        "publisher": { "@id": "https://fxstrength.org/#organization" },
+        "inLanguage": "en"
+      }
     ]
   }
   </script>
@@ -114,6 +142,7 @@
     <section class="intro">
       <div class="intro-copy">
         <h1>Live Currency Strength Meter</h1>
+        <p class="lead-summary"><strong>FXStrength is a free live currency strength meter.</strong> It scores the 8 major currencies plus gold, silver and Bitcoin across intraday, daily and weekly timeframes, so you can see at a glance which are strong and which are weak before you choose a pair to trade.</p>
         <p>
           FXStrength shows the <strong>relative strength of the 8 major currencies</strong>
           — USD, EUR, JPY, GBP, AUD, CHF, CAD, NZD — plus <strong>gold (XAU)</strong>,
@@ -193,7 +222,7 @@
       <p class="wl-cta-title">Get the live Driver Meter first</p>
       <p class="wl-cta-sub">A live version is coming — free early access when it launches, and there's no payment system yet. One email when it's ready.</p>
       <form class="wl-cta" data-goal="WaitlistCTA_meter" novalidate>
-        <input type="email" placeholder="you@email.com" autocomplete="email" aria-label="Email for the Driver Meter waitlist" required />
+        <input type="email" name="email" placeholder="you@email.com" autocomplete="email" aria-label="Email for the Driver Meter waitlist" required />
         <button type="submit">Join the waitlist</button>
       </form>
       <p class="wl-cta-note">Free early access. No payment system yet.</p>
@@ -255,7 +284,8 @@
           <p class="pp-wl-lead"><strong>Want to see what's driving every G10 currency — live?</strong></p>
           <p class="pp-wl-sub">Join the waitlist and get free early access when it launches.</p>
           <form id="waitlist-form" class="pp-wl-form" novalidate>
-            <input type="email" id="waitlist-email" placeholder="you@email.com"
+            <label for="waitlist-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
+            <input type="email" id="waitlist-email" name="email" placeholder="you@email.com"
                    autocomplete="email" required />
             <button type="submit">Join the waitlist</button>
           </form>
@@ -276,7 +306,8 @@
         Learn how macro, central banks, and market expectations move currencies.
       </p>
       <form id="capture-form" class="capture-form" novalidate>
-        <input type="email" id="capture-email" placeholder="you@email.com"
+        <label for="capture-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
+        <input type="email" id="capture-email" name="email" placeholder="you@email.com"
                autocomplete="email" required />
         <button type="submit">Get Updates</button>
       </form>
@@ -444,8 +475,8 @@
     b.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
   })();
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-  <script src="app.js?v=6"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script defer src="app.js?v=6"></script>
   <script src="waitlist-cta.js?v=1" defer></script>
   <script>
   /* Homepage pick-a-pair: pull the cheat cards from the FX Drivers page (one source

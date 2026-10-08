@@ -19,6 +19,7 @@ PER-LESSON (swap each issue, in the .md):
 
 import hashlib
 import html
+import json
 import re
 import sys
 from datetime import date
@@ -414,7 +415,7 @@ CTA_HTML = """    <aside class="lesson-cta" id="lesson-cta">
       <p>Get <strong>Behind the Move</strong> — the free breakdown of
          <em>why</em> the market moved, before you trade it.</p>
       <form id="cta-form" class="capture-form" novalidate>
-        <input type="email" id="cta-email" placeholder="you@email.com"
+        <input type="email" id="cta-email" name="email" placeholder="you@email.com"
                autocomplete="email" required aria-label="Your email" />
         <button type="submit">Get the free report</button>
       </form>
@@ -457,7 +458,7 @@ WL_CTA_BAND = """    <section class="wl-cta-band" aria-label="Live Driver Meter 
       <p class="wl-cta-title">Get the live Driver Meter first</p>
       <p class="wl-cta-sub">A live version is coming — free early access when it launches, and there's no payment system yet. One email when it's ready.</p>
       <form class="wl-cta" data-goal="WaitlistCTA_post" novalidate>
-        <input type="email" placeholder="you@email.com" autocomplete="email" aria-label="Email for the Driver Meter waitlist" required />
+        <input type="email" name="email" placeholder="you@email.com" autocomplete="email" aria-label="Email for the Driver Meter waitlist" required />
         <button type="submit">Join the waitlist</button>
       </form>
       <p class="wl-cta-note">Free early access. No payment system yet.</p>
@@ -681,6 +682,18 @@ def render_index(sec, articles):
     desc = sinfo["index_desc"]
     cover = f'{SITE}{sinfo["cover"]}'
     sv, lv = asset_v("styles.css"), asset_v("lessons.css")
+    # Entity schema so assistants recognise the publisher, not just the page.
+    index_ld = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": sinfo["name"],
+        "description": desc,
+        "url": f"{SITE}/{sec}/",
+        "dateModified": str(date.today()),
+        "isPartOf": {"@type": "WebSite", "@id": f"{SITE}/#website", "name": "FXStrength", "url": SITE + "/"},
+        "publisher": {"@type": "Organization", "name": "FXStrength", "url": SITE + "/",
+                      "logo": {"@type": "ImageObject", "url": SITE + "/logo.png"}},
+    })
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -701,6 +714,7 @@ def render_index(sec, articles):
   <meta name="twitter:image" content="{cover}" />
   <link rel="stylesheet" href="/styles.css?v={sv}" />
   <link rel="stylesheet" href="/lessons.css?v={lv}" />
+  <script type="application/ld+json">{index_ld}</script>
   <script>try{{document.documentElement.setAttribute('data-theme',localStorage.getItem('fxs_theme')||'dark');}}catch(e){{}}</script>
   <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
 </head>
