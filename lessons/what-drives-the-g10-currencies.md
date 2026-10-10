@@ -10,7 +10,26 @@ description: What drives each of the G10 currencies (USD, EUR, JPY, GBP, CHF, CA
 summary: Every G10 currency has obvious drivers and a less-obvious watch most people miss. This guide covers all ten, teaches you to build a view of a currency before you look at a pair, and shows why FX is always relative — a pair is two currency stories netted, never just "short USD".
 ---
 
-Before you look at a single pair, it helps to know what actually moves each currency. This guide breaks down the **core drivers** of all ten G10 currencies — and, for each, the **less-obvious watch** that most retail traders overlook. The goal isn't a signal. It's to help you build a macro view of a currency *before* you look at a pair — because in FX, nothing moves alone.
+**The G10 currencies are the ten most-traded in the world: the US dollar (USD), euro (EUR), Japanese yen (JPY), British pound (GBP), Swiss franc (CHF), Canadian dollar (CAD), Australian dollar (AUD), New Zealand dollar (NZD), Norwegian krone (NOK) and Swedish krona (SEK).** Each is driven by its own mix of central-bank rate expectations, economic data, commodity prices and risk sentiment — and this guide breaks down what moves all ten.
+
+Before you look at a single pair, it helps to know what actually moves each currency. This guide covers the **core drivers** of all ten — and, for each, the **less-obvious watch** that most retail traders overlook. The goal isn't a signal. It's to help you build a macro view of a currency *before* you look at a pair — because in FX, nothing moves alone.
+
+## What Are the G10 Currencies?
+
+The G10 is the group of ten major, highly-liquid currencies at the centre of global trade, reserves and FX turnover (despite the name, there are ten — a historical quirk):
+
+- 🇺🇸 [US dollar (USD)](#usd) — the world's reserve currency
+- 🇪🇺 [Euro (EUR)](#eur) — the dollar's main counterweight
+- 🇯🇵 [Japanese yen (JPY)](#jpy) — the classic funding currency and haven
+- 🇬🇧 [British pound (GBP)](#gbp)
+- 🇨🇭 [Swiss franc (CHF)](#chf) — a safe haven
+- 🇨🇦 [Canadian dollar (CAD)](#cad) — an oil currency
+- 🇦🇺 [Australian dollar (AUD)](#aud) — iron ore and China
+- 🇳🇿 [New Zealand dollar (NZD)](#nzd) — dairy and China
+- 🇳🇴 [Norwegian krone (NOK)](#nok) — oil and European growth
+- 🇸🇪 [Swedish krona (SEK)](#sek) — a European growth/risk proxy
+
+Each links to its full breakdown below: the core drivers, why they matter, the less-obvious watch, and where it shows up.
 
 ## Compare a Pair, Side by Side
 
@@ -277,6 +296,9 @@ Every currency has its obvious drivers and its less-obvious watch — and none o
 ## Frequently Asked Questions
 
 :::faq
+### What are the G10 currencies?
+The G10 is the group of ten major, liquid currencies: the US dollar (USD), euro (EUR), Japanese yen (JPY), British pound (GBP), Swiss franc (CHF), Canadian dollar (CAD), Australian dollar (AUD), New Zealand dollar (NZD), Norwegian krone (NOK) and Swedish krona (SEK). Despite the "G10" name there are ten — a historical quirk. They dominate global FX turnover, trade and reserves.
+
 ### What drives the US dollar?
 The US dollar is driven mainly by Fed rate expectations, US economic data, Treasury yields, US–global yield differentials and risk sentiment. When US yields rise relative to peers or markets turn risk-off, the dollar tends to strengthen. The DXY is a readout of those forces, not a driver in itself.
 

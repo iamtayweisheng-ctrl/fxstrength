@@ -51,10 +51,11 @@ SECTIONS = {
     },
     "fx-drivers": {
         "name": "FX Drivers",
+        "index_title": "What Drives Each G10 Currency",
         "tagline": "What moves each major currency — the drivers behind every FX pair.",
         "index_h1": "FX Drivers",
-        "index_desc": ("FXStrength FX Drivers — a plain-English reference for what drives each "
-                       "major currency, the less-obvious watches, and how the pieces fit together."),
+        "index_desc": ("A plain guide to what drives each G10 currency — the core macro forces, "
+                       "the less-obvious watches, and how to build a view of a currency before you trade a pair."),
         "cover": "/og-guides.png",
     },
 }
@@ -699,7 +700,7 @@ def render_index(sec, articles):
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{html.escape(sinfo["name"])} | FXStrength</title>
+  <title>{html.escape(sinfo.get("index_title", sinfo["name"]))} | FXStrength</title>
   <meta name="description" content="{html.escape(desc, quote=True)}" />
   <link rel="canonical" href="{SITE}/{sec}/" />
   <meta name="theme-color" content="#0b0f17" />
@@ -754,6 +755,7 @@ def render_index(sec, articles):
 STATIC_URLS = [
     ("/", "1.0", "daily"),
     ("/currency-strength-meter", "0.8", "monthly"),
+    ("/bitcoin-strength-meter", "0.8", "monthly"),
     ("/prop-firm-discount-codes", "0.6", "monthly"),
 ]
 
