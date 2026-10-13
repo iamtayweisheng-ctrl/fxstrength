@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-12T01:16:44Z",
+  "generated": "2026-10-13T02:31:41Z",
   "source": "ForexFactory weekly calendar (High-impact)",
   "note": "This week's high-impact events, mapped to the meter's drivers. Context, not signals.",
   "order": [
@@ -76,7 +76,7 @@
         "day": "Thu",
         "date": "2026-10-15T12:30:00+00:00",
         "when": "upcoming",
-        "forecast": "0.5%",
+        "forecast": "0.6%",
         "previous": "1.4%",
         "actual": "",
         "surprise": null
@@ -88,7 +88,7 @@
         "day": "Thu",
         "date": "2026-10-15T12:30:00+00:00",
         "when": "upcoming",
-        "forecast": "0.5%",
+        "forecast": "0.6%",
         "previous": "0.4%",
         "actual": "",
         "surprise": null
@@ -126,7 +126,7 @@
         "day": "Wed",
         "date": "2026-10-15T00:30:00+00:00",
         "when": "upcoming",
-        "forecast": "20.0K",
+        "forecast": "19.6K",
         "previous": "39.5K",
         "actual": "",
         "surprise": null
