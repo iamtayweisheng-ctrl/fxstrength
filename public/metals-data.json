@@ -1,17 +1,17 @@
 {
   "_metals_note": "Principled weights (established gold/silver macro), not yet data-calibrated. Real yields dominant, USD second, risk-off (haven) third. Silver more risk-sensitive; its risk relationship is least certain \u2014 recalibrate when price data available.",
-  "as_of_metals": "2026-10-13",
-  "generated": "2026-10-15T00:24:01Z",
+  "as_of_metals": "2026-10-14",
+  "generated": "2026-10-15T23:37:18Z",
   "metals_periods": {
     "daily": {
       "XAU": {
-        "tilt": -1.0,
+        "tilt": -0.3,
         "drivers": [
           {
             "key": "realyield",
             "label": "Real yields (US 10Y)",
-            "colour": "red",
-            "reason": "Real yields rising \u2014 weighs on XAU",
+            "colour": "amber",
+            "reason": "Real yields roughly flat",
             "weight": 0.5,
             "beta": 0.5
           },
@@ -26,29 +26,29 @@
           {
             "key": "risk",
             "label": "Risk sentiment",
-            "colour": "red",
-            "reason": "Risk-on \u2014 weighs on XAU",
+            "colour": "amber",
+            "reason": "Risk sentiment roughly flat",
             "weight": 0.2,
             "beta": 0.2
           }
         ]
       },
       "XAG": {
-        "tilt": -1.08,
+        "tilt": -0.28,
         "drivers": [
           {
             "key": "realyield",
             "label": "Real yields (US 10Y)",
-            "colour": "red",
-            "reason": "Real yields rising \u2014 weighs on XAG",
+            "colour": "amber",
+            "reason": "Real yields roughly flat",
             "weight": 0.4,
             "beta": 0.45
           },
           {
             "key": "risk",
             "label": "Risk sentiment",
-            "colour": "red",
-            "reason": "Risk-on \u2014 weighs on XAG",
+            "colour": "amber",
+            "reason": "Risk sentiment roughly flat",
             "weight": 0.35,
             "beta": 0.35
           },
