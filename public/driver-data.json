@@ -2,7 +2,7 @@
   "as_of_risk": "2026-10-19",
   "as_of_rates_us": "2026-10-19",
   "as_of_slow": "2026-07",
-  "generated": "2026-10-20T23:37:54Z",
+  "generated": "2026-10-21T00:22:53Z",
   "windows": {
     "daily": "~30 days (matches strength meter)",
     "weekly": "~26 weeks"
@@ -33,7 +33,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +3.6 over 1m) \u2014 weighs on EUR",
+            "reason": "Risk-off (VIX +4.2 over 1m) \u2014 weighs on EUR",
             "weight": 0.191,
             "beta": 0.159
           }
@@ -46,7 +46,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +3.6 over 1m) \u2014 weighs on GBP",
+            "reason": "Risk-off (VIX +4.2 over 1m) \u2014 weighs on GBP",
             "weight": 0.786,
             "beta": 0.405
           },
@@ -67,7 +67,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +3.6 over 1m) \u2014 weighs on AUD",
+            "reason": "Risk-off (VIX +4.2 over 1m) \u2014 weighs on AUD",
             "weight": 0.531,
             "beta": 0.493
           },
@@ -96,7 +96,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +3.6 over 1m) \u2014 weighs on NZD",
+            "reason": "Risk-off (VIX +4.2 over 1m) \u2014 weighs on NZD",
             "weight": 0.531,
             "beta": 0.432
           },
@@ -133,7 +133,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "green",
-            "reason": "Risk-on (VIX +3.6 over 1m) \u2014 supports USD",
+            "reason": "Risk-on (VIX +4.2 over 1m) \u2014 supports USD",
             "weight": 0.377,
             "beta": 0.342
           },
@@ -162,7 +162,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +3.6 over 1m) \u2014 weighs on CAD",
+            "reason": "Risk-off (VIX +4.2 over 1m) \u2014 weighs on CAD",
             "weight": 0.302,
             "beta": 0.337
           },
@@ -243,7 +243,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
-            "reason": "Risk roughly flat (VIX -1.1 over 6m)",
+            "reason": "Risk roughly flat (VIX -0.5 over 6m)",
             "weight": 0.191,
             "beta": 0.159
           }
@@ -256,7 +256,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
-            "reason": "Risk roughly flat (VIX -1.1 over 6m)",
+            "reason": "Risk roughly flat (VIX -0.5 over 6m)",
             "weight": 0.786,
             "beta": 0.405
           },
@@ -277,7 +277,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
-            "reason": "Risk roughly flat (VIX -1.1 over 6m)",
+            "reason": "Risk roughly flat (VIX -0.5 over 6m)",
             "weight": 0.531,
             "beta": 0.493
           },
@@ -306,7 +306,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
-            "reason": "Risk roughly flat (VIX -1.1 over 6m)",
+            "reason": "Risk roughly flat (VIX -0.5 over 6m)",
             "weight": 0.531,
             "beta": 0.432
           },
@@ -343,7 +343,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
-            "reason": "Risk roughly flat (VIX -1.1 over 6m)",
+            "reason": "Risk roughly flat (VIX -0.5 over 6m)",
             "weight": 0.377,
             "beta": 0.342
           },
@@ -372,7 +372,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "amber",
-            "reason": "Risk roughly flat (VIX -1.1 over 6m)",
+            "reason": "Risk roughly flat (VIX -0.5 over 6m)",
             "weight": 0.302,
             "beta": 0.337
           },
