@@ -1,11 +1,11 @@
 {
   "_metals_note": "Principled weights (established gold/silver macro), not yet data-calibrated. Real yields dominant, USD second, risk-off (haven) third. Silver more risk-sensitive; its risk relationship is least certain \u2014 recalibrate when price data available.",
-  "as_of_metals": "2026-10-22",
-  "generated": "2026-10-26T00:02:38Z",
+  "as_of_metals": "2026-10-23",
+  "generated": "2026-10-27T00:17:57Z",
   "metals_periods": {
     "daily": {
       "XAU": {
-        "tilt": 0.4,
+        "tilt": 0.7,
         "drivers": [
           {
             "key": "realyield",
@@ -18,8 +18,8 @@
           {
             "key": "usd",
             "label": "US dollar",
-            "colour": "red",
-            "reason": "Dollar firming \u2014 weighs on XAU",
+            "colour": "amber",
+            "reason": "Dollar roughly flat",
             "weight": 0.3,
             "beta": 0.3
           },
@@ -34,7 +34,7 @@
         ]
       },
       "XAG": {
-        "tilt": 0.52,
+        "tilt": 0.8,
         "drivers": [
           {
             "key": "realyield",
@@ -55,8 +55,8 @@
           {
             "key": "usd",
             "label": "US dollar",
-            "colour": "red",
-            "reason": "Dollar firming \u2014 weighs on XAG",
+            "colour": "amber",
+            "reason": "Dollar roughly flat",
             "weight": 0.25,
             "beta": 0.28
           }
