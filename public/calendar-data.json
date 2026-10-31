@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-30T01:54:37Z",
+  "generated": "2026-10-31T00:40:55Z",
   "source": "ForexFactory weekly calendar (High-impact)",
   "note": "This week's high-impact events, mapped to the meter's drivers. Context, not signals.",
   "order": [
@@ -254,11 +254,23 @@
     ],
     "JPY": [
       {
+        "title": "BOJ Outlook Report",
+        "driver": "yield",
+        "driver_label": "Yield advantage",
+        "day": "Thu",
+        "date": "2026-10-30T03:02:00+00:00",
+        "when": "upcoming",
+        "forecast": "",
+        "previous": "",
+        "actual": "",
+        "surprise": null
+      },
+      {
         "title": "BOJ Policy Rate",
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Thu",
-        "date": "2026-10-30T02:30:00+00:00",
+        "date": "2026-10-30T03:02:00+00:00",
         "when": "upcoming",
         "forecast": "<1.25%",
         "previous": "<1.25%",
@@ -270,19 +282,7 @@
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Thu",
-        "date": "2026-10-30T02:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "BOJ Outlook Report",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-10-30T02:31:00+00:00",
+        "date": "2026-10-30T03:02:00+00:00",
         "when": "upcoming",
         "forecast": "",
         "previous": "",
@@ -294,7 +294,7 @@
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Fri",
-        "date": "2026-10-30T05:30:00+00:00",
+        "date": "2026-10-30T06:30:00+00:00",
         "when": "upcoming",
         "forecast": "",
         "previous": "",
