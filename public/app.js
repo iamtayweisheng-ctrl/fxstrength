@@ -242,6 +242,7 @@ function initIdeasToggle() {
 
 // ── intraday line chart (single, full-width, Today / Previous-day toggle) ──
 let intraData = null;      // stashed intraday block for toggle + theme rebuilds
+let weeklyData = null;     // weekly-trend block (thisweek / lastweek), daily points
 
 // Custom hover mode: like 'nearest', but always resolves to a SINGLE element — so the
 // tooltip shows only the line under the cursor, even where several lines overlap at the
@@ -375,41 +376,65 @@ function updateResetCountdown() {
   el.textContent = `🕒 resets in ${p(Math.floor(s / 3600))}:${p(Math.floor((s % 3600) / 60))}:${p(s % 60)}`;
 }
 
+// chartDay can be an intraday view ('today' / 'prev') or a weekly view
+// ('thisweek' / 'lastweek', daily points rebased to Monday's open).
+function isWeeklyView() { return chartDay === 'thisweek' || chartDay === 'lastweek'; }
+
+function setChartYTitle(weekly) {
+  if (!chartMain) return;
+  try {
+    chartMain.options.scales.y.title.text = weekly
+      ? "% move vs the other currencies (since the week's open)"
+      : '% move vs the other currencies (since the NY-close session open)';
+  } catch (e) { /* ignore */ }
+}
+
 function drawChart() {
-  if (!intraData || typeof Chart === 'undefined') return;
-  const day = intraData[chartDay];
+  if (typeof Chart === 'undefined') return;
+  const weekly = isWeeklyView();
+  const src = weekly ? (weeklyData && weeklyData[chartDay]) : (intraData && intraData[chartDay]);
   const label = document.getElementById('chart-day-label');
   const dateEl = document.getElementById('chart-date');
   const el = document.getElementById('chart-main');
   if (!el) return;
-  updateResetCountdown();
-  if (!day) {                              // e.g. no previous day yet
-    if (label) label.textContent = chartDay === 'today' ? 'Today' : 'Previous day';
+  updateResetCountdown();                  // clears itself unless chartDay === 'today'
+  const fallbackLabel = weekly ? (chartDay === 'thisweek' ? 'This week' : 'Last week')
+                               : (chartDay === 'today' ? 'Today' : 'Previous day');
+  if (!src) {
+    if (label) label.textContent = fallbackLabel;
     if (chartMain) { chartMain.destroy(); chartMain = null; }
     if (dateEl) dateEl.textContent = '(no data)';
     return;
   }
-  // Be honest about "Today": if the latest session isn't the current trading day
-  // (weekend / market closed), it's the last completed session, not a live day.
-  const sessionNow = currentSessionKey(new Date());
-  const isLiveToday = chartDay === 'today' && day.date === sessionNow;
-  if (label) label.textContent = chartDay === 'today' ? (isLiveToday ? 'Today (live)' : 'Latest session') : 'Previous day';
-  if (dateEl) dateEl.textContent = 'session opened ' + day.date + (chartDay === 'today' && !isLiveToday ? ' · market closed' : '');
-  const ds = datasets(day.lines);
+  if (weekly) {
+    if (label) label.textContent = fallbackLabel;
+    const span = (src.times && src.times.length) ? src.times[0] + ' – ' + src.times[src.times.length - 1] : '';
+    if (dateEl) dateEl.textContent = 'week of ' + span + (chartDay === 'thisweek' ? ' · to date' : '');
+  } else {
+    // Be honest about "Today": if the latest session isn't the current trading day
+    // (weekend / market closed), it's the last completed session, not a live day.
+    const sessionNow = currentSessionKey(new Date());
+    const isLiveToday = chartDay === 'today' && src.date === sessionNow;
+    if (label) label.textContent = chartDay === 'today' ? (isLiveToday ? 'Today (live)' : 'Latest session') : 'Previous day';
+    if (dateEl) dateEl.textContent = 'session opened ' + src.date + (chartDay === 'today' && !isLiveToday ? ' · market closed' : '');
+  }
+  const ds = datasets(src.lines);
   if (chartMain) {                         // update in place, keep legend toggles
-    chartMain.data.labels = day.times;
+    chartMain.data.labels = src.times;
     const byLabel = Object.fromEntries(ds.map((d) => [d.label, d.data]));
     chartMain.data.datasets.forEach((d) => { d.data = byLabel[d.label] || []; });
+    setChartYTitle(weekly);
     chartMain.update('none');
   } else {
-    chartMain = new Chart(el, { type: 'line', data: { labels: day.times, datasets: ds }, options: chartOpts() });
+    chartMain = new Chart(el, { type: 'line', data: { labels: src.times, datasets: ds }, options: chartOpts() });
+    setChartYTitle(weekly);
+    chartMain.update('none');
     if (trendPair !== 'all') applyPairFilter(trendPair);   // restore focus after a rebuild
   }
 }
 
 function renderCharts(intra) {
-  if (!intra) return;
-  intraData = intra;
+  intraData = intra || null;
   drawChart();
 }
 
@@ -422,6 +447,7 @@ async function load() {
     render(matrix);
     renderRisk(matrix);
     renderIdeas(matrix);
+    weeklyData = matrix.weekly_trend || null;
     renderCharts(matrix.timeframes.intraday);
   } catch (e) {
     document.getElementById('grid').innerHTML =

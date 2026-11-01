@@ -258,6 +258,50 @@ def compute_intraday():
             "today": today, "prev": prev}
 
 
+def compute_weekly_trend():
+    """Weekly strength as a per-day time series that resets each Monday.
+
+    Emits this week's line (Monday-to-date) and last week's completed line, each
+    rebased to the week's first trading day, so the two weeks can be compared on a
+    daily x-axis. The ISO week starts Monday, so the view naturally rolls forward
+    every Monday as a new week's data arrives.
+    """
+    maps = fetch_all("1d", "3mo")                      # daily bars
+    have = [p for p in ALL_PAIRS if p in maps]
+    if len(have) < 10:
+        print(f"  ! weekly trend: only {len(have)} fiat pairs - skipping")
+        return None
+
+    axis, filled = align(maps)
+    by_week = {}                                        # (iso_year, iso_week) -> [indices]
+    for i, t in enumerate(axis):
+        y, w, _ = date.fromisoformat(t[:10]).isocalendar()
+        by_week.setdefault((y, w), []).append(i)
+    weeks = [k for k in sorted(by_week) if len(by_week[k]) >= 2]
+    if not weeks:
+        return None
+
+    def week_line(key):
+        idxs = by_week[key]
+        first = idxs[0]
+        ret = {p: [(col[i] / col[first] - 1) * 100 if col[first] else 0.0
+                   for i in idxs] for p, col in filled.items()}
+        lines = strength_from_returns(ret, len(idxs))
+        times = []
+        for i in idxs:                                 # "26 Oct" — portable (no %-d)
+            d = date.fromisoformat(axis[i][:10])
+            times.append(f"{d.day} {d.strftime('%b')}")
+        lines = {c: [round(v, 3) for v in col] for c, col in lines.items()}
+        return {"week": f"{key[0]}-W{key[1]:02d}",
+                "start": axis[idxs[0]][:10], "end": axis[idxs[-1]][:10],
+                "times": times, "lines": lines}
+
+    thisweek = week_line(weeks[-1])
+    lastweek = week_line(weeks[-2]) if len(weeks) >= 2 else None
+    return {"label": "Weekly trend · daily points, resets Monday",
+            "thisweek": thisweek, "lastweek": lastweek}
+
+
 def arrow(col):
     """Short-term slope over the last few points → up / down / flat."""
     if len(col) < 2:
@@ -374,6 +418,9 @@ def main():
         timeframes[mode] = {"label": r["label"], "window": r["win"],
                             "asof": r["asof"], "scores": to_scores(r["series"])}
 
+    print("- weekly trend ...")
+    weekly_trend = compute_weekly_trend()
+
     print("- market context ...")
     market = fetch_context()
 
@@ -383,6 +430,7 @@ def main():
         "currencies": CCYS + list(COMMODITIES),
         "timeframe_order": [t for t in TIMEFRAME_ORDER if t in timeframes],
         "timeframes": timeframes,
+        "weekly_trend": weekly_trend,
         "market": market,
         "source": "Yahoo Finance",
     }
