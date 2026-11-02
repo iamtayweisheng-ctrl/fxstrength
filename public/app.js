@@ -403,7 +403,9 @@ function drawChart() {
   if (!src) {
     if (label) label.textContent = fallbackLabel;
     if (chartMain) { chartMain.destroy(); chartMain = null; }
-    if (dateEl) dateEl.textContent = '(no data)';
+    if (dateEl) dateEl.textContent = (weekly && chartDay === 'thisweek')
+      ? 'not enough data yet — check back after Monday’s close'
+      : '(no data)';
     return;
   }
   if (weekly) {

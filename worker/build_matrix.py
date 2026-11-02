@@ -277,9 +277,14 @@ def compute_weekly_trend():
     for i, t in enumerate(axis):
         y, w, _ = date.fromisoformat(t[:10]).isocalendar()
         by_week.setdefault((y, w), []).append(i)
-    weeks = [k for k in sorted(by_week) if len(by_week[k]) >= 2]
-    if not weeks:
+    if not by_week:
         return None
+
+    # Anchor on the actual calendar week, not "the last two buckets with data".
+    # Early on a Monday the new week has only 1 bar (or none yet), so the stale
+    # prior week must never be relabelled "this week" — tie the labels to today.
+    cur_key = datetime.now(timezone.utc).date().isocalendar()[:2]
+    prior = [k for k in sorted(by_week) if k < cur_key]   # completed weeks before now
 
     def week_line(key):
         idxs = by_week[key]
@@ -296,8 +301,11 @@ def compute_weekly_trend():
                 "start": axis[idxs[0]][:10], "end": axis[idxs[-1]][:10],
                 "times": times, "lines": lines}
 
-    thisweek = week_line(weeks[-1])
-    lastweek = week_line(weeks[-2]) if len(weeks) >= 2 else None
+    # "This week" is the current calendar week only if it has at least 2 daily
+    # points to plot; a single Monday dot is a flat, meaningless line, so until
+    # then the frontend shows a "no data yet" note rather than a one-point chart.
+    thisweek = week_line(cur_key) if len(by_week.get(cur_key, [])) >= 2 else None
+    lastweek = week_line(prior[-1]) if prior else None
     return {"label": "Weekly trend · daily points, resets Monday",
             "thisweek": thisweek, "lastweek": lastweek}
 
