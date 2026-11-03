@@ -410,7 +410,9 @@ function drawChart() {
   }
   if (weekly) {
     if (label) label.textContent = fallbackLabel;
-    const span = (src.times && src.times.length) ? src.times[0] + ' – ' + src.times[src.times.length - 1] : '';
+    // times[0] is the "open" baseline node; the first real day is times[1].
+    const days = (src.times || []).filter((t) => t !== 'open');
+    const span = days.length ? days[0] + ' – ' + days[days.length - 1] : '';
     if (dateEl) dateEl.textContent = 'week of ' + span + (chartDay === 'thisweek' ? ' · to date' : '');
   } else {
     // Be honest about "Today": if the latest session isn't the current trading day

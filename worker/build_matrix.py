@@ -284,15 +284,20 @@ def compute_weekly_trend():
     # Early on a Monday the new week has only 1 bar (or none yet), so the stale
     # prior week must never be relabelled "this week" — tie the labels to today.
     cur_key = datetime.now(timezone.utc).date().isocalendar()[:2]
-    prior = [k for k in sorted(by_week) if k < cur_key]   # completed weeks before now
+    order = sorted(by_week)
+    prior = [k for k in order if k < cur_key]              # completed weeks before now
 
     def week_line(key):
         idxs = by_week[key]
-        first = idxs[0]
-        ret = {p: [(col[i] / col[first] - 1) * 100 if col[first] else 0.0
-                   for i in idxs] for p, col in filled.items()}
-        lines = strength_from_returns(ret, len(idxs))
-        times = []
+        # Rebase to the PRIOR week's last close, plotted as a 0 "open" node. That
+        # way the week's first daily bar (Monday) already shows a real move, so the
+        # chart renders from day one instead of needing a second close to draw a line.
+        pos = order.index(key)
+        base = by_week[order[pos - 1]][-1] if pos > 0 else idxs[0]
+        ret = {p: [0.0] + [(col[i] / col[base] - 1) * 100 if col[base] else 0.0
+                           for i in idxs] for p, col in filled.items()}
+        lines = strength_from_returns(ret, len(idxs) + 1)
+        times = ["open"]
         for i in idxs:                                 # "26 Oct" — portable (no %-d)
             d = date.fromisoformat(axis[i][:10])
             times.append(f"{d.day} {d.strftime('%b')}")
@@ -301,10 +306,9 @@ def compute_weekly_trend():
                 "start": axis[idxs[0]][:10], "end": axis[idxs[-1]][:10],
                 "times": times, "lines": lines}
 
-    # "This week" is the current calendar week only if it has at least 2 daily
-    # points to plot; a single Monday dot is a flat, meaningless line, so until
-    # then the frontend shows a "no data yet" note rather than a one-point chart.
-    thisweek = week_line(cur_key) if len(by_week.get(cur_key, [])) >= 2 else None
+    # "This week" renders as soon as the current week has any daily bar; the 0
+    # "open" node guarantees a two-point line even on the first trading day.
+    thisweek = week_line(cur_key) if by_week.get(cur_key) else None
     lastweek = week_line(prior[-1]) if prior else None
     return {"label": "Weekly trend · daily points, resets Monday",
             "thisweek": thisweek, "lastweek": lastweek}
