@@ -214,7 +214,7 @@ def compute_mode(mode):
     ret = {p: pct_from_start(filled[p], start) for p in filled}
     series = strength_from_returns(ret, n)
     return {"label": cfg["label"], "win": win, "series": series,
-            "asof": axis[-1] if axis else None}
+            "dates": axis[start:], "asof": axis[-1] if axis else None}
 
 
 def compute_intraday():
@@ -397,6 +397,40 @@ def fetch_context():
     return ctx
 
 
+RISK_ON = ("AUD", "NZD", "CAD")      # commodity currencies
+HAVENS = ("USD", "JPY", "CHF")       # safe havens
+
+
+def compute_risk_series(series, dates, days=7):
+    """Day-by-day risk gauge, so the UI can show movement, not just a bare number.
+
+    Reproduces the frontend gauge exactly — avg(commodity 0–10 scores) minus
+    avg(haven scores) on each day's fiat scale — for the last `days` daily
+    points. The latest value matches the live meter; the rest give it context
+    (is +1.2 a shift from yesterday, or just where it has been sitting?).
+    """
+    if not series or not dates:
+        return None
+    n = len(dates)
+    out = []
+    for k in range(max(0, n - days), n):
+        pcts = {c: series[c][k] for c in CCYS if c in series and k < len(series[c])}
+        if len(pcts) < len(CCYS):
+            continue
+        scale = max(1e-9, max(abs(v) for v in pcts.values()))
+        score = {c: max(0.0, min(10.0, 5 + 5 * pcts[c] / scale)) for c in pcts}
+        g = (sum(score[c] for c in RISK_ON) / len(RISK_ON)
+             - sum(score[c] for c in HAVENS) / len(HAVENS))
+        d = date.fromisoformat(dates[k][:10])
+        out.append({"d": f"{d.day} {d.strftime('%b')}", "g": round(g, 2)})
+    if len(out) < 2:
+        return None
+    gauge = out[-1]["g"]
+    prev = out[-2]["g"]
+    return {"gauge": gauge, "prev": prev, "delta": round(gauge - prev, 2),
+            "history": out}
+
+
 def market_open(now):
     """FX cash market: ~Sun 21:00 UTC → Fri 21:00 UTC."""
     wd, hr = now.weekday(), now.hour            # Mon=0 … Sun=6
@@ -422,6 +456,7 @@ def main():
             "prev": intra["prev"],
         }
 
+    risk = None
     for mode in MODES:
         print(f"- {mode} ...")
         r = compute_mode(mode)
@@ -429,6 +464,8 @@ def main():
             continue
         timeframes[mode] = {"label": r["label"], "window": r["win"],
                             "asof": r["asof"], "scores": to_scores(r["series"])}
+        if mode == "daily":
+            risk = compute_risk_series(r["series"], r["dates"])
 
     print("- weekly trend ...")
     weekly_trend = compute_weekly_trend()
@@ -444,6 +481,7 @@ def main():
         "timeframes": timeframes,
         "weekly_trend": weekly_trend,
         "market": market,
+        "risk": risk,
         "source": "Yahoo Finance",
     }
 

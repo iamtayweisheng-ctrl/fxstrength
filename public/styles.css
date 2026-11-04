@@ -249,6 +249,20 @@ h2 { font-size: 18px; margin: 0 0 8px; }
 .rchip.off { border-left-color: var(--weak); }
 .rchip span { color: var(--muted); font-size: 12px; font-weight: 500; margin-left: 5px; }
 
+/* day-over-day context for the risk gauge */
+.risk-trend { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+.risk-trend:empty { display: none; }
+.risk-dd { font-size: 12px; font-weight: 700; color: var(--muted); }
+.risk-dd.on { color: var(--strong); }
+.risk-dd.off { color: var(--weak); }
+.risk-spark { width: 150px; height: 34px; flex: 0 0 auto; }
+.risk-spark-zero { stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 3; }
+.risk-spark-line { fill: none; stroke: var(--muted); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.risk-spark-dot { fill: var(--muted); }
+.risk-spark-dot.on { fill: var(--strong); }
+.risk-spark-dot.off { fill: var(--weak); }
+.risk-range { font-size: 11px; }
+
 /* ── trade ideas ─────────────────────────────────────── */
 .ideas { margin: 26px 0; }
 .ideas-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }

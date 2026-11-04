@@ -169,6 +169,8 @@ function renderRisk(matrix) {
   lbl.textContent = `${state === 'on' ? 'Risk ON' : state === 'off' ? 'Risk OFF' : 'Mixed'} · FX ${gauge >= 0 ? '+' : ''}${gauge.toFixed(1)}`;
   lbl.className = 'risk-label ' + state;
 
+  renderRiskTrend(matrix.risk, gauge);
+
   const m = matrix.market || {};
   const chips = [];
   if (m.vix) {
@@ -182,6 +184,41 @@ function renderRisk(matrix) {
   }
   document.getElementById('risk-context').innerHTML =
     chips.join('') || '<span class="hint">Market context unavailable.</span>';
+}
+
+// Day-over-day context for the risk gauge: a "vs yesterday" delta plus a small
+// 7-day sparkline, so +1.2 reads as a move or a hold rather than a bare number.
+function renderRiskTrend(risk, liveGauge) {
+  const el = document.getElementById('risk-trend');
+  if (!el) return;
+  if (!risk || !risk.history || risk.history.length < 2) { el.innerHTML = ''; return; }
+  const h = risk.history.slice();
+  // keep the live headline and the sparkline's last point in sync
+  if (typeof liveGauge === 'number') h[h.length - 1] = { d: h[h.length - 1].d, g: +liveGauge.toFixed(2) };
+  const gs = h.map((p) => p.g);
+  const delta = +(gs[gs.length - 1] - gs[gs.length - 2]).toFixed(1);
+  const dir = delta > 0.05 ? 'on' : delta < -0.05 ? 'off' : 'mid';
+  const arrow = delta > 0.05 ? '▲' : delta < -0.05 ? '▼' : '—';
+
+  // sparkline (viewBox units); y flips so higher gauge sits higher
+  const W = 150, H = 34, pad = 3;
+  const lo = Math.min(-2, ...gs), hi = Math.max(2, ...gs);
+  const x = (i) => pad + (i * (W - 2 * pad)) / (gs.length - 1);
+  const y = (v) => H - pad - ((v - lo) / (hi - lo)) * (H - 2 * pad);
+  const zeroY = y(0).toFixed(1);
+  const pts = gs.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+  const last = gs[gs.length - 1];
+  const spark =
+    `<svg class="risk-spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">` +
+    `<line x1="${pad}" y1="${zeroY}" x2="${W - pad}" y2="${zeroY}" class="risk-spark-zero"/>` +
+    `<polyline points="${pts}" class="risk-spark-line"/>` +
+    `<circle cx="${x(gs.length - 1).toFixed(1)}" cy="${y(last).toFixed(1)}" r="2.5" class="risk-spark-dot ${dir}"/>` +
+    `</svg>`;
+
+  el.innerHTML =
+    `<span class="risk-dd ${dir}">${arrow} ${delta >= 0 ? '+' : ''}${delta} vs yesterday</span>` +
+    spark +
+    `<span class="risk-range hint">7-day range ${Math.min(...gs).toFixed(1)} to ${Math.max(...gs).toFixed(1)}</span>`;
 }
 
 // ── trade ideas ─────────────────────────────────────────────────────────
