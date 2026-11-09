@@ -1,252 +1,72 @@
 {
-  "generated": "2026-11-08T01:22:52Z",
+  "generated": "2026-11-09T00:44:39Z",
   "source": "ForexFactory weekly calendar (High-impact)",
   "note": "This week's high-impact events, mapped to the meter's drivers. Context, not signals.",
   "order": [
-    "GBP",
-    "AUD",
     "USD",
-    "NZD",
-    "CAD",
-    "JPY"
+    "GBP"
   ],
   "currencies": {
-    "AUD": [
-      {
-        "title": "Cash Rate",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Mon",
-        "date": "2026-11-03T03:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "4.85%",
-        "previous": "4.60%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "RBA Monetary Policy Statement",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Mon",
-        "date": "2026-11-03T03:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "RBA Rate Statement",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Mon",
-        "date": "2026-11-03T03:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "RBA Press Conference",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Mon",
-        "date": "2026-11-03T04:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      }
-    ],
     "USD": [
       {
-        "title": "Congressional Elections",
+        "title": "Core CPI m/m",
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Tue",
-        "date": "2026-11-03T15:16:00+00:00",
+        "date": "2026-11-10T13:30:00+00:00",
         "when": "upcoming",
-        "forecast": "",
-        "previous": "",
+        "forecast": "0.2%",
+        "previous": "0.3%",
         "actual": "",
         "surprise": null
       },
       {
-        "title": "Average Hourly Earnings m/m",
+        "title": "CPI m/m",
         "driver": "yield",
         "driver_label": "Yield advantage",
-        "day": "Fri",
-        "date": "2026-11-06T13:30:00+00:00",
+        "day": "Tue",
+        "date": "2026-11-10T13:30:00+00:00",
         "when": "upcoming",
         "forecast": "0.3%",
-        "previous": "0.1%",
+        "previous": "0.6%",
         "actual": "",
         "surprise": null
       },
       {
-        "title": "Non-Farm Employment Change",
+        "title": "Core PPI m/m",
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Fri",
-        "date": "2026-11-06T13:30:00+00:00",
+        "date": "2026-11-13T13:30:00+00:00",
         "when": "upcoming",
-        "forecast": "65K",
-        "previous": "29K",
+        "forecast": "0.3%",
+        "previous": "0.7%",
         "actual": "",
         "surprise": null
       },
       {
-        "title": "Unemployment Rate",
+        "title": "PPI m/m",
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Fri",
-        "date": "2026-11-06T13:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "4.2%",
-        "previous": "4.2%",
-        "actual": "",
-        "surprise": null
-      }
-    ],
-    "NZD": [
-      {
-        "title": "Employment Change q/q",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Tue",
-        "date": "2026-11-03T21:45:00+00:00",
+        "date": "2026-11-13T13:30:00+00:00",
         "when": "upcoming",
         "forecast": "0.4%",
-        "previous": "0.5%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "Unemployment Rate",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Tue",
-        "date": "2026-11-03T21:45:00+00:00",
-        "when": "upcoming",
-        "forecast": "5.5%",
-        "previous": "5.6%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "Parliamentary Elections",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Fri",
-        "date": "2026-11-06T21:45:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
+        "previous": "1.3%",
         "actual": "",
         "surprise": null
       }
     ],
     "GBP": [
       {
-        "title": "BOE Monetary Policy Report",
+        "title": "GDP m/m",
         "driver": "yield",
         "driver_label": "Yield advantage",
         "day": "Thu",
-        "date": "2026-11-05T12:00:00+00:00",
+        "date": "2026-11-12T07:00:00+00:00",
         "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "Monetary Policy Summary",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-11-05T12:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "MPC Official Bank Rate Votes",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-11-05T12:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "7-0-2",
-        "previous": "3-0-6",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "Official Bank Rate",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-11-05T12:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "4.00%",
-        "previous": "3.75%",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "BOE Gov Bailey Speaks",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Thu",
-        "date": "2026-11-05T12:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
-        "actual": "",
-        "surprise": null
-      }
-    ],
-    "CAD": [
-      {
-        "title": "Employment Change",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Fri",
-        "date": "2026-11-06T13:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "14.6K",
-        "previous": "-68.3K",
-        "actual": "",
-        "surprise": null
-      },
-      {
-        "title": "Unemployment Rate",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Fri",
-        "date": "2026-11-06T13:30:00+00:00",
-        "when": "upcoming",
-        "forecast": "6.5%",
-        "previous": "6.5%",
-        "actual": "",
-        "surprise": null
-      }
-    ],
-    "JPY": [
-      {
-        "title": "BOJ Gov Ueda Speaks",
-        "driver": "yield",
-        "driver_label": "Yield advantage",
-        "day": "Fri",
-        "date": "2026-11-06T16:00:00+00:00",
-        "when": "upcoming",
-        "forecast": "",
-        "previous": "",
+        "forecast": "0.0%",
+        "previous": "0.1%",
         "actual": "",
         "surprise": null
       }
