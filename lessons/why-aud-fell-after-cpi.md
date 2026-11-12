@@ -29,7 +29,7 @@ The key move: **the currency reacted to a change in expectations about the RBA �
 
 ## What Price Is Saying
 
-:::figure src="/img/aud-cpi-price-chart.png" alt="Australian Dollar Index daily chart. After the 29 July CPI release the index dipped toward the key support zone near 69.3, held, and recovered toward 70.3 — staying above major support near 68.4 and below the May swing high near 72.5, with major resistance near 71.3."
+:::figure src="/img/aud-cpi-price-chart.webp" alt="Australian Dollar Index daily chart. After the 29 July CPI release the index dipped toward the key support zone near 69.3, held, and recovered toward 70.3 — staying above major support near 68.4 and below the May swing high near 72.5, with major resistance near 71.3."
 caption="Figure 1 — Australian Dollar Index (daily). Softer CPI triggered the initial reaction lower, but price held the key support zone rather than breaking toward major support. Macro explains why price moved; the levels show where the market is making decisions."
 :::
 

@@ -1,3 +1,9 @@
+# HSTS: force HTTPS for a year. includeSubDomains is safe here (all subdomains
+# are served over HTTPS via Cloudflare; email uses MX, which HSTS doesn't touch).
+# `preload` is deliberately omitted — it's the hard-to-reverse part.
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
 # Always revalidate styling/scripts so updates appear right after deploy.
 # ETag makes this cheap: the browser gets a 304 (no re-download) when unchanged,
 # and only re-fetches when the file actually changed — no more hard-refresh needed.

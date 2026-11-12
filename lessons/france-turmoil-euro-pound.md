@@ -1,6 +1,7 @@
 ---
 section: behind-the-move
 title: "France Is in Turmoil. Why Is the Pound Benefiting — and Could the Euro Crisis Spread?"
+seo_title: "The Pound, the Euro and France's Turmoil"
 dek: Political uncertainty in France is weighing on the euro — but a weaker EUR/GBP doesn't automatically mean the UK economy is stronger.
 slug: france-turmoil-euro-pound
 date: 2026-10-25

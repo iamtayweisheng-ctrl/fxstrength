@@ -325,6 +325,8 @@ def head_html(meta, faq=None):
     slug = meta["slug"]
     url = f"{SITE}/{sec}/{slug}"
     title = meta["title"]
+    # Optional shorter <title> for search (keeps the longer on-page H1 intact).
+    seo_title = meta.get("seo_title", title)
     desc = meta.get("description", meta.get("dek", ""))
     # Social share card — a real PNG (X and most scrapers don't render SVG og:images).
     # Defaults to the section's branded cover; a file may override with a
@@ -381,7 +383,7 @@ def head_html(meta, faq=None):
     sv, lv = asset_v("styles.css"), asset_v("lessons.css")
     return f"""  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{e(title)} — FXStrength</title>
+  <title>{e(seo_title)} — FXStrength</title>
   <meta name="description" content="{e(desc)}" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#0b0f17" />

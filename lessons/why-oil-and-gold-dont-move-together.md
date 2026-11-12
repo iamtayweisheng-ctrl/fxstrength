@@ -46,7 +46,7 @@ Markets may respond by raising expected interest rates or delaying expected cuts
 
 The important point: the oil shock doesn't dictate one inevitable gold response. **It changes the conditions under which several markets are being priced.**
 
-For a related example of how persistent energy prices can influence central-bank thinking, see [Reuters' report on the Bank of Canada's inflation outlook](https://www.reuters.com/world/americas/bank-canada-sees-sharply-higher-inflation-outlook-oil-surges-macklem-says-2026-10-17/). (This supports the inflation-transmission discussion; it isn't evidence of the original physical supply disruption.)
+For a related example of how persistent energy prices can influence central-bank thinking, see Reuters' report on the Bank of Canada's inflation outlook (17 Oct 2026). (This supports the inflation-transmission discussion; it isn't evidence of the original physical supply disruption.)
 
 :::cta:::
 

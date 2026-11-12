@@ -19,7 +19,7 @@ Across the Atlantic, Bank of England Governor **Andrew Bailey** has cautioned ag
 
 The difference isn't that one central bank cares about inflation and the other doesn't. It's **how much evidence each sees that an energy shock is becoming a lasting domestic inflation problem.**
 
-*Sources: [Reuters — Bank of Canada inflation outlook](https://www.reuters.com/world/americas/bank-canada-sees-sharply-higher-inflation-outlook-oil-surges-macklem-says-2026-10-17/); [Financial Times — Bailey on energy prices](https://www.ft.com/content/b6255adb-3ce5-4463-92cd-de2f8e9a1f74).*
+*Sources: Reuters — "Bank of Canada sees sharply higher inflation outlook as oil surges" (17 Oct 2026); Financial Times — Bailey on energy prices (Oct 2026).*
 
 ## Why oil doesn't automatically mean rate hikes
 

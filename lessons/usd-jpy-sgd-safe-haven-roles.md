@@ -1,6 +1,7 @@
 ---
 section: behind-the-move
 title: "Is the US Dollar Still a Safe Haven? Why USD, JPY and SGD Are Behaving Differently"
+seo_title: "Is the US Dollar Still a Safe Haven?"
 dek: An AI-driven equity sell-off is testing the dollar's safe-haven role, while the Singapore dollar draws attention for a different reason — its appeal as a funding currency.
 slug: usd-jpy-sgd-safe-haven-roles
 date: 2026-10-25
@@ -25,7 +26,7 @@ The dollar's appeal comes from more than the US economy. It's central to interna
 
 But the dollar faces competing forces. If a global shock creates demand for liquidity, USD may strengthen. If the shock causes investors to expect weaker US growth or lower Fed rates, falling Treasury yields may instead weigh on it. The *source* of the shock matters too — uncertainty originating in US policy or concerns about US government finances can complicate the traditional safe-haven response.
 
-Reuters reported on October 20 that the dollar had gained around 4% since the Iran war began, supported by higher rates, US economic strength and the country's energy-export position — while noting that rising debt and policy uncertainty could weigh on its longer-term appeal. ([Reuters](https://www.reuters.com/business/energy/global-markets-safe-havens-graphic-pix-2026-10-20/)) These aren't contradictory: a currency can benefit from one crisis while remaining exposed to other risks.
+Reuters reported on October 20 that the dollar had gained around 4% since the Iran war began, supported by higher rates, US economic strength and the country's energy-export position — while noting that rising debt and policy uncertainty could weigh on its longer-term appeal. (Reuters, 20 Oct 2026) These aren't contradictory: a currency can benefit from one crisis while remaining exposed to other risks.
 
 **The dollar's safe-haven role hasn't disappeared. Its response depends on the balance between liquidity demand, interest-rate expectations and confidence in the US outlook.**
 

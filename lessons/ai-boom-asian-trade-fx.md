@@ -1,6 +1,7 @@
 ---
 section: the-bigger-picture
 title: The AI Boom Is Showing Up in Asian Trade Data. What Does That Mean for FX?
+seo_title: "The AI Boom in Asian Trade Data — and FX"
 dek: Taiwan's record exports and China's accelerating shipments show how AI demand is reshaping trade — but stronger exports don't automatically mean a stronger currency.
 slug: ai-boom-asian-trade-fx
 date: 2026-10-18
@@ -15,7 +16,7 @@ Taiwan's exports reached a record **US$87.22 billion in September 2026**, rising
 
 These figures point to strong external demand for parts of Asia's technology and manufacturing supply chains. They don't, on their own, tell us what either currency should do next.
 
-*Sources: [Reuters — Taiwan exports hit a record](https://www.reuters.com/world/asia-pacific/taiwan-september-exports-hit-fresh-monthly-record-ai-demand-us-leads-2026-10-08/); [Reuters — China's September exports surge](https://www.reuters.com/world/asia-pacific/chinas-exports-surge-363-yy-september-imports-up-31-2026-10-14/).*
+*Sources: Reuters — "Taiwan September exports hit fresh monthly record" (8 Oct 2026); Reuters — "China's exports surge 36.3% y/y in September" (14 Oct 2026).*
 
 ## Why stronger exports don't guarantee currency strength
 

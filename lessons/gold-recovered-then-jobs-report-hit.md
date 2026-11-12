@@ -1,6 +1,7 @@
 ---
 section: behind-the-move
 title: Gold Recovered. Then the US Jobs Report Hit. Why Didn't Buyers Walk Away?
+seo_title: "Gold Recovered, Then the Jobs Report Hit"
 dek: Gold bounced ~4.5% off its October low, then a hot payroll print should have sent it lower — and buyers defended $4,040 instead. What that says about whether this is a bottom or just a breather.
 slug: gold-recovered-then-jobs-report-hit
 date: 2026-11-09

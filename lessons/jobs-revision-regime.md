@@ -56,7 +56,7 @@ The broader environment was aggressively hawkish. The Federal Reserve was tighte
 
 The important point isn't *"+462k made USD rise."* The better interpretation is that the revision provided information *consistent with an already-hawkish macro regime* — and the Dollar's broader behaviour reflected that environment.
 
-:::figure src="/img/bls-benchmark-2022.png" caption="US Dollar Index (DXY) around the 2022 revision (+462,000) — a positive number that fit an already-hawkish regime." alt="DXY daily chart marking the 2022 BLS benchmark revision"
+:::figure src="/img/bls-benchmark-2022.webp" caption="US Dollar Index (DXY) around the 2022 revision (+462,000) — a positive number that fit an already-hawkish regime." alt="DXY daily chart marking the 2022 BLS benchmark revision"
 :::
 
 ## 4. 2023: A Negative Revision That Fought the Regime
@@ -67,7 +67,7 @@ But the Federal Reserve was still operating inside a tightening cycle. The marke
 
 And that is precisely why this example is useful: **a negative number does not automatically overpower the bigger market regime.**
 
-:::figure src="/img/bls-benchmark-2023.png" caption="DXY around the 2023 revision (−306,000) — a negative print, but the Fed was still in a hiking regime." alt="DXY daily chart marking the 2023 BLS benchmark revision"
+:::figure src="/img/bls-benchmark-2023.webp" caption="DXY around the 2023 revision (−306,000) — a negative print, but the Fed was still in a hiking regime." alt="DXY daily chart marking the 2023 BLS benchmark revision"
 :::
 
 ## 5. 2024: The Big Revision Arrives During Dollar Weakness
@@ -78,7 +78,7 @@ But again, the important question is not simply how large the number was — loo
 
 That makes the example more interesting, not less. The revision was consistent with concerns about the labour market, but the market response itself was mixed. So we should not rewrite history and say *"−818k caused the Dollar to fall."* The evidence does not support that level of certainty.
 
-:::figure src="/img/bls-benchmark-2024.png" caption="DXY around the 2024 revision (−818,000) — the Dollar was already under pressure into Jackson Hole." alt="DXY daily chart marking the 2024 BLS benchmark revision"
+:::figure src="/img/bls-benchmark-2024.webp" caption="DXY around the 2024 revision (−818,000) — the Dollar was already under pressure into Jackson Hole." alt="DXY daily chart marking the 2024 BLS benchmark revision"
 :::
 
 ## 6. 2025: The −911,000 Revision
@@ -89,7 +89,7 @@ And the initial market reaction was indeed Dollar-negative in parts of the FX ma
 
 This is perhaps the most useful example of all: the largest revision did not produce a simple mechanical Dollar reaction. Why? Because the market was already focused on the possibility of Fed rate cuts. The revision reinforced concerns about the labour market, but traders were simultaneously looking at upcoming inflation data and the broader rate outlook. The number mattered — but the number did not determine the entire market reaction.
 
-:::figure src="/img/bls-benchmark-2025.png" caption="DXY around the 2025 revision (−911,000) — it broke multi-month support to ~98.55 as yields fell on aggressive Fed-easing bets." alt="DXY daily chart marking the 2025 BLS benchmark revision"
+:::figure src="/img/bls-benchmark-2025.webp" caption="DXY around the 2025 revision (−911,000) — it broke multi-month support to ~98.55 as yields fell on aggressive Fed-easing bets." alt="DXY daily chart marking the 2025 BLS benchmark revision"
 :::
 
 ## 7. The Pattern Is About Regime, Not Direction

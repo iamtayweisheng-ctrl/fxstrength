@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
-Disallow: /meter.html
+
+# meter.html is kept out of search with a noindex meta tag (not disallowed here,
+# so crawlers can read that tag). GPTBot, ClaudeBot, PerplexityBot and
+# Google-Extended are intentionally allowed — AI-search referrals depend on it.
 
 Sitemap: https://fxstrength.org/sitemap.xml

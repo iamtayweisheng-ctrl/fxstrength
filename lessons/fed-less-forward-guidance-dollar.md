@@ -1,6 +1,7 @@
 ---
 section: the-bigger-picture
 title: Why Is the Fed Giving Markets Less Guidance? What Does That Mean for the Dollar?
+seo_title: "The Fed's Less-Guidance Shift and the Dollar"
 dek: Fed Chair Kevin Warsh is questioning forward guidance — telling markets what the central bank might do next. Could less of it make the dollar harder to price?
 slug: fed-less-forward-guidance-dollar
 date: 2026-11-01
