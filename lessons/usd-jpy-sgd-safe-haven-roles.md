@@ -16,7 +16,7 @@ For years, the US dollar has been one of the first currencies investors turn to 
 
 The latest sell-off in technology stocks is a useful case study. Investors have questioned whether massive AI infrastructure spending will generate sufficient returns, while elevated oil prices and geopolitical tension have added to the uncertainty. Yet currencies haven't responded in a simple, uniform way.
 
-Reuters reported on October 23 that the Japanese yen strengthened as investors sought safety during the equity sell-off, while falling US Treasury yields weighed on the dollar. The yen's gains weren't uninterrupted, but its performance showed defensive demand can favour currencies other than USD. ([Reuters](https://live.euronext.com/en/financial-news/yen-set-weekly-gain-ai-jitters-spur-safe-haven-rush))
+Reuters reported on October 23 that the Japanese yen strengthened as investors sought safety during the equity sell-off, while falling US Treasury yields weighed on the dollar. The yen's gains weren't uninterrupted, but its performance showed defensive demand can favour currencies other than USD. ([Reuters via Euronext](https://live.euronext.com/en/financial-news/euro-sinks-french-debt-worries-yen-gains-week-ai-rout))
 
 That doesn't mean the dollar has lost its safe-haven status. It means we need to understand **what kind of risk investors are trying to protect themselves against.**
 

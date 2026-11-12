@@ -57,6 +57,38 @@ SECTIONS = {
         "index_desc": ("A plain guide to what drives each G10 currency — the core macro forces, "
                        "the less-obvious watches, and how to build a view of a currency before you trade a pair."),
         "cover": "/og-guides.png",
+        "intro_html": """    <section class="lib-intro">
+      <p>A currency's price is the market's running verdict on one country's economy
+      versus another's. Four forces do most of the work, and they apply to every pair:</p>
+      <ul>
+        <li><strong>Interest-rate expectations.</strong> Not today's rate, but where the
+        market thinks the central bank is heading. Rising expectations usually support a
+        currency; a dovish turn usually weakens it.</li>
+        <li><strong>Growth and inflation data.</strong> Jobs, CPI, GDP and PMIs matter
+        because they move those rate expectations — which is why the same number can help
+        a currency in one regime and hurt it in another.</li>
+        <li><strong>Risk sentiment.</strong> In risk-off moments money flows to havens
+        (USD, JPY, CHF); in risk-on moments it favours the commodity currencies
+        (AUD, NZD, CAD). Our <a href="/">live strength grid</a> shows which side is winning.</li>
+        <li><strong>Terms of trade and politics.</strong> Commodity prices move the
+        exporters (CAD with oil, AUD with metals, NOK with gas), while elections, debt and
+        policy credibility can override the data for a time.</li>
+      </ul>
+      <p>Each G10 currency weights these differently. Here is the headline driver for each,
+      with the full breakdown in the guide below:</p>
+      <ul>
+        <li><strong>USD</strong> — Fed policy, Treasury yields and global risk appetite (it is both a growth and a haven currency).</li>
+        <li><strong>EUR</strong> — ECB policy and the gap between core and periphery; French and Italian bond spreads are a key stress gauge.</li>
+        <li><strong>JPY</strong> — real-yield gaps versus the US and haven demand; sensitive to BOJ normalisation.</li>
+        <li><strong>GBP</strong> — BoE policy against sticky UK inflation, plus fiscal and gilt-market credibility.</li>
+        <li><strong>CHF</strong> — safe-haven flows and the SNB's tolerance for franc strength.</li>
+        <li><strong>CAD</strong> — Bank of Canada policy and oil, with heavy exposure to the US cycle.</li>
+        <li><strong>AUD</strong> — risk sentiment, industrial-metal and iron-ore demand, and the China growth story.</li>
+        <li><strong>NZD</strong> — risk appetite, dairy prices and RBNZ policy.</li>
+        <li><strong>NOK</strong> — natural gas and oil, Norges Bank policy and overall risk mood.</li>
+        <li><strong>SEK</strong> — a cyclical, risk-sensitive currency tied to European growth and Riksbank policy.</li>
+      </ul>
+    </section>""",
     },
 }
 
@@ -683,6 +715,7 @@ def render_index(sec, articles):
     if not items:
         items = '<p class="hint">The first article is on its way.</p>'
     desc = sinfo["index_desc"]
+    intro_block = sinfo.get("intro_html", "")      # optional lead content under the header
     cover = f'{SITE}{sinfo["cover"]}'
     sv, lv = asset_v("styles.css"), asset_v("lessons.css")
     # Entity schema so assistants recognise the publisher, not just the page.
@@ -729,6 +762,7 @@ def render_index(sec, articles):
       <h1>{html.escape(sinfo["index_h1"])}</h1>
       <p class="dek">{html.escape(sinfo["tagline"])}</p>
     </header>
+{intro_block}
     <div class="lib-grid">
 {items}
     </div>
