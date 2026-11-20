@@ -20,7 +20,7 @@ The same oil shock can push one central bank towards another rate hike while mak
 
 ## The oil shock is no longer just about supply
 
-The Strait of Hormuz remains a major focus because disruptions to shipping can threaten the flow of energy through an important global route. In the week to 15 November, the market was dealing with renewed US–Iran tensions, reports of military activity and continued uncertainty around shipping through the Strait, with WTI near **$89** and Brent above **$98** as geopolitical risk supported prices.
+The Strait of Hormuz remains a major focus because disruptions to shipping can threaten the flow of energy through an important global route. In the week to 15 November, the market was dealing with renewed US–Iran tensions, reports of military activity and continued uncertainty around shipping through the Strait, with WTI near **$89** and Brent above **$98** as geopolitical risk supported prices. (In the weeks since, the oil price itself has stayed surprisingly subdued even as the conflict escalated — we unpack why in [The Gulf Conflict Is Escalating. So Why Isn't Brent Rising?](/the-bigger-picture/gulf-conflict-brent-not-rising))
 
 But the FX consequences do not stop at the oil market. When energy prices rise, importing economies face a larger bill for the same amount of energy. That can:
 

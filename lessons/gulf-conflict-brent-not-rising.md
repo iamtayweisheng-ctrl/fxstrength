@@ -50,7 +50,7 @@ That doesn't remove the geopolitical risk premium — it means the premium is be
 
 ## What this means for currencies
 
-The change in the oil market creates different effects across currencies.
+The change in the oil market creates different effects across currencies — and it interacts with [which central banks can actually afford to keep fighting inflation](/the-bigger-picture/oil-shock-central-banks-fight-inflation).
 
 ### USD — rate expectations still matter more than oil
 
