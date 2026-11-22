@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gold Strength Meter — Live XAU Strength vs the Majors</title>
+  <meta name="description" content="A live gold strength meter: see how strong XAU is against the major currencies on intraday, daily and weekly timeframes — not just gold versus a weak or strong dollar." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0b0f17" />
+  <link rel="canonical" href="https://fxstrength.org/gold-strength-meter" />
+  <meta property="og:site_name" content="FXStrength" />
+  <meta property="og:title" content="Gold Strength Meter — Live XAU Strength vs the Majors" />
+  <meta property="og:description" content="See gold's own strength, scored against the basket of major currencies and normalised to gold's own volatility — live, across intraday, daily and weekly." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fxstrength.org/gold-strength-meter" />
+  <meta property="og:image" content="https://fxstrength.org/og.svg" />
+  <link rel="stylesheet" href="styles.css?v=8" />
+  <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
+  <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
+  <style>
+    .page{max-width:760px;margin:0 auto;padding:0 18px 48px}
+    .page h1{font-size:28px;line-height:1.2;margin:20px 0 10px}
+    .page h2{font-size:21px;margin:30px 0 6px}
+    .page h3{font-size:16px;margin:18px 0 4px}
+    .page p,.page li{font-size:15px;line-height:1.7;color:var(--ink)}
+    .lead-summary{font-size:16px;line-height:1.6;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+      border-left:3px solid var(--accent);border-radius:10px;padding:14px 16px;margin:0 0 20px}
+    .page .muted{color:var(--muted)}
+    .page ul{padding-left:20px}
+    .page li{margin:4px 0}
+    .page strong{color:var(--ink)}
+    .example{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+    .meter-cta{display:block;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);
+      border-radius:12px;padding:18px 20px;margin:26px 0;text-decoration:none;color:var(--ink)}
+    .meter-cta b{color:var(--ink)} .meter-cta .go{color:var(--accent);font-weight:700}
+    .page .foot-ref{font-size:13px;color:var(--muted);margin-top:28px}
+    .page .foot-ref a{color:var(--accent)}
+    /* Live XAU widget */
+    .gold-live{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:22px 0}
+    .gold-live .gl-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .gold-live .gl-title{font-weight:700;color:var(--ink);font-size:15px}
+    .gold-live .gl-upd{font-size:12px;color:var(--muted)}
+    .gl-rows{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+    .gl-cell{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;text-align:center}
+    .gl-tf{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:4px}
+    .gl-score{font-size:24px;font-weight:800;line-height:1.1}
+    .gl-arrow{font-size:13px;margin-left:4px}
+    .gl-arrow.up{color:#22c55e} .gl-arrow.down{color:#ef4444} .gl-arrow.flat{color:var(--muted)}
+    .gl-pct{font-size:11px;color:var(--muted);margin-top:2px}
+    .gl-note{font-size:12px;color:var(--muted);margin:12px 0 0}
+    .gl-fallback{font-size:13px;color:var(--muted)}
+    @media(max-width:480px){.gl-score{font-size:20px}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">▚▚</span> <a href="/" style="color:inherit;text-decoration:none">FXStrength</a></div>
+    <div class="topbar-right">
+      <a class="nav-link" href="/behind-the-move/">Behind the Move</a>
+      <a class="nav-link" href="/the-bigger-picture/">The Bigger Picture</a>
+      <a class="nav-link" href="/fx-drivers/">FX Drivers</a>
+      <a class="nav-link" href="/">Strength meter</a>
+      <button class="refresh" id="theme-toggle" title="Light / dark" aria-label="Toggle light or dark theme">☾</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <h1>Gold strength meter</h1>
+
+    <p class="lead-summary"><strong>A gold strength meter scores gold (XAU) against a basket of major currencies — not just against the dollar.</strong> It tells you whether gold is broadly strong on its own, or only rising because the dollar is weak. Below is gold's live strength across three timeframes, scaled to gold's own volatility.</p>
+
+    <!-- Live XAU read, pulled from the same matrix the homepage grid uses. -->
+    <section class="gold-live" id="gold-live" aria-label="Live gold strength">
+      <div class="gl-head">
+        <span class="gl-title">Gold (XAU) strength now</span>
+        <span class="gl-upd" id="gl-upd">loading…</span>
+      </div>
+      <div class="gl-rows" id="gl-rows">
+        <p class="gl-fallback" id="gl-fallback">Loading the live gold read…</p>
+      </div>
+      <p class="gl-note">0 = weak, 10 = strong <em>for gold</em> — scaled to gold's own normal range, so it isn't directly comparable to a currency's score. ▲ rising · ▼ falling · — flat.
+        <a href="/" data-cta="gold-to-meter">See gold beside the 8 majors, silver &amp; Bitcoin →</a></p>
+    </section>
+
+    <h2>What is a gold strength meter?</h2>
+    <p>XAU/USD only tells you gold's story <em>against the dollar</em>. If the dollar is weak everywhere, gold can look like it's rallying when really the dollar is just falling. A gold strength meter fixes that by scoring gold against the whole basket of majors — USD, EUR, JPY, GBP and the rest — and placing it on the same scale as the currencies. That separates <strong>gold strength</strong> from <strong>dollar weakness</strong>, which a single XAU/USD chart can't do.</p>
+
+    <h2>How is gold strength calculated?</h2>
+    <p>The method mirrors currency strength: take gold's percentage move against each major currency over a chosen window and average them into one score. The twist is scale. Gold routinely moves more than the fiats in a day, so putting it on the raw currency scale would peg it at the extreme almost every session. Instead, the meter <strong>normalises gold to its own typical volatility</strong>, so its 0–10 score reads "how strong is gold versus its <em>own</em> normal," not against the currency yardstick. A 9/10 for gold means a strong day <em>for gold</em> — it is not the same as a 9/10 for the dollar.</p>
+
+    <h2>What moves gold?</h2>
+    <p>Gold doesn't pay interest, so its biggest swing factor is the <strong>real yield</strong> — the return on cash and bonds after inflation. When real yields rise, holding gold costs more in forgone interest and gold tends to soften; when they fall, gold's appeal rises. Around that sit three forces worth watching on the meter:</p>
+    <ul>
+      <li><strong>The US dollar.</strong> Gold is priced in dollars, so a stronger dollar is often a headwind — but the meter shows whether gold is weak outright or merely weak against a strong dollar.</li>
+      <li><strong>Risk sentiment and havens.</strong> In stress, gold can attract defensive demand alongside the yen and franc — or not, depending on whether the move is a liquidity scramble (which can favour the dollar instead).</li>
+      <li><strong>Central banks and inflation.</strong> Policy expectations and official buying shift the longer-run backdrop.</li>
+    </ul>
+    <p>These forces often pull in different directions at once, which is why gold's price alone can mislead. A few worked examples:</p>
+    <ul>
+      <li><a href="/behind-the-move/hot-cpi-paradox-yields-gold">The hot CPI paradox: why yields fell and gold rose</a> — the real-yield link in action.</li>
+      <li><a href="/behind-the-move/gold-recovered-then-jobs-report-hit">Gold recovered, then the US jobs report hit — why buyers didn't walk away</a>.</li>
+      <li><a href="/behind-the-move/gold-broken-down-where-buyers-step-in">Gold has broken down — where will buyers finally step in?</a></li>
+      <li><a href="/behind-the-move/why-oil-and-gold-dont-move-together">Oil is surging — why don't oil and gold move together?</a></li>
+    </ul>
+
+    <a class="meter-cta" href="/" data-cta="gold-to-meter">
+      <b>See gold strength live.</b> FXStrength scores <b>gold (XAU)</b> alongside the 8 major currencies, silver and Bitcoin,
+      across intraday, daily and weekly timeframes on one grid — so you can tell whether a gold move is its own story or just the dollar's.
+      <span class="go">Open the live meter →</span>
+    </a>
+
+    <h2>How do I read the gold score?</h2>
+    <p>A high score means gold has been strong <em>relative to its own recent range</em>; a low score, weak. Check the <strong>direction arrow</strong> for whether that strength is building or fading, and the <strong>timeframe</strong> for whether it's an intraday blip or a weekly trend. When gold is strong on all three timeframes at once, that's the highest-conviction read. And because the score is normalised to gold's volatility, compare it to gold's own history — not directly to a currency's number.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <h3>What is a gold strength meter?</h3>
+        <p>A tool that scores gold (XAU) against a basket of major currencies, the same way a currency strength meter ranks the fiats. Instead of reading XAU/USD alone — which mixes gold's story with the dollar's — it isolates gold's own strength and places it on one scale beside the currencies, silver and Bitcoin.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How is gold strength measured against currencies?</h3>
+        <p>You take gold's percentage move against each major currency over a chosen window and average them into a single score. Because gold is more volatile than the fiats, the 0 to 10 score is normalised to gold's own typical range, so it reflects how strong gold is versus its own normal rather than against the currency scale.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What makes gold strong or weak?</h3>
+        <p>The biggest factor is the real yield — the return on cash and bonds after inflation. Rising real yields tend to weigh on gold; falling real yields support it. The US dollar, risk sentiment and safe-haven demand, and central-bank policy and buying also move it. The meter helps you see whether gold is strong outright or just rising against a weak dollar.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How do I read the gold strength score?</h3>
+        <p>A high score means gold has been strong relative to its own recent range; a low score, weak. Because it's normalised to gold's volatility, a 9 out of 10 for gold is not directly equivalent to a 9 for the dollar — it means a strong day for gold. Use the direction arrow for momentum and the timeframe for whether it's a blip or a trend.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is there a silver or XAU/USD version?</h3>
+        <p>Yes. FXStrength scores silver (XAG) on the same grid, and you can see gold against the dollar and every other major at once on the live meter. That lets you check whether a gold move is broad strength or specific to one pair.</p>
+      </div>
+    </div>
+
+    <p class="foot-ref">Related: <a href="/">the live strength meter</a> · <a href="/currency-strength-meter">what is a currency strength meter?</a> · <a href="/bitcoin-strength-meter">Bitcoin strength meter</a> · <a href="/fx-drivers/">what drives each G10 currency</a>.</p>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-links">Read: <a href="/behind-the-move/">Behind the Move</a> · <a href="/the-bigger-picture/">The Bigger Picture</a> · <a href="/fx-drivers/">FX Drivers</a></p>
+    <p class="disclaimer">
+      FXStrength provides market information for educational purposes only and is <strong>not financial advice</strong>.
+      Trading precious metals, foreign exchange and CFDs carries a high risk of loss.
+    </p>
+    <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "FXStrength Gold Strength Meter",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "url": "https://fxstrength.org/gold-strength-meter",
+    "description": "A live gold strength meter: scores gold (XAU) against the basket of major currencies on intraday, daily and weekly timeframes, normalised to gold's own volatility.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isAccessibleForFree": true,
+    "publisher": { "@type": "Organization", "name": "FXStrength", "url": "https://fxstrength.org/" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is a gold strength meter?", "acceptedAnswer": { "@type": "Answer", "text": "A tool that scores gold (XAU) against a basket of major currencies, the same way a currency strength meter ranks the fiats. Instead of reading XAU/USD alone — which mixes gold's story with the dollar's — it isolates gold's own strength and places it on one scale beside the currencies, silver and Bitcoin." } },
+      { "@type": "Question", "name": "How is gold strength measured against currencies?", "acceptedAnswer": { "@type": "Answer", "text": "You take gold's percentage move against each major currency over a chosen window and average them into a single score. Because gold is more volatile than the fiats, the 0 to 10 score is normalised to gold's own typical range, so it reflects how strong gold is versus its own normal rather than against the currency scale." } },
+      { "@type": "Question", "name": "What makes gold strong or weak?", "acceptedAnswer": { "@type": "Answer", "text": "The biggest factor is the real yield — the return on cash and bonds after inflation. Rising real yields tend to weigh on gold; falling real yields support it. The US dollar, risk sentiment and safe-haven demand, and central-bank policy and buying also move it. The meter helps you see whether gold is strong outright or just rising against a weak dollar." } },
+      { "@type": "Question", "name": "How do I read the gold strength score?", "acceptedAnswer": { "@type": "Answer", "text": "A high score means gold has been strong relative to its own recent range; a low score, weak. Because it's normalised to gold's volatility, a 9 out of 10 for gold is not directly equivalent to a 9 for the dollar — it means a strong day for gold. Use the direction arrow for momentum and the timeframe for whether it's a blip or a trend." } },
+      { "@type": "Question", "name": "Is there a silver or XAU/USD version?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. FXStrength scores silver (XAG) on the same grid, and you can see gold against the dollar and every other major at once on the live meter. That lets you check whether a gold move is broad strength or specific to one pair." } }
+    ]
+  }
+  </script>
+
+  <script>
+  (function(){
+    try{document.documentElement.setAttribute('data-theme',localStorage.getItem('fxs_theme')||'dark');}catch(e){}
+    var tb=document.getElementById('theme-toggle');
+    function sync(){try{tb.textContent=(localStorage.getItem('fxs_theme')||'dark')==='light'?'☀':'☾';}catch(e){}}
+    if(tb){tb.addEventListener('click',function(){
+      var next=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+      document.documentElement.setAttribute('data-theme',next);
+      try{localStorage.setItem('fxs_theme',next);}catch(e){}sync();
+    });sync();}
+    document.querySelectorAll('a[data-cta="gold-to-meter"]').forEach(function(c){
+      c.addEventListener('click',function(){try{window.plausible&&window.plausible('GoldGuideToMeter');}catch(e){}});
+    });
+
+    // Live XAU read from the published matrix (same source as the homepage grid).
+    var ARROWS={up:'▲',down:'▼',flat:'—'};
+    var TF_LABEL={intraday:'Intraday',daily:'Daily',weekly:'Weekly'};
+    function scoreColor(s){var t=Math.max(0,Math.min(1,s/10));
+      if(t<0.5){var k=t/0.5;return 'rgb('+(239-k*139)+','+(68+k*48)+','+(68+k*71)+')';}
+      var k2=(t-0.5)/0.5;return 'rgb('+(100-k2*66)+','+(116+k2*81)+','+(139-k2*45)+')';}
+    function paint(m){
+      var order=m.timeframe_order||Object.keys(m.timeframes||{});
+      var tfs=order.filter(function(t){return m.timeframes&&m.timeframes[t]&&m.timeframes[t].scores&&m.timeframes[t].scores.XAU;});
+      var rows=document.getElementById('gl-rows');
+      if(!tfs.length){rows.innerHTML='<p class="gl-fallback">Live gold read is updating — <a href="/">open the full meter</a>.</p>';return;}
+      rows.innerHTML='';
+      rows.style.gridTemplateColumns='repeat('+tfs.length+',1fr)';
+      tfs.forEach(function(t){
+        var s=m.timeframes[t].scores.XAU;var col=scoreColor(s.score);
+        var pct=(typeof s.pct==='number')?((s.pct>=0?'+':'')+s.pct+'% vs basket'):'';
+        var cell=document.createElement('div');cell.className='gl-cell';
+        cell.innerHTML='<div class="gl-tf">'+(TF_LABEL[t]||t)+'</div>'+
+          '<div class="gl-score" style="color:'+col+'">'+s.score.toFixed(1)+
+          '<span class="gl-arrow '+s.arrow+'">'+(ARROWS[s.arrow]||'—')+'</span></div>'+
+          '<div class="gl-pct">'+pct+'</div>';
+        rows.appendChild(cell);
+      });
+      var upd=document.getElementById('gl-upd');
+      if(m.generated_at){var g=new Date(m.generated_at);
+        var age=Math.max(0,Math.round((Date.now()-g.getTime())/60000));
+        var at=age<60?age+'m ago':Math.floor(age/60)+'h '+(age%60)+'m ago';
+        upd.textContent='updated '+at+(m.market_open?'':' · market closed');}
+      else upd.textContent='';
+    }
+    fetch('/data/matrix.json',{cache:'no-store'}).then(function(r){return r.json();}).then(paint).catch(function(){
+      var rows=document.getElementById('gl-rows');
+      rows.innerHTML='<p class="gl-fallback">Couldn’t load the live read right now — <a href="/">open the full meter</a>.</p>';
+      document.getElementById('gl-upd').textContent='';
+    });
+  })();
+  </script>
+</body>
+</html>

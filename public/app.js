@@ -109,8 +109,11 @@ function render(matrix) {
     const sep = isVol && !sepDone;      // divider above the first non-fiat asset
     if (isVol) sepDone = true;
     const label = hcell('', 'ghead rowlabel' + (sep ? ' grp-sep' : ''));
-    label.innerHTML =
-      `<span class="ccy${isVol ? ' metal' : ''}">${ccy}</span>`;
+    const ccySpan = `<span class="ccy${isVol ? ' metal' : ''}">${ccy}</span>`;
+    // Gold row links to the dedicated gold strength meter page.
+    label.innerHTML = ccy === 'XAU'
+      ? `<a class="ccy-link" href="/gold-strength-meter" title="Gold strength meter — live XAU vs the majors">${ccySpan}</a>`
+      : ccySpan;
     label.title = (CCY_NAME[ccy] || ccy) + (isVol
       ? ' — scored against its OWN normal volatility (0 = weak, 10 = strong for this asset), so it is not directly comparable to the currencies.'
       : '');
@@ -510,12 +513,17 @@ function track(event, props) {
 // contact lands via Brevo Contacts. 'email_address_check' is Brevo's honeypot (stays empty).
 const SUBSCRIBE_ENDPOINT = 'https://95e1cb32.sibforms.com/serve/MUIFAIKhyQh6CGkKVNSeY3PosPVQD4EVB-LtNRAK6boe5Ftk9MfOVfqm8jCWu3t7Vr6jgB3f5szihJ4r_0drvErPkuxB-uBanxXUJqsebdxRjpqi-AM3eH-VtDQaKSWbsWQ54ntlFxGz9vd3mItlg_naooEP1Dfz1PSdgaDhyVoGYkxqmzzpUVlVhE02yNKtBiplU09v5l7Lnq6J8w==';
 
-function initCapture() {
-  const form = document.getElementById('capture-form');
-  const note = document.getElementById('capture-note');
+// Wires an email-capture form to Brevo + the Plausible 'Signup' goal. `location`
+// ('top' | 'bottom') is sent as a Plausible prop so the two homepage forms can be
+// told apart. `done` is the confirmation shown on success.
+function initCapture(formId, noteId, location, done) {
+  const form = document.getElementById(formId);
+  const note = document.getElementById(noteId);
+  if (!form || !note) return;
   form.addEventListener('submit', async (ev) => {
     ev.preventDefault();
-    const email = document.getElementById('capture-email').value.trim();
+    const field = form.querySelector('input[type=email]');
+    const email = (field ? field.value : '').trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
       note.textContent = 'Please enter a valid email.';
       return;
@@ -530,10 +538,17 @@ function initCapture() {
         await fetch(SUBSCRIBE_ENDPOINT, { method: 'POST', mode: 'no-cors', body: fd });
       } catch (e) { /* opaque response in no-cors; treat as sent */ }
     }
-    track('Signup');
-    note.textContent = "You're on the list — we'll be in touch when alerts launch.";
+    track('Signup', location ? { location } : undefined);
+    note.textContent = done || "You're on the list — we'll be in touch when alerts launch.";
     form.reset();
   });
+}
+
+// Fire a Plausible goal when the homepage codes box is clicked (internal link,
+// so sendBeacon survives the navigation).
+function initCodesBox() {
+  const link = document.getElementById('codes-box-link');
+  if (link) link.addEventListener('click', () => track('CodesBox'));
 }
 
 function initRefresh() {
@@ -582,7 +597,9 @@ function initTheme() {
 
 initTheme();
 load();
-initCapture();
+initCapture('capture-form', 'capture-note', 'bottom');
+initCapture('top-capture-form', 'top-capture-note', 'top', "You're on the list — the weekly read lands in your inbox.");
+initCodesBox();
 initRefresh();
 initIdeasToggle();
 initChartToggle();

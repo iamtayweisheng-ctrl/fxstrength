@@ -399,3 +399,28 @@ h2 { font-size: 18px; margin: 0 0 8px; }
   .bar { height: 30px; padding: 0 6px; }
   .ghead { font-size: 10px; }
 }
+
+/* ── top-of-page email capture (slim, mobile-first) ──── */
+.top-capture { max-width: 920px; margin: 14px auto 0; padding: 14px 16px; background: var(--panel);
+  border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 12px; }
+.top-capture .tc-line { margin: 0 0 10px; font-weight: 600; color: var(--ink); font-size: 15px; }
+.tc-form { display: flex; gap: 8px; flex-wrap: wrap; }
+.tc-form input { flex: 1 1 220px; min-width: 0; padding: 10px 12px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--panel-2); color: var(--ink); font-size: 15px; }
+.tc-form button { padding: 10px 16px; border: 0; border-radius: 8px; background: var(--accent);
+  color: #0b0f17; font-weight: 700; cursor: pointer; font-size: 15px; }
+.tc-note { margin: 8px 0 0; font-size: 12px; color: var(--muted); }
+
+/* ── homepage codes box (internal link to /prop-firm-discount-codes) ── */
+.codes-box { max-width: 920px; margin: 14px auto 0; padding: 12px 16px; display: flex;
+  align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+.codes-box .cb-copy { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.cb-badge { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; font-weight: 700;
+  color: var(--accent); border: 1px solid var(--line); border-radius: 999px; padding: 3px 9px; }
+.codes-box .cb-line { margin: 0; color: var(--ink); font-size: 14px; }
+.cb-link { font-weight: 700; color: var(--accent); text-decoration: none; white-space: nowrap; }
+.cb-link:hover { text-decoration: underline; }
+
+.ccy-link { text-decoration: none; color: inherit; }
+.ccy-link:hover .ccy { text-decoration: underline; }

@@ -792,6 +792,7 @@ STATIC_URLS = [
     ("/", "1.0", "daily"),
     ("/currency-strength-meter", "0.8", "monthly"),
     ("/bitcoin-strength-meter", "0.8", "monthly"),
+    ("/gold-strength-meter", "0.8", "monthly"),
     ("/prop-firm-discount-codes", "0.6", "monthly"),
 ]
 
