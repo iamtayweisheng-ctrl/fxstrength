@@ -221,7 +221,11 @@
         upd.textContent='updated '+at+(m.market_open?'':' · market closed');}
       else upd.textContent='';
     }
-    fetch('/data/matrix.json',{cache:'no-store'}).then(function(r){return r.json();}).then(paint).catch(function(){
+    // Match the homepage: production reads the live `data` branch from GitHub's CDN
+    // (the committed /data copy is stale); locally fall back to the committed file.
+    var IS_LOCAL=['localhost','127.0.0.1',''].indexOf(location.hostname)>=0;
+    var DATA_URL=IS_LOCAL?'data/matrix.json':'https://raw.githubusercontent.com/iamtayweisheng-ctrl/fxstrength/data/matrix.json';
+    fetch(DATA_URL,{cache:'no-store'}).then(function(r){return r.json();}).then(paint).catch(function(){
       var rows=document.getElementById('gl-rows');
       rows.innerHTML='<p class="gl-fallback">Couldn’t load the live read right now — <a href="/">open the full meter</a>.</p>';
       document.getElementById('gl-upd').textContent='';
