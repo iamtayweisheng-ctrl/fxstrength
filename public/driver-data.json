@@ -2,7 +2,7 @@
   "as_of_risk": "2026-11-19",
   "as_of_rates_us": "2026-11-19",
   "as_of_slow": "2026-09",
-  "generated": "2026-11-22T01:54:06Z",
+  "generated": "2026-11-23T01:24:51Z",
   "windows": {
     "daily": "~30 days (matches strength meter)",
     "weekly": "~26 weeks"
@@ -17,7 +17,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "amber",
-            "reason": "Yield edge steady (-8bp)",
+            "reason": "Yield edge steady (-4bp)",
             "weight": 0.515,
             "beta": 0.398
           },
@@ -33,7 +33,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +9.4 over 1m) \u2014 weighs on EUR",
+            "reason": "Risk-off (VIX +9.0 over 1m) \u2014 weighs on EUR",
             "weight": 0.191,
             "beta": 0.159
           }
@@ -46,7 +46,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +9.4 over 1m) \u2014 weighs on GBP",
+            "reason": "Risk-off (VIX +9.0 over 1m) \u2014 weighs on GBP",
             "weight": 0.786,
             "beta": 0.405
           },
@@ -67,7 +67,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +9.4 over 1m) \u2014 weighs on AUD",
+            "reason": "Risk-off (VIX +9.0 over 1m) \u2014 weighs on AUD",
             "weight": 0.531,
             "beta": 0.493
           },
@@ -75,7 +75,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "amber",
-            "reason": "Yield edge steady (-8bp)",
+            "reason": "Yield edge steady (-4bp)",
             "weight": 0.275,
             "beta": 0.256
           },
@@ -96,7 +96,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +9.4 over 1m) \u2014 weighs on NZD",
+            "reason": "Risk-off (VIX +9.0 over 1m) \u2014 weighs on NZD",
             "weight": 0.531,
             "beta": 0.432
           },
@@ -104,7 +104,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "amber",
-            "reason": "Yield edge steady (-8bp)",
+            "reason": "Yield edge steady (-4bp)",
             "weight": 0.256,
             "beta": 0.212
           },
@@ -125,7 +125,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "amber",
-            "reason": "Yield edge steady (+8bp)",
+            "reason": "Yield edge steady (+4bp)",
             "weight": 0.406,
             "beta": 0.369
           },
@@ -133,7 +133,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "green",
-            "reason": "Risk-on (VIX +9.4 over 1m) \u2014 supports USD",
+            "reason": "Risk-on (VIX +9.0 over 1m) \u2014 supports USD",
             "weight": 0.377,
             "beta": 0.342
           },
@@ -154,7 +154,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "amber",
-            "reason": "Yield edge steady (-8bp)",
+            "reason": "Yield edge steady (-4bp)",
             "weight": 0.346,
             "beta": 0.387
           },
@@ -162,7 +162,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +9.4 over 1m) \u2014 weighs on CAD",
+            "reason": "Risk-off (VIX +9.0 over 1m) \u2014 weighs on CAD",
             "weight": 0.302,
             "beta": 0.337
           },
@@ -191,7 +191,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "amber",
-            "reason": "Yield edge steady (-8bp)",
+            "reason": "Yield edge steady (-4bp)",
             "weight": 0.674,
             "beta": 0.317
           },
@@ -212,7 +212,7 @@
             "key": "yield",
             "label": "Yield advantage",
             "colour": "amber",
-            "reason": "Yield edge steady (-8bp)",
+            "reason": "Yield edge steady (-4bp)",
             "weight": 1.0,
             "beta": 0.463
           }
@@ -243,7 +243,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +11.7 over 6m) \u2014 weighs on EUR",
+            "reason": "Risk-off (VIX +11.9 over 6m) \u2014 weighs on EUR",
             "weight": 0.191,
             "beta": 0.159
           }
@@ -256,7 +256,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +11.7 over 6m) \u2014 weighs on GBP",
+            "reason": "Risk-off (VIX +11.9 over 6m) \u2014 weighs on GBP",
             "weight": 0.786,
             "beta": 0.405
           },
@@ -277,7 +277,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +11.7 over 6m) \u2014 weighs on AUD",
+            "reason": "Risk-off (VIX +11.9 over 6m) \u2014 weighs on AUD",
             "weight": 0.531,
             "beta": 0.493
           },
@@ -306,7 +306,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +11.7 over 6m) \u2014 weighs on NZD",
+            "reason": "Risk-off (VIX +11.9 over 6m) \u2014 weighs on NZD",
             "weight": 0.531,
             "beta": 0.432
           },
@@ -343,7 +343,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "green",
-            "reason": "Risk-on (VIX +11.7 over 6m) \u2014 supports USD",
+            "reason": "Risk-on (VIX +11.9 over 6m) \u2014 supports USD",
             "weight": 0.377,
             "beta": 0.342
           },
@@ -372,7 +372,7 @@
             "key": "risk",
             "label": "Risk sentiment",
             "colour": "red",
-            "reason": "Risk-off (VIX +11.7 over 6m) \u2014 weighs on CAD",
+            "reason": "Risk-off (VIX +11.9 over 6m) \u2014 weighs on CAD",
             "weight": 0.302,
             "beta": 0.337
           },
