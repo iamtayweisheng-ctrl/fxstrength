@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T02:39:36Z",
+  "generated": "2026-11-24T05:15:34Z",
   "source": "ForexFactory weekly calendar (High-impact)",
   "note": "This week's high-impact events, mapped to the meter's drivers. Context, not signals.",
   "order": [
@@ -27,7 +27,7 @@
         "day": "Tue",
         "date": "2026-11-25T00:30:00+00:00",
         "when": "upcoming",
-        "forecast": "4.8%",
+        "forecast": "4.7%",
         "previous": "4.3%",
         "actual": "",
         "surprise": null
