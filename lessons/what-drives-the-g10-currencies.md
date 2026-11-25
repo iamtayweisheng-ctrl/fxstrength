@@ -1,6 +1,6 @@
 ---
 section: fx-drivers
-title: What Drives the G10 Currencies?
+title: "The G10 Currencies: List, and What Drives Each One"
 dek: A plain-English guide to what moves each major currency — and the less-obvious watch most retail traders miss. Build a view of a currency before you look at a pair.
 slug: what-drives-the-g10-currencies
 date: 2026-08-13
@@ -10,7 +10,21 @@ description: What drives each of the G10 currencies (USD, EUR, JPY, GBP, CHF, CA
 summary: Every G10 currency has obvious drivers and a less-obvious watch most people miss. This guide covers all ten, teaches you to build a view of a currency before you look at a pair, and shows why FX is always relative — a pair is two currency stories netted, never just "short USD".
 ---
 
-**The G10 currencies are the ten most-traded in the world: the US dollar (USD), euro (EUR), Japanese yen (JPY), British pound (GBP), Swiss franc (CHF), Canadian dollar (CAD), Australian dollar (AUD), New Zealand dollar (NZD), Norwegian krone (NOK) and Swedish krona (SEK).** Each is driven by its own mix of central-bank rate expectations, economic data, commodity prices and risk sentiment — and this guide breaks down what moves all ten.
+**The G10 currencies are the ten most-traded in the world: the US dollar (USD), euro (EUR), Japanese yen (JPY), British pound (GBP), Swiss franc (CHF), Canadian dollar (CAD), Australian dollar (AUD), New Zealand dollar (NZD), Swedish krona (SEK) and Norwegian krone (NOK).** Each is driven by its own mix of central-bank rate expectations, economic data, commodity prices and risk sentiment — and this guide breaks down what moves all ten.
+
+:::table
+Code | Currency | Country / region | Central bank
+USD | US dollar | United States | Federal Reserve (Fed)
+EUR | Euro | Eurozone | European Central Bank (ECB)
+JPY | Japanese yen | Japan | Bank of Japan (BoJ)
+GBP | British pound | United Kingdom | Bank of England (BoE)
+CHF | Swiss franc | Switzerland | Swiss National Bank (SNB)
+CAD | Canadian dollar | Canada | Bank of Canada (BoC)
+AUD | Australian dollar | Australia | Reserve Bank of Australia (RBA)
+NZD | New Zealand dollar | New Zealand | Reserve Bank of New Zealand (RBNZ)
+SEK | Swedish krona | Sweden | Sveriges Riksbank
+NOK | Norwegian krone | Norway | Norges Bank
+:::
 
 Before you look at a single pair, it helps to know what actually moves each currency. This guide covers the **core drivers** of all ten — and, for each, the **less-obvious watch** that most retail traders overlook. The goal isn't a signal. It's to help you build a macro view of a currency *before* you look at a pair — because in FX, nothing moves alone.
 

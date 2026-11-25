@@ -424,3 +424,8 @@ h2 { font-size: 18px; margin: 0 0 8px; }
 
 .ccy-link { text-decoration: none; color: inherit; }
 .ccy-link:hover .ccy { text-decoration: underline; }
+
+/* ── authorship byline under the meter ───────────────── */
+.byline { max-width: 920px; margin: 10px auto 0; font-size: 13px; color: var(--muted); line-height: 1.6; }
+.byline a { color: var(--accent); text-decoration: none; }
+.byline a:hover { text-decoration: underline; }

@@ -14,3 +14,6 @@
 
 # Section renamed (guides → fx-drivers)
 /guides/*  /fx-drivers/:splat  301
+
+# /contact is the "Say hello" section of the About page (no separate page)
+/contact  /about/#contact  301

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About FXStrength · Vincent, Singapore</title>
+  <meta name="description" content="FXStrength is a free, live currency strength meter for the G8 currencies, gold and Bitcoin, built and run by Vincent in Singapore. Education, not advice." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0b0f17" />
+  <link rel="canonical" href="https://fxstrength.org/about/" />
+  <meta property="og:site_name" content="FXStrength" />
+  <meta property="og:title" content="About FXStrength · Vincent, Singapore" />
+  <meta property="og:description" content="A free, live currency strength meter for the majors, gold and Bitcoin — built and run by Vincent in Singapore. Education, not advice." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fxstrength.org/about/" />
+  <meta property="og:image" content="https://fxstrength.org/og.svg" />
+  <link rel="stylesheet" href="/styles.css?v=9" />
+  <script defer data-domain="fxstrength.org" src="https://plausible.io/js/script.tagged-events.js"></script>
+  <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
+  <style>
+    .page{max-width:720px;margin:0 auto;padding:0 18px 48px}
+    .page h1{font-size:28px;line-height:1.25;margin:22px 0 14px}
+    .page h2{font-size:20px;margin:30px 0 8px}
+    .page p{font-size:16px;line-height:1.75;color:var(--ink);margin:0 0 16px}
+    .page strong{color:var(--ink)}
+    .page a{color:var(--accent)}
+    .about-contact{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);
+      border-radius:12px;padding:16px 18px;margin:22px 0 6px}
+    .about-contact p{margin:0 0 6px}
+    .about-fine{font-size:13px;color:var(--muted);margin-top:22px}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">▚▚</span> <a href="/" style="color:inherit;text-decoration:none">FXStrength</a></div>
+    <div class="topbar-right">
+      <a class="nav-link" href="/behind-the-move/">Behind the Move</a>
+      <a class="nav-link" href="/the-bigger-picture/">The Bigger Picture</a>
+      <a class="nav-link" href="/fx-drivers/">FX Drivers</a>
+      <a class="nav-link" href="/">Strength meter</a>
+      <a class="nav-link" href="/about/">About</a>
+      <button class="refresh" id="theme-toggle" title="Light / dark" aria-label="Toggle light or dark theme">☾</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <h1>Hi, I'm Vincent. I'm from Singapore.</h1>
+
+    <p>I grew up in a traditional Chinese family, where the first money lesson was simple: wealth you can't hold is only a promise. So I've held physical gold since I was a kid, and I've spent a lot of the years since asking a slightly obsessive question: <em>if gold just sits there, why does everything else keep moving around it?</em></p>
+
+    <p>FXStrength is where that question ended up. It's a free, live meter that shows how strong the eight major currencies, gold and Bitcoin are right now, across three timeframes. Next to it are plain-English write-ups on <em>why</em> things moved: the data, the central banks, the story the market chose to believe that week.</p>
+
+    <p><strong>What it isn't:</strong> signals, tips, or anyone telling you what to trade. The meter shows you the picture; the articles show you the reasoning. The decision stays yours.</p>
+
+    <p><strong>Where the numbers come from:</strong> prices from Yahoo Finance, refreshed about every 15 minutes, so they may be slightly delayed. The method is the same for every currency, and nothing is adjusted by hand.</p>
+
+    <p><strong>Why I built it:</strong> after 15 years in marketing, I wanted one place that answered "what's actually strong right now, and why?" without a sign-up wall or a sales pitch. I couldn't find one, so I made it.</p>
+
+    <h2 id="contact">Say hello</h2>
+    <div class="about-contact">
+      <p>Found a bug, spotted something wrong, or want to argue about gold? I read everything.</p>
+      <p><strong><a href="mailto:hello@fxstrength.org">hello@fxstrength.org</a></strong> · <strong><a href="https://x.com/TheFXstrength" target="_blank" rel="noopener">@TheFXstrength</a></strong> on X</p>
+    </div>
+
+    <p class="about-fine"><em>FXStrength is for education only and is not financial advice.</em></p>
+  </main>
+
+  <footer class="foot">
+    <p class="foot-links">Read: <a href="/behind-the-move/">Behind the Move</a> · <a href="/the-bigger-picture/">The Bigger Picture</a> · <a href="/fx-drivers/">FX Drivers</a> · <a href="/about/">About</a></p>
+    <p class="disclaimer">
+      FXStrength provides market information for educational purposes only and is <strong>not financial advice</strong>.
+      Trading foreign exchange and CFDs carries a high risk of loss.
+    </p>
+    <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "url": "https://fxstrength.org/about/",
+    "name": "About FXStrength",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Vincent",
+      "url": "https://fxstrength.org/",
+      "address": { "@type": "PostalAddress", "addressLocality": "Singapore", "addressCountry": "SG" },
+      "sameAs": ["https://x.com/TheFXstrength"]
+    },
+    "publisher": { "@type": "Organization", "name": "FXStrength", "url": "https://fxstrength.org/" }
+  }
+  </script>
+
+  <script>
+  (function(){
+    try{document.documentElement.setAttribute('data-theme',localStorage.getItem('fxs_theme')||'dark');}catch(e){}
+    var tb=document.getElementById('theme-toggle');
+    function sync(){try{tb.textContent=(localStorage.getItem('fxs_theme')||'dark')==='light'?'☀':'☾';}catch(e){}}
+    if(tb){tb.addEventListener('click',function(){
+      var next=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+      document.documentElement.setAttribute('data-theme',next);
+      try{localStorage.setItem('fxs_theme',next);}catch(e){}sync();
+    });sync();}
+  })();
+  </script>
+</body>
+</html>

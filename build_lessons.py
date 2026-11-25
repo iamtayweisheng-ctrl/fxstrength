@@ -239,6 +239,20 @@ def directive_html(name, attrs, inner_lines, ctx):
         figcap = f"<figcaption>{inline(cap)}</figcaption>" if cap else ""
         return (f'<figure class="lesson-figure"><img src="{html.escape(src, quote=True)}" '
                 f'alt="{html.escape(alt, quote=True)}" loading="lazy" />{figcap}</figure>')
+    if name == "table":
+        # Pipe-delimited rows; the first row is the header. Cells take inline md.
+        rows = [r for r in inner_lines if r.strip()]
+        if not rows:
+            return ""
+        def cells(r):
+            return [c.strip() for c in r.strip().strip("|").split("|")]
+        thead = "".join(f"<th>{inline(c)}</th>" for c in cells(rows[0]))
+        tbody = "".join(
+            "<tr>" + "".join(f"<td>{inline(c)}</td>" for c in cells(r)) + "</tr>"
+            for r in rows[1:]
+        )
+        return ('<div class="lesson-table-wrap"><table class="lesson-table">'
+                f'<thead><tr>{thead}</tr></thead><tbody>{tbody}</tbody></table></div>')
     if name == "cards":
         # Split inner into ### title -> body cards.
         cards, cur_t, cur_b = [], None, []
@@ -625,6 +639,7 @@ def topbar_html():
     <a class="brand" href="/"><span class="logo">▚▚</span> FXStrength</a>
     <nav class="topbar-right lesson-nav">
 {links}      <a href="/">Strength meter</a>
+      <a href="/about/">About</a>
       <button class="refresh" id="theme-toggle" title="Light / dark"
               aria-label="Toggle light or dark theme">☾</button>
     </nav>
@@ -690,7 +705,7 @@ def render_lesson(meta, body, others):
     <p class="foot-news">📬 More from <strong>{html.escape(sinfo['name'])}</strong> —
        <a href="/{sec}/">read the archive</a>.</p>
 {DISCLAIMER}
-    <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
+    <p class="src">© FXStrength · <a href="/">fxstrength.org</a> · <a href="/about/">About</a></p>
   </footer>
 {TOTOP}
 {CTA_SCRIPT}
@@ -770,7 +785,7 @@ def render_index(sec, articles):
   </main>
   <footer class="foot">
 {DISCLAIMER}
-    <p class="src">© FXStrength · <a href="/">fxstrength.org</a></p>
+    <p class="src">© FXStrength · <a href="/">fxstrength.org</a> · <a href="/about/">About</a></p>
   </footer>
 {TOTOP}
 {CTA_SCRIPT}
@@ -790,6 +805,7 @@ def render_index(sec, articles):
 # meter.html is deliberately excluded — it's private/v0 and disallowed in robots.txt.
 STATIC_URLS = [
     ("/", "1.0", "daily"),
+    ("/about/", "0.5", "yearly"),
     ("/currency-strength-meter", "0.8", "monthly"),
     ("/bitcoin-strength-meter", "0.8", "monthly"),
     ("/gold-strength-meter", "0.8", "monthly"),

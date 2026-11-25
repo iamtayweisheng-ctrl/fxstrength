@@ -1,0 +1,19 @@
+# FXStrength
+
+> A free, live currency strength meter for the eight major currencies plus gold and Bitcoin, across intraday, daily and weekly timeframes — with plain-English write-ups on why the market moved. Built and run by Vincent in Singapore. Education, not financial advice. Prices from Yahoo Finance, refreshed about every 15 minutes.
+
+## Core
+- [Live strength meter](https://fxstrength.org/): the live grid of the 8 majors, gold, silver and Bitcoin across three timeframes.
+- [What is a currency strength meter?](https://fxstrength.org/currency-strength-meter): how a strength meter works and how to read it.
+- [Gold strength meter](https://fxstrength.org/gold-strength-meter): live XAU strength against the majors, and what moves gold.
+- [Bitcoin strength meter](https://fxstrength.org/bitcoin-strength-meter): BTC strength against the majors.
+- [About](https://fxstrength.org/about/): who runs FXStrength, the method, and contact (hello@fxstrength.org).
+
+## Writing
+- [Behind the Move](https://fxstrength.org/behind-the-move/): explains why currencies moved — the data, central banks, and the story the market believed.
+- [The Bigger Picture](https://fxstrength.org/the-bigger-picture/): the macro forces behind market moves.
+- [FX Drivers](https://fxstrength.org/fx-drivers/): what drives each of the G10 currencies.
+
+## Notes
+- FXStrength is for education only and is not financial advice or a signal service.
+- Strength is each currency's average move against the others; gold, silver and Bitcoin are scaled to their own volatility.
