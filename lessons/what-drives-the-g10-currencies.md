@@ -4,6 +4,7 @@ title: "The G10 Currencies: List, and What Drives Each One"
 dek: A plain-English guide to what moves each major currency — and the less-obvious watch most retail traders miss. Build a view of a currency before you look at a pair.
 slug: what-drives-the-g10-currencies
 date: 2026-08-13
+updated: 2026-11-28
 kicker: FX Drivers
 cover: /og-g10-drivers.png
 description: What drives each of the G10 currencies (USD, EUR, JPY, GBP, CHF, CAD, AUD, NZD, NOK, SEK) — the core macro drivers, why they matter, and the less-obvious second-order signal most retail traders overlook. Learn to build a macro view of a currency before you look at a pair.
@@ -289,7 +290,7 @@ That last step is where **price is evidence, not proof**: a pair moving your way
 
 ## Where the FXStrength Meter Comes In
 
-You can hold all of this in your head for one pair. Across ten currencies and dozens of pairs, it's a lot to track — which is exactly what the strength meter is for. It **organizes the evidence**: it shows, across all the majors at once, which currencies are actually strong and weak right now, so you can see whether a currency's story is showing up *broadly* or only in one noisy pair.
+You can hold all of this in your head for one pair. Across ten currencies and dozens of pairs, it's a lot to track — which is exactly what the strength meter is for. It **organises the evidence**: it shows, across all the majors at once, which currencies are actually strong and weak right now, so you can see whether a currency's story is showing up *broadly* or only in one noisy pair.
 
 :::flow
 Currency Drivers → Expectations → Currency Strength → Relative Strength → FX Pair
@@ -299,7 +300,7 @@ Currency Drivers → Expectations → Currency Strength → Relative Strength �
 A currency can be strong. A currency can be weak. But a pair tells you which one is stronger.
 :::
 
-The meter reads the current strength across the board — it **organizes evidence, it does not predict**. [See the live strength meter →](/)
+The meter reads the current strength across the board — it **organises evidence, it does not predict**. [See the live strength meter →](/)
 
 :::cta:::
 

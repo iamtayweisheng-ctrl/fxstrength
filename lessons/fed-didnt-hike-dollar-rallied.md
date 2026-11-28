@@ -4,6 +4,7 @@ title: The Fed Didn't Hike. So Why Did the Dollar Rally?
 dek: Markets don't need a rate change to reprice a currency. They only need their expectations to change.
 slug: fed-didnt-hike-dollar-rallied
 date: 2026-08-29
+updated: 2026-11-28
 issue_no: 6
 lesson_no: 6
 newsletter_issue: Behind the Move · Issue #006 · Week 35, 2026 · Theme — The Fed Didn't Hike. So Why Did the Dollar Rally?
@@ -15,7 +16,7 @@ Jackson Hole arrived this week with no rate decision, no new dot plot, and no im
 
 The Federal Funds target remained 3.50–3.75%, exactly where it was before the speeches began.
 
-And yet the US Dollar rallied. Treasury yields rose. Rate expectations shifted.
+And yet the US dollar rallied. Treasury yields rose. Rate expectations shifted.
 
 If you were watching the headlines, you might have been confused. How does a currency strengthen when its central bank does nothing?
 
@@ -143,12 +144,12 @@ Markets move when expectations change, not only when central banks change rates.
 
 ## Question of the Week
 
-:::insight tag="🧭 Question of the Week"
-**A central banker gives a speech that sounds hawkish, but the 2-year Treasury yield falls and the Dollar barely moves. What does this tell you?**
+:::insight tag="Question of the Week"
+**A central banker gives a speech that sounds hawkish, but the 2-year Treasury yield falls and the dollar barely moves. What does this tell you?**
 
 - A. The speech was not actually hawkish.
 - B. The market does not believe the message will lead to tighter policy.
-- C. The Dollar is broken and no longer responds to rates.
+- C. The dollar is broken and no longer responds to rates.
 
 If yields fall and the currency does not follow, the market is effectively saying that the speech did not materially change expectations for the policy path. The words matter — but the market's reaction to those words matters more.
 
@@ -157,7 +158,7 @@ If yields fall and the currency does not follow, the market is effectively sayin
 
 ## Conclusion
 
-Warsh did not change interest rates on Friday. He changed what the market thought the Fed might do next. That was enough to move Treasury yields. And once yields moved, the Dollar followed.
+Warsh did not change interest rates on Friday. He changed what the market thought the Fed might do next. That was enough to move Treasury yields. And once yields moved, the dollar followed.
 
 But expectations are not outcomes. The next question is whether the economic data — inflation, employment and financial conditions — gives the Fed a reason to follow through on the tougher tone. That is where the next repricing will come from.
 

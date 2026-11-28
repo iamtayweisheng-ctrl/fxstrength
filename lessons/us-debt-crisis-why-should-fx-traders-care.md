@@ -4,6 +4,7 @@ title: The US Debt Crisis. Why Should FX Traders Care?
 dek: The debt number is the headline. The financing cost is the signal.
 slug: us-debt-crisis-why-should-fx-traders-care
 date: 2026-08-11
+updated: 2026-11-28
 kicker: The Bigger Picture
 description: US federal debt is approaching $40 trillion — but for FX traders the size of the debt isn't the signal, the cost of financing it is. A framework for how fiscal pressure transmits through Treasury yields to the US dollar and gold.
 summary: The debt total isn't what moves currencies — the cost of financing it is. This framework shows how fiscal pressure transmits through Treasury yields to the US dollar and gold, and what signals would tell you it is becoming a genuine market concern.

@@ -1,10 +1,10 @@
 ---
 section: behind-the-move
-title: Gold Recovered. Then the US Jobs Report Hit. Why Didn't Buyers Walk Away?
-seo_title: "Gold Recovered, Then the Jobs Report Hit"
+title: "Gold Recovered, Then the Jobs Report Hit"
 dek: Gold bounced ~4.5% off its October low, then a hot payroll print should have sent it lower — and buyers defended $4,040 instead. What that says about whether this is a bottom or just a breather.
 slug: gold-recovered-then-jobs-report-hit
 date: 2026-11-09
+updated: 2026-11-28
 issue_no: 19
 lesson_no: 19
 newsletter_issue: Behind the Move · Issue #019 · Week 46, 2026 · Theme — A rebound is not the same as a bottom.

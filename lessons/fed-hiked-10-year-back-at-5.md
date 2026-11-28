@@ -4,6 +4,7 @@ title: The Fed Hiked. So Why Is the 10-Year Yield Back at 5%?
 dek: The Fed finally moved — but the bond market didn't back away from 5%, giving us a clearer picture of what investors demand from long-term US debt.
 slug: fed-hiked-10-year-back-at-5
 date: 2026-09-19
+updated: 2026-11-28
 issue_no: 10
 lesson_no: 10
 newsletter_issue: Behind the Move · Issue #010 · Week 38, 2026 · Theme — The Fed controls the short end; the market prices the long end.
@@ -152,14 +153,14 @@ The question is no longer simply whether the Fed is hawkish. It is: **what risks
 - The next phase is about confirmation: US data, Fed communication, yields and broad USD price action will show which explanation holds.
 
 :::cards
-### 📖 What You Learned
+### What You Learned
 When speculation becomes evidence, the question changes. Before the decision, markets asked what the Fed might do. Now the Fed has moved — the question is what the market believes comes next, and what risks it still wants to be compensated for.
 
-### 🔍 What Price Is Saying
+### What Price Is Saying
 The 10-year moved toward 5% before the hike, dipped briefly around the decision, then returned to ~5% by week's end. The market did not permanently reprice long yields lower just because the Fed delivered the expected hike. The 10-year remains well above the policy rate — pricing a broader mix of future policy, inflation, growth and long-term risk. Price is evidence, not proof; the next data point shows whether that pricing is confirmed or challenged.
 
-### 🛠 How FXStrength Helps
-FX is another test of the bond-market story. If yields rise on stronger growth and a higher Fed path, broad USD strength should confirm it; if yields return to 5% while USD won't strengthen broadly, the relationship is less straightforward. FXStrength organizes that evidence across currencies and timeframes — not to predict the next move, but to see whether the macro story, the yield move and the currency price action are telling the same story.
+### How FXStrength Helps
+FX is another test of the bond-market story. If yields rise on stronger growth and a higher Fed path, broad USD strength should confirm it; if yields return to 5% while USD won't strengthen broadly, the relationship is less straightforward. FXStrength organises that evidence across currencies and timeframes — not to predict the next move, but to see whether the macro story, the yield move and the currency price action are telling the same story.
 :::
 
 ## Related Reading

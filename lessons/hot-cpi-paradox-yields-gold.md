@@ -4,6 +4,7 @@ title: "The Hot CPI Paradox: Why Yields Fell and Gold Rose"
 dek: When inflation comes in hot but bond yields fall, the market may be telling you something more important than "rates are going higher."
 slug: hot-cpi-paradox-yields-gold
 date: 2026-09-11
+updated: 2026-11-28
 issue_no: 9
 lesson_no: 9
 newsletter_issue: Behind the Move · Issue #009 · Week 37, 2026 · Theme — The market trades the consequences of the number, not the number.
@@ -137,7 +138,7 @@ When the market breaks the textbook reaction, don't immediately assume the marke
 
 ## Question of the Week
 
-:::insight tag="🧭 Question of the Week"
+:::insight tag="Question of the Week"
 **CPI comes in hotter than expected. Traders price a higher probability of a Fed hike, but long-term Treasury yields fall and gold rises. What is the most useful interpretation?**
 
 - A. The CPI report must have been wrong.

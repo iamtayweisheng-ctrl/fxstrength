@@ -4,6 +4,7 @@ title: The Same Oil Shock, Two Very Different Central Banks
 dek: Why persistently high energy prices may put the Bank of Canada under more pressure to tighten than the Bank of England.
 slug: same-oil-shock-two-central-banks
 date: 2026-10-18
+updated: 2026-11-28
 issue_no: 15
 lesson_no: 15
 newsletter_issue: Behind the Move · Issue #015 · Week 42, 2026 · Theme — Central banks react not to the shock, but to how it travels through their economy.

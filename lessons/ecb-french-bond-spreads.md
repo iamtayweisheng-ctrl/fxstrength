@@ -4,6 +4,7 @@ title: What Can the ECB Actually Do About French Bond Spreads?
 dek: France's bond spreads are at crisis-era levels. The ECB has tools — but a fiscal constraint sits at the heart of every one of them.
 slug: ecb-french-bond-spreads
 date: 2026-10-06
+updated: 2026-11-28
 kicker: The Bigger Picture
 description: French–German bond spreads have widened to levels last seen in the European debt crisis. This maps the ECB's realistic escalation ladder — from verbal intervention to TPI — and the fiscal constraint that limits all of it, plus the five signals that show the situation turning from fiscal concern into financial-stability risk.
 summary: French borrowing costs are climbing and the OAT–Bund spread is at crisis-era levels. The ECB has tools to fight disorderly fragmentation, but they're conditional on fiscal sustainability — so the real question isn't "will the ECB intervene?" but "how bad would it have to get first?" A framework for the ECB's escalation ladder and the signals that matter.

@@ -1,10 +1,10 @@
 ---
 section: the-bigger-picture
-title: The AI Boom Is Showing Up in Asian Trade Data. What Does That Mean for FX?
-seo_title: "The AI Boom in Asian Trade Data — and FX"
+title: "The AI Boom in Asian Trade Data — and FX"
 dek: Taiwan's record exports and China's accelerating shipments show how AI demand is reshaping trade — but stronger exports don't automatically mean a stronger currency.
 slug: ai-boom-asian-trade-fx
 date: 2026-10-18
+updated: 2026-11-28
 kicker: The Bigger Picture
 description: Taiwan's exports hit a record US$87bn in September on AI demand and China's exports surged 36%. But trade data shows where goods move, not where money moves — a framework for connecting exports to the external balance, capital flows, policy and price confirmation before concluding anything about TWD or CNY.
 summary: The AI boom is now visible in Asian trade data — Taiwan's record US$87bn September exports and China's 36% surge. But a strong export sector doesn't guarantee a strong currency: imports, capital flows, central-bank management and expectations all intervene. And Taiwan and China aren't the same FX story. How to connect trade data to the currency without over-reading it.

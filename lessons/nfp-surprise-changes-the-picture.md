@@ -4,6 +4,7 @@ title: When the Surprise Changes the Picture
 dek: US payrolls fell 23,000 against +85,000 expected. The lesson isn't that the number was negative — it's how far it landed from what markets had spent all week pricing in. That gap is why the surprise matters more than the number.
 slug: nfp-surprise-changes-the-picture
 date: 2026-08-07
+updated: 2026-11-28
 issue_no: 2
 lesson_no: 2
 newsletter_issue: Behind the Move · Issue #002 · Week 32, 2026 · Theme — When the Surprise Changes the Picture
@@ -148,7 +149,7 @@ We don't need to predict the answer. 102 is the level. Price will tell us whethe
 
 ## Question of the Week
 
-:::insight tag="🧭 Question of the Week"
+:::insight tag="Question of the Week"
 **Which question matters most when a new economic number is released?**
 
 - A. Was the number good or bad?

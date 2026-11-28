@@ -394,7 +394,7 @@ def head_html(meta, faq=None):
         "description": desc,
         "datePublished": pub,
         "dateModified": meta.get("updated", pub),
-        "author": {"@type": "Organization", "name": "FXStrength", "url": SITE + "/"},
+        "author": {"@type": "Person", "name": "Vincent", "url": SITE + "/about/"},
         "publisher": {
             "@type": "Organization", "name": "FXStrength",
             "logo": {"@type": "ImageObject", "url": og_img},
@@ -512,6 +512,10 @@ WL_CTA_BAND = """    <section class="wl-cta-band" aria-label="Live Driver Meter 
       </form>
       <p class="wl-cta-note">Free early access. No payment system yet.</p>
     </section>"""
+
+NEWHERE_BOX = """    <aside class="newhere">
+      <p><strong>New here?</strong> FXStrength is a free, live currency strength meter for the majors, gold and Bitcoin, with the macro reasoning behind each move. <a href="/">Open the live meter</a> or <a href="/about/">read about it</a>.</p>
+    </aside>"""
 
 WL_CTA_SCRIPT = '  <script src="/waitlist-cta.js?v=1" defer></script>'
 
@@ -693,16 +697,18 @@ def render_lesson(meta, body, others):
       <p class="kicker">{html.escape(kicker)}</p>
       <h1>{html.escape(meta['title'])}</h1>
       <p class="dek">{html.escape(meta.get('dek', ''))}</p>
+      <p class="lesson-byline">By <a href="/about/">Vincent</a> · Singapore</p>
       <p class="lesson-meta">{html.escape(meta_line)}</p>
       <div class="lesson-body">
 {article_body}
       </div>
     </article>
+{NEWHERE_BOX}
 {WL_CTA_BAND}
 {related_html(meta, others)}
   </main>
   <footer class="foot">
-    <p class="foot-news">📬 More from <strong>{html.escape(sinfo['name'])}</strong> —
+    <p class="foot-news">More from <strong>{html.escape(sinfo['name'])}</strong> —
        <a href="/{sec}/">read the archive</a>.</p>
 {DISCLAIMER}
     <p class="src">© FXStrength · <a href="/">fxstrength.org</a> · <a href="/about/">About</a></p>

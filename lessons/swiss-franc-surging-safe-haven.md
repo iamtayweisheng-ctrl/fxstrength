@@ -4,6 +4,7 @@ title: Why Is the Swiss Franc Surging When Switzerland Pays Almost Nothing?
 dek: Switzerland's policy rate is 0%, yet the franc is surging. When markets get scared, capital preservation can matter more than carry.
 slug: swiss-franc-surging-safe-haven
 date: 2026-10-03
+updated: 2026-11-28
 issue_no: 13
 lesson_no: 13
 newsletter_issue: Behind the Move · Issue #013 · Week 40, 2026 · Theme — Sometimes a currency rises because the alternatives look worse.

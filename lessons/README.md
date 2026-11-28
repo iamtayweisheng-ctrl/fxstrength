@@ -52,7 +52,7 @@ cross-link automatically in the "More reading" block.
 Directive blocks:
 ```
 :::insight
-📌 Key-Insight pull-quote. **Bold** works inside.
+Key-Insight pull-quote. **Bold** works inside.
 :::
 
 :::cta:::                         ← place the signup box ONCE, mid/late in the page

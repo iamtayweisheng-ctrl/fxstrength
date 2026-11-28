@@ -1,10 +1,10 @@
 ---
 section: behind-the-move
-title: The Nasdaq Is Breaking Down. Why Aren't Gold and the Dollar Acting Like Safe Havens?
-seo_title: "Why Gold and the Dollar Aren't Acting Like Havens"
+title: "Why Gold and the Dollar Aren't Acting Like Havens"
 dek: The AI-led sell-off is spreading, but the unusual part is outside equities — gold is falling, the dollar is rising and Treasury yields are retreating. That looks less like a flight to safety and more like a scramble for cash.
 slug: nasdaq-breakdown-gold-dollar-not-havens
 date: 2026-11-22
+updated: 2026-11-28
 issue_no: 20
 lesson_no: 20
 newsletter_issue: Behind the Move · Issue #020 · Week 47, 2026 · Theme — Seeking safety and raising cash are not the same trade.

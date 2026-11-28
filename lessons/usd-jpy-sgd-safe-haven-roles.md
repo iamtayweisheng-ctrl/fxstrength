@@ -1,10 +1,10 @@
 ---
 section: behind-the-move
-title: "Is the US Dollar Still a Safe Haven? Why USD, JPY and SGD Are Behaving Differently"
-seo_title: "Is the US Dollar Still a Safe Haven?"
+title: "Is the US Dollar Still a Safe Haven?"
 dek: An AI-driven equity sell-off is testing the dollar's safe-haven role, while the Singapore dollar draws attention for a different reason — its appeal as a funding currency.
 slug: usd-jpy-sgd-safe-haven-roles
 date: 2026-10-25
+updated: 2026-11-28
 issue_no: 16
 lesson_no: 16
 newsletter_issue: Behind the Move · Issue #016 · Week 43, 2026 · Theme — Safe haven, reserve currency and funding currency are three different roles.

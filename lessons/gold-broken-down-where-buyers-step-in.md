@@ -4,6 +4,7 @@ title: Gold Has Broken Down. Where Will Buyers Finally Step In?
 dek: Gold has fallen sharply from its January record, but the physical and central-bank demand story hasn't disappeared — the question is whether those buyers can absorb the financial selling.
 slug: gold-broken-down-where-buyers-step-in
 date: 2026-11-01
+updated: 2026-11-28
 issue_no: 18
 lesson_no: 18
 newsletter_issue: Behind the Move · Issue #018 · Week 44, 2026 · Theme — The long-term demand story and the short-term price can point in different directions.

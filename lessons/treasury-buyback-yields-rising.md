@@ -4,6 +4,7 @@ title: The Treasury Is Buying Bonds. So Why Are Yields Rising?
 dek: A $4 billion buyback program meets a $30 trillion bond market — and the market wins.
 slug: treasury-buyback-yields-rising
 date: 2026-09-10
+updated: 2026-11-28
 issue_no: 8
 lesson_no: 8
 newsletter_issue: Behind the Move · Issue #008 · Week 37, 2026 · Theme — The size of a flow matters more than the fact that the flow exists.
@@ -117,14 +118,14 @@ The beginner mistake is to read *"Treasury buys bonds → yields must fall,"* or
 - Don't trade the headline. Ask what changed, how large the flow is, and what the rest of the market is doing.
 
 :::cards
-### 📖 What You Learned
+### What You Learned
 Don't confuse an action with the market's reaction. The size of the flow relative to the market, and the direction of the larger structural forces, determine whether a policy move actually moves prices.
 
-### 🔍 What Price Is Saying
+### What Price Is Saying
 Yields rose to multi-year highs despite the buyback — the market was focused on larger forces (supply, inflation, the risk premium on long-term debt). The dollar softened rather than rallied, reinforcing that higher yields don't automatically mean a stronger currency; equities fell as conditions tightened, and gold faced headwinds from rising real yields.
 
-### 🛠 How FXStrength Helps
-The strength meter shows whether a USD move is broad-based or isolated to one pair. When yields move sharply, it gives you another piece of evidence — is the dollar actually strengthening across the market, or is the yield story not translating into broad USD demand? It doesn't predict yields or USD; it organizes the evidence so you can judge whether the macro story and the price action are aligned.
+### How FXStrength Helps
+The strength meter shows whether a USD move is broad-based or isolated to one pair. When yields move sharply, it gives you another piece of evidence — is the dollar actually strengthening across the market, or is the yield story not translating into broad USD demand? It doesn't predict yields or USD; it organises the evidence so you can judge whether the macro story and the price action are aligned.
 :::
 
 This article is part of the FXStrength Learning Path. For more on how yields, expectations and fiscal policy drive currencies, see [The US Debt Crisis. Why Should FX Traders Care?](/the-bigger-picture/us-debt-crisis-why-should-fx-traders-care)

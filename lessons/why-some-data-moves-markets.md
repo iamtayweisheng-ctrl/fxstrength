@@ -4,6 +4,7 @@ title: Why Some Economic Data Moves Markets — And Some Doesn't
 dek: The question isn't whether the number was good or bad. It's whether the number changed anyone's expectations.
 slug: why-some-data-moves-markets
 date: 2026-08-14
+updated: 2026-11-28
 issue_no: 3
 lesson_no: 3
 newsletter_issue: Behind the Move · Issue #003 · Market Lesson
@@ -189,7 +190,7 @@ Don't ask whether the number was good or bad — ask what the number *changed*.
 The immediate reaction tells you whether the market was surprised, not whether the surprise will stick. A move that holds and is confirmed across related markets is stronger evidence of genuine repricing than a short-lived spike. Price is evidence, not proof.
 
 ### How FXStrength Helps
-When a surprise hits, the meter shows whether the reaction is broad-based across a currency or isolated to one pair — a broad move is stronger evidence the currency's own expectations are shifting. It organizes the price evidence; it doesn't predict releases or tell you how to trade.
+When a surprise hits, the meter shows whether the reaction is broad-based across a currency or isolated to one pair — a broad move is stronger evidence the currency's own expectations are shifting. It organises the price evidence; it doesn't predict releases or tell you how to trade.
 :::
 
-This lesson is part of the FXStrength Learning Path. For more on how markets price expectations, read [Lesson #001 — Markets Trade Expectations](/behind-the-move/why-aud-fell-after-cpi).
+For more on how markets price expectations, read [Why Did AUD Fall After Softer-Than-Expected Inflation?](/behind-the-move/why-aud-fell-after-cpi)

@@ -272,3 +272,15 @@ main.lesson.lib { max-width: 820px; }
 .lesson-table thead th { font-size: 12px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); border-bottom: 1px solid var(--line); }
 .lesson-table tbody tr:last-child td { border-bottom: 0; }
 .lesson-table td:first-child { font-weight: 700; color: var(--ink); white-space: nowrap; }
+
+/* ── article byline ──────────────────────────────────── */
+.lesson-byline { font-size: 14px; color: var(--muted); margin: 2px 0 2px; }
+.lesson-byline a { color: var(--accent); text-decoration: none; }
+.lesson-byline a:hover { text-decoration: underline; }
+
+/* ── "New here?" orientation box ─────────────────────── */
+.newhere { max-width: 760px; margin: 26px auto 0; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 12px; padding: 14px 18px; }
+.newhere p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.6; }
+.newhere a { color: var(--accent); text-decoration: none; }
+.newhere a:hover { text-decoration: underline; }

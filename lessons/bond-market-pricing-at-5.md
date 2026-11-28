@@ -4,6 +4,7 @@ title: What Is the Bond Market Pricing at 5%?
 dek: US Treasury yields have broken back above 5%. The bigger question isn't why yields are rising — but what the bond market thinks happens next.
 slug: bond-market-pricing-at-5
 date: 2026-09-26
+updated: 2026-11-28
 issue_no: 12
 lesson_no: 12
 newsletter_issue: Behind the Move · Issue #012 · Week 39, 2026 · Theme — A yield is a price. The signal is in why it changed.
@@ -129,14 +130,14 @@ A 5% 10-Year yield is interesting. But the more important information is in the 
 - The most useful question is not "will yields rise or fall?" but "what is the market repricing?"
 
 :::cards
-### 📖 What You Learned
+### What You Learned
 The bond market is constantly pricing the future. The 10-Year yield isn't simply a prediction of the next Fed decision — it's a market price for a much bigger question: what will growth, inflation, monetary policy and fiscal risk look like over the next decade?
 
-### 🔍 What Price Is Saying
+### What Price Is Saying
 The move back above 5% suggests investors are demanding greater compensation to hold long-term US debt. The next signal comes from whether yields stay elevated as new data arrives — and whether the Dollar confirms or diverges from the move. That divergence tells you whether rising yields are improving the relative attractiveness of US assets or increasingly reflecting risk compensation.
 
-### 🛠 How FXStrength Helps
-FXStrength lets you compare USD strength across multiple pairs and timeframes rather than assuming one pair tells the whole story. When yields move sharply, the strength grid adds another piece of evidence: are currencies confirming the bond-market message? It doesn't predict where yields or currencies go — it organizes the evidence.
+### How FXStrength Helps
+FXStrength lets you compare USD strength across multiple pairs and timeframes rather than assuming one pair tells the whole story. When yields move sharply, the strength grid adds another piece of evidence: are currencies confirming the bond-market message? It doesn't predict where yields or currencies go — it organises the evidence.
 :::
 
 ## Related Reading

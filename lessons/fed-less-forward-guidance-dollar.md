@@ -1,10 +1,10 @@
 ---
 section: the-bigger-picture
-title: Why Is the Fed Giving Markets Less Guidance? What Does That Mean for the Dollar?
-seo_title: "The Fed's Less-Guidance Shift and the Dollar"
+title: "The Fed's Less-Guidance Shift and the Dollar"
 dek: Fed Chair Kevin Warsh is questioning forward guidance — telling markets what the central bank might do next. Could less of it make the dollar harder to price?
 slug: fed-less-forward-guidance-dollar
 date: 2026-11-01
+updated: 2026-11-28
 kicker: The Bigger Picture
 description: Fed Chair Warsh is pulling back from forward guidance, arguing markets have grown too dependent on the Fed's promised rate path — a "hall of mirrors." What that shift means for how FX traders read data, Treasury yields and the dollar when there's less of a roadmap.
 summary: Warsh is deliberately giving markets less of a promised rate path, arguing forward guidance has become too prominent and risks a "hall of mirrors" where the Fed and markets each price off the other's expectations. For FX, less guidance doesn't remove the Fed's influence — it changes how it's read: economic data and Treasury yields have to do more of the work than the next press conference.

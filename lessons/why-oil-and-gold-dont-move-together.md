@@ -4,6 +4,7 @@ title: Oil Is Surging. Why Don't Oil and Gold Move Together?
 dek: Geopolitical stress can lift energy prices without producing a lasting gold rally — the difference lies in what each market is pricing.
 slug: why-oil-and-gold-dont-move-together
 date: 2026-10-18
+updated: 2026-11-28
 issue_no: 14
 lesson_no: 14
 newsletter_issue: Behind the Move · Issue #014 · Week 42, 2026 · Theme — Oil prices the availability of energy; gold prices a different mix entirely.

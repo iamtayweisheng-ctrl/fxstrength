@@ -1,10 +1,10 @@
 ---
 section: the-bigger-picture
-title: The Gulf Conflict Is Escalating. So Why Isn't Brent Rising?
-seo_title: "Why Isn't Brent Rising as the Gulf Escalates?"
+title: "Why Isn't Brent Rising as the Gulf Escalates?"
 dek: The war risk is back, but oil isn't reacting the way it did during the initial shock. The reason lies in what has changed in the physical oil market — and it matters for the energy currencies.
 slug: gulf-conflict-brent-not-rising
 date: 2026-11-20
+updated: 2026-11-28
 kicker: The Bigger Picture
 description: The Gulf conflict is escalating, yet Brent is subdued. The IEA now sees the global oil market tipping into surplus in Q4 2026 as supply recovers (+2.3 mb/d in October) and demand weakens. Why the market reprices on actual supply loss, not headlines — the crude-vs-refined split still straining diesel — and what a softer Brent means for USD, EUR, JPY, CAD and NOK.
 summary: Despite renewed Gulf tensions, Brent hasn't rallied because the physical supply picture has changed: global supply rose 2.3 mb/d in October, Gulf crude flows have recovered to ~82% of pre-war levels, demand is falling, and the IEA expects a Q4 surplus. The market now prices the expected supply-demand balance, not each headline, so it needs evidence of an actual reversal in Gulf exports to rerate. For FX, cheaper oil eases importers' (EUR, JPY) terms of trade and trims support for exporters (CAD, NOK) — but rate expectations and the dollar's own drivers still dominate.

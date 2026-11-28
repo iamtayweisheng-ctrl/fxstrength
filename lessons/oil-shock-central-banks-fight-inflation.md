@@ -1,10 +1,10 @@
 ---
 section: the-bigger-picture
-title: The Oil Shock Is Spreading. Which Central Banks Can Afford to Fight Inflation?
-seo_title: "Which Central Banks Can Afford to Fight Inflation?"
+title: "Which Central Banks Can Afford to Fight Inflation?"
 dek: Oil prices are rising, inflation is sticky and central banks are turning hawkish. But the FX impact depends on more than who raises rates — it's about who can afford to keep raising them.
 slug: oil-shock-central-banks-fight-inflation
 date: 2026-11-15
+updated: 2026-11-28
 kicker: The Bigger Picture
 description: An oil shock isn't one currency story — it's several. Higher energy prices hit importers and exporters differently and force central banks into different trade-offs between inflation and growth. Why the highest interest rate doesn't automatically win, why the dollar has two separate sources of support, and what to watch as the shock spreads.
 summary: A rising oil price pushes importers' inflation and trade bills higher while boosting exporters' revenue, so the same shock supports one currency, pressures another and leaves a third unchanged. Several central banks face inflation pressure at once, but they differ in how much more they can tighten without hurting growth — which is why relative changes in expected rates matter more than the current rate level. The dollar is unusual in drawing on both higher yields and safe-haven demand, but those are separate drivers that can reverse independently.
@@ -82,24 +82,14 @@ This is why an oil-driven rate hike is not necessarily as positive for a currenc
 
 The market snapshot for 15 November shows several different policy paths. These are market *expectations*, not promises — they can change quickly as new inflation, employment and growth data arrive.
 
-:::cards
-### Fed
-~88% probability of a December hike. Watch whether inflation and yields keep pushing expected US rates higher.
-
-### ECB
-~20 bps of tightening priced by year-end. Watch whether energy inflation outweighs modest growth.
-
-### BoE
-~21 bps priced by year-end. Watch whether inflation persistence can justify tightening if growth weakens.
-
-### RBA
-Cash rate at 4.85% after another hike. Watch whether the market is approaching the end of the hiking cycle.
-
-### BoJ
-~19 bps priced by year-end. Watch whether policy expectations can shift enough to support the yen.
-
-### SNB
-Little tightening priced. Watch whether a more dovish path leaves the franc vulnerable on rate differentials.
+:::table
+Central bank | What's priced | What to watch
+Fed | ~88% chance of a December hike | Whether inflation and yields keep pushing expected US rates higher
+ECB | ~20 bp of tightening by year-end | Whether energy inflation outweighs modest growth
+BoE | ~21 bp by year-end | Whether inflation persistence can justify tightening if growth weakens
+RBA | Cash rate at 4.85% after another hike | Whether the market is approaching the end of the hiking cycle
+BoJ | ~19 bp by year-end | Whether policy expectations can shift enough to support the yen
+SNB | Little tightening priced | Whether a more dovish path leaves the franc vulnerable on rate differentials
 :::
 
 The table shows why simply ranking currencies by their current interest rates would miss the bigger picture. The market is constantly comparing what each central bank is expected to do *next*.
